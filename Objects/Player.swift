@@ -3,10 +3,10 @@ import CoreGraphics
 
 let SpawnTypePlayer = "Player"
 
-enum MovementDirection : Int {
-    case Idle = 0
-    case Left = 1
-    case Right = 2
+enum MovementDirection {
+    case Idle
+    case Left
+    case Right
 }
 
 class Player : SKSpriteNode {

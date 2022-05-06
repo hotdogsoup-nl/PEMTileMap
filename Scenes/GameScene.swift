@@ -16,11 +16,6 @@ enum TileQueryPosition : Int {
     case BelowRight
 }
 
-enum PlayerCauseOfDeath {
-    case FellInRavine
-    case FellInWater
-}
-
 protocol GameSceneDelegate {
     func gameOver()
     func levelCompleted()
@@ -28,7 +23,10 @@ protocol GameSceneDelegate {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameSceneDelegate : GameSceneDelegate?
-    var tilemap : JSTileMap?
+    var tilemapJS : JSTileMap?
+    var tilemapPEM : PEMTMXMap?
+    
+    private var swapButton : SKSpriteNode
     
     private var player : Player?
     private var previousUpdateTime = TimeInterval(0)
@@ -37,56 +35,78 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var door : SKSpriteNode?
     private var spawnLayer : TMXLayer?
     private var terrainLayer : TMXLayer?
-
-    // MARK: - Control
     
-    func startControl() {
+    // MARK: - Init
+    
+    override init(size: CGSize) {
+        swapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
+        swapButton.position = CGPoint(x: size.width * 0.5, y: size.height - swapButton.size.height * 0.5 - 10)
+        
+        let buttonLabel = SKLabelNode(text: "Swap")
+        buttonLabel.fontSize = 16.0
+        buttonLabel.verticalAlignmentMode = .center
+        buttonLabel.position = CGPoint.zero
+        swapButton.addChild(buttonLabel)
+
+        super.init(size: size)
+        addChild(swapButton)
+        
+        startControl()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Control
+
+    private func startControl() {
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor(named: "Game-background")!
-                
-        loadMapWithJSTileMap()
+        
+        swapMap()
         initLayers()
         addSpawnObjects()
     }
     
     deinit {
-        print("deinit gamescene")
-        
+        print("deinit: \(self)")
     }
     
     // MARK: - Map
     
+    private func swapMap() {
+        if tilemapJS == nil {
+            loadMapWithJSTileMap()
+        } else {
+            loadMapWithPEMTMXMap()
+        }
+    }
+    
     private func loadMapWithJSTileMap() {
+        tilemapPEM?.removeFromParent()
+        tilemapPEM = nil
         
         if let map = JSTileMap(named:"level1.tmx") {
+            tilemapJS = map
             addChild(map)
         } else {
             #if DEBUG
             print("could not load JSTileMap")
             #endif
         }
-        
-//        if let newTilemap = JSTileMap(named:"testlevel.tmx") {
-//            tilemap = newTilemap
-//            addChild(tilemap!)
-//        }
-//
-        
-//        if let mapPEM = PEMTMXMap(mapNamed: "level1.tmx") {
-//            addChild(mapPEM)
-//        } else {
-//            #if DEBUG
-//            print("could not load JSTileMap")
-//            #endif
-//        }
     }
     
     private func loadMapWithPEMTMXMap() {
-        if let mapPEM = PEMTMXMap(mapNamed: "level1.tmx") {
-            addChild(mapPEM)
+        tilemapJS?.removeFromParent()
+        tilemapJS = nil
+
+        if let map = PEMTMXMap(mapNamed: "level1.tmx") {
+            tilemapPEM = map
+            addChild(map)
         } else {
             #if DEBUG
-            print("could not load JSTileMap")
+            print("could not load PEMTMXMap")
             #endif
         }
     }
@@ -95,12 +115,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initLayers() {
         hideScreenLayoutLayer()
-        spawnLayer = tilemap?.layerNamed(LayerNameSpawn)
-        terrainLayer = tilemap?.layerNamed(LayerNameTerrain)
+        spawnLayer = tilemapJS?.layerNamed(LayerNameSpawn)
+        terrainLayer = tilemapJS?.layerNamed(LayerNameTerrain)
     }
     
     private func hideScreenLayoutLayer() {
-        let screenLayoutLayer = tilemap?.layerNamed(LayerNameScreenLayout)
+        let screenLayoutLayer = tilemapJS?.layerNamed(LayerNameScreenLayout)
         screenLayoutLayer?.isHidden = !SHOW_SCREENLAYOUT_LAYER
     }
 
@@ -266,25 +286,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameSceneDelegate?.levelCompleted()
     }
     
-    private func playerDiedSequence(_ cause: PlayerCauseOfDeath) {
+    private func playerDiedSequence() {
         if (player!.isDead) {
             return
         }
         
         player?.isDead = true
-        
-        print("DEATH! \(cause)")
-
-        switch(cause) {
-        case .FellInRavine:
-            break
-        case .FellInWater:
-            break;
-        }
-        
+                
         run(SKAction.sequence([SKAction.wait(forDuration: 1), SKAction.run { 
             self.gameOverSequence()
-
         }]))
     }
     
@@ -314,6 +324,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Input handling
 
     private func touchDownAtPoint(_ pos: CGPoint) {
+        let node = nodes(at: pos).first
+        
+        if node == swapButton || node?.parent == swapButton {
+            swapMap()
+            return
+        }
+        
         if pos.x > 0 {
             player!.direction = .Right
         } else {
@@ -325,6 +342,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func touchUpAtPoint(_ pos: CGPoint) {
+        let node = nodes(at: pos).first
+        
+        if node == swapButton || node?.parent == swapButton {
+            return
+        }
+
         if pos.x > 0 {
             if player!.direction == .Right {
                 player!.direction = .Idle
