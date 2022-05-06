@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="212" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" name="tileSet" tilewidth="16" tileheight="16" tilecount="256" columns="16">
+  <image source="tileSet.png" trans="fe80fe" width="256" height="256"/>
+ </tileset>
+ <layer id="1" name="background" width="212" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt2udT1EAYx/ETBVGxoYiKvRcUFRXsvYK9gCjOiAX7jAWwz1hQsbxQQUXlheUfUPwD/eaFMzeZsJfcbm6Ty/Ob+bwil3ueLMnu7V0qJZFIJBKJRCKRSEzkFV7jDd4m6L0l/iJjFCxf8BXf0Jeg95b4i4yRJD3f8QM/8ctyLdlGt4fhGIESjMQojMYYUwXGJDLX6uc3/qAffy3Xkm10e5iMCkzBVEzDdMwwVF9cInOtxEQWYTEqsQRLUYVlNotyJR/WEdkmKb1HdX0wCAUYjCEoRBGGohjDXMevxTqsxwZsxCZsDrHGoNfO1DoiqmOmSj6sofwkquuDsSjFOIxHGSagHBMxyXX8XtShHvuwHwdwMBXes9HWtYvqmEmyT9jz90zMwmzMwVzMw3wswMIA50rKs1GVpKy34pqw/0eXYwWqsRKrsBo1qMWaEN4znyPPlGRnC7ZiG7ZjB3ZiF3ZjzwCvS98v/x/ZSw+euHxGk3nXXw7hMI7gKI7hOBrQiBMer/HaL3cSh730ge55W4nLZzSZd/3lDFpwFudwHhfQiou45DpetV8eh710nXu+CSdxCs04HU6JnjEx99us34luD6r6c9Vbph5u4CZu4Tba0I4O3MFd1/lU++V+9tLTe7YRnXv+Mq7gKq7hekg1esXE3G+zfie6Pajqz1VvmXp4jCd4imfoxHO8wEt0uc6n2i9X/c2J7fF0ovP92T3cxwM8xKNwSvSMibnfZv1OdHtQ1Z+r3jL18A7v8QHd6MFHfMJn9LrOl+meUcX2eDqJa/0mvke3ff11e4jC/GTj9wwS89F5DkQluj1EYX4yPQ7/ACg9xBU=
+  </data>
+ </layer>
+ <layer id="2" name="walls" width="212" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt1+ENgyAQhmE2bTdoN4AJ7Mr1hySEchwIisX3SS61USgl9yVoDAAAAAAAAAAAAAAAAPZwoxdwko9S0rOu4Tdrx0rr8ffcVqn7s7FbAWhjDXkCerCGPJ3BjV4ADhdn6cp5ctF3fx4PP0d7rPXsOF+P/+aUuXPPS9fxPKWkdyvPCteauHf39HH4vrlnv1NZunKejqJloCYjr7Xejeu5q1QmSvox1btn97KUpZnyVJoDLQM1GVm2Qp1cJnI9KfWuNrb1HBGOz2VppjyV5kDLQE1GyFO9kkyk+jLXu9rY1nOEH69l6cg8LdRP9dgb9rjvflL/W16POVrnmaHutA9faJk07A==
+  </data>
+ </layer>
+ <layer id="3" name="hazards" width="212" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt2TkKADAIBED/X+XJadJHyCVhBgQbFWw3AgAAAAAAAAD+1kYBAAAAAABwx2o2k5m/kQHN9p+43xL9rv0Vvcj2qv8EALI6v9wIcQ==
+  </data>
+ </layer>
+</map>
