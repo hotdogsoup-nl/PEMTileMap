@@ -16,8 +16,10 @@ enum
 {
 	TMXLayerAttributeNone	= 1 << 0,
 	TMXLayerAttributeBase64	= 1 << 1,
-	TMXLayerAttributeGzip	= 1 << 2,
-	TMXLayerAttributeZlib	= 1 << 3,
+	TMXLayerAttributeGzip   = 1 << 2,
+	TMXLayerAttributeZlib   = 1 << 3,
+    TMXLayerAttributeZstd   = 1 << 4,
+    TMXLayerAttributeCsv    = 1 << 5,
 };
 
 typedef enum
@@ -177,9 +179,6 @@ typedef enum
 
 // object groups
 @property (strong, nonatomic) NSMutableArray* objectGroups;
-
-// xml tile gids
-@property (strong, nonatomic) NSMutableArray* gidData;
 
 @property (assign, nonatomic) BOOL cullNodes;
 

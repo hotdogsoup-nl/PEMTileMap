@@ -164,8 +164,9 @@
 			gID = gID & kFlippedMask;
 			
 			// skip 0 GIDs
-			if (!gID)
+            if (!gID) {
 				continue;
+            }
 			
 			// get the tileset for the passed gID.  This will allow us to support multiple tilesets!
 			TMXTilesetInfo* tilesetInfo = [mapInfo tilesetInfoForGid:gID];
@@ -1126,24 +1127,12 @@
 	}
 	else if([elementName isEqualToString:@"tile"])
 	{
-		if (!storingCharacters)
-		{
-			TMXTilesetInfo* info = [self.tilesets lastObject];
-			NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:3];
-			self.parentGID =  info.firstGid + [attributeDict[@"id"] intValue];
-			(self.tileProperties)[@(self.parentGID)] = dict;
-			
-			self.parentElement = TMXPropertyTile;
-		}
-		else
-		{
-			if (!self.gidData)
-				self.gidData = [NSMutableArray array];
-			
-			// remember XML gids for the data tag in the order they come in.
-			[self.gidData addObject:attributeDict[@"gid"]];
-		}
-		
+        TMXTilesetInfo* info = [self.tilesets lastObject];
+        NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:3];
+        self.parentGID =  info.firstGid + [attributeDict[@"id"] intValue];
+        (self.tileProperties)[@(self.parentGID)] = dict;
+        
+        self.parentElement = TMXPropertyTile;
 	}
 	else if([elementName isEqualToString:@"layer"])
 	{
@@ -1234,7 +1223,11 @@
 				layerAttributes |= TMXLayerAttributeGzip;
 			else if([compression isEqualToString:@"zlib"])
 				layerAttributes |= TMXLayerAttributeZlib;
-		}
+            else if([compression isEqualToString:@"zstd"])
+                layerAttributes |= TMXLayerAttributeZstd;
+        } else if ([encoding isEqualToString:@"csv"]) {
+            layerAttributes |= TMXLayerAttributeCsv;
+        }
 	}
 	else if([elementName isEqualToString:@"object"])
 	{
@@ -1364,14 +1357,14 @@
 						
 			NSData* buffer = [[NSData alloc] initWithBase64EncodedString:currentString options:0];
 			if( ! buffer.length ) {
-				NSLog(@"TiledMap: decode data error");
+				NSLog(@"JSTileMap: decode data error");
 				[parser abortParsing];
 				return;
 			}
 			
 			unsigned int len = (unsigned int)buffer.length;
-			
-			if( layerAttributes & (TMXLayerAttributeGzip | TMXLayerAttributeZlib) )
+            
+			if( layerAttributes & (TMXLayerAttributeGzip | TMXLayerAttributeZlib ))
 			{
 				unsigned char *deflated;
 				CGSize s = [layer layerGridSize];
@@ -1382,38 +1375,44 @@
 												
 				if( ! deflated )
 				{
-					NSLog(@"TiledMap: inflate data error");
+					NSLog(@"JSTileMap: inflate data error");
 					[parser abortParsing];
 					return;
 				}
 				
 				layer.tiles = (int *) deflated;
 			}
-			else
+            else if( layerAttributes & TMXLayerAttributeZstd) {
+                NSLog(@"JSTileMap: Zstandard compression is not supported");
+                [parser abortParsing];
+                return;
+
+            } else
 			{
 				char* tileArray = malloc(buffer.length);
 				memmove(tileArray, buffer.bytes, buffer.length);
 				layer.tiles = (int *) tileArray;
 			}
-		}
-		else
-		{
-			// convert to binary gid data
-			if (self.gidData.count)
-			{
-				layer.tiles = malloc(self.gidData.count * sizeof(unsigned int));
-				int x = 0;
-				for (NSString* gid in self.gidData)
-				{
-					layer.tiles[x] = [gid intValue];
-					x++;
-				}
-			}
-		}
-		
-		[self.gidData removeAllObjects];
-		currentString = [NSMutableString string];
-		
+        } else if (layerAttributes & TMXLayerAttributeCsv) {
+            NSArray *separatedCSVData = [currentString componentsSeparatedByString:@","];
+            unsigned long len = separatedCSVData.count * sizeof(unsigned int);
+
+            layer.tiles = malloc(len);
+            int x = 0;
+            for (NSString *tile in separatedCSVData)
+            {
+                NSString *cleanTile = [tile stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                layer.tiles[x] = [cleanTile intValue];
+                x++;
+            }
+        } else {
+            NSLog(@"JSTileMap: XML tile data unsupported!");
+            [parser abortParsing];
+            return;
+
+        }
+        
+        currentString = [NSMutableString string];
 	}
 	else if ([elementName isEqualToString:@"map"])
 	{
@@ -1440,8 +1439,9 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    if (storingCharacters)
+    if (storingCharacters) {
 		[currentString appendString:string];
+    }
 }
 
 
