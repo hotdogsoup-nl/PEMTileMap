@@ -1,11 +1,12 @@
+import UIKit
 import SpriteKit
 
-class GameViewController: NSViewController {
+class GameViewController: UIViewController {
     let gameController = GameController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let skView = self.view as! SKView? {
             #if DEBUG
             skView.ignoresSiblingOrder = true
@@ -17,10 +18,5 @@ class GameViewController: NSViewController {
             gameController.view = skView
             gameController.startControl()
         }
-    }
-    
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        view.window?.aspectRatio = CGSize(width: 1120, height: 770)
     }
 }
