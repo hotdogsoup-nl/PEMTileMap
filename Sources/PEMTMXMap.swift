@@ -83,10 +83,10 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     }
     
     convenience init?(mapNamed mapName : String) {
-        self.init(mapNamed: mapName, baseZPosition: 0, zOrderModifier: -20)
+        self.init(mapNamed: mapName, baseZPosition: 0, zPositionLayerDelta: -20)
     }
 
-    init?(mapNamed mapName : String, baseZPosition : CGFloat, zOrderModifier : CGFloat) {
+    init?(mapNamed mapName : String, baseZPosition : CGFloat, zPositionLayerDelta : CGFloat) {
         super.init()
 //        var tmxFileName = mapName
 //        var tmxFileExtension : String?
