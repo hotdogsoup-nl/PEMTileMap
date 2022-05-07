@@ -40,9 +40,9 @@ public class GameController: NSObject, GameSceneDelegate {
             let transition = SKTransition.doorsOpenVertical(withDuration: 0.3)
             view!.presentScene(nextScene, transition: transition)
 
-            if let cameraNode = nextScene.camera, let tilemap = nextScene.tilemapJS {
+//            if let cameraNode = nextScene.camera, let tilemap = nextScene.tilemapJS {
 //                self.fitSceneToView(tilemap: tilemap, cameraNode: cameraNode, newSize: self.view!.bounds.size)
-            }
+//            }
         }
     }
     
