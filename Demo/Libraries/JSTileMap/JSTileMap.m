@@ -1003,6 +1003,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"JSTileMap dealloc");
     [self setCullNodes:NO];
 }
 
