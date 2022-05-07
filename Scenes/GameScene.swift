@@ -76,10 +76,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Map
     
     private func swapMap() {
-        if tilemapJS == nil {
-            loadMapWithJSTileMap()
-        } else {
+        if tilemapPEM == nil {
             loadMapWithPEMTMXMap()
+        } else {
+            loadMapWithJSTileMap()
         }
     }
     
