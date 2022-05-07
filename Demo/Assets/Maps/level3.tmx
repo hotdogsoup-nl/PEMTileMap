@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="TileSet with collection of images" tilewidth="16" tileheight="16" tilecount="2" columns="0" objectalignment="center">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="10">
+   <image width="16" height="16" source="Tiles/disk_01.png"/>
+  </tile>
+  <tile id="11">
+   <image width="16" height="16" source="Tiles/disk_02.png"/>
+  </tile>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJzjZiAMuIlQQy/AA8XUUkcvQEwYgtQAAEooAF0=
+  </data>
+ </layer>
+</map>

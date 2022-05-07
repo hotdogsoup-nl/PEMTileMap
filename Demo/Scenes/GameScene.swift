@@ -178,8 +178,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Collision detection
     
     private func checkForCollisionsAndMovePlayer() {
-        let tileQueryPositions : [TileQueryPosition] = [.Below, .Above, .ToTheLeft, .ToTheRight, .AboveLeft, .AboveRight, .BelowLeft, .BelowRight]
-        
+//        let tileQueryPositions : [TileQueryPosition] = [.Below, .Above, .ToTheLeft, .ToTheRight, .AboveLeft, .AboveRight, .BelowLeft, .BelowRight]
+//        
 //        for tileQueryPosition in tileQueryPositions {
 //            let playerRect = player?.collisionBoundingBox()
 //            let playerCoord = tilemap.coordinateForPoint(player!.desiredPosition)

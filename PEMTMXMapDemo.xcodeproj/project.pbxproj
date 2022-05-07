@@ -29,7 +29,6 @@
 		2037A5F128258DB000E13452 /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20562E0E282521C1005CE60A /* JSTileMap.m */; };
 		2037A5F528258DB500E13452 /* PEMTMXMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTMXMap.swift */; };
 		2037A5F828258E0700E13452 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
-		2037A5FA28258E9E00E13452 /* tileSet.png in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3D28252C00005CE60A /* tileSet.png */; };
 		2037A5FB28258E9E00E13452 /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
 		2037A5FF2825B0DC00E13452 /* level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5FE2825B0DC00E13452 /* level2.tmx */; };
 		2037A6002825B0DC00E13452 /* level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5FE2825B0DC00E13452 /* level2.tmx */; };
@@ -38,8 +37,6 @@
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		20562E16282521C1005CE60A /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20562E0E282521C1005CE60A /* JSTileMap.m */; };
 		20562E17282521C1005CE60A /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20562E0E282521C1005CE60A /* JSTileMap.m */; };
-		20562E4D28252C00005CE60A /* tileSet.png in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3D28252C00005CE60A /* tileSet.png */; };
-		20562E4E28252C00005CE60A /* tileSet.png in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3D28252C00005CE60A /* tileSet.png */; };
 		20562E4F28252C00005CE60A /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
 		20562E5028252C00005CE60A /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
 		205BF67128266D4200077DB2 /* PEMTMXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTMXParser.swift */; };
@@ -48,6 +45,18 @@
 		205BF69A282687A800077DB2 /* PEMTMXExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* PEMTMXExtensions.swift */; };
 		205BF69B282687A800077DB2 /* PEMTMXExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* PEMTMXExtensions.swift */; };
 		205BF69C282687A800077DB2 /* PEMTMXExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* PEMTMXExtensions.swift */; };
+		205BF6A22826A00D00077DB2 /* tileSet.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6A12826A00D00077DB2 /* tileSet.tsx */; };
+		205BF6A32826A00D00077DB2 /* tileSet.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6A12826A00D00077DB2 /* tileSet.tsx */; };
+		205BF6A42826A00D00077DB2 /* tileSet.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6A12826A00D00077DB2 /* tileSet.tsx */; };
+		205BF6A52826A41300077DB2 /* PEMTMXTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTMXTileSet.swift */; };
+		205BF6A62826A41400077DB2 /* PEMTMXTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTMXTileSet.swift */; };
+		205BF6A72826A41400077DB2 /* PEMTMXTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTMXTileSet.swift */; };
+		205BF6A92826A85F00077DB2 /* Tiles in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6A82826A85F00077DB2 /* Tiles */; };
+		205BF6AA2826A85F00077DB2 /* Tiles in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6A82826A85F00077DB2 /* Tiles */; };
+		205BF6AB2826A85F00077DB2 /* Tiles in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6A82826A85F00077DB2 /* Tiles */; };
+		205BF6AD2826A95600077DB2 /* level3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6AC2826A95600077DB2 /* level3.tmx */; };
+		205BF6AE2826A95600077DB2 /* level3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6AC2826A95600077DB2 /* level3.tmx */; };
+		205BF6AF2826A95600077DB2 /* level3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6AC2826A95600077DB2 /* level3.tmx */; };
 		207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DB82812AD5700FC4C77 /* AppDelegate.swift */; };
 		207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DBA2812AD5700FC4C77 /* GameViewController.swift */; };
 		207D3DBE2812AD5700FC4C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DBC2812AD5700FC4C77 /* Main.storyboard */; };
@@ -83,11 +92,13 @@
 		20562E12282521C1005CE60A /* PEMTMXLayerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXLayerInfo.swift; sourceTree = "<group>"; };
 		20562E13282521C1005CE60A /* PEMTMXMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXMap.swift; sourceTree = "<group>"; };
 		20562E14282521C1005CE60A /* PEMTMXObjectGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXObjectGroup.swift; sourceTree = "<group>"; };
-		20562E15282521C1005CE60A /* PEMTMXTilesetInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXTilesetInfo.swift; sourceTree = "<group>"; };
-		20562E3D28252C00005CE60A /* tileSet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileSet.png; sourceTree = "<group>"; };
+		20562E15282521C1005CE60A /* PEMTMXTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXTileSet.swift; sourceTree = "<group>"; };
 		20562E3E28252C00005CE60A /* level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level1.tmx; sourceTree = "<group>"; };
 		205BF67028266D4200077DB2 /* PEMTMXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTMXParser.swift; sourceTree = "<group>"; };
 		205BF699282687A800077DB2 /* PEMTMXExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTMXExtensions.swift; sourceTree = "<group>"; };
+		205BF6A12826A00D00077DB2 /* tileSet.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = tileSet.tsx; sourceTree = "<group>"; };
+		205BF6A82826A85F00077DB2 /* Tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tiles; sourceTree = "<group>"; };
+		205BF6AC2826A95600077DB2 /* level3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level3.tmx; sourceTree = "<group>"; };
 		205C86332823D8D800360A29 /* Objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridging-Header.h"; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		207D3DB02812AD5700FC4C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -173,7 +184,6 @@
 				20562E11282521C1005CE60A /* PEMTMXLayer.swift */,
 				20562E12282521C1005CE60A /* PEMTMXLayerInfo.swift */,
 				20562E14282521C1005CE60A /* PEMTMXObjectGroup.swift */,
-				20562E15282521C1005CE60A /* PEMTMXTilesetInfo.swift */,
 			);
 			path = Unused;
 			sourceTree = "<group>";
@@ -184,6 +194,7 @@
 				20562E13282521C1005CE60A /* PEMTMXMap.swift */,
 				205BF67028266D4200077DB2 /* PEMTMXParser.swift */,
 				205BF699282687A800077DB2 /* PEMTMXExtensions.swift */,
+				20562E15282521C1005CE60A /* PEMTMXTileSet.swift */,
 				206E238A282666150039C4FE /* Unused */,
 			);
 			path = Sources;
@@ -228,7 +239,9 @@
 			children = (
 				20562E3E28252C00005CE60A /* level1.tmx */,
 				2037A5FE2825B0DC00E13452 /* level2.tmx */,
-				20562E3D28252C00005CE60A /* tileSet.png */,
+				205BF6AC2826A95600077DB2 /* level3.tmx */,
+				205BF6A12826A00D00077DB2 /* tileSet.tsx */,
+				205BF6A82826A85F00077DB2 /* Tiles */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -414,11 +427,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2037A5E128258C4900E13452 /* Main.storyboard in Resources */,
+				205BF6AF2826A95600077DB2 /* level3.tmx in Resources */,
 				2037A5EB28258D9D00E13452 /* Colors.xcassets in Resources */,
+				205BF6A42826A00D00077DB2 /* tileSet.tsx in Resources */,
+				205BF6AB2826A85F00077DB2 /* Tiles in Resources */,
 				2037A6012825B0DC00E13452 /* level2.tmx in Resources */,
 				2037A5FB28258E9E00E13452 /* level1.tmx in Resources */,
 				2037A5EA28258D9A00E13452 /* Assets.xcassets in Resources */,
-				2037A5FA28258E9E00E13452 /* tileSet.png in Resources */,
 				2037A5E628258C4A00E13452 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,7 +443,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				207D3DBE2812AD5700FC4C77 /* Main.storyboard in Resources */,
-				20562E4D28252C00005CE60A /* tileSet.png in Resources */,
+				205BF6AD2826A95600077DB2 /* level3.tmx in Resources */,
+				205BF6A22826A00D00077DB2 /* tileSet.tsx in Resources */,
+				205BF6A92826A85F00077DB2 /* Tiles in Resources */,
 				2037A5FF2825B0DC00E13452 /* level2.tmx in Resources */,
 				207D3DC12812AD5700FC4C77 /* LaunchScreen.storyboard in Resources */,
 				20562E4F28252C00005CE60A /* level1.tmx in Resources */,
@@ -443,9 +460,11 @@
 			files = (
 				20562E5028252C00005CE60A /* level1.tmx in Resources */,
 				207D3DCE2812AD5700FC4C77 /* Main.storyboard in Resources */,
-				20562E4E28252C00005CE60A /* tileSet.png in Resources */,
+				205BF6A32826A00D00077DB2 /* tileSet.tsx in Resources */,
 				20CA158328181D8700797A7C /* Colors.xcassets in Resources */,
+				205BF6AE2826A95600077DB2 /* level3.tmx in Resources */,
 				207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */,
+				205BF6AA2826A85F00077DB2 /* Tiles in Resources */,
 				2037A6002825B0DC00E13452 /* level2.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +485,7 @@
 				2037A5ED28258DA300E13452 /* Player.swift in Sources */,
 				2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */,
 				205BF69C282687A800077DB2 /* PEMTMXExtensions.swift in Sources */,
+				205BF6A72826A41400077DB2 /* PEMTMXTileSet.swift in Sources */,
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
 				205BF67328266D4200077DB2 /* PEMTMXParser.swift in Sources */,
@@ -485,6 +505,7 @@
 				207D3DD42812AD5700FC4C77 /* GameScene.swift in Sources */,
 				207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */,
 				205BF69A282687A800077DB2 /* PEMTMXExtensions.swift in Sources */,
+				205BF6A52826A41300077DB2 /* PEMTMXTileSet.swift in Sources */,
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139E2818168600797A7C /* GameController.swift in Sources */,
 				205BF67128266D4200077DB2 /* PEMTMXParser.swift in Sources */,
@@ -504,6 +525,7 @@
 				207D3DD52812AD5700FC4C77 /* GameScene.swift in Sources */,
 				20CA139B281815DD00797A7C /* GameViewController.swift in Sources */,
 				205BF69B282687A800077DB2 /* PEMTMXExtensions.swift in Sources */,
+				205BF6A62826A41400077DB2 /* PEMTMXTileSet.swift in Sources */,
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139F2818168600797A7C /* GameController.swift in Sources */,
 				205BF67228266D4200077DB2 /* PEMTMXParser.swift in Sources */,
