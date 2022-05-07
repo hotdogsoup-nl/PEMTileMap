@@ -3,7 +3,7 @@ import SpriteKit
 import zlib
 import CoreGraphics
 
-//enum PEMTMXLayerAttribute: Int {
+//enum LayerAttribute: Int {
 //    case None
 //    case Base64
 //    case Gzip
@@ -14,7 +14,7 @@ import CoreGraphics
 //    }
 //}
 //
-//enum PEMTMXPropertyType {
+//enum PropertyType {
 //    case None
 //    case Map
 //    case Layer
@@ -23,16 +23,10 @@ import CoreGraphics
 //    case ImageLayer
 //}
 //
-//enum PEMTMXTileFlags: Int {
-//    case Diagonal = 0x20000000
-//    case Vertical = 0x40000000
-//    case Horizontal = 0x80000000
-//    case FlippedAll = 0xe0000000
-//    case FlippedMask = 0x1fffffff
-//}
+
 //
 
-internal enum MapOrientation : String {
+internal enum Orientation : String {
     case Orthogonal = "orthogonal"
     case Isometric = "isometric"
     case Staggered = "staggered"
@@ -57,7 +51,7 @@ internal enum MapStaggerIndex : String {
 }
 
 class PEMTMXMap : SKNode, XMLParserDelegate {
-    var orientation : MapOrientation?
+    var orientation : Orientation?
     var renderOrder : MapRenderOrder?
     var staggerAxis : MapStaggerAxis?
     var staggerIndex : MapStaggerIndex?
@@ -72,8 +66,11 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     
     private var backgroundColorNode : SKSpriteNode?
     
+    internal var tileSets : [PEMTMXTileSet] = []
+    
     // XML Parser
     internal var xmlCharacters : String = ""
+    internal var currentFirstGid = UInt(0)
 
     
 //    var parentElement = PEMTMXPropertyType.None
@@ -84,7 +81,6 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
 //    private (set) var maxZPositioning = CGFloat(0)
 //
 //    var resourcePath : String?
-//    var tilesets : Array<Any>? // xxx
 //    var tileProperties : Dictionary<String, Any>? // xxx
 //    var properties : Dictionary<String, Any>? // xxx
 //    var layers : Array<PEMTMXLayerInfo>?
@@ -163,8 +159,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             addChild(backgroundColorNode!)
         }
         
-        
-        
+        print (self)
         
 //
 //                if (baseZPosition < (baseZPosition + zOrderModifier * CGFloat(zOrderCount + 1))) {
@@ -246,7 +241,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
         tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
         mapSize = CGSize(width: CGFloat(Int(width)!), height: CGFloat(Int(height)!))
         
-        if let mapOrientation = MapOrientation(rawValue: orientationValue) {
+        if let mapOrientation = Orientation(rawValue: orientationValue) {
             orientation = mapOrientation
         } else {
             #if DEBUG
@@ -332,4 +327,21 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
 //
 //        return returnValue
 //    }
+    
+    #if DEBUG
+    override var description: String {
+        var result : String = ""
+        
+        result += "\nPEMTMXMap --"
+        result += "\norientation: \(String(describing: orientation))"
+        result += "\nmapSize: \(mapSize)"
+        result += "\ntileSize: \(tileSize)"
+        
+        for tileSet in tileSets {
+            result += "\n\(tileSet)"
+        }
+    
+        return result
+    }
+    #endif
 }
