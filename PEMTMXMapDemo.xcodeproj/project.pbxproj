@@ -98,12 +98,12 @@
 		205C86332823D8D800360A29 /* Objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridging-Header.h"; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		207D3DB02812AD5700FC4C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		207D3DB52812AD5700FC4C77 /* PEM TMX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEM TMX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PEMTMXMapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DB82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DBA2812AD5700FC4C77 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		207D3DBD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		207D3DC02812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		207D3DC62812AD5700FC4C77 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PEMTMXDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PEMTMXMapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DC82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		207D3DCF2812AD5700FC4C77 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
@@ -229,8 +229,8 @@
 		207D3DB62812AD5700FC4C77 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				207D3DB52812AD5700FC4C77 /* PEM TMX.app */,
-				207D3DC62812AD5700FC4C77 /* PEMTMXDemo.app */,
+				207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */,
+				207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */,
 				2037A5D328258C4800E13452 /* PEMTMXDemo.app */,
 			);
 			name = Products;
@@ -326,7 +326,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Dotty The Kangaroo iOS";
-			productReference = 207D3DB52812AD5700FC4C77 /* PEM TMX.app */;
+			productReference = 207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		207D3DC52812AD5700FC4C77 /* macOS version */ = {
@@ -345,7 +345,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Dotty The Kangaroo macOS";
-			productReference = 207D3DC62812AD5700FC4C77 /* PEMTMXDemo.app */;
+			productReference = 207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -369,7 +369,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTMXDemo" */;
+			buildConfigurationList = 207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTMXMapDemo" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -653,8 +653,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxdemo";
-				PRODUCT_NAME = PEMTMXDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxmapdemo";
+				PRODUCT_NAME = PEMTMXMapDemo;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Objc-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -711,8 +711,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxdemo";
-				PRODUCT_NAME = PEMTMXDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxmapdemo";
+				PRODUCT_NAME = PEMTMXMapDemo;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "Objc-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -742,7 +742,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_NAME = "PEM TMX";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -772,7 +771,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_NAME = "PEM TMX";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -804,7 +802,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_NAME = PEMTMXDemo;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -834,7 +831,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_NAME = PEMTMXDemo;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -853,7 +849,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTMXDemo" */ = {
+		207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTMXMapDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				207D3DD82812AD5700FC4C77 /* Debug */,
