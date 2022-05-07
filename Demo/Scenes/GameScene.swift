@@ -101,7 +101,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tilemapJS?.removeFromParent()
         tilemapJS = nil
 
-        if let map = PEMTMXMap(mapNamed: "level1.tmx") {
+        if let map = PEMTMXMap(mapName: "level1.tmx") {
             tilemapPEM = map
             addChild(map)
         } else {

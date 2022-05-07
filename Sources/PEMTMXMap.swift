@@ -31,14 +31,51 @@ import CoreGraphics
 //    case FlippedMask = 0x1fffffff
 //}
 //
-//enum PEMTMXOrientationStyle {
-//    case Orthogonal
-//    case Isometric
-//}
-    
+
+internal enum MapOrientation : String {
+    case Orthogonal = "orthogonal"
+    case Isometric = "isometric"
+    case Staggered = "staggered"
+    case Hexagonal = "hexagonal"
+}
+
+internal enum MapRenderOrder : String {
+    case RightDown = "right-down"
+    case RightUp = "right-up"
+    case LeftDown = "left-down"
+    case LeftUp = "left-up"
+}
+
+internal enum MapStaggerAxis : String {
+    case X = "x"
+    case Y = "y"
+}
+
+internal enum MapStaggerIndex : String {
+    case Even = "even"
+    case Odd = "odd"
+}
+
 class PEMTMXMap : SKNode, XMLParserDelegate {
-//    var mapSize = CGSize.zero
-//    var tileSize = CGSize.zero
+    var orientation : MapOrientation?
+    var renderOrder : MapRenderOrder?
+    var staggerAxis : MapStaggerAxis?
+    var staggerIndex : MapStaggerIndex?
+
+    var mapSize = CGSize.zero
+    var tileSize = CGSize.zero
+    var hexSideLength = Int(0)
+    var parallaxOrigin = CGPoint.zero
+    
+    var backgroundColor : SKColor?
+    var infinite = false
+    
+    private var backgroundColorNode : SKSpriteNode?
+    
+    // XML Parser
+    internal var xmlCharacters : String = ""
+
+    
 //    var parentElement = PEMTMXPropertyType.None
 //    var parentGID = Int(0)
 //    var orientation : PEMTMXOrientationStyle?
@@ -46,7 +83,6 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
 //    private (set) var minZPositioning = CGFloat(0)
 //    private (set) var maxZPositioning = CGFloat(0)
 //
-//    var fileName : String?
 //    var resourcePath : String?
 //    var tilesets : Array<Any>? // xxx
 //    var tileProperties : Dictionary<String, Any>? // xxx
@@ -80,36 +116,56 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     }
     
     deinit {
+        #if DEBUG
+        print("deinit: \(self)")
+        #endif
     }
     
-    convenience init?(mapNamed mapName : String) {
-        self.init(mapNamed: mapName, baseZPosition: 0, zPositionLayerDelta: -20)
-    }
+    /**
+     Load a **TMX** tilemap file and return a new `PEMTMXMap` node. Returns nil if the file could not be read or parsed.
 
-    init?(mapNamed mapName : String, baseZPosition : CGFloat, zPositionLayerDelta : CGFloat) {
+     - parameter mapName : TMX file name.
+     - parameter baseZPosition : Base zPosition for the node. Default is 0.
+     - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is -20.
+     - returns: `PEMTMXMap?` tilemap node.
+     */
+    
+    init?(mapName : String, baseZPosition : CGFloat = 0, zPositionLayerDelta : CGFloat = 20) {
         super.init()
-//        var tmxFileName = mapName
-//        var tmxFileExtension : String?
-//
-//        if (mapName.range(of: ".") != nil) {
-//            tmxFileName = (mapName as NSString).deletingPathExtension
-//            tmxFileExtension = (mapName as NSString).pathExtension
-//        }
-//
-//        if let path = Bundle.main.url(forResource: tmxFileName, withExtension: tmxFileExtension) {
-//            fileName = path.absoluteString
-//
-//            if let parser = XMLParser(contentsOf: path) {
-//                parser.delegate = self
-//                parser.shouldProcessNamespaces = false
-//                parser.shouldReportNamespacePrefixes = false
-//                parser.shouldResolveExternalEntities = false
-//                if (!parser.parse()) {
-//                    #if DEBUG
-//                    print("Error parsing map: ", parser.parserError as Any)
-//                    #endif
-//                    return nil
-//                }
+        var tmxFileName = mapName
+        var tmxFileExtension : String?
+
+        if (mapName.range(of: ".") != nil) {
+            tmxFileName = (mapName as NSString).deletingPathExtension
+            tmxFileExtension = (mapName as NSString).pathExtension
+        }
+
+        if let path = Bundle.main.url(forResource: tmxFileName, withExtension: tmxFileExtension) {
+            if let parser = XMLParser(contentsOf: path) {
+                parser.delegate = self
+                parser.shouldProcessNamespaces = false
+                parser.shouldReportNamespacePrefixes = false
+                parser.shouldResolveExternalEntities = false
+                if (!parser.parse()) {
+                    #if DEBUG
+                    print("PEMTMXMap: Error parsing map: ", parser.parserError as Any)
+                    #endif
+                    return nil
+                }
+            }
+        }
+        
+        if backgroundColor != nil {
+            let colorNode = SKSpriteNode(color: backgroundColor!, size: mapSizePoints())
+            backgroundColorNode = colorNode
+            backgroundColorNode?.anchorPoint = .zero
+            backgroundColorNode?.position = .zero
+            addChild(backgroundColorNode!)
+        }
+        
+        
+        
+        
 //
 //                if (baseZPosition < (baseZPosition + zOrderModifier * CGFloat(zOrderCount + 1))) {
 //                    minZPositioning = baseZPosition;
@@ -179,6 +235,79 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
 //            }
 //        }
     }
+    
+    internal func getAttributes(_ attributes : Dictionary<String, String>) {
+        guard let width = attributes[XMLAttributeWidth] else { return }
+        guard let height = attributes[XMLAttributeHeight] else { return }
+        guard let tilewidth = attributes[XMLAttributeTileWidth] else { return }
+        guard let tileheight = attributes[XMLAttributeTileHeight] else { return }
+        guard let orientationValue = attributes[XMLAttributeOrientation] else { return }
+                
+        tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
+        mapSize = CGSize(width: CGFloat(Int(width)!), height: CGFloat(Int(height)!))
+        
+        if let mapOrientation = MapOrientation(rawValue: orientationValue) {
+            orientation = mapOrientation
+        } else {
+            #if DEBUG
+            print("PEMTMXMap: unsupported map orientation: \(String(describing: orientationValue))")
+            #endif
+        }
+        
+        if let value = attributes[XMLAttributeRenderOrder] {
+            if let mapRenderOrder = MapRenderOrder(rawValue: value) {
+                renderOrder = mapRenderOrder
+            } else {
+                #if DEBUG
+                print("PEMTMXMap: unsupported map render order: \(String(describing: value))")
+                #endif
+            }
+        }
+        
+        if let value = attributes[XMLAttributeHexSideLength] {
+            hexSideLength = Int(value) ?? 0
+        }
+        
+        if let value = attributes[XMLAttributeStaggerAxis] {
+            if let mapStaggerAxis = MapStaggerAxis(rawValue: value) {
+                staggerAxis = mapStaggerAxis
+            } else {
+                #if DEBUG
+                print("PEMTMXMap: unsupported map stagger axis: \(String(describing: value))")
+                #endif
+            }
+        }
+
+        if let value = attributes[XMLAttributeStaggerIndex] {
+            if let mapStaggerIndex = MapStaggerIndex(rawValue: value) {
+                staggerIndex = mapStaggerIndex
+            } else {
+                #if DEBUG
+                print("PEMTMXMap: unsupported map stagger index: \(String(describing: value))")
+                #endif
+            }
+        }
+        
+        if let value = attributes[XMLAttributeParallaxOriginX] {
+            parallaxOrigin.x = CGFloat(Int(value) ?? 0)
+        }
+
+        if let value = attributes[XMLAttributeParallaxOriginY] {
+            parallaxOrigin.y = CGFloat(Int(value) ?? 0)
+        }
+
+        if let value = attributes[XMLAttributeBackgroundColor] {
+            backgroundColor = SKColor.init(hexString: value)
+        }
+
+        if let value = attributes[XMLAttributeInfinite] {
+            infinite = value == "1"
+        }
+    }
+    
+    private func mapSizePoints() -> CGSize {
+        return CGSize(width: mapSize.width * tileSize.width, height: mapSize.height * tileSize.height)
+    }
 
 //    func layerNamed(_ name : String) -> PEMTMXLayer? {
 //        return nil
@@ -203,22 +332,4 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
 //
 //        return returnValue
 //    }
-    
-    // MARK: - XMLParserDelegate
-    
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        
-    }
-    
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        
-    }
-    
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        
-    }
-    
-    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        
-    }
 }
