@@ -75,6 +75,9 @@
 		20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
 		20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
 		20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
+		20D0D3132828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
+		20D0D3142828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
+		20D0D3152828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +119,7 @@
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		20CA139D2818168600797A7C /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		20CA158128181D8700797A7C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		20D0D3122828111B001E505D /* Data+Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				205BF699282687A800077DB2 /* SKColor+Hex.swift */,
+				20D0D3122828111B001E505D /* Data+Compression.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -508,6 +513,7 @@
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
 				20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
+				20D0D3152828111B001E505D /* Data+Compression.swift in Sources */,
 				205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +535,7 @@
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139E2818168600797A7C /* GameController.swift in Sources */,
 				20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */,
+				20D0D3132828111B001E505D /* Data+Compression.swift in Sources */,
 				205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,6 +557,7 @@
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139F2818168600797A7C /* GameController.swift in Sources */,
 				20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
+				20D0D3142828111B001E505D /* Data+Compression.swift in Sources */,
 				205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
