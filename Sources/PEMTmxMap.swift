@@ -27,6 +27,18 @@ internal enum MapStaggerIndex : String {
     case Odd = "odd"
 }
 
+internal enum DataEncoding : String {
+    case Base64 = "base64"
+    case Csv = "csv"
+}
+
+internal enum DataCompression : String {
+    case None = "none"
+    case Gzip = "gzip"
+    case Zlib = "zlib"
+    case Zstd = "zstd"
+}
+
 class PEMTmxMap : SKNode, XMLParserDelegate {
     private (set) var version : String?
     private (set) var tiledversion : String?
@@ -49,7 +61,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
 
     private var backgroundColorNode : SKSpriteNode?
     private var baseZPosition = CGFloat(0)
-    private var zPositionLayerDelta = CGFloat(0)
+    private var zPositionLayerDelta = CGFloat(20)
 
     internal var tileSets : [PEMTmxTileSet] = []
     internal var tileLayers : [PEMTmxTileLayer] = []
@@ -58,6 +70,8 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
     internal var currentParseString : String = ""
     internal var currentFirstGid = UInt(0)
     internal var currentMapElement = MapElements.None
+    internal var dataEncoding : DataEncoding?
+    internal var dataCompression = DataCompression.None
     
     override init() {
         super.init()
@@ -73,16 +87,12 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         #endif
     }
 
-    /**
-     Load a **TMX** tilemap file and return a new `PEMTmxMap` node. Returns nil if the file could not be read or parsed.
-
-     - parameter mapName : TMX file name.
-     - parameter baseZPosition : Base zPosition for the node. Default is 0.
-     - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is -20.
-     - returns: `PEMTmxMap?` tilemap node.
-     */
-
-    init?(mapName : String, baseZPosition : CGFloat = 0, zPositionLayerDelta : CGFloat = 20) {
+    /// Load a **TMX** tilemap file and return a new `PEMTmxMap` node. Returns nil if the file could not be read or parsed.
+    /// - parameter mapName : TMX file name.
+    /// - parameter baseZPosition : Base zPosition for the node. Default is 0.
+    /// - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is -20.
+    /// - returns: `PEMTmxMap?` tilemap node.
+    init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20) {
         super.init()
 
         if let path = bundleURLForResource(mapName) {
@@ -118,15 +128,15 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         generateMap()
     }
     
-    internal func parseAttributes(_ attributes : Dictionary<String, String>) {
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
-        guard let tilewidth = attributes[ElementAttributes.TileWidth.rawValue] else { return }
-        guard let tileheight = attributes[ElementAttributes.TileHeight.rawValue] else { return }
-        guard let orientationValue = attributes[ElementAttributes.Orientation.rawValue] else { return }
+    internal func parseAttributes(_ attributes: Dictionary<String, String>) {
+        guard let width = attributes[MapElementAttributes.Width.rawValue] else { return }
+        guard let height = attributes[MapElementAttributes.Height.rawValue] else { return }
+        guard let tilewidth = attributes[MapElementAttributes.TileWidth.rawValue] else { return }
+        guard let tileheight = attributes[MapElementAttributes.TileHeight.rawValue] else { return }
+        guard let orientationValue = attributes[MapElementAttributes.Orientation.rawValue] else { return }
                 
-        version = attributes[ElementAttributes.Version.rawValue]
-        tiledversion = attributes[ElementAttributes.TiledVersion.rawValue]
+        version = attributes[MapElementAttributes.Version.rawValue]
+        tiledversion = attributes[MapElementAttributes.TiledVersion.rawValue]
         
         if let mapOrientation = Orientation(rawValue: orientationValue) {
             orientation = mapOrientation
@@ -136,7 +146,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             #endif
         }
         
-        if let value = attributes[ElementAttributes.RenderOrder.rawValue] {
+        if let value = attributes[MapElementAttributes.RenderOrder.rawValue] {
             if let mapRenderOrder = MapRenderOrder(rawValue: value) {
                 renderOrder = mapRenderOrder
             } else {
@@ -146,7 +156,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[ElementAttributes.CompressionLevel.rawValue] {
+        if let value = attributes[MapElementAttributes.CompressionLevel.rawValue] {
             compressionLevel = Int(value)!
         }
         
@@ -154,11 +164,11 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
         
         
-        if let value = attributes[ElementAttributes.HexSideLength.rawValue] {
+        if let value = attributes[MapElementAttributes.HexSideLength.rawValue] {
             hexSideLengthInPoints = Int(value) ?? 0
         }
         
-        if let value = attributes[ElementAttributes.StaggerAxis.rawValue] {
+        if let value = attributes[MapElementAttributes.StaggerAxis.rawValue] {
             if let mapStaggerAxis = MapStaggerAxis(rawValue: value) {
                 staggerAxis = mapStaggerAxis
             } else {
@@ -168,7 +178,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
 
-        if let value = attributes[ElementAttributes.StaggerIndex.rawValue] {
+        if let value = attributes[MapElementAttributes.StaggerIndex.rawValue] {
             if let mapStaggerIndex = MapStaggerIndex(rawValue: value) {
                 staggerIndex = mapStaggerIndex
             } else {
@@ -178,39 +188,63 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[ElementAttributes.ParallaxOriginX.rawValue] {
+        if let value = attributes[MapElementAttributes.ParallaxOriginX.rawValue] {
             parallaxOriginInPoints.x = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[ElementAttributes.ParallaxOriginY.rawValue] {
+        if let value = attributes[MapElementAttributes.ParallaxOriginY.rawValue] {
             parallaxOriginInPoints.y = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[ElementAttributes.BackgroundColor.rawValue] {
+        if let value = attributes[MapElementAttributes.BackgroundColor.rawValue] {
             backgroundColor = SKColor.init(hexString: value)
         }
         
-        if let value = attributes[ElementAttributes.NextLayerId.rawValue] {
+        if let value = attributes[MapElementAttributes.NextLayerId.rawValue] {
             nextLayerId = UInt(value)!
         }
 
-        if let value = attributes[ElementAttributes.NextObjectId.rawValue] {
+        if let value = attributes[MapElementAttributes.NextObjectId.rawValue] {
             nextObjectId = UInt(value)!
         }
 
-        if let value = attributes[ElementAttributes.Infinite.rawValue] {
+        if let value = attributes[MapElementAttributes.Infinite.rawValue] {
             infinite = value == "1"
         }
     }
     
-    private func generateMap() {
+    // MARK: - Map generation
         
+    private func generateMap() {
+        var currentZPosition = baseZPosition
+        
+        // add tile layers
+        for tileLayer in tileLayers {
+            if tileLayer.visible {
+                tileLayer.generateTiles()
+                
+                tileLayer.position = CGPoint.zero
+                tileLayer.zPosition = currentZPosition
+                currentZPosition += 1
+                
+                addChild(tileLayer)
+            }
+        }
+        
+        
+        // add image layers
+        
+        // add objects
     }
+    
+    // MARK: - Calculations
     
     private func mapSizeInPoints() -> CGSize {
         return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
     }
-    
+
+    // MARK: - Debug
+
     #if DEBUG
     override var description: String {
         var result : String = ""
@@ -235,7 +269,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
 
 // MARK: - Helper functions
 
-func bundleURLForResource(_ resource : String) -> URL? {
+func bundleURLForResource(_ resource: String) -> URL? {
     var fileName = resource
     var fileExtension : String?
 
@@ -247,7 +281,7 @@ func bundleURLForResource(_ resource : String) -> URL? {
     return Bundle.main.url(forResource: fileName, withExtension: fileExtension)
 }
 
-func bundlePathForResource(_ resource : String) -> String? {
+func bundlePathForResource(_ resource: String) -> String? {
     var fileName = resource
     var fileExtension : String?
 

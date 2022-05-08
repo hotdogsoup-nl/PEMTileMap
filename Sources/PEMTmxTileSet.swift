@@ -39,36 +39,32 @@ class PEMTmxTileSet : NSObject {
     private (set) var objectAlignment = ObjectAlignment.Unspecified
     private (set) var tileSetImage : SKTexture?
     
-    /**
-     Uses  **TMX** tileset attributes to create and return a new `PEMTmxTileSet` object.
-
-     - parameter attributes : Dictionary containing TMX tileset attributes.
-     */
-
+    /// Uses  **TMX** tileset attributes to create and return a new `PEMTmxTileSet` object.
+    /// - parameter attributes : Dictionary containing TMX tileset attributes.
     init(attributes: Dictionary<String, String>) {
         super.init()
 
-        if let value = attributes[ElementAttributes.FirstGid.rawValue] {
+        if let value = attributes[MapElementAttributes.FirstGid.rawValue] {
             firstGid = UInt(value)!
         }
 
-        externalSource = attributes[ElementAttributes.Source.rawValue]
-        name = attributes[ElementAttributes.Name.rawValue]
+        externalSource = attributes[MapElementAttributes.Source.rawValue]
+        name = attributes[MapElementAttributes.Name.rawValue]
 
-        if let tilewidth = attributes[ElementAttributes.TileWidth.rawValue],
-           let tileheight = attributes[ElementAttributes.TileHeight.rawValue] {
+        if let tilewidth = attributes[MapElementAttributes.TileWidth.rawValue],
+           let tileheight = attributes[MapElementAttributes.TileHeight.rawValue] {
             tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
         }
 
-        if let value = attributes[ElementAttributes.Spacing.rawValue] {
+        if let value = attributes[MapElementAttributes.Spacing.rawValue] {
             spacingInPoints = UInt(value) ?? 0
         }
         
-        if let value = attributes[ElementAttributes.Margin.rawValue] {
+        if let value = attributes[MapElementAttributes.Margin.rawValue] {
             marginInPoints = UInt(value) ?? 0
         }
 
-        if let value = attributes[ElementAttributes.TileCount.rawValue] {
+        if let value = attributes[MapElementAttributes.TileCount.rawValue] {
             tileCount = UInt(value) ?? 0
         }
     }
@@ -79,10 +75,12 @@ class PEMTmxTileSet : NSObject {
         #endif
     }
     
-    internal func setTileSetImage(attributes : Dictionary<String, String>) {
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
-        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
+    // MARK: - Setup
+    
+    internal func setTileSetImage(attributes: Dictionary<String, String>) {
+        guard let width = attributes[MapElementAttributes.Width.rawValue] else { return }
+        guard let height = attributes[MapElementAttributes.Height.rawValue] else { return }
+        guard let source = attributes[MapElementAttributes.Source.rawValue] else { return }
 
         type = .SingleImage
         
@@ -96,6 +94,8 @@ class PEMTmxTileSet : NSObject {
             }
         }
     }
+    
+    // MARK: - Debug
     
     #if DEBUG
     override var description: String {
