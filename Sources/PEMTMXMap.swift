@@ -24,8 +24,6 @@ import CoreGraphics
 //}
 //
 
-//
-
 internal enum Orientation : String {
     case Orthogonal = "orthogonal"
     case Isometric = "isometric"
@@ -51,11 +49,6 @@ internal enum MapStaggerIndex : String {
 }
 
 class PEMTMXMap : SKNode, XMLParserDelegate {
-    var orientation : Orientation?
-    var renderOrder : MapRenderOrder?
-    var staggerAxis : MapStaggerAxis?
-    var staggerIndex : MapStaggerIndex?
-
     var mapSize = CGSize.zero
     var tileSize = CGSize.zero
     var hexSideLength = Int(0)
@@ -64,15 +57,19 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     var backgroundColor : SKColor?
     var infinite = false
     
+    var orientation : Orientation?
+    var renderOrder : MapRenderOrder?
+    var staggerAxis : MapStaggerAxis?
+    var staggerIndex : MapStaggerIndex?
+
     private var backgroundColorNode : SKSpriteNode?
-    
+
     internal var tileSets : [PEMTMXTileSet] = []
     
     // XML Parser
     internal var currentParseString : String = ""
     internal var currentFirstGid = UInt(0)
     internal var currentMapElement = MapElements.None
-
     
 //    var parentElement = PEMTMXPropertyType.None
 //    var parentGID = Int(0)
@@ -114,10 +111,10 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     
     deinit {
         #if DEBUG
-        print("deinit: \(self)")
+        print("deinit: PEMTMXMap")
         #endif
     }
-    
+
     /**
      Load a **TMX** tilemap file and return a new `PEMTMXMap` node. Returns nil if the file could not be read or parsed.
 
@@ -126,18 +123,13 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
      - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is -20.
      - returns: `PEMTMXMap?` tilemap node.
      */
-    
+
     init?(mapName : String, baseZPosition : CGFloat = 0, zPositionLayerDelta : CGFloat = 20) {
         super.init()
-        var tmxFileName = mapName
-        var tmxFileExtension : String?
 
-        if (mapName.range(of: ".") != nil) {
-            tmxFileName = (mapName as NSString).deletingPathExtension
-            tmxFileExtension = (mapName as NSString).pathExtension
-        }
-
-        if let path = Bundle.main.url(forResource: tmxFileName, withExtension: tmxFileExtension) {
+        
+  
+        if let path = bundleURLForResource(mapName) {
             if let parser = XMLParser(contentsOf: path) {
                 parser.delegate = self
                 parser.shouldProcessNamespaces = false
@@ -233,11 +225,11 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     }
     
     internal func getAttributes(_ attributes : Dictionary<String, String>) {
-        guard let width = attributes[MapAttributes.Width.rawValue] else { return }
-        guard let height = attributes[MapAttributes.Height.rawValue] else { return }
-        guard let tilewidth = attributes[MapAttributes.TileWidth.rawValue] else { return }
-        guard let tileheight = attributes[MapAttributes.TileHeight.rawValue] else { return }
-        guard let orientationValue = attributes[MapAttributes.Orientation.rawValue] else { return }
+        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
+        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
+        guard let tilewidth = attributes[ElementAttributes.TileWidth.rawValue] else { return }
+        guard let tileheight = attributes[ElementAttributes.TileHeight.rawValue] else { return }
+        guard let orientationValue = attributes[ElementAttributes.Orientation.rawValue] else { return }
                 
         tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
         mapSize = CGSize(width: CGFloat(Int(width)!), height: CGFloat(Int(height)!))
@@ -250,7 +242,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             #endif
         }
         
-        if let value = attributes[MapAttributes.RenderOrder.rawValue] {
+        if let value = attributes[ElementAttributes.RenderOrder.rawValue] {
             if let mapRenderOrder = MapRenderOrder(rawValue: value) {
                 renderOrder = mapRenderOrder
             } else {
@@ -260,11 +252,11 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[MapAttributes.HexSideLength.rawValue] {
+        if let value = attributes[ElementAttributes.HexSideLength.rawValue] {
             hexSideLength = Int(value) ?? 0
         }
         
-        if let value = attributes[MapAttributes.StaggerAxis.rawValue] {
+        if let value = attributes[ElementAttributes.StaggerAxis.rawValue] {
             if let mapStaggerAxis = MapStaggerAxis(rawValue: value) {
                 staggerAxis = mapStaggerAxis
             } else {
@@ -274,7 +266,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             }
         }
 
-        if let value = attributes[MapAttributes.StaggerIndex.rawValue] {
+        if let value = attributes[ElementAttributes.StaggerIndex.rawValue] {
             if let mapStaggerIndex = MapStaggerIndex(rawValue: value) {
                 staggerIndex = mapStaggerIndex
             } else {
@@ -284,19 +276,19 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[MapAttributes.ParallaxOriginX.rawValue] {
+        if let value = attributes[ElementAttributes.ParallaxOriginX.rawValue] {
             parallaxOrigin.x = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[MapAttributes.ParallaxOriginY.rawValue] {
+        if let value = attributes[ElementAttributes.ParallaxOriginY.rawValue] {
             parallaxOrigin.y = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[MapAttributes.BackgroundColor.rawValue] {
+        if let value = attributes[ElementAttributes.BackgroundColor.rawValue] {
             backgroundColor = SKColor.init(hexString: value)
         }
 
-        if let value = attributes[MapAttributes.Infinite.rawValue] {
+        if let value = attributes[ElementAttributes.Infinite.rawValue] {
             infinite = value == "1"
         }
     }
@@ -345,4 +337,30 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
         return result
     }
     #endif
+}
+
+// MARK: - Helper functions
+
+func bundleURLForResource(_ resource : String) -> URL? {
+    var fileName = resource
+    var fileExtension : String?
+
+    if resource.range(of: ".") != nil {
+        fileName = (resource as NSString).deletingPathExtension
+        fileExtension = (resource as NSString).pathExtension
+    }
+
+    return Bundle.main.url(forResource: fileName, withExtension: fileExtension)
+}
+
+func bundlePathForResource(_ resource : String) -> String? {
+    var fileName = resource
+    var fileExtension : String?
+
+    if resource.range(of: ".") != nil {
+        fileName = (resource as NSString).deletingPathExtension
+        fileExtension = (resource as NSString).pathExtension
+    }
+
+    return Bundle.main.path(forResource: fileName, ofType: fileExtension)
 }

@@ -29,7 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var swapButton : SKSpriteNode
     private var nextMapButton : SKSpriteNode
     private var currentMapNameLabel : SKLabelNode
-    private var currentMapNumber = Int(1)
+    private var currentMapNumber = Int(2)
 
     private var player : Player?
     private var previousUpdateTime = TimeInterval(0)

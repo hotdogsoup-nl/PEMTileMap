@@ -1,12 +1,9 @@
 import Foundation
 import SpriteKit
 
-internal enum TileFlags: Int {
-    case Diagonal = 0x20000000
-    case Vertical = 0x40000000
-    case Horizontal = 0x80000000
-    case FlippedAll = 0xe0000000
-    case FlippedMask = 0x1fffffff
+internal enum TileSetType {
+    case CollectionOfImages
+    case SingleImage
 }
 
 internal enum ObjectAlignment: String {
@@ -22,42 +19,67 @@ internal enum ObjectAlignment: String {
     case BottomRight = "bottomright"
 }
 
+internal enum TileFlags: Int {
+    case Diagonal = 0x20000000
+    case Vertical = 0x40000000
+    case Horizontal = 0x80000000
+    case FlippedAll = 0xe0000000
+    case FlippedMask = 0x1fffffff
+}
+
 class PEMTMXTileSet : NSObject {
+    private (set) var type = TileSetType.CollectionOfImages
     private (set) var firstGid = UInt(0)
-    private (set) var source : String?
+    private (set) var externalSource : String?
     private (set) var name : String?
     private (set) var tileSize = CGSize.zero
-    private (set) var maxTileSize = CGSize.zero
-    private (set) var unitTileSize = CGSize.zero
     private (set) var spacing = UInt(0)
     private (set) var margin = UInt(0)
     private (set) var tileCount = UInt(0)
-    private (set) var imageSize = CGSize.zero
     private (set) var objectAlignment = ObjectAlignment.Unspecified
-    
+    private (set) var tileSetImage : SKTexture?
+
     init(gId: UInt, attributes: Dictionary<String, String>) {
         firstGid = gId
-        source = attributes[MapAttributes.Source.rawValue]
-        name = attributes[MapAttributes.Name.rawValue]
+        externalSource = attributes[ElementAttributes.Source.rawValue]
+        name = attributes[ElementAttributes.Name.rawValue]
 
-        let tilewidth = attributes[MapAttributes.TileWidth.rawValue]!
-        let tileheight = attributes[MapAttributes.TileHeight.rawValue]!
+        let tilewidth = attributes[ElementAttributes.TileWidth.rawValue]!
+        let tileheight = attributes[ElementAttributes.TileHeight.rawValue]!
 
         tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
 
-        if let value = attributes[MapAttributes.Spacing.rawValue] {
+        if let value = attributes[ElementAttributes.Spacing.rawValue] {
             spacing = UInt(value) ?? 0
         }
         
-        if let value = attributes[MapAttributes.Margin.rawValue] {
+        if let value = attributes[ElementAttributes.Margin.rawValue] {
             margin = UInt(value) ?? 0
         }
 
-        if let value = attributes[MapAttributes.TileCount.rawValue] {
+        if let value = attributes[ElementAttributes.TileCount.rawValue] {
             tileCount = UInt(value) ?? 0
         }
 
         super.init()
+    }
+    
+    internal func setTileSetImage(attributes : Dictionary<String, String>) {
+        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
+        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
+        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
+
+        type = .SingleImage
+        
+        if let path = bundlePathForResource(source) {
+            tileSetImage = SKTexture(imageNamed: path)
+            
+            if tileSetImage?.size().width != CGFloat(Int(width)!) || tileSetImage?.size().height != CGFloat(Int(height)!) {
+                #if DEBUG
+                print("PEMTMXMap: tileset <image> size mismatch: \(source)")
+                #endif
+            }
+        }
     }
     
     #if DEBUG
@@ -66,8 +88,9 @@ class PEMTMXTileSet : NSObject {
         
         result += "\nPEMTMXTileSet --"
         result += "\nfirstGid: \(firstGid)"
-        result += "\nsource: \(String(describing: source))"
         result += "\nname: \(String(describing: name))"
+        result += "\nexternalSource: \(String(describing: externalSource))"
+        result += "\ntileSetImage: \(String(describing: tileSetImage))"
         result += "\ntileCount: \(tileCount)"
 
         return result
