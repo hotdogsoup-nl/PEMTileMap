@@ -23,11 +23,14 @@ protocol GameSceneDelegate {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameSceneDelegate : GameSceneDelegate?
-    var tilemapJS : JSTileMap?
-    var tilemapPEM : PEMTMXMap?
+    private var tilemapJS : JSTileMap?
+    private var tilemapPEM : PEMTMXMap?
     
     private var swapButton : SKSpriteNode
-    
+    private var nextMapButton : SKSpriteNode
+    private var currentMapNameLabel : SKLabelNode
+    private var currentMapNumber = Int(1)
+
     private var player : Player?
     private var previousUpdateTime = TimeInterval(0)
     private var doorOpened = false
@@ -40,16 +43,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override init(size: CGSize) {
         swapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
-        swapButton.position = CGPoint(x: size.width * 0.5, y: size.height - swapButton.size.height * 0.5 - 10)
+        swapButton.position = CGPoint(x: size.width * 0.5 - swapButton.size.width * 0.6, y: size.height - swapButton.size.height * 0.5 - 10)
         
-        let buttonLabel = SKLabelNode(text: "Swap")
+        var buttonLabel = SKLabelNode(text: "Swap")
         buttonLabel.fontSize = 16.0
         buttonLabel.verticalAlignmentMode = .center
         buttonLabel.position = CGPoint.zero
         swapButton.addChild(buttonLabel)
 
+        
+        nextMapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
+        nextMapButton.position = CGPoint(x: size.width * 0.5 + nextMapButton.size.width * 0.6, y: size.height - nextMapButton.size.height * 0.5 - 10)
+        
+        buttonLabel = SKLabelNode(text: "Next Map")
+        buttonLabel.fontSize = 16.0
+        buttonLabel.verticalAlignmentMode = .center
+        buttonLabel.position = CGPoint.zero
+        nextMapButton.addChild(buttonLabel)
+        
+        currentMapNameLabel = SKLabelNode(text: "...")
+        currentMapNameLabel.fontSize = 16.0
+        currentMapNameLabel.verticalAlignmentMode = .center
+        currentMapNameLabel.horizontalAlignmentMode = .right
+        currentMapNameLabel.position = CGPoint(x: size.width * 0.9 - currentMapNameLabel.calculateAccumulatedFrame().size.width * 0.5, y: nextMapButton.position.y)
+
         super.init(size: size)
+        
+        addChild(currentMapNameLabel)
         addChild(swapButton)
+        addChild(nextMapButton)
         
         startControl()
     }
@@ -83,11 +105,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    private func nextMap() {
+        currentMapNumber = currentMapNumber + 1
+        if currentMapNumber > 3 {
+            currentMapNumber = 1
+        }
+        
+        if tilemapPEM == nil {
+            loadMapWithJSTileMap()
+        } else {
+            loadMapWithPEMTMXMap()
+        }
+    }
+    
     private func loadMapWithJSTileMap() {
+        tilemapJS?.removeFromParent()
+        tilemapJS = nil
+
         tilemapPEM?.removeFromParent()
         tilemapPEM = nil
         
-        if let map = JSTileMap(named:"level1.tmx") {
+        let mapName = String(format: "level%ld.tmx", currentMapNumber)
+        
+        if let map = JSTileMap(named : mapName) {
+            currentMapNameLabel.text = mapName
             tilemapJS = map
             addChild(map)
         } else {
@@ -101,7 +142,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tilemapJS?.removeFromParent()
         tilemapJS = nil
 
-        if let map = PEMTMXMap(mapName: "level1.tmx") {
+        tilemapPEM?.removeFromParent()
+        tilemapPEM = nil
+        
+        let mapName = String(format: "level%ld.tmx", currentMapNumber)
+        currentMapNameLabel.text = mapName
+
+        if let map = PEMTMXMap(mapName : mapName) {
             tilemapPEM = map
             addChild(map)
         } else {
@@ -331,6 +378,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
+        if node == nextMapButton || node?.parent == nextMapButton {
+            nextMap()
+            return
+        }
+        
         if pos.x > 0 {
             player!.direction = .Right
         } else {
@@ -345,6 +397,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let node = nodes(at: pos).first
         
         if node == swapButton || node?.parent == swapButton {
+            return
+        }
+        
+        if node == nextMapButton || node?.parent == nextMapButton {
             return
         }
 
