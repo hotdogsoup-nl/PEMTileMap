@@ -10,8 +10,17 @@
   </tile>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="10" height="10">
-  <data encoding="base64" compression="zlib">
-   eJzjZiAMuIlQQy/AA8XUUkcvQEwYgtQAAEooAF0=
-  </data>
+  <data encoding="csv">
+11,0,0,0,0,0,0,0,0,11,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,12,12,0,0,0,0,
+0,0,0,0,12,12,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+11,0,0,0,0,0,0,0,0,11
+</data>
  </layer>
 </map>
