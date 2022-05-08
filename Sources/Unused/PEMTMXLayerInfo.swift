@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTMXLayerInfo : NSObject {
+class PEMTmxLayerInfo : NSObject {
     var name : String?
     var layerGridSize = CGSize.zero
     var tiles : UnsafeMutablePointer<Int32>?
@@ -11,7 +11,7 @@ class PEMTMXLayerInfo : NSObject {
     var maxGid = UInt(0)
     var properties : Dictionary<NSNumber, SKTexture> // xxx
     var offset = CGPoint.zero
-    var layer : PEMTMXLayer?
+    var layer : PEMTmxLayer?
     
     var zOrderCount = Int(0)
     

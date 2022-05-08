@@ -48,7 +48,7 @@ internal enum MapStaggerIndex : String {
     case Odd = "odd"
 }
 
-class PEMTMXMap : SKNode, XMLParserDelegate {
+class PEMTmxMap : SKNode, XMLParserDelegate {
     var mapSize = CGSize.zero
     var tileSize = CGSize.zero
     var hexSideLength = Int(0)
@@ -64,7 +64,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
 
     private var backgroundColorNode : SKSpriteNode?
 
-    internal var tileSets : [PEMTMXTileSet] = []
+    internal var tileSets : [PEMTmxTileSet] = []
     
     // XML Parser
     internal var currentParseString : String = ""
@@ -81,17 +81,17 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     
     deinit {
         #if DEBUG
-        print("deinit: PEMTMXMap")
+        print("deinit: PEMTmxMap")
         #endif
     }
 
     /**
-     Load a **TMX** tilemap file and return a new `PEMTMXMap` node. Returns nil if the file could not be read or parsed.
+     Load a **TMX** tilemap file and return a new `PEMTmxMap` node. Returns nil if the file could not be read or parsed.
 
      - parameter mapName : TMX file name.
      - parameter baseZPosition : Base zPosition for the node. Default is 0.
      - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is -20.
-     - returns: `PEMTMXMap?` tilemap node.
+     - returns: `PEMTmxMap?` tilemap node.
      */
 
     init?(mapName : String, baseZPosition : CGFloat = 0, zPositionLayerDelta : CGFloat = 20) {
@@ -105,7 +105,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
                 parser.shouldResolveExternalEntities = false
                 if (!parser.parse()) {
                     #if DEBUG
-                    print("PEMTMXMap: Error parsing map: ", parser.parserError as Any)
+                    print("PEMTmxMap: Error parsing map: ", parser.parserError as Any)
                     #endif
                     return nil
                 }
@@ -139,7 +139,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             orientation = mapOrientation
         } else {
             #if DEBUG
-            print("PEMTMXMap: unsupported map orientation: \(String(describing: orientationValue))")
+            print("PEMTmxMap: unsupported map orientation: \(String(describing: orientationValue))")
             #endif
         }
         
@@ -148,7 +148,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
                 renderOrder = mapRenderOrder
             } else {
                 #if DEBUG
-                print("PEMTMXMap: unsupported map render order: \(String(describing: value))")
+                print("PEMTmxMap: unsupported map render order: \(String(describing: value))")
                 #endif
             }
         }
@@ -162,7 +162,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
                 staggerAxis = mapStaggerAxis
             } else {
                 #if DEBUG
-                print("PEMTMXMap: unsupported map stagger axis: \(String(describing: value))")
+                print("PEMTmxMap: unsupported map stagger axis: \(String(describing: value))")
                 #endif
             }
         }
@@ -172,7 +172,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
                 staggerIndex = mapStaggerIndex
             } else {
                 #if DEBUG
-                print("PEMTMXMap: unsupported map stagger index: \(String(describing: value))")
+                print("PEMTmxMap: unsupported map stagger index: \(String(describing: value))")
                 #endif
             }
         }
@@ -202,7 +202,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     override var description: String {
         var result : String = ""
         
-        result += "\nPEMTMXMap --"
+        result += "\nPEMTmxMap --"
         result += "\norientation: \(String(describing: orientation))"
         result += "\nmapSize: \(mapSize)"
         result += "\ntileSize: \(tileSize)"

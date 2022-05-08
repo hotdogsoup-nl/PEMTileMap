@@ -1,15 +1,15 @@
 import Foundation
 import SpriteKit
 
-class PEMTMXLayer : SKNode {
-    var layerInfo : PEMTMXLayerInfo?
-    var tileInfo : Set<PEMTMXTilesetInfo>?
+class PEMTmxLayer : SKNode {
+    var layerInfo : PEMTmxLayerInfo?
+    var tileInfo : Set<PEMTmxTilesetInfo>?
     var mapTileSize = CGSize.zero
-//        weak var map : PEMTMXMap? // xxx
+//        weak var map : PEMTmxMap? // xxx
     
     private var tilesByColumnRow : Dictionary<String, Any>? // xxx
     
-    init?(tilesets : Array<Any>, layerInfo: PEMTMXLayerInfo, mapInfo: PEMTMXMap) {
+    init?(tilesets : Array<Any>, layerInfo: PEMTmxLayerInfo, mapInfo: PEMTmxMap) {
         // xxx todo
         return nil
     }

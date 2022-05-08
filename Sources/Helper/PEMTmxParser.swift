@@ -43,7 +43,7 @@ internal enum ElementAttributes : String {
     case Width = "width"
 }
 
-extension PEMTMXMap {    
+extension PEMTmxMap {
     // MARK: - XMLParserDelegate
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
@@ -57,7 +57,7 @@ extension PEMTMXMap {
             currentMapElement = .TileSet
             if let value = attributeDict[ElementAttributes.Source.rawValue] {
                 #if DEBUG
-                print("PEMTMXMap: external tilesets are unsupported: \(value)")
+                print("PEMTmxMap: external tilesets are unsupported: \(value)")
                 #endif
                 parser.abortParsing()
                 return
@@ -73,7 +73,7 @@ extension PEMTMXMap {
                 }
             }
             
-            let tileSet = PEMTMXTileSet(gId: gId, attributes: attributeDict)
+            let tileSet = PEMTmxTileSet(gId: gId, attributes: attributeDict)
             tileSets.append(tileSet)
         case MapElements.Image.rawValue:
             switch currentMapElement {
@@ -83,7 +83,7 @@ extension PEMTMXMap {
                 }
             default:
                 #if DEBUG
-                print("PEMTMXMap: unexpected XML element name: <\(elementName)> as child of <\(currentMapElement.rawValue)>")
+                print("PEMTmxMap: unexpected XML element name: <\(elementName)> as child of <\(currentMapElement.rawValue)>")
                 #endif
             }
         case MapElements.Layer.rawValue:
@@ -101,7 +101,7 @@ extension PEMTMXMap {
 
         default:
             #if DEBUG
-            print("PEMTMXMap: unsupported XML element name: <\(elementName)>")
+            print("PEMTmxMap: unsupported XML element name: <\(elementName)>")
             #endif
         }
     }
@@ -129,7 +129,7 @@ extension PEMTMXMap {
             break
         default:
             #if DEBUG
-            print("PEMTMXMap: unsupported XML element name: <\(elementName)>")
+            print("PEMTmxMap: unsupported XML element name: <\(elementName)>")
             #endif
         }
     }
@@ -140,7 +140,7 @@ extension PEMTMXMap {
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         #if DEBUG
-        print("PEMTMXMap: parseErrorOccurred: \(parseError)")
+        print("PEMTmxMap: parseErrorOccurred: \(parseError)")
         #endif
     }
 }

@@ -27,7 +27,7 @@ internal enum TileFlags: Int {
     case FlippedMask = 0x1fffffff
 }
 
-class PEMTMXTileSet : NSObject {
+class PEMTmxTileSet : NSObject {
     private (set) var type = TileSetType.CollectionOfImages
     private (set) var firstGid = UInt(0)
     private (set) var externalSource : String?
@@ -76,7 +76,7 @@ class PEMTMXTileSet : NSObject {
             
             if tileSetImage?.size().width != CGFloat(Int(width)!) || tileSetImage?.size().height != CGFloat(Int(height)!) {
                 #if DEBUG
-                print("PEMTMXMap: tileset <image> size mismatch: \(source)")
+                print("PEMTmxMap: tileset <image> size mismatch: \(source)")
                 #endif
             }
         }
@@ -86,7 +86,7 @@ class PEMTMXTileSet : NSObject {
     override var description: String {
         var result : String = ""
         
-        result += "\nPEMTMXTileSet --"
+        result += "\nPEMTmxTileSet --"
         result += "\nfirstGid: \(firstGid)"
         result += "\nname: \(String(describing: name))"
         result += "\nexternalSource: \(String(describing: externalSource))"

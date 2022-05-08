@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTMXImageLayer : NSObject {
+class PEMTmxImageLayer : NSObject {
     var name : String?
     var properties : Dictionary<NSNumber, SKTexture> // xxx
     var imageSource : String?

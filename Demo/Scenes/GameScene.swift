@@ -24,7 +24,7 @@ protocol GameSceneDelegate {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameSceneDelegate : GameSceneDelegate?
     private var tilemapJS : JSTileMap?
-    private var tilemapPEM : PEMTMXMap?
+    private var tilemapPEM : PEMTmxMap?
     
     private var swapButton : SKSpriteNode
     private var nextMapButton : SKSpriteNode
@@ -99,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func swapMap() {
         if tilemapPEM == nil {
-            loadMapWithPEMTMXMap()
+            loadMapWithPEMTmxMap()
         } else {
             loadMapWithJSTileMap()
         }
@@ -114,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if tilemapPEM == nil {
             loadMapWithJSTileMap()
         } else {
-            loadMapWithPEMTMXMap()
+            loadMapWithPEMTmxMap()
         }
     }
     
@@ -138,7 +138,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private func loadMapWithPEMTMXMap() {
+    private func loadMapWithPEMTmxMap() {
         tilemapJS?.removeFromParent()
         tilemapJS = nil
 
@@ -148,12 +148,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let mapName = String(format: "level%ld.tmx", currentMapNumber)
         currentMapNameLabel.text = mapName
 
-        if let map = PEMTMXMap(mapName : mapName) {
+        if let map = PEMTmxMap(mapName : mapName) {
             tilemapPEM = map
             addChild(map)
         } else {
             #if DEBUG
-            print("could not load PEMTMXMap")
+            print("could not load PEMTmxMap")
             #endif
         }
     }

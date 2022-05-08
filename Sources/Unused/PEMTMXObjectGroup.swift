@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTMXObjectGroup : NSObject {
+class PEMTmxObjectGroup : NSObject {
     var groupName : String?
     var positionOffset = CGPoint.zero
     var objects : Array<Dictionary<String, String>>
