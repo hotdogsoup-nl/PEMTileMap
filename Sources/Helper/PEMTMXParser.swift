@@ -2,6 +2,7 @@ internal enum MapElements : String {
     case None = "none"
     case Map = "map"
     case TileSet = "tileset"
+    case Image = "image"
     case Layer = "layer"
     case ObjectGroup = "objectgroup"
     case ImageLayer = "imagelayer"
@@ -10,11 +11,12 @@ internal enum MapElements : String {
     case Template = "template"
 }
 
-internal enum MapAttributes : String {
+internal enum ElementAttributes : String {
     case BackgroundColor = "backgroundcolor"
     case Columns = "columns"
     //case CompressionLevel = "compressionlevel"
     case FirstGid = "firstgid"
+//    case Format = "format"
     case Height = "height"
     case HexSideLength = "hexsidelength"
     case Infinite = "infinite"
@@ -36,6 +38,7 @@ internal enum MapAttributes : String {
     case TiledVersion = "tiledversion"
     case TileHeight = "tileheight"
     case TileWidth = "tilewidth"
+    case Trans = "trans"
     case Version = "version"
     case Width = "width"
 }
@@ -47,18 +50,21 @@ extension PEMTMXMap {
         
         switch elementName {
         case MapElements.Map.rawValue:
+            currentMapElement = .Map
             getAttributes(attributeDict)
+            currentMapElement = .Map
         case MapElements.TileSet.rawValue :
-            if let value = attributeDict[MapAttributes.Source.rawValue] {
+            currentMapElement = .TileSet
+            if let value = attributeDict[ElementAttributes.Source.rawValue] {
                 #if DEBUG
-                print("PEMTMXMap: external tilesets unsupported: \(value)")
+                print("PEMTMXMap: external tilesets are unsupported: \(value)")
                 #endif
                 parser.abortParsing()
                 return
             }
             
             var gId = UInt(0)
-            if let value = attributeDict[MapAttributes.FirstGid.rawValue] {
+            if let value = attributeDict[ElementAttributes.FirstGid.rawValue] {
                 if currentFirstGid == 0 {
                     gId = UInt(value) ?? 0
                 } else {
@@ -69,9 +75,33 @@ extension PEMTMXMap {
             
             let tileSet = PEMTMXTileSet(gId: gId, attributes: attributeDict)
             tileSets.append(tileSet)
+        case MapElements.Image.rawValue:
+            switch currentMapElement {
+            case .TileSet:
+                if let tileSet = tileSets.last {
+                    tileSet.setTileSetImage(attributes: attributeDict)
+                }
+            default:
+                #if DEBUG
+                print("PEMTMXMap: unexpected XML element name: <\(elementName)> as child of <\(currentMapElement.rawValue)>")
+                #endif
+            }
+        case MapElements.Layer.rawValue:
+            break
+        case MapElements.ObjectGroup.rawValue:
+            break
+        case MapElements.ImageLayer.rawValue:
+            break
+        case MapElements.Group.rawValue:
+            break
+        case MapElements.Properties.rawValue:
+            break
+        case MapElements.Template.rawValue:
+            break
+
         default:
             #if DEBUG
-            print("PEMTMXMap: unsupported XML element name: \(elementName)")
+            print("PEMTMXMap: unsupported XML element name: <\(elementName)>")
             #endif
         }
     }
@@ -79,9 +109,27 @@ extension PEMTMXMap {
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         switch elementName {
+        case MapElements.Map.rawValue:
+            currentMapElement = .None
+        case MapElements.TileSet.rawValue :
+            currentMapElement = .None
+        case MapElements.Image.rawValue:
+            break
+        case MapElements.Layer.rawValue:
+            break
+        case MapElements.ObjectGroup.rawValue:
+            break
+        case MapElements.ImageLayer.rawValue:
+            break
+        case MapElements.Group.rawValue:
+            break
+        case MapElements.Properties.rawValue:
+            break
+        case MapElements.Template.rawValue:
+            break
         default:
             #if DEBUG
-            print("PEMTMXMap: unsupported XML element name: \(elementName)")
+            print("PEMTMXMap: unsupported XML element name: <\(elementName)>")
             #endif
         }
     }

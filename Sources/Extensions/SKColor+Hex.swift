@@ -1,18 +1,5 @@
 import SpriteKit
 
-public func standardiseHexString(_ hexString: String) -> String {
-    let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-    switch hex.count {
-        case 3, 4:
-            let hexStringArray = Array(hex)
-            return zip(hexStringArray, hexStringArray).reduce("") { (result, values) in
-                return result + String(values.0) + String(values.1)
-            }
-        default:
-            return hex
-    }
-}
-
 extension SKColor {
     public convenience init(hexString: String) {
         let hex = standardiseHexString(hexString)
@@ -30,5 +17,18 @@ extension SKColor {
                 (a, r, g, b) = (255, 0, 0, 0)
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+}
+
+fileprivate func standardiseHexString(_ hexString: String) -> String {
+    let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+    switch hex.count {
+        case 3, 4:
+            let hexStringArray = Array(hex)
+            return zip(hexStringArray, hexStringArray).reduce("") { (result, values) in
+                return result + String(values.0) + String(values.1)
+            }
+        default:
+            return hex
     }
 }
