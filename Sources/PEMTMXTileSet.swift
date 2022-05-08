@@ -37,23 +37,23 @@ class PEMTMXTileSet : NSObject {
     
     init(gId: UInt, attributes: Dictionary<String, String>) {
         firstGid = gId
-        source = attributes[XMLAttributeSource]
-        name = attributes[XMLAttributeName]
+        source = attributes[MapAttributes.Source.rawValue]
+        name = attributes[MapAttributes.Name.rawValue]
 
-        let tilewidth = attributes[XMLAttributeTileWidth]!
-        let tileheight = attributes[XMLAttributeTileHeight]!
+        let tilewidth = attributes[MapAttributes.TileWidth.rawValue]!
+        let tileheight = attributes[MapAttributes.TileHeight.rawValue]!
 
         tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
 
-        if let value = attributes[XMLAttributeSpacing] {
+        if let value = attributes[MapAttributes.Spacing.rawValue] {
             spacing = UInt(value) ?? 0
         }
         
-        if let value = attributes[XMLAttributeMargin] {
+        if let value = attributes[MapAttributes.Margin.rawValue] {
             margin = UInt(value) ?? 0
         }
 
-        if let value = attributes[XMLAttributeTileCount] {
+        if let value = attributes[MapAttributes.TileCount.rawValue] {
             tileCount = UInt(value) ?? 0
         }
 

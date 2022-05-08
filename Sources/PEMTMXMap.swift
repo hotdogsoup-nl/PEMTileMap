@@ -69,8 +69,9 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     internal var tileSets : [PEMTMXTileSet] = []
     
     // XML Parser
-    internal var xmlCharacters : String = ""
+    internal var currentParseString : String = ""
     internal var currentFirstGid = UInt(0)
+    internal var currentMapElement = MapElements.None
 
     
 //    var parentElement = PEMTMXPropertyType.None
@@ -232,11 +233,11 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
     }
     
     internal func getAttributes(_ attributes : Dictionary<String, String>) {
-        guard let width = attributes[XMLAttributeWidth] else { return }
-        guard let height = attributes[XMLAttributeHeight] else { return }
-        guard let tilewidth = attributes[XMLAttributeTileWidth] else { return }
-        guard let tileheight = attributes[XMLAttributeTileHeight] else { return }
-        guard let orientationValue = attributes[XMLAttributeOrientation] else { return }
+        guard let width = attributes[MapAttributes.Width.rawValue] else { return }
+        guard let height = attributes[MapAttributes.Height.rawValue] else { return }
+        guard let tilewidth = attributes[MapAttributes.TileWidth.rawValue] else { return }
+        guard let tileheight = attributes[MapAttributes.TileHeight.rawValue] else { return }
+        guard let orientationValue = attributes[MapAttributes.Orientation.rawValue] else { return }
                 
         tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
         mapSize = CGSize(width: CGFloat(Int(width)!), height: CGFloat(Int(height)!))
@@ -249,7 +250,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             #endif
         }
         
-        if let value = attributes[XMLAttributeRenderOrder] {
+        if let value = attributes[MapAttributes.RenderOrder.rawValue] {
             if let mapRenderOrder = MapRenderOrder(rawValue: value) {
                 renderOrder = mapRenderOrder
             } else {
@@ -259,11 +260,11 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[XMLAttributeHexSideLength] {
+        if let value = attributes[MapAttributes.HexSideLength.rawValue] {
             hexSideLength = Int(value) ?? 0
         }
         
-        if let value = attributes[XMLAttributeStaggerAxis] {
+        if let value = attributes[MapAttributes.StaggerAxis.rawValue] {
             if let mapStaggerAxis = MapStaggerAxis(rawValue: value) {
                 staggerAxis = mapStaggerAxis
             } else {
@@ -273,7 +274,7 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             }
         }
 
-        if let value = attributes[XMLAttributeStaggerIndex] {
+        if let value = attributes[MapAttributes.StaggerIndex.rawValue] {
             if let mapStaggerIndex = MapStaggerIndex(rawValue: value) {
                 staggerIndex = mapStaggerIndex
             } else {
@@ -283,19 +284,19 @@ class PEMTMXMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[XMLAttributeParallaxOriginX] {
+        if let value = attributes[MapAttributes.ParallaxOriginX.rawValue] {
             parallaxOrigin.x = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[XMLAttributeParallaxOriginY] {
+        if let value = attributes[MapAttributes.ParallaxOriginY.rawValue] {
             parallaxOrigin.y = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[XMLAttributeBackgroundColor] {
+        if let value = attributes[MapAttributes.BackgroundColor.rawValue] {
             backgroundColor = SKColor.init(hexString: value)
         }
 
-        if let value = attributes[XMLAttributeInfinite] {
+        if let value = attributes[MapAttributes.Infinite.rawValue] {
             infinite = value == "1"
         }
     }
