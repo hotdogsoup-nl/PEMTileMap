@@ -72,13 +72,16 @@
 		20CA139F2818168600797A7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* GameController.swift */; };
 		20CA158228181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		20CA158328181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
+		20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
+		20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
+		20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2014E98328168E6100A12253 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2014E98628169C4500A12253 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
 		2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLayoutHelper.swift; sourceTree = "<group>"; };
-		2037A5D328258C4800E13452 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXDemo.app; path = PEMTMXMapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2037A5D328258C4800E13452 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXDemo.app; path = "PEMTmx Map Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037A5D528258C4900E13452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		2037A5E028258C4900E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -88,7 +91,7 @@
 		20562E0D282521C1005CE60A /* JSTileMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTileMap.h; sourceTree = "<group>"; };
 		20562E0E282521C1005CE60A /* JSTileMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTileMap.m; sourceTree = "<group>"; };
 		20562E10282521C1005CE60A /* PEMTMXImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXImageLayer.swift; sourceTree = "<group>"; };
-		20562E11282521C1005CE60A /* PEMTMXLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXLayer.swift; sourceTree = "<group>"; };
+		20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileLayer.swift; sourceTree = "<group>"; };
 		20562E12282521C1005CE60A /* PEMTMXLayerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXLayerInfo.swift; sourceTree = "<group>"; };
 		20562E13282521C1005CE60A /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
 		20562E14282521C1005CE60A /* PEMTMXObjectGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXObjectGroup.swift; sourceTree = "<group>"; };
@@ -102,12 +105,12 @@
 		205C86332823D8D800360A29 /* Objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridging-Header.h"; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		207D3DB02812AD5700FC4C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PEMTMXMapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXMapDemo.app; path = "PEMTmx Map Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DB82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DBA2812AD5700FC4C77 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		207D3DBD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		207D3DC02812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PEMTMXMapDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXMapDemo.app; path = "PEMTmx Map Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DC82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				20562E10282521C1005CE60A /* PEMTMXImageLayer.swift */,
-				20562E11282521C1005CE60A /* PEMTMXLayer.swift */,
 				20562E12282521C1005CE60A /* PEMTMXLayerInfo.swift */,
 				20562E14282521C1005CE60A /* PEMTMXObjectGroup.swift */,
 			);
@@ -193,6 +195,7 @@
 			children = (
 				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
 				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
+				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
 				209AB9A62827C4730021A297 /* Helper */,
 				209AB9A72827C8510021A297 /* Extensions */,
 				206E238A282666150039C4FE /* Unused */,
@@ -504,6 +507,7 @@
 				205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
+				20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
 				205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +528,7 @@
 				205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139E2818168600797A7C /* GameController.swift in Sources */,
+				20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */,
 				205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +549,7 @@
 				205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139F2818168600797A7C /* GameController.swift in Sources */,
+				20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
 				205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

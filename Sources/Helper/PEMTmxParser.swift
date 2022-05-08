@@ -1,31 +1,39 @@
 internal enum MapElements : String {
-    case None = "none"
-    case Map = "map"
-    case TileSet = "tileset"
-    case Image = "image"
-    case Layer = "layer"
-    case ObjectGroup = "objectgroup"
-    case ImageLayer = "imagelayer"
     case Group = "group"
+    case Image = "image"
+    case ImageLayer = "imagelayer"
+    case Layer = "layer"
+    case Map = "map"
+    case None = "none"
+    case ObjectGroup = "objectgroup"
     case Properties = "properties"
     case Template = "template"
+    case TileSet = "tileset"
 }
 
 internal enum ElementAttributes : String {
     case BackgroundColor = "backgroundcolor"
     case Columns = "columns"
-    //case CompressionLevel = "compressionlevel"
+    case Compression = "compression"
+    case CompressionLevel = "compressionlevel"
+    case Encoding = "encoding"
     case FirstGid = "firstgid"
-//    case Format = "format"
+    case Format = "format"
     case Height = "height"
     case HexSideLength = "hexsidelength"
+    case Id = "id"
     case Infinite = "infinite"
     case Margin = "margin"
     case Name = "name"
-    //case NextLayerId = "nextlayerid"
-    //case NextObjectId = "nextobjectid"
+    case NextLayerId = "nextlayerid"
+    case NextObjectId = "nextobjectid"
     case ObjectAlignment = "objectalignment"
+    case OffsetX = "offsetx"
+    case OffsetY = "offsety"
     case Orientation = "orientation"
+    case Opacity = "opacity"
+    case ParallaxX = "parallaxx"
+    case ParallaxY = "parallaxy"
     case ParallaxOriginX = "parallaxoriginx"
     case ParallaxOriginY = "parallaxoriginy"
     case RenderOrder = "renderorder"
@@ -38,9 +46,13 @@ internal enum ElementAttributes : String {
     case TiledVersion = "tiledversion"
     case TileHeight = "tileheight"
     case TileWidth = "tilewidth"
+    case TintColor = "tintcolor"
     case Trans = "trans"
     case Version = "version"
+    case Visible = "visible"
     case Width = "width"
+    case X = "x"
+    case Y = "y"
 }
 
 extension PEMTmxMap {
@@ -50,11 +62,9 @@ extension PEMTmxMap {
         
         switch elementName {
         case MapElements.Map.rawValue:
-            currentMapElement = .Map
-            getAttributes(attributeDict)
+            parseAttributes(attributeDict)
             currentMapElement = .Map
         case MapElements.TileSet.rawValue :
-            currentMapElement = .TileSet
             if let value = attributeDict[ElementAttributes.Source.rawValue] {
                 #if DEBUG
                 print("PEMTmxMap: external tilesets are unsupported: \(value)")
@@ -63,18 +73,9 @@ extension PEMTmxMap {
                 return
             }
             
-            var gId = UInt(0)
-            if let value = attributeDict[ElementAttributes.FirstGid.rawValue] {
-                if currentFirstGid == 0 {
-                    gId = UInt(value) ?? 0
-                } else {
-                    gId = currentFirstGid
-                    currentFirstGid = 0
-                }
-            }
-            
-            let tileSet = PEMTmxTileSet(gId: gId, attributes: attributeDict)
+            let tileSet = PEMTmxTileSet(attributes: attributeDict)
             tileSets.append(tileSet)
+            currentMapElement = .TileSet
         case MapElements.Image.rawValue:
             switch currentMapElement {
             case .TileSet:
@@ -87,7 +88,9 @@ extension PEMTmxMap {
                 #endif
             }
         case MapElements.Layer.rawValue:
-            break
+            let layer = PEMTmxTileLayer(attributes: attributeDict)
+            tileLayers.append(layer)
+            currentMapElement = .Layer
         case MapElements.ObjectGroup.rawValue:
             break
         case MapElements.ImageLayer.rawValue:

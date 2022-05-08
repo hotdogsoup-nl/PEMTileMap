@@ -3,27 +3,6 @@ import SpriteKit
 import zlib
 import CoreGraphics
 
-//enum LayerAttribute: Int {
-//    case None
-//    case Base64
-//    case Gzip
-//    case Zlib
-//
-//    var value: UInt8 {
-//        return UInt8(1 << self.rawValue)
-//    }
-//}
-//
-//enum PropertyType {
-//    case None
-//    case Map
-//    case Layer
-//    case ObjectGroup
-//    case Tile
-//    case ImageLayer
-//}
-//
-
 internal enum Orientation : String {
     case Orthogonal = "orthogonal"
     case Isometric = "isometric"
@@ -49,23 +28,32 @@ internal enum MapStaggerIndex : String {
 }
 
 class PEMTmxMap : SKNode, XMLParserDelegate {
-    var mapSize = CGSize.zero
-    var tileSize = CGSize.zero
-    var hexSideLength = Int(0)
-    var parallaxOrigin = CGPoint.zero
+    private (set) var version : String?
+    private (set) var tiledversion : String?
+    private (set) var compressionLevel = Int(-1)
+
+    private (set) var mapSizeInTiles = CGSize.zero
+    private (set) var tileSizeInPoints = CGSize.zero
+    private (set) var hexSideLengthInPoints = Int(0)
+    private (set) var parallaxOriginInPoints = CGPoint.zero
     
-    var backgroundColor : SKColor?
-    var infinite = false
+    private (set) var backgroundColor : SKColor?
+    private (set) var nextLayerId = UInt(0)
+    private (set) var nextObjectId = UInt(0)
+    private (set) var infinite = false
     
-    var orientation : Orientation?
-    var renderOrder : MapRenderOrder?
-    var staggerAxis : MapStaggerAxis?
-    var staggerIndex : MapStaggerIndex?
+    private (set) var orientation : Orientation?
+    private (set) var renderOrder : MapRenderOrder?
+    private (set) var staggerAxis : MapStaggerAxis?
+    private (set) var staggerIndex : MapStaggerIndex?
 
     private var backgroundColorNode : SKSpriteNode?
+    private var baseZPosition = CGFloat(0)
+    private var zPositionLayerDelta = CGFloat(0)
 
     internal var tileSets : [PEMTmxTileSet] = []
-    
+    internal var tileLayers : [PEMTmxTileLayer] = []
+
     // XML Parser
     internal var currentParseString : String = ""
     internal var currentFirstGid = UInt(0)
@@ -81,7 +69,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
     
     deinit {
         #if DEBUG
-        print("deinit: PEMTmxMap")
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
         #endif
     }
 
@@ -112,8 +100,11 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
         
+        self.baseZPosition = baseZPosition
+        self.zPositionLayerDelta = zPositionLayerDelta
+        
         if backgroundColor != nil {
-            let colorNode = SKSpriteNode(color: backgroundColor!, size: mapSizePoints())
+            let colorNode = SKSpriteNode(color: backgroundColor!, size: mapSizeInPoints())
             backgroundColorNode = colorNode
             backgroundColorNode?.anchorPoint = .zero
             backgroundColorNode?.position = .zero
@@ -123,17 +114,19 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         #if DEBUG
         print (self)
         #endif
+        
+        generateMap()
     }
     
-    internal func getAttributes(_ attributes : Dictionary<String, String>) {
+    internal func parseAttributes(_ attributes : Dictionary<String, String>) {
         guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
         guard let tilewidth = attributes[ElementAttributes.TileWidth.rawValue] else { return }
         guard let tileheight = attributes[ElementAttributes.TileHeight.rawValue] else { return }
         guard let orientationValue = attributes[ElementAttributes.Orientation.rawValue] else { return }
                 
-        tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
-        mapSize = CGSize(width: CGFloat(Int(width)!), height: CGFloat(Int(height)!))
+        version = attributes[ElementAttributes.Version.rawValue]
+        tiledversion = attributes[ElementAttributes.TiledVersion.rawValue]
         
         if let mapOrientation = Orientation(rawValue: orientationValue) {
             orientation = mapOrientation
@@ -153,8 +146,16 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
         
+        if let value = attributes[ElementAttributes.CompressionLevel.rawValue] {
+            compressionLevel = Int(value)!
+        }
+        
+        mapSizeInTiles = CGSize(width: Int(width)!, height: Int(height)!)
+        tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
+        
+        
         if let value = attributes[ElementAttributes.HexSideLength.rawValue] {
-            hexSideLength = Int(value) ?? 0
+            hexSideLengthInPoints = Int(value) ?? 0
         }
         
         if let value = attributes[ElementAttributes.StaggerAxis.rawValue] {
@@ -178,15 +179,23 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         }
         
         if let value = attributes[ElementAttributes.ParallaxOriginX.rawValue] {
-            parallaxOrigin.x = CGFloat(Int(value) ?? 0)
+            parallaxOriginInPoints.x = CGFloat(Int(value) ?? 0)
         }
 
         if let value = attributes[ElementAttributes.ParallaxOriginY.rawValue] {
-            parallaxOrigin.y = CGFloat(Int(value) ?? 0)
+            parallaxOriginInPoints.y = CGFloat(Int(value) ?? 0)
         }
 
         if let value = attributes[ElementAttributes.BackgroundColor.rawValue] {
             backgroundColor = SKColor.init(hexString: value)
+        }
+        
+        if let value = attributes[ElementAttributes.NextLayerId.rawValue] {
+            nextLayerId = UInt(value)!
+        }
+
+        if let value = attributes[ElementAttributes.NextObjectId.rawValue] {
+            nextObjectId = UInt(value)!
         }
 
         if let value = attributes[ElementAttributes.Infinite.rawValue] {
@@ -194,8 +203,12 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         }
     }
     
-    private func mapSizePoints() -> CGSize {
-        return CGSize(width: mapSize.width * tileSize.width, height: mapSize.height * tileSize.height)
+    private func generateMap() {
+        
+    }
+    
+    private func mapSizeInPoints() -> CGSize {
+        return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
     }
     
     #if DEBUG
@@ -204,11 +217,15 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         
         result += "\nPEMTmxMap --"
         result += "\norientation: \(String(describing: orientation))"
-        result += "\nmapSize: \(mapSize)"
-        result += "\ntileSize: \(tileSize)"
+        result += "\nmapSizeInTiles: \(mapSizeInTiles)"
+        result += "\ntileSizeInPoints: \(tileSizeInPoints)"
         
         for tileSet in tileSets {
             result += "\n\(tileSet)"
+        }
+        
+        for layer in tileLayers {
+            result += "\n\(layer)"
         }
     
         return result

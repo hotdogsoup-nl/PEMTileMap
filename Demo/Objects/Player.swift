@@ -17,7 +17,7 @@ class Player : SKSpriteNode {
     var desiredPosition = CGPoint.zero
     var velocity = CGPoint.zero
 
-    private let jumpForce = CGPoint(x: 0, y: tileSize.height * 15)
+    private let jumpForce = CGPoint(x: 0, y: gameTileSize.height * 15)
     private let movementForce = CGFloat(playerSize.width * 10)
     private let movementDecelerationFactor = CGFloat(0.9)
 
@@ -86,7 +86,7 @@ class Player : SKSpriteNode {
     
     func collisionBoundingBox() -> CGRect {
         let offset = CGPoint(x: 2.0, y: 2.0)
-        let clippingHeight = tileSize.height - size.height
+        let clippingHeight = gameTileSize.height - size.height
         let boundingBox = CGRect(x: frame.origin.x + offset.x * 0.5, y: frame.origin.y - clippingHeight * 0.25 - offset.y, width: size.width - offset.x, height: size.height + clippingHeight)
         let diff = CGPointSubtract(desiredPosition, position);
         return boundingBox.offsetBy(dx: diff.x, dy: diff.y);

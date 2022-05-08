@@ -32,36 +32,51 @@ class PEMTmxTileSet : NSObject {
     private (set) var firstGid = UInt(0)
     private (set) var externalSource : String?
     private (set) var name : String?
-    private (set) var tileSize = CGSize.zero
-    private (set) var spacing = UInt(0)
-    private (set) var margin = UInt(0)
+    private (set) var tileSizeInPoints = CGSize.zero
+    private (set) var spacingInPoints = UInt(0)
+    private (set) var marginInPoints = UInt(0)
     private (set) var tileCount = UInt(0)
     private (set) var objectAlignment = ObjectAlignment.Unspecified
     private (set) var tileSetImage : SKTexture?
+    
+    /**
+     Uses  **TMX** tileset attributes to create and return a new `PEMTmxTileSet` object.
 
-    init(gId: UInt, attributes: Dictionary<String, String>) {
-        firstGid = gId
+     - parameter attributes : Dictionary containing TMX tileset attributes.
+     */
+
+    init(attributes: Dictionary<String, String>) {
+        super.init()
+
+        if let value = attributes[ElementAttributes.FirstGid.rawValue] {
+            firstGid = UInt(value)!
+        }
+
         externalSource = attributes[ElementAttributes.Source.rawValue]
         name = attributes[ElementAttributes.Name.rawValue]
 
-        let tilewidth = attributes[ElementAttributes.TileWidth.rawValue]!
-        let tileheight = attributes[ElementAttributes.TileHeight.rawValue]!
-
-        tileSize = CGSize(width: CGFloat(Int(tilewidth)!), height: CGFloat(Int(tileheight)!))
+        if let tilewidth = attributes[ElementAttributes.TileWidth.rawValue],
+           let tileheight = attributes[ElementAttributes.TileHeight.rawValue] {
+            tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
+        }
 
         if let value = attributes[ElementAttributes.Spacing.rawValue] {
-            spacing = UInt(value) ?? 0
+            spacingInPoints = UInt(value) ?? 0
         }
         
         if let value = attributes[ElementAttributes.Margin.rawValue] {
-            margin = UInt(value) ?? 0
+            marginInPoints = UInt(value) ?? 0
         }
 
         if let value = attributes[ElementAttributes.TileCount.rawValue] {
             tileCount = UInt(value) ?? 0
         }
-
-        super.init()
+    }
+    
+    deinit {
+        #if DEBUG
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #endif
     }
     
     internal func setTileSetImage(attributes : Dictionary<String, String>) {
