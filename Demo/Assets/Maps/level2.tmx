@@ -8,6 +8,7 @@
    <property name="prop1" value="0"/>
   </properties>
   <image source="Tiles/tileSet.png" width="256" height="256"/>
+  <tile id="67" type="tiletype?"/>
   <tile id="127">
    <properties>
     <property name="prop1" value="question mark tile"/>
@@ -23,7 +24,7 @@
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,128,128,0,0,0,0,
+2147483776,0,0,0,128,128,0,0,0,0,
 0,0,0,0,128,128,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
