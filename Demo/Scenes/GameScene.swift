@@ -126,9 +126,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tilemapPEM = nil
         
         let mapName = String(format: "level%ld.tmx", currentMapNumber)
-        
+        currentMapNameLabel.text = mapName
+
         if let map = JSTileMap(named : mapName) {
-            currentMapNameLabel.text = mapName
+            backgroundColor = SKColor(named: "Game-background")!
+
             tilemapJS = map
             addChild(map)
         } else {
@@ -149,12 +151,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         currentMapNameLabel.text = mapName
 
         if let map = PEMTmxMap(mapName : mapName) {
+            if map.backgroundColor != nil {
+                backgroundColor = map.backgroundColor!
+            }
+            
             tilemapPEM = map
             addChild(map)
-        } else {
-            #if DEBUG
-            print("could not load PEMTmxMap")
-            #endif
         }
     }
     

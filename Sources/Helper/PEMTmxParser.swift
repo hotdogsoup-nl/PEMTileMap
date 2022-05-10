@@ -1,4 +1,4 @@
-internal enum Elements : String {
+enum Elements : String {
     case None
     case Data = "data"
     case Group = "group"
@@ -12,7 +12,7 @@ internal enum Elements : String {
     case TileSet = "tileset"
 }
 
-internal enum ElementAttributes : String {
+enum ElementAttributes : String {
     case BackgroundColor = "backgroundcolor"
     case Columns = "columns"
     case Compression = "compression"
@@ -56,7 +56,38 @@ internal enum ElementAttributes : String {
     case Y = "y"
 }
 
-extension PEMTmxMap {
+class PEMTmxParser : XMLParser, XMLParserDelegate {
+    private weak var currentMap : PEMTmxMap?
+    
+    private var currentParseString : String = ""
+    private var currentFirstGid = UInt32(0)
+    private var elementPath : [AnyObject] = []
+    private var dataEncoding : DataEncoding?
+    private var dataCompression = DataCompression.None
+    
+    init?(map: PEMTmxMap, fileURL: URL) {
+        do {
+            let data = try Data(contentsOf:fileURL)
+            super.init(data: data)
+        }
+        catch {
+            return nil
+        }
+
+        currentMap = map
+        delegate = self
+        
+        shouldProcessNamespaces = false
+        shouldReportNamespacePrefixes = false
+        shouldResolveExternalEntities = false        
+    }
+    
+    deinit {
+        #if DEBUG
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #endif
+    }
+    
     // MARK: - XMLParserDelegate
     
     func parserDidStartDocument(_ parser: XMLParser) {
@@ -69,7 +100,7 @@ extension PEMTmxMap {
             
         // top level elements
         case Elements.Map.rawValue:
-            parseAttributes(attributeDict)
+            currentMap?.parseAttributes(attributeDict)
             elementPath.append(self)
         case Elements.TileSet.rawValue :
             if let value = attributeDict[ElementAttributes.Source.rawValue] {
@@ -81,11 +112,11 @@ extension PEMTmxMap {
             }
             
             let tileSet = PEMTmxTileSet(attributes: attributeDict)
-            tileSets.append(tileSet)
+            currentMap?.tileSets.append(tileSet)
             elementPath.append(tileSet)
         case Elements.Layer.rawValue:
             let layer = PEMTmxTileLayer(attributes: attributeDict)
-            tileLayers.append(layer)
+            currentMap?.tileLayers.append(layer)
             elementPath.append(layer)
         case Elements.ObjectGroup.rawValue:
             break
@@ -161,7 +192,7 @@ extension PEMTmxMap {
         case Elements.Image.rawValue:
             break
         case Elements.Data.rawValue:
-            guard let tileLayer = tileLayers.last else {
+            guard let tileLayer = currentMap?.tileLayers.last else {
                 #if DEBUG
                 print("PEMTmxMap: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
                 #endif
@@ -211,6 +242,7 @@ extension PEMTmxMap {
     
     func parserDidEndDocument(_ parser: XMLParser) {
         elementPath.removeAll()
+        currentParseString.removeAll()
     }
     
     // MARK: - Decoding data
@@ -219,7 +251,7 @@ extension PEMTmxMap {
         return cleanString(data).components(separatedBy: ",").map {UInt32($0)!}
     }
     
-    func cleanString(_ string: String) -> String {
+    fileprivate func cleanString(_ string: String) -> String {
         var result = string.replacingOccurrences(of: "\n", with: "")
         result = result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         return result.replacingOccurrences(of: " ", with: "")

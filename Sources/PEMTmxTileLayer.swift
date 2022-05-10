@@ -5,15 +5,15 @@ class PEMTmxTileLayer : SKNode {
     private (set) var layerId : String?
     private (set) var layerName : String?
     
-    private (set) var coordsInTiles = CGPoint.zero
+    private (set) var coordsInTiles = CGPoint.zero // not supported
     private (set) var sizeInTiles = CGSize.zero
     private (set) var opacity = CGFloat(1)
     private (set) var visible = true
     private (set) var tintColor : SKColor?
-    private (set) var offSetInPoints = CGVector.zero
+    private (set) var offSetInPoints = CGPoint.zero
     private (set) var parallaxFactorX = CGFloat(1)
     private (set) var parallaxFactorY = CGFloat(1)
-
+    
     internal var tileData: [UInt32] = []
 
     init(attributes: Dictionary<String, String>) {
@@ -52,7 +52,7 @@ class PEMTmxTileLayer : SKNode {
         
         if let dx = attributes[ElementAttributes.OffsetX.rawValue],
            let dy = attributes[ElementAttributes.OffsetY.rawValue] {
-            offSetInPoints = CGVector(dx: Int(dx)!, dy: Int(dy)!)
+            offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
         
         if let value = attributes[ElementAttributes.ParallaxX.rawValue] {
@@ -64,8 +64,6 @@ class PEMTmxTileLayer : SKNode {
             let valueString : NSString = value as NSString
             parallaxFactorY = CGFloat(valueString.doubleValue)
         }
-        
-        setUp()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,12 +77,12 @@ class PEMTmxTileLayer : SKNode {
     }
     
     // MARK: - Map generation
-    
-    private func setUp() {
-        alpha = opacity
-    }
 
     func generateTiles(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
+        
+        alpha = opacity
+        position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
+        
         for index in tileData.indices {
             let tileIdFromData = tileData[index]
             
@@ -135,11 +133,8 @@ class PEMTmxTileLayer : SKNode {
         }
         
         let mapHeightInPoints = sizeInTiles.height * tile.size.height
-        
         tile.position = CGPoint(x: tile.coords!.x * tile.size.width + tile.size.width * 0.5,
                                 y: mapHeightInPoints - (tile.coords!.y * tile.size.height + tile.size.height * 0.5))
-        
-        print(tile)
         addChild(tile)
     }
 }

@@ -1,11 +1,6 @@
 import Foundation
 import SpriteKit
 
-internal enum TileSetType {
-    case CollectionOfImages
-    case SingleImage
-}
-
 internal enum ObjectAlignment: String {
     case Unspecified = "unspecified"
     case TopLeft = "topleft"
@@ -19,35 +14,27 @@ internal enum ObjectAlignment: String {
     case BottomRight = "bottomright"
 }
 
-internal enum TileFlags: Int {
-    case Diagonal = 0x20000000
-    case Vertical = 0x40000000
-    case Horizontal = 0x80000000
-    case FlippedAll = 0xe0000000
-    case FlippedMask = 0x1fffffff
-}
-
 class PEMTmxTileSet : NSObject {
-    private (set) var type = TileSetType.CollectionOfImages
-    private (set) var firstGid = UInt32(0)
-    private (set) var externalSource : String?
     private (set) var name : String?
     private (set) var tileSizeInPoints = CGSize.zero
     private (set) var spacingInPoints = UInt(0)
     private (set) var marginInPoints = UInt(0)
     private (set) var tileCount = UInt(0)
-    private (set) var objectAlignment = ObjectAlignment.Unspecified
-    private (set) var tileAtlasImage : SKTexture?
-    private (set) var tileAtlasImageSize : CGSize?
-    private (set) var tileSetTileUnitSize : CGSize?
-    private (set) var tilesPerRow = UInt(0)
-    private (set) var tilesPerColumn = UInt(0)
+    private (set) var objectAlignment = ObjectAlignment.Unspecified // unsupported
+
+    private var firstGid = UInt32(0)
+    private var externalSource : String?
+    private var tileAtlasImage : SKTexture?
+    private var tileAtlasImageSize : CGSize?
+    private var tileSetTileUnitSize : CGSize?
+    private var tilesPerRow = UInt(0)
+    private var tilesPerColumn = UInt(0)
     
     private var lastPossibleGid: UInt32 {
         return firstGid + UInt32((tilesPerRow * tilesPerColumn)) - 1
     }
     
-    var globalRange: ClosedRange<UInt32> {
+    private var globalRange: ClosedRange<UInt32> {
         return firstGid...lastPossibleGid
     }
     
@@ -77,6 +64,16 @@ class PEMTmxTileSet : NSObject {
         if let value = attributes[ElementAttributes.TileCount.rawValue] {
             tileCount = UInt(value) ?? 0
         }
+        
+        if let value = attributes[ElementAttributes.ObjectAlignment.rawValue] {
+            if let tileSetObjectAlignment = ObjectAlignment(rawValue: value) {
+                objectAlignment = tileSetObjectAlignment
+            } else {
+                #if DEBUG
+                print("PEMTmxMap: unsupported tileset object alignment: \(String(describing: value))")
+                #endif
+            }
+        }
     }
     
     deinit {
@@ -91,8 +88,6 @@ class PEMTmxTileSet : NSObject {
         guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
         guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
-
-        type = .SingleImage
         
         if let path = bundlePathForResource(source) {
             tileAtlasImage = SKTexture(imageNamed: path)
@@ -109,9 +104,7 @@ class PEMTmxTileSet : NSObject {
             }
         }
     }
-    
-    // MARK: - Public
-    
+        
     internal func tileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
         let tileAttributes = tileAttributes(fromGid: gid)
         let textureGid = tileAttributes.gid - firstGid
@@ -150,5 +143,17 @@ class PEMTmxTileSet : NSObject {
     
     private func columnFrom(gid: UInt32) -> UInt {
         return UInt(gid) % tilesPerRow
+    }
+    
+    internal func bundlePathForResource(_ resource: String) -> String? {
+        var fileName = resource
+        var fileExtension : String?
+
+        if resource.range(of: ".") != nil {
+            fileName = (resource as NSString).deletingPathExtension
+            fileExtension = (resource as NSString).pathExtension
+        }
+
+        return Bundle.main.path(forResource: fileName, ofType: fileExtension)
     }
 }

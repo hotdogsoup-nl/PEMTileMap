@@ -4,7 +4,7 @@ Based on the well-known [JSTileMap][jstilemap-url] project which was famously us
 
 ## Features
 
-- [X] both nearest neighbour and linear texture antialiasing
+- [X] both nearest neighbor and linear texture antialiasing
 
 [tmx-map-url]:https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#
 [tiled-url]:http://www.mapeditor.org
