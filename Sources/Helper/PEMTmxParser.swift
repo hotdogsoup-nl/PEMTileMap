@@ -109,7 +109,6 @@ extension PEMTmxMap {
             print("PEMTmxMap: unexpeced <\(elementName)> for \(String(describing: elementPath.last)).")
             #endif
             parser.abortParsing()
-            
         case Elements.Data.rawValue:
             if let value = attributeDict[ElementAttributes.Encoding.rawValue] {
                 if let encoding = DataEncoding(rawValue: value) {
@@ -129,7 +128,6 @@ extension PEMTmxMap {
                     dataCompression = .None
                 }
             }
-            
         default:
             #if DEBUG
             print("PEMTmxMap: unsupported TMX element name: <\(elementName)>")

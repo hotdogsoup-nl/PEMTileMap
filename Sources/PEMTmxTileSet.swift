@@ -51,8 +51,6 @@ class PEMTmxTileSet : NSObject {
         return firstGid...lastPossibleGid
     }
     
-    /// Uses  **TMX** tileset attributes to create and return a new `PEMTmxTileSet` object.
-    /// - parameter attributes : Dictionary containing TMX tileset attributes.
     init(attributes: Dictionary<String, String>) {
         super.init()
 
@@ -163,21 +161,4 @@ class PEMTmxTileSet : NSObject {
     private func columnFrom(gid: UInt32) -> UInt {
         return UInt(gid) % tilesPerRow
     }
-    
-    // MARK: - Debug
-    
-    #if DEBUG
-    override var description: String {
-        var result : String = ""
-        
-        result += "\nPEMTmxTileSet --"
-        result += "\nfirstGid: \(firstGid)"
-        result += "\nname: \(String(describing: name))"
-        result += "\nexternalSource: \(String(describing: externalSource))"
-        result += "\ntileAtlasImage: \(String(describing: tileAtlasImage))"
-        result += "\ntileCount: \(tileCount)"
-
-        return result
-    }
-    #endif
 }

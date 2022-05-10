@@ -143,21 +143,4 @@ class PEMTmxTileLayer : SKNode {
         print(tile)
         addChild(tile)
     }
-    
-    // MARK: - Debug
-    
-    #if DEBUG
-    override var description: String {
-        var result : String = ""
-        
-        result += "\nPEMTmxLayer --"
-        result += "\nlayerId: \(String(describing: layerId))"
-        result += "\nlayerName: \(String(describing: layerName))"
-        result += "\ncoordsInTiles: \(coordsInTiles)"
-        result += "\nsizeInTiles: \(sizeInTiles)"
-        result += "\ntileData: \(tileData)"
-
-        return result
-    }
-    #endif
 }
