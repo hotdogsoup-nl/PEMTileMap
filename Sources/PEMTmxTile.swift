@@ -6,6 +6,16 @@ class PEMTmxTile : SKSpriteNode {
     var flippedVertically : Bool = false { didSet { updateFlip() } }
     var flippedDiagonally : Bool = false { didSet { updateFlip() } }
     
+    deinit {
+        #if DEBUG
+        #if os(macOS)
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(type(of: self))")
+        #endif
+        #endif
+    }
+    
     func updateFlip() {
         if (flippedDiagonally) {
             if (flippedHorizontally && !flippedVertically) {

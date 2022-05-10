@@ -72,7 +72,11 @@ class PEMTmxTileLayer : SKNode {
     
     deinit {
         #if DEBUG
+        #if os(macOS)
         print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(type(of: self))")
+        #endif
         #endif
     }
     
