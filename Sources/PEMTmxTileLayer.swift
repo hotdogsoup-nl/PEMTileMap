@@ -16,8 +16,6 @@ class PEMTmxTileLayer : SKNode {
 
     internal var tileData: [UInt32] = []
 
-    /// Uses  **TMX** tile layer attributes to create and return a new `PEMTmxTileLayer` object.
-    /// - parameter attributes : Dictionary containing TMX tile layer attributes.
     init(attributes: Dictionary<String, String>) {
         super.init()
         
@@ -86,33 +84,36 @@ class PEMTmxTileLayer : SKNode {
         alpha = opacity
     }
 
-    func generateTiles(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet]) {
+    func generateTiles(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
         for index in tileData.indices {
-            let tileId = tileData[index]
+            let tileIdFromData = tileData[index]
             
-            if (tileId == 0) {
+            if (tileIdFromData == 0) {
                 continue
             }
             
-            let tileAttrs = flippedTileFlags(gid: tileId)
-            let gid = UInt32(tileAttrs.gid)
+            let tileAttributes = tileAttributes(fromGid: tileIdFromData)
         
-            if let tileSet = tileSetFor(gid: gid, tileSets: tileSets) {
-                if let tile = tileSet.tileFor(gid: gid) {
+            if let tileSet = tileSetFor(gid: tileAttributes.gid, tileSets: tileSets) {
+                if let tile = tileSet.tileFor(gid: tileAttributes.gid, textureFilteringMode: textureFilteringMode) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
                     
                     tile.coords = CGPoint(x: CGFloat(x), y: CGFloat(y))
-                    let name = String(format: "PEMTmxTile - gid:%ld (%ld, %ld)", gid, Int(tile.coords!.x), Int(tile.coords!.y))
-                    addTile(tile, name: name)
+                    tile.flippedHorizontally = tileAttributes.flippedHorizontally
+                    tile.flippedVertically = tileAttributes.flippedVertically
+                    tile.flippedDiagonally = tileAttributes.flippedDiagonally
+                    tile.name = String(format: "PEMTmxTile - gid:%ld (%ld, %ld)", tileAttributes.gid, Int(tile.coords!.x), Int(tile.coords!.y))
+                    
+                    addTile(tile)
                 } else {
                     #if DEBUG
-                    print("PEMTmxMap: no tile found with gid: \(gid) in tileSet: \(tileSet)")
+                    print("PEMTmxMap: no tile found with gid: \(tileAttributes.gid) in tileSet: \(tileSet)")
                     #endif
                 }
             } else {
                 #if DEBUG
-                print("PEMTmxMap: no tileSet found for tile with gid: \(gid)")
+                print("PEMTmxMap: no tileSet found for tile with gid: \(tileAttributes.gid)")
                 #endif
             }
         }
@@ -127,9 +128,7 @@ class PEMTmxTileLayer : SKNode {
         return nil
     }
     
-    private func addTile(_ tile: PEMTmxTile, name: String?) {
-        tile.name = name
-        
+    private func addTile(_ tile: PEMTmxTile) {
         if tintColor != nil {
             tile.color = tintColor!
             tile.colorBlendFactor = 1.0

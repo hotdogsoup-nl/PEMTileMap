@@ -59,6 +59,8 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
     private (set) var staggerAxis : MapStaggerAxis?
     private (set) var staggerIndex : MapStaggerIndex?
 
+    private (set) var textureFilteringMode = SKTextureFilteringMode.nearest
+
     private var backgroundColorNode : SKSpriteNode?
     private var baseZPosition = CGFloat(0)
     private var currentZPosition = CGFloat(0)
@@ -93,7 +95,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
     /// - parameter baseZPosition : Base zPosition for the node. Default is 0.
     /// - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is -20.
     /// - returns: `PEMTmxMap?` tilemap node.
-    init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20) {
+    init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest) {
         super.init()
 
         if let path = bundleURLForResource(mapName) {
@@ -113,6 +115,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
         
         self.baseZPosition = baseZPosition
         self.zPositionLayerDelta = zPositionLayerDelta
+        self.textureFilteringMode = textureFilteringMode
         
         setUp()
         generateMap()
@@ -222,7 +225,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
     private func addLayers() {
         for tileLayer in tileLayers {
             if tileLayer.visible {
-                tileLayer.generateTiles(mapSizeInTiles: mapSizeInTiles, tileSets: tileSets)
+                tileLayer.generateTiles(mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
                 
                 tileLayer.position = CGPoint(x: tileLayer.offSetInPoints.dx, y: -tileLayer.offSetInPoints.dy)
                 tileLayer.zPosition = currentZPosition
@@ -247,7 +250,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
 
 // MARK: - Helper functions
 
-func flippedTileFlags(gid: UInt32) -> (gid: UInt32, hflip: Bool, vflip: Bool, dflip: Bool) {
+internal func tileAttributes(fromGid gid: UInt32) -> (gid: UInt32, flippedHorizontally: Bool, flippedVertically: Bool, flippedDiagonally: Bool) {
     let flippedDiagonalFlag: UInt32   = 0x20000000
     let flippedVerticalFlag: UInt32   = 0x40000000
     let flippedHorizontalFlag: UInt32 = 0x80000000
@@ -255,15 +258,15 @@ func flippedTileFlags(gid: UInt32) -> (gid: UInt32, hflip: Bool, vflip: Bool, df
     let flippedAll = (flippedHorizontalFlag | flippedVerticalFlag | flippedDiagonalFlag)
     let flippedMask = ~(flippedAll)
 
-    let flipHoriz: Bool = (gid & flippedHorizontalFlag) != 0
-    let flipVert:  Bool = (gid & flippedVerticalFlag) != 0
-    let flipDiag:  Bool = (gid & flippedDiagonalFlag) != 0
+    let flippedHorizontally: Bool = (gid & flippedHorizontalFlag) != 0
+    let flippedVertically: Bool = (gid & flippedVerticalFlag) != 0
+    let flippedDiagonally: Bool = (gid & flippedDiagonalFlag) != 0
 
     let gid = gid & flippedMask
-    return (gid, flipHoriz, flipVert, flipDiag)
+    return (gid, flippedHorizontally, flippedVertically, flippedDiagonally)
 }
 
-func bundleURLForResource(_ resource: String) -> URL? {
+internal func bundleURLForResource(_ resource: String) -> URL? {
     var fileName = resource
     var fileExtension : String?
 
@@ -275,7 +278,7 @@ func bundleURLForResource(_ resource: String) -> URL? {
     return Bundle.main.url(forResource: fileName, withExtension: fileExtension)
 }
 
-func bundlePathForResource(_ resource: String) -> String? {
+internal func bundlePathForResource(_ resource: String) -> String? {
     var fileName = resource
     var fileExtension : String?
 

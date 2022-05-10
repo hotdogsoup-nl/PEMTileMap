@@ -112,21 +112,11 @@ class PEMTmxTileSet : NSObject {
     
     // MARK: - Public
     
-    func tileFor(gid: UInt32) -> PEMTmxTile? {
-        let tileAttrs = flippedTileFlags(gid: gid)
-        var textureGid = UInt32(tileAttrs.gid)
-        textureGid -= firstGid
-        
-        print (textureGid)
-        
+    internal func tileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
+        let tileAttributes = tileAttributes(fromGid: gid)
+        let textureGid = tileAttributes.gid - firstGid
         
         let atlasCoords = CGPoint(x: Int(rowFrom(gid: textureGid)), y: Int(columnFrom(gid: textureGid)))
-        
-        
-        print (atlasCoords)
-
-        
-        
         var rowInPoints = (((tileSizeInPoints.height + CGFloat(spacingInPoints)) * atlasCoords.x) + CGFloat(marginInPoints)) / tileAtlasImageSize!.height
         let columnInPoints = (((tileSizeInPoints.width + CGFloat(spacingInPoints)) * atlasCoords.y) + CGFloat(marginInPoints)) / tileAtlasImageSize!.width
         
@@ -135,7 +125,7 @@ class PEMTmxTileSet : NSObject {
         let rect = CGRect(x: columnInPoints, y: rowInPoints, width: tileSetTileUnitSize!.width, height: tileSetTileUnitSize!.height)
         
         let texture = SKTexture(rect: rect, in: tileAtlasImage!)
-        texture.filteringMode = .nearest
+        texture.filteringMode = textureFilteringMode
         
         if let tile = tileWithTexture(texture) {
             return tile
@@ -144,7 +134,7 @@ class PEMTmxTileSet : NSObject {
         return nil
     }
     
-    func contains(globalID gid: UInt32) -> Bool {
+    internal func contains(globalID gid: UInt32) -> Bool {
         return globalRange ~= gid
     }
         
