@@ -33,6 +33,9 @@
 		2037A5FF2825B0DC00E13452 /* level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5FE2825B0DC00E13452 /* level2.tmx */; };
 		2037A6002825B0DC00E13452 /* level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5FE2825B0DC00E13452 /* level2.tmx */; };
 		2037A6012825B0DC00E13452 /* level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5FE2825B0DC00E13452 /* level2.tmx */; };
+		204097CE282A753300603024 /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204097CD282A753300603024 /* PEMTmxTile.swift */; };
+		204097CF282A753300603024 /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204097CD282A753300603024 /* PEMTmxTile.swift */; };
+		204097D0282A753300603024 /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204097CD282A753300603024 /* PEMTmxTile.swift */; };
 		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		20562E16282521C1005CE60A /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20562E0E282521C1005CE60A /* JSTileMap.m */; };
@@ -90,14 +93,12 @@
 		2037A5E028258C4900E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2037A5E528258C4A00E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2037A5FE2825B0DC00E13452 /* level2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level2.tmx; sourceTree = "<group>"; };
+		204097CD282A753300603024 /* PEMTmxTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTile.swift; sourceTree = "<group>"; };
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		20562E0D282521C1005CE60A /* JSTileMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTileMap.h; sourceTree = "<group>"; };
 		20562E0E282521C1005CE60A /* JSTileMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTileMap.m; sourceTree = "<group>"; };
-		20562E10282521C1005CE60A /* PEMTMXImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXImageLayer.swift; sourceTree = "<group>"; };
 		20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileLayer.swift; sourceTree = "<group>"; };
-		20562E12282521C1005CE60A /* PEMTMXLayerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXLayerInfo.swift; sourceTree = "<group>"; };
 		20562E13282521C1005CE60A /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
-		20562E14282521C1005CE60A /* PEMTMXObjectGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTMXObjectGroup.swift; sourceTree = "<group>"; };
 		20562E15282521C1005CE60A /* PEMTmxTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSet.swift; sourceTree = "<group>"; };
 		20562E3E28252C00005CE60A /* level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level1.tmx; sourceTree = "<group>"; };
 		205BF67028266D4200077DB2 /* PEMTmxParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxParser.swift; sourceTree = "<group>"; };
@@ -184,25 +185,15 @@
 			path = Libraries;
 			sourceTree = "<group>";
 		};
-		206E238A282666150039C4FE /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				20562E10282521C1005CE60A /* PEMTMXImageLayer.swift */,
-				20562E12282521C1005CE60A /* PEMTMXLayerInfo.swift */,
-				20562E14282521C1005CE60A /* PEMTMXObjectGroup.swift */,
-			);
-			path = Unused;
-			sourceTree = "<group>";
-		};
 		206E238B282667560039C4FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
 				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
 				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
+				204097CD282A753300603024 /* PEMTmxTile.swift */,
 				209AB9A62827C4730021A297 /* Helper */,
 				209AB9A72827C8510021A297 /* Extensions */,
-				206E238A282666150039C4FE /* Unused */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -504,6 +495,7 @@
 				2037A5F528258DB500E13452 /* PEMTmxMap.swift in Sources */,
 				2037A5EE28258DA500E13452 /* GameController.swift in Sources */,
 				2037A5F128258DB000E13452 /* JSTileMap.m in Sources */,
+				204097D0282A753300603024 /* PEMTmxTile.swift in Sources */,
 				2037A5DE28258C4900E13452 /* GameViewController.swift in Sources */,
 				2037A5EC28258DA000E13452 /* GameScene.swift in Sources */,
 				2037A5ED28258DA300E13452 /* Player.swift in Sources */,
@@ -526,6 +518,7 @@
 				2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
 				20562E16282521C1005CE60A /* JSTileMap.m in Sources */,
 				2037A5C9282587AB00E13452 /* PEMTmxMap.swift in Sources */,
+				204097CE282A753300603024 /* PEMTmxTile.swift in Sources */,
 				204662E0281BE8CF00F3635B /* Define.swift in Sources */,
 				2014E98428168E6100A12253 /* Player.swift in Sources */,
 				207D3DD42812AD5700FC4C77 /* GameScene.swift in Sources */,
@@ -548,6 +541,7 @@
 				2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
 				20562E17282521C1005CE60A /* JSTileMap.m in Sources */,
 				2037A5CE282587AC00E13452 /* PEMTmxMap.swift in Sources */,
+				204097CF282A753300603024 /* PEMTmxTile.swift in Sources */,
 				204662E1281BE8CF00F3635B /* Define.swift in Sources */,
 				2014E98528168E6100A12253 /* Player.swift in Sources */,
 				207D3DD52812AD5700FC4C77 /* GameScene.swift in Sources */,
