@@ -33,7 +33,7 @@ internal enum DataEncoding : String {
 }
 
 internal enum DataCompression : String {
-    case None = "none"
+    case None
     case Gzip = "gzip"
     case Zlib = "zlib"
     case Zstd = "zstd"
@@ -55,21 +55,22 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
     private (set) var infinite = false
     
     private (set) var orientation : Orientation?
-    private (set) var renderOrder : MapRenderOrder?
+    private (set) var renderOrder = MapRenderOrder.RightDown
     private (set) var staggerAxis : MapStaggerAxis?
     private (set) var staggerIndex : MapStaggerIndex?
 
     private var backgroundColorNode : SKSpriteNode?
     private var baseZPosition = CGFloat(0)
+    private var currentZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
 
     internal var tileSets : [PEMTmxTileSet] = []
     internal var tileLayers : [PEMTmxTileLayer] = []
 
-    // XML Parser
+    // TMX Parser
     internal var currentParseString : String = ""
-    internal var currentFirstGid = UInt(0)
-    internal var currentMapElement = MapElements.None
+    internal var currentFirstGid = UInt32(0)
+    internal var elementPath : [AnyObject] = []
     internal var dataEncoding : DataEncoding?
     internal var dataCompression = DataCompression.None
     
@@ -106,37 +107,27 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
                     print("PEMTmxMap: Error parsing map: ", parser.parserError as Any)
                     #endif
                     return nil
-                }
+                }                
             }
         }
         
         self.baseZPosition = baseZPosition
         self.zPositionLayerDelta = zPositionLayerDelta
         
-        if backgroundColor != nil {
-            let colorNode = SKSpriteNode(color: backgroundColor!, size: mapSizeInPoints())
-            backgroundColorNode = colorNode
-            backgroundColorNode?.anchorPoint = .zero
-            backgroundColorNode?.position = .zero
-            addChild(backgroundColorNode!)
-        }
-        
-        #if DEBUG
-        print (self)
-        #endif
-        
+        setUp()
         generateMap()
+        postProcess()
     }
     
     internal func parseAttributes(_ attributes: Dictionary<String, String>) {
-        guard let width = attributes[MapElementAttributes.Width.rawValue] else { return }
-        guard let height = attributes[MapElementAttributes.Height.rawValue] else { return }
-        guard let tilewidth = attributes[MapElementAttributes.TileWidth.rawValue] else { return }
-        guard let tileheight = attributes[MapElementAttributes.TileHeight.rawValue] else { return }
-        guard let orientationValue = attributes[MapElementAttributes.Orientation.rawValue] else { return }
+        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
+        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
+        guard let tilewidth = attributes[ElementAttributes.TileWidth.rawValue] else { return }
+        guard let tileheight = attributes[ElementAttributes.TileHeight.rawValue] else { return }
+        guard let orientationValue = attributes[ElementAttributes.Orientation.rawValue] else { return }
                 
-        version = attributes[MapElementAttributes.Version.rawValue]
-        tiledversion = attributes[MapElementAttributes.TiledVersion.rawValue]
+        version = attributes[ElementAttributes.Version.rawValue]
+        tiledversion = attributes[ElementAttributes.TiledVersion.rawValue]
         
         if let mapOrientation = Orientation(rawValue: orientationValue) {
             orientation = mapOrientation
@@ -146,7 +137,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             #endif
         }
         
-        if let value = attributes[MapElementAttributes.RenderOrder.rawValue] {
+        if let value = attributes[ElementAttributes.RenderOrder.rawValue] {
             if let mapRenderOrder = MapRenderOrder(rawValue: value) {
                 renderOrder = mapRenderOrder
             } else {
@@ -156,19 +147,18 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[MapElementAttributes.CompressionLevel.rawValue] {
+        if let value = attributes[ElementAttributes.CompressionLevel.rawValue] {
             compressionLevel = Int(value)!
         }
         
         mapSizeInTiles = CGSize(width: Int(width)!, height: Int(height)!)
         tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
         
-        
-        if let value = attributes[MapElementAttributes.HexSideLength.rawValue] {
+        if let value = attributes[ElementAttributes.HexSideLength.rawValue] {
             hexSideLengthInPoints = Int(value) ?? 0
         }
         
-        if let value = attributes[MapElementAttributes.StaggerAxis.rawValue] {
+        if let value = attributes[ElementAttributes.StaggerAxis.rawValue] {
             if let mapStaggerAxis = MapStaggerAxis(rawValue: value) {
                 staggerAxis = mapStaggerAxis
             } else {
@@ -178,7 +168,7 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
 
-        if let value = attributes[MapElementAttributes.StaggerIndex.rawValue] {
+        if let value = attributes[ElementAttributes.StaggerIndex.rawValue] {
             if let mapStaggerIndex = MapStaggerIndex(rawValue: value) {
                 staggerIndex = mapStaggerIndex
             } else {
@@ -188,86 +178,90 @@ class PEMTmxMap : SKNode, XMLParserDelegate {
             }
         }
         
-        if let value = attributes[MapElementAttributes.ParallaxOriginX.rawValue] {
+        if let value = attributes[ElementAttributes.ParallaxOriginX.rawValue] {
             parallaxOriginInPoints.x = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[MapElementAttributes.ParallaxOriginY.rawValue] {
+        if let value = attributes[ElementAttributes.ParallaxOriginY.rawValue] {
             parallaxOriginInPoints.y = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[MapElementAttributes.BackgroundColor.rawValue] {
+        if let value = attributes[ElementAttributes.BackgroundColor.rawValue] {
             backgroundColor = SKColor.init(hexString: value)
         }
         
-        if let value = attributes[MapElementAttributes.NextLayerId.rawValue] {
+        if let value = attributes[ElementAttributes.NextLayerId.rawValue] {
             nextLayerId = UInt(value)!
         }
 
-        if let value = attributes[MapElementAttributes.NextObjectId.rawValue] {
+        if let value = attributes[ElementAttributes.NextObjectId.rawValue] {
             nextObjectId = UInt(value)!
         }
 
-        if let value = attributes[MapElementAttributes.Infinite.rawValue] {
+        if let value = attributes[ElementAttributes.Infinite.rawValue] {
             infinite = value == "1"
         }
     }
     
     // MARK: - Map generation
+    
+    private func setUp() {
+    }
         
     private func generateMap() {
-        var currentZPosition = baseZPosition
+        currentZPosition = baseZPosition
         
         // add tile layers
-        for tileLayer in tileLayers {
-            if tileLayer.visible {
-                tileLayer.generateTiles()
-                
-                tileLayer.position = CGPoint.zero
-                tileLayer.zPosition = currentZPosition
-                currentZPosition += 1
-                
-                addChild(tileLayer)
-            }
-        }
-        
+        addLayers()
         
         // add image layers
         
         // add objects
     }
     
-    // MARK: - Calculations
-    
-    private func mapSizeInPoints() -> CGSize {
-        return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
-    }
-
-    // MARK: - Debug
-
-    #if DEBUG
-    override var description: String {
-        var result : String = ""
-        
-        result += "\nPEMTmxMap --"
-        result += "\norientation: \(String(describing: orientation))"
-        result += "\nmapSizeInTiles: \(mapSizeInTiles)"
-        result += "\ntileSizeInPoints: \(tileSizeInPoints)"
-        
-        for tileSet in tileSets {
-            result += "\n\(tileSet)"
+    private func addLayers() {
+        for tileLayer in tileLayers {
+            if tileLayer.visible {
+                tileLayer.generateTiles(mapSizeInTiles: mapSizeInTiles, tileSets: tileSets)
+                
+                tileLayer.position = CGPoint(x: tileLayer.offSetInPoints.dx, y: -tileLayer.offSetInPoints.dy)
+                tileLayer.zPosition = currentZPosition
+                currentZPosition += zPositionLayerDelta
+                
+                addChild(tileLayer)
+            }
         }
-        
-        for layer in tileLayers {
-            result += "\n\(layer)"
-        }
-    
-        return result
     }
-    #endif
+    
+    private func postProcess() {
+        if backgroundColor != nil {
+            let colorNode = SKSpriteNode(color: backgroundColor!, size: calculateAccumulatedFrame().size)
+            backgroundColorNode = colorNode
+            backgroundColorNode?.anchorPoint = .zero
+            backgroundColorNode?.position = .zero
+            backgroundColorNode?.zPosition = baseZPosition - zPositionLayerDelta
+            addChild(backgroundColorNode!)
+        }
+    }
 }
 
 // MARK: - Helper functions
+
+func flippedTileFlags(gid: UInt32) -> (gid: UInt32, hflip: Bool, vflip: Bool, dflip: Bool) {
+    let flippedDiagonalFlag: UInt32   = 0x20000000
+    let flippedVerticalFlag: UInt32   = 0x40000000
+    let flippedHorizontalFlag: UInt32 = 0x80000000
+
+    let flippedAll = (flippedHorizontalFlag | flippedVerticalFlag | flippedDiagonalFlag)
+    let flippedMask = ~(flippedAll)
+
+    let flipHoriz: Bool = (gid & flippedHorizontalFlag) != 0
+    let flipVert:  Bool = (gid & flippedVerticalFlag) != 0
+    let flipDiag:  Bool = (gid & flippedDiagonalFlag) != 0
+
+    let gid = gid & flippedMask
+    return (gid, flipHoriz, flipVert, flipDiag)
+}
 
 func bundleURLForResource(_ resource: String) -> URL? {
     var fileName = resource

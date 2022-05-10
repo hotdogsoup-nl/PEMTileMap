@@ -1,18 +1,18 @@
-internal enum MapElements : String {
+internal enum Elements : String {
+    case None
     case Data = "data"
     case Group = "group"
     case Image = "image"
     case ImageLayer = "imagelayer"
     case Layer = "layer"
     case Map = "map"
-    case None = "none"
     case ObjectGroup = "objectgroup"
     case Properties = "properties"
     case Template = "template"
     case TileSet = "tileset"
 }
 
-internal enum MapElementAttributes : String {
+internal enum ElementAttributes : String {
     case BackgroundColor = "backgroundcolor"
     case Columns = "columns"
     case Compression = "compression"
@@ -59,14 +59,20 @@ internal enum MapElementAttributes : String {
 extension PEMTmxMap {
     // MARK: - XMLParserDelegate
     
+    func parserDidStartDocument(_ parser: XMLParser) {
+        elementPath.removeAll()
+    }
+    
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         
         switch elementName {
-        case MapElements.Map.rawValue:
+            
+        // top level elements
+        case Elements.Map.rawValue:
             parseAttributes(attributeDict)
-            currentMapElement = .Map
-        case MapElements.TileSet.rawValue :
-            if let value = attributeDict[MapElementAttributes.Source.rawValue] {
+            elementPath.append(self)
+        case Elements.TileSet.rawValue :
+            if let value = attributeDict[ElementAttributes.Source.rawValue] {
                 #if DEBUG
                 print("PEMTmxMap: external tilesets are unsupported: \(value)")
                 #endif
@@ -76,29 +82,36 @@ extension PEMTmxMap {
             
             let tileSet = PEMTmxTileSet(attributes: attributeDict)
             tileSets.append(tileSet)
-            currentMapElement = .TileSet
-        case MapElements.Image.rawValue:
-            switch currentMapElement {
-            case .TileSet:
-                guard let tileSet = tileSets.last else {
-                    #if DEBUG
-                    print("PEMTmxMap: found <\(elementName)> for non-existing <\(currentMapElement)>.")
-                    #endif
-                    parser.abortParsing()
-                    return
-                }
-                tileSet.setTileSetImage(attributes: attributeDict)
-            default:
-                #if DEBUG
-                print("PEMTmxMap: unexpected XML element name: <\(elementName)> as child of <\(currentMapElement.rawValue)>")
-                #endif
-            }
-        case MapElements.Layer.rawValue:
+            elementPath.append(tileSet)
+        case Elements.Layer.rawValue:
             let layer = PEMTmxTileLayer(attributes: attributeDict)
             tileLayers.append(layer)
-            currentMapElement = .Layer
-        case MapElements.Data.rawValue:
-            if let value = attributeDict[MapElementAttributes.Encoding.rawValue] {
+            elementPath.append(layer)
+        case Elements.ObjectGroup.rawValue:
+            break
+        case Elements.ImageLayer.rawValue:
+            break
+        case Elements.Group.rawValue:
+            break
+        case Elements.Properties.rawValue:
+            break
+        case Elements.Template.rawValue:
+            break
+
+        // child elements
+        case Elements.Image.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxTileSet {
+                currentElement.setTileAtlasImage(attributes: attributeDict)
+                break
+            }
+            
+            #if DEBUG
+            print("PEMTmxMap: unexpeced <\(elementName)> for \(String(describing: elementPath.last)).")
+            #endif
+            parser.abortParsing()
+            
+        case Elements.Data.rawValue:
+            if let value = attributeDict[ElementAttributes.Encoding.rawValue] {
                 if let encoding = DataEncoding(rawValue: value) {
                     dataEncoding = encoding
                 } else {
@@ -109,28 +122,17 @@ extension PEMTmxMap {
                 }
             }
             
-            if let value = attributeDict[MapElementAttributes.Compression.rawValue] {
+            if let value = attributeDict[ElementAttributes.Compression.rawValue] {
                 if let compression = DataCompression(rawValue: value) {
                     dataCompression = compression
                 } else {
                     dataCompression = .None
                 }
             }
-
-        case MapElements.ObjectGroup.rawValue:
-            break
-        case MapElements.ImageLayer.rawValue:
-            break
-        case MapElements.Group.rawValue:
-            break
-        case MapElements.Properties.rawValue:
-            break
-        case MapElements.Template.rawValue:
-            break
-
+            
         default:
             #if DEBUG
-            print("PEMTmxMap: unsupported XML element name: <\(elementName)>")
+            print("PEMTmxMap: unsupported TMX element name: <\(elementName)>")
             #endif
         }
     }
@@ -138,25 +140,38 @@ extension PEMTmxMap {
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         switch elementName {
-        case MapElements.Map.rawValue:
-            currentMapElement = .None
-        case MapElements.TileSet.rawValue :
-            currentMapElement = .None
-        case MapElements.Image.rawValue:
+            
+        // top level elements
+        case Elements.Map.rawValue:
             break
-        case MapElements.Layer.rawValue:
+        case Elements.TileSet.rawValue :
             break
-        case MapElements.Data.rawValue:
+        case Elements.Layer.rawValue:
+            break
+        case Elements.ObjectGroup.rawValue:
+            break
+        case Elements.ImageLayer.rawValue:
+            break
+        case Elements.Group.rawValue:
+            break
+        case Elements.Properties.rawValue:
+            break
+        case Elements.Template.rawValue:
+            break
+            
+        // child elements
+        case Elements.Image.rawValue:
+            break
+        case Elements.Data.rawValue:
             guard let tileLayer = tileLayers.last else {
                 #if DEBUG
-                print("PEMTmxMap: found <\(elementName)> for non-existing <\(currentMapElement)>.")
+                print("PEMTmxMap: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
                 #endif
                 parser.abortParsing()
                 return
             }
             
             var decodedData : [UInt32]?
-            
             switch dataEncoding {
             case .Base64:
                 decodedData = decodeData(base64: currentParseString, compression: dataCompression)
@@ -177,21 +192,13 @@ extension PEMTmxMap {
                 #endif
                 parser.abortParsing()
             }
-        case MapElements.ObjectGroup.rawValue:
-            break
-        case MapElements.ImageLayer.rawValue:
-            break
-        case MapElements.Group.rawValue:
-            break
-        case MapElements.Properties.rawValue:
-            break
-        case MapElements.Template.rawValue:
-            break
         default:
             #if DEBUG
-            print("PEMTmxMap: unsupported XML element name: <\(elementName)>")
+            print("PEMTmxMap: unsupported TMX element name: <\(elementName)>")
             #endif
         }
+        
+        currentParseString.removeAll()
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -202,6 +209,10 @@ extension PEMTmxMap {
         #if DEBUG
         print("PEMTmxMap: parseErrorOccurred: \(parseError)")
         #endif
+    }
+    
+    func parserDidEndDocument(_ parser: XMLParser) {
+        elementPath.removeAll()
     }
     
     // MARK: - Decoding data
