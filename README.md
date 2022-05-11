@@ -52,9 +52,10 @@ This project also contains a Demo game based on SuperKoalio to show an example o
 - [ ] scroll using the TMX parallax properties
 - [ ] Touch, Mouse, Keyboard control
 
-## Demo Game Features
+## Superkoalio Demo Game Features
 - [ ] load map
 - [ ] spawn player on the map
+- [ ] collision detection
 - [ ] level completed, load next map
 - [ ] game over
 - [ ] sound & music with Audio Unit effects
