@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "207D3DC52812AD5700FC4C77"
-               BuildableName = "PEMTmx Map.app"
+               BuildableName = "PEMTmxMap Demo.app"
                BlueprintName = "macOS version"
                ReferencedContainer = "container:PEMTmxMap.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "207D3DC52812AD5700FC4C77"
-            BuildableName = "PEMTmx Map.app"
+            BuildableName = "PEMTmxMap Demo.app"
             BlueprintName = "macOS version"
             ReferencedContainer = "container:PEMTmxMap.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "207D3DC52812AD5700FC4C77"
-            BuildableName = "PEMTmx Map.app"
+            BuildableName = "PEMTmxMap Demo.app"
             BlueprintName = "macOS version"
             ReferencedContainer = "container:PEMTmxMap.xcodeproj">
          </BuildableReference>
