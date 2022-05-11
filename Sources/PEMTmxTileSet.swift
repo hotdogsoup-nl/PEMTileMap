@@ -22,9 +22,23 @@ class PEMTmxTileSet : NSObject {
     private (set) var spacingInPoints = UInt(0)
     private (set) var marginInPoints = UInt(0)
 
-    private var firstGid = UInt32(0)
     private var externalSource : String?
+    private var firstGid = UInt32(0)
+    private var lastGid: UInt32 {
+        if spriteSheet != nil {
+            return spriteSheet!.lastGid
+        }
+        return tiles.last?.gid ?? 0
+    }
+    private var gidRange: ClosedRange<UInt32> {
+        return firstGid...lastGid
+    }
+    
+    // spritesheet
     private var spriteSheet : PEMTmxTileSetSpriteSheet?
+    
+    // tiles as separate images
+    private var tiles : [PEMTmxTileSetTile] = []
     
     // MARK: - Init
     
@@ -89,40 +103,45 @@ class PEMTmxTileSet : NSObject {
         }
     }
     
-    func addTileImage(attributes: Dictionary<String, String>) {
-//        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
-//        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
-//        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
-//
-//        if let path = bundlePathForResource(source) {
-//
-//        }
-//
+    func addTileImage(id: UInt32, attributes: Dictionary<String, String>) {
+        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
+
+        if bundlePathForResource(source) != nil {
+            if let newTile = PEMTmxTileSetTile(gid: firstGid + id, attributes: attributes) {
+                tiles.append(newTile)
+            }
+        }
     }
     
     // MARK: - Public
 
     func tileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
         if spriteSheet != nil {
-            return spriteSheet!.tileFromSpriteSheetFor(gid: gid, textureFilteringMode: textureFilteringMode)
+            return spriteSheet!.tileFor(gid: gid, textureFilteringMode: textureFilteringMode)
+        }
+        
+        return tileSetTileFor(gid: gid, textureFilteringMode: textureFilteringMode)
+    }
+        
+    func contains(globalID gid: UInt32) -> Bool {
+        return gidRange ~= gid
+    }
+    
+    // MARK: - Private
+    
+    private func tileSetTileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
+        if let tile = tiles.filter({ $0.gid == gid }).first {
+            return PEMTmxTile(texture: tile.textureImage)
         }
         
         return nil
-    }
-    
-    func contains(globalID gid: UInt32) -> Bool {
-        if spriteSheet != nil {
-            return spriteSheet!.globalRange ~= gid
-        }
-
-        return false
     }
     
     // MARK: - Debug
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSet: \(name ?? "-"), (\(externalSource ?? "-"))"
+        return "PEMTmxTileSet: \(name ?? "-"), (firstGid: \(firstGid), lastGid: \(lastGid))"
     }
     #endif
 }

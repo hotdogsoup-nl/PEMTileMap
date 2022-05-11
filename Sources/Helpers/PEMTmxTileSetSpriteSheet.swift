@@ -2,22 +2,18 @@ import SpriteKit
 
 class PEMTmxTileSetSpriteSheet : NSObject {
     private var firstGid = UInt32(0)
+    var lastGid: UInt32 {
+        return firstGid + UInt32((tilesPerRow * tilesPerColumn)) - 1
+    }
+    
     private var tileSizeInPoints = CGSize.zero
     private var marginInPoints = UInt(0)
     private var spacingInPoints = UInt(0)
     
-    private var lastPossibleGid: UInt32 {
-        return firstGid + UInt32((tilesPerRow * tilesPerColumn)) - 1
-    }
-
-    var globalRange: ClosedRange<UInt32> {
-        return firstGid...lastPossibleGid
-    }
-
-    private var spriteSheetImage : SKTexture?
-    private var spriteSheetImageSize : CGSize?
-    private var spriteSheetImageSource : String?
-    private var spriteSheetTileUnitSize : CGSize?
+    private var textureImage : SKTexture?
+    private var textureImageSize : CGSize?
+    private var textureImageSource : String?
+    private var tileUnitSize : CGSize?
     private var tilesPerRow = UInt(0)
     private var tilesPerColumn = UInt(0)
     
@@ -50,17 +46,17 @@ class PEMTmxTileSetSpriteSheet : NSObject {
         guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
         
         if let path = bundlePathForResource(source) {
-            spriteSheetImageSource = source
-            spriteSheetImage = SKTexture(imageNamed: path)
-            spriteSheetImageSize = spriteSheetImage?.size()
-            spriteSheetTileUnitSize = CGSize(width: tileSizeInPoints.width / spriteSheetImageSize!.width, height: tileSizeInPoints.height / spriteSheetImageSize!.height)
+            textureImageSource = source
+            textureImage = SKTexture(imageNamed: path)
+            textureImageSize = textureImage?.size()
+            tileUnitSize = CGSize(width: tileSizeInPoints.width / textureImageSize!.width, height: tileSizeInPoints.height / textureImageSize!.height)
             
-            tilesPerRow = (UInt(spriteSheetImageSize!.width) - marginInPoints * 2 + spacingInPoints) / (UInt(tileSizeInPoints.width) + spacingInPoints)
-            tilesPerColumn = (UInt(spriteSheetImageSize!.height) - marginInPoints * 2 + spacingInPoints) / (UInt(tileSizeInPoints.height) + spacingInPoints)
+            tilesPerRow = (UInt(textureImageSize!.width) - marginInPoints * 2 + spacingInPoints) / (UInt(tileSizeInPoints.width) + spacingInPoints)
+            tilesPerColumn = (UInt(textureImageSize!.height) - marginInPoints * 2 + spacingInPoints) / (UInt(tileSizeInPoints.height) + spacingInPoints)
             
-            if spriteSheetImageSize!.width != CGFloat(Int(width)!) || spriteSheetImageSize!.height != CGFloat(Int(height)!) {
+            if textureImageSize!.width != CGFloat(Int(width)!) || textureImageSize!.height != CGFloat(Int(height)!) {
                 #if DEBUG
-                print("PEMTmxMap: tileset <image> size mismatch: \(source)")
+                print("PEMTmxTileSetSpriteSheet: tileset <image> size mismatch: \(source)")
                 #endif
             }
         }
@@ -68,19 +64,19 @@ class PEMTmxTileSetSpriteSheet : NSObject {
     
     // MARK: - Public
     
-    func tileFromSpriteSheetFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
+    func tileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
         let tileAttributes = tileAttributes(fromGid: gid)
         let textureGid = tileAttributes.gid - firstGid
         
         let spriteSheetCoords = CGPoint(x: Int(rowFrom(gid: textureGid)), y: Int(columnFrom(gid: textureGid)))
-        var rowInPoints = (((tileSizeInPoints.height + CGFloat(spacingInPoints)) * spriteSheetCoords.x) + CGFloat(marginInPoints)) / spriteSheetImageSize!.height
-        let columnInPoints = (((tileSizeInPoints.width + CGFloat(spacingInPoints)) * spriteSheetCoords.y) + CGFloat(marginInPoints)) / spriteSheetImageSize!.width
+        var rowInPoints = (((tileSizeInPoints.height + CGFloat(spacingInPoints)) * spriteSheetCoords.x) + CGFloat(marginInPoints)) / textureImageSize!.height
+        let columnInPoints = (((tileSizeInPoints.width + CGFloat(spacingInPoints)) * spriteSheetCoords.y) + CGFloat(marginInPoints)) / textureImageSize!.width
         
-        rowInPoints = 1.0 - rowInPoints - spriteSheetTileUnitSize!.height
+        rowInPoints = 1.0 - rowInPoints - tileUnitSize!.height
         
-        let rect = CGRect(x: columnInPoints, y: rowInPoints, width: spriteSheetTileUnitSize!.width, height: spriteSheetTileUnitSize!.height)
+        let rect = CGRect(x: columnInPoints, y: rowInPoints, width: tileUnitSize!.width, height: tileUnitSize!.height)
         
-        let texture = SKTexture(rect: rect, in: spriteSheetImage!)
+        let texture = SKTexture(rect: rect, in: textureImage!)
         texture.filteringMode = textureFilteringMode
         
         return PEMTmxTile(texture: texture)
@@ -100,7 +96,7 @@ class PEMTmxTileSetSpriteSheet : NSObject {
         
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetSpriteSheet: \(spriteSheetImageSource ?? "-"), (\(tilesPerColumn), \(tilesPerRow)"
+        return "PEMTmxTileSetSpriteSheet: \(textureImageSource ?? "-"), (\(tilesPerColumn), \(tilesPerRow))"
     }
     #endif
 }

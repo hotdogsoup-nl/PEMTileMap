@@ -74,8 +74,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     private weak var currentMap : PEMTmxMap?
     
     private var currentParseString : String = ""
-    private var currentFirstGid = UInt32(0)
-    private var currentTileGid = UInt32(0)
+    private var currentTileId = UInt32(0)
     private var currentTileType : String = ""
     
     private var elementPath : [AnyObject] = []
@@ -154,10 +153,8 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         // child elements
         case Elements.Image.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
-                if currentTileGid != 0 {
-                    print("found image inside tile")
-                    
-                    currentElement.addTileImage(attributes: attributeDict)
+                if currentTileId != 0 {
+                    currentElement.addTileImage(id: currentTileId, attributes: attributeDict)
                     break
                 }
 
@@ -172,7 +169,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Tile.rawValue:
             if elementPath.last is PEMTmxTileSet {
                 if let value = attributeDict[ElementAttributes.Id.rawValue] {
-                    currentTileGid = UInt32(value)!
+                    currentTileId = UInt32(value)!
                 }
                 
                 if let value = attributeDict[ElementAttributes.TypeAttribute.rawValue] {
@@ -237,7 +234,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Image.rawValue:
             break
         case Elements.Tile.rawValue:
-            currentTileGid = 0
+            currentTileId = 0
             currentTileType = ""
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.tileLayers.last else {
@@ -291,7 +288,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     func parserDidEndDocument(_ parser: XMLParser) {
         elementPath.removeAll()
         currentParseString.removeAll()
-        currentTileGid = 0
+        currentTileId = 0
         currentTileType = ""
     }
     
