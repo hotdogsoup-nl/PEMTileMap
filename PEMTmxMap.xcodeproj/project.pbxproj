@@ -104,7 +104,7 @@
 		2014E98328168E6100A12253 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2014E98628169C4500A12253 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
 		2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLayoutHelper.swift; sourceTree = "<group>"; };
-		2037A5D328258C4800E13452 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXDemo.app; path = "PEMTmx Map Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2037A5D328258C4800E13452 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXDemo.app; path = "PEMTmx Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037A5D528258C4900E13452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		2037A5E028258C4900E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -124,12 +124,12 @@
 		205C86332823D8D800360A29 /* Objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridging-Header.h"; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		207D3DB02812AD5700FC4C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXMapDemo.app; path = "PEMTmx Map Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXMapDemo.app; path = "PEMTmx Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DB82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DBA2812AD5700FC4C77 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		207D3DBD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		207D3DC02812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXMapDemo.app; path = "PEMTmx Map Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		207D3DC62812AD5700FC4C77 /* PEMTmxMap Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DC82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */,
-				207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */,
+				207D3DC62812AD5700FC4C77 /* PEMTmxMap Demo.app */,
 				2037A5D328258C4800E13452 /* PEMTMXDemo.app */,
 			);
 			name = Products;
@@ -392,7 +392,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Dotty The Kangaroo macOS";
-			productReference = 207D3DC62812AD5700FC4C77 /* PEMTMXMapDemo.app */;
+			productReference = 207D3DC62812AD5700FC4C77 /* PEMTmxMap Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -715,14 +715,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "PEM TMX";
+				INFOPLIST_KEY_CFBundleDisplayName = "PEMTmxMap Demo";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxmapdemo";
-				PRODUCT_NAME = "PEMTmx Map";
+				PRODUCT_NAME = "PEMTmxMap Demo";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Demo/Objc-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -774,13 +774,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "PEM TMX";
+				INFOPLIST_KEY_CFBundleDisplayName = "PEMTmxMap Demo";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxmapdemo";
-				PRODUCT_NAME = "PEMTmx Map";
+				PRODUCT_NAME = "PEMTmxMap Demo";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "Demo/Objc-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -859,9 +859,8 @@
 				DEVELOPMENT_TEAM = 5ZQJBZ5NT4;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "PEM TMX";
+				INFOPLIST_KEY_CFBundleDisplayName = "PEMTmxMap Demo";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -888,9 +887,8 @@
 				DEVELOPMENT_TEAM = 5ZQJBZ5NT4;
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "PEM TMX";
+				INFOPLIST_KEY_CFBundleDisplayName = "PEMTmxMap Demo";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
