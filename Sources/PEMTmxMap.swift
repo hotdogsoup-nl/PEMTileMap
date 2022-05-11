@@ -215,9 +215,10 @@ class PEMTmxMap : SKNode {
     private func addLayers() {
         for tileLayer in tileLayers {
             if tileLayer.visible {
+                currentZPosition += zPositionLayerDelta
+
                 tileLayer.generateTiles(mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
                 tileLayer.zPosition = currentZPosition
-                currentZPosition += zPositionLayerDelta
                 
                 addChild(tileLayer)
             }
