@@ -1,22 +1,22 @@
 {
   "images" : [
     {
-      "filename" : "TopShelf-Wide.png",
+      "filename" : "tvosTopShelf-Wide.png",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
-      "filename" : "TopShelf-Wide@2x.png",
+      "filename" : "tvosTopShelf-Wide@2x.png",
       "idiom" : "tv",
       "scale" : "2x"
     },
     {
-      "filename" : "TopShelf-Wide copy.png",
+      "filename" : "tvosTopShelf-Wide copy.png",
       "idiom" : "tv-marketing",
       "scale" : "1x"
     },
     {
-      "filename" : "TopShelf-Wide@2x copy.png",
+      "filename" : "tvosTopShelf-Wide@2x copy.png",
       "idiom" : "tv-marketing",
       "scale" : "2x"
     }
