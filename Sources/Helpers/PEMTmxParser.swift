@@ -214,11 +214,11 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             
         // top level elements
         case Elements.Map.rawValue:
-            break
+            elementPath.removeLast()
         case Elements.TileSet.rawValue :
-            break
+            elementPath.removeLast()
         case Elements.Layer.rawValue:
-            break
+            elementPath.removeLast()
         case Elements.ObjectGroup.rawValue:
             break
         case Elements.ImageLayer.rawValue:
