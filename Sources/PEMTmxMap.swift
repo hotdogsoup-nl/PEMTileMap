@@ -198,6 +198,10 @@ class PEMTmxMap : SKNode {
 
         #if DEBUG
         print (self)
+        
+        for tileSet in tileSets {
+            print(tileSet)
+        }
         #endif
         
         // add tile layers
