@@ -141,4 +141,10 @@ class PEMTmxTileLayer : SKNode {
                                 y: mapHeightInPoints - (tile.coords!.y * tile.size.height + tile.size.height * 0.5))
         addChild(tile)
     }
+    
+    #if DEBUG
+    override var description: String {
+        return "PEMTmxTileLayer: \(layerId ?? "-"), (\(layerName ?? "-"))"
+    }
+    #endif
 }
