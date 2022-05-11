@@ -41,6 +41,7 @@ internal enum DataCompression : String {
 
 class PEMTmxMap : SKNode {
     private (set) var version : String?
+    private (set) var mapSource : String?
     private (set) var tiledversion : String?
 
     private (set) var mapSizeInTiles = CGSize.zero
@@ -106,6 +107,7 @@ class PEMTmxMap : SKNode {
             return nil
         }
         
+        mapSource = mapName
         self.baseZPosition = baseZPosition
         self.zPositionLayerDelta = zPositionLayerDelta
         self.textureFilteringMode = textureFilteringMode
@@ -235,6 +237,12 @@ class PEMTmxMap : SKNode {
 
         return Bundle.main.url(forResource: fileName, withExtension: fileExtension)
     }
+    
+    #if DEBUG
+    override var description: String {
+        return "PEMTmxMap: \(mapSource ?? "-") (layers: \(tileLayers.count), tileSets: \(tileSets.count))"
+    }
+    #endif
 }
 
 // MARK: - Helper functions
