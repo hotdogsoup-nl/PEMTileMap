@@ -203,6 +203,10 @@ class PEMTmxMap : SKNode {
     
     private func generateMap() {
         currentZPosition = baseZPosition
+
+        #if DEBUG
+        print (self)
+        #endif
         
         // add tile layers
         addLayers()
@@ -221,6 +225,10 @@ class PEMTmxMap : SKNode {
                 tileLayer.zPosition = currentZPosition
                 
                 addChild(tileLayer)
+                
+                #if DEBUG
+                print (tileLayer)
+                #endif
             }
         }
     }
