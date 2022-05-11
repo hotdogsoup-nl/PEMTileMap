@@ -1,3 +1,11 @@
+<p align="center">
+<a href="https://github.com/p-edge-media/PEMTmxMap"><img src="Demo/Assets.xcassets/logo.imageset/logo.png" height="100"/>
+<p align="center">
+<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-5.5-brightgreen.svg"></a>
+<a href="https://developer.apple.com/download/more/"><img src="https://img.shields.io/badge/Xcode-11.0-orange.svg"></a>
+<a href="https://www.apple.com"><img src="https://img.shields.io/badge/platforms-iOS%20%7C%20tvOS%20%7C%20macOS-red.svg"></a>
+</p>
+
 **PEMTmxMap** creates `SpriteKit` game maps from TMX Map files. [TMX Map files][tmx-map-url] can be created and edited with [Tiled][tiled-url].
 
 Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
