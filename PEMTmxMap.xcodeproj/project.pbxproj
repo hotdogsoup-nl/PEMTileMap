@@ -416,7 +416,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTmxMapDemo" */;
+			buildConfigurationList = 207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTmxMap" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -722,7 +722,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxmapdemo";
-				PRODUCT_NAME = "PEMTmx Map Demo";
+				PRODUCT_NAME = "PEMTmx Map";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Demo/Objc-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -780,7 +780,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.p-edge.pemtmxmapdemo";
-				PRODUCT_NAME = "PEMTmx Map Demo";
+				PRODUCT_NAME = "PEMTmx Map";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "Demo/Objc-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -917,7 +917,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTmxMapDemo" */ = {
+		207D3DAB2812AD5600FC4C77 /* Build configuration list for PBXProject "PEMTmxMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				207D3DD82812AD5700FC4C77 /* Debug */,
