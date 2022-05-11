@@ -26,6 +26,7 @@ class PEMTmxTileSet : NSObject {
     private var externalSource : String?
     private var tileAtlasImage : SKTexture?
     private var tileAtlasImageSize : CGSize?
+    private var tileAtlasImageSource : String?
     private var tileSetTileUnitSize : CGSize?
     private var tilesPerRow = UInt(0)
     private var tilesPerColumn = UInt(0)
@@ -94,6 +95,7 @@ class PEMTmxTileSet : NSObject {
         guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
         
         if let path = bundlePathForResource(source) {
+            tileAtlasImageSource = source
             tileAtlasImage = SKTexture(imageNamed: path)
             tileAtlasImageSize = tileAtlasImage?.size()
             tileSetTileUnitSize = CGSize(width: tileSizeInPoints.width / tileAtlasImageSize!.width, height: tileSizeInPoints.height / tileAtlasImageSize!.height)
@@ -106,7 +108,7 @@ class PEMTmxTileSet : NSObject {
                 print("PEMTmxMap: tileset <image> size mismatch: \(source)")
                 #endif
             }
-        }
+        }        
     }
         
     internal func tileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
@@ -160,4 +162,14 @@ class PEMTmxTileSet : NSObject {
 
         return Bundle.main.path(forResource: fileName, ofType: fileExtension)
     }
+    
+    #if DEBUG
+    override var description: String {
+        if tileAtlasImage != nil {
+            return "PEMTmxTileSet: \(name ?? "-"), (\(tileAtlasImageSource ?? "-"))"
+        }
+        
+        return "PEMTmxTileSet: \(name ?? "-"), (\(externalSource ?? "-"))"
+    }
+    #endif
 }
