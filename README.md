@@ -1,6 +1,8 @@
 **PEMTmxMap** creates `SpriteKit` game maps from TMX Map files. [TMX Map files][tmx-map-url] can be created and edited with [Tiled][tiled-url].
 
-Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs [SuperKoalio][superkoalio-url] project but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
+Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
+
+This project also contains the Demo game based on SuperKoalio to show an example of how to use the TMX Tile Map in a SpriteKit game.
 
 ## Features
 
