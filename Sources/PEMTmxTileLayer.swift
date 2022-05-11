@@ -63,7 +63,7 @@ class PEMTmxTileLayer : SKNode {
         if let value = attributes[ElementAttributes.ParallaxY.rawValue] {
             let valueString : NSString = value as NSString
             parallaxFactorY = CGFloat(valueString.doubleValue)
-        }
+        }        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -83,7 +83,6 @@ class PEMTmxTileLayer : SKNode {
     // MARK: - Map generation
 
     func generateTiles(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
-        
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
         
@@ -144,7 +143,7 @@ class PEMTmxTileLayer : SKNode {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileLayer: \(layerId ?? "-"), (\(layerName ?? "-"))"
+        return "PEMTmxTileLayer: \(layerId ?? "-"), (name: \(layerName ?? "-"), zPosition: \(zPosition))"
     }
     #endif
 }
