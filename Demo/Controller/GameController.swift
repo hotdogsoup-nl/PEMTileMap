@@ -56,22 +56,22 @@ public class GameController: NSObject, GameSceneDelegate {
     
     // MARK: - View
     
-    private func fitSceneToView(tilemap : JSTileMap, cameraNode: SKCameraNode, newSize: CGSize, portrait: Bool = false, transition: TimeInterval = 0) {
+    private func fitSceneToView(tilemap : PEMTmxMap, cameraNode: SKCameraNode, newSize: CGSize, portrait: Bool = false, transition: TimeInterval = 0) {
         if (!FIT_SCENE_TO_VIEW) {
             return
         }
-                
-        let mapsize = tilemap.mapSize
-        let maxWidthScale = newSize.width / mapsize.width
-        let maxHeightScale = newSize.height / mapsize.height
-        var contentScale : CGFloat = 1.0
-        
-        if portrait {
-            contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
-        } else {
-            contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
-        }
-
-        cameraNode.setScale(contentScale)
+//                
+//        let mapsize = tilemap.mapSize
+//        let maxWidthScale = newSize.width / mapsize.width
+//        let maxHeightScale = newSize.height / mapsize.height
+//        var contentScale : CGFloat = 1.0
+//        
+//        if portrait {
+//            contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
+//        } else {
+//            contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
+//        }
+//
+//        cameraNode.setScale(contentScale)
     }
 }

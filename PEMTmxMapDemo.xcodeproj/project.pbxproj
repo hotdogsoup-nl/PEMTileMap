@@ -38,7 +38,6 @@
 		2037A5EE28258DA500E13452 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* GameController.swift */; };
 		2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
 		2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
-		2037A5F128258DB000E13452 /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20562E0E282521C1005CE60A /* JSTileMap.m */; };
 		2037A5F528258DB500E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
 		2037A5F828258E0700E13452 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		2037A5FB28258E9E00E13452 /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
@@ -50,8 +49,6 @@
 		204097D0282A753300603024 /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204097CD282A753300603024 /* PEMTmxTile.swift */; };
 		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
-		20562E16282521C1005CE60A /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20562E0E282521C1005CE60A /* JSTileMap.m */; };
-		20562E17282521C1005CE60A /* JSTileMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20562E0E282521C1005CE60A /* JSTileMap.m */; };
 		20562E4F28252C00005CE60A /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
 		20562E5028252C00005CE60A /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
 		205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
@@ -111,8 +108,6 @@
 		2037A5FE2825B0DC00E13452 /* level2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level2.tmx; sourceTree = "<group>"; };
 		204097CD282A753300603024 /* PEMTmxTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTile.swift; sourceTree = "<group>"; };
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
-		20562E0D282521C1005CE60A /* JSTileMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTileMap.h; sourceTree = "<group>"; };
-		20562E0E282521C1005CE60A /* JSTileMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTileMap.m; sourceTree = "<group>"; };
 		20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileLayer.swift; sourceTree = "<group>"; };
 		20562E13282521C1005CE60A /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
 		20562E15282521C1005CE60A /* PEMTmxTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSet.swift; sourceTree = "<group>"; };
@@ -184,23 +179,6 @@
 			path = tvOS;
 			sourceTree = "<group>";
 		};
-		20562E0C282521C1005CE60A /* JSTileMap */ = {
-			isa = PBXGroup;
-			children = (
-				20562E0D282521C1005CE60A /* JSTileMap.h */,
-				20562E0E282521C1005CE60A /* JSTileMap.m */,
-			);
-			path = JSTileMap;
-			sourceTree = "<group>";
-		};
-		205C86102823D71A00360A29 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				20562E0C282521C1005CE60A /* JSTileMap */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
 		206E238B282667560039C4FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,7 +202,6 @@
 				20C9979028227A3400EEBDE0 /* Objects */,
 				20CA139C2818160800797A7C /* Controller */,
 				2014E98A28169C5300A12253 /* Helper */,
-				205C86102823D71A00360A29 /* Libraries */,
 				207D3DB02812AD5700FC4C77 /* Assets.xcassets */,
 				20CA158128181D8700797A7C /* Colors.xcassets */,
 				207D3DB72812AD5700FC4C77 /* iOS */,
@@ -517,7 +494,6 @@
 				2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */,
 				2037A5F528258DB500E13452 /* PEMTmxMap.swift in Sources */,
 				2037A5EE28258DA500E13452 /* GameController.swift in Sources */,
-				2037A5F128258DB000E13452 /* JSTileMap.m in Sources */,
 				204097D0282A753300603024 /* PEMTmxTile.swift in Sources */,
 				2037A5DE28258C4900E13452 /* GameViewController.swift in Sources */,
 				2037A5EC28258DA000E13452 /* GameScene.swift in Sources */,
@@ -542,7 +518,6 @@
 			files = (
 				2014E98728169C4500A12253 /* MathHelper.swift in Sources */,
 				2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
-				20562E16282521C1005CE60A /* JSTileMap.m in Sources */,
 				2037A5C9282587AB00E13452 /* PEMTmxMap.swift in Sources */,
 				204097CE282A753300603024 /* PEMTmxTile.swift in Sources */,
 				204662E0281BE8CF00F3635B /* Define.swift in Sources */,
@@ -568,7 +543,6 @@
 			files = (
 				2014E98828169C4500A12253 /* MathHelper.swift in Sources */,
 				2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
-				20562E17282521C1005CE60A /* JSTileMap.m in Sources */,
 				2037A5CE282587AC00E13452 /* PEMTmxMap.swift in Sources */,
 				204097CF282A753300603024 /* PEMTmxTile.swift in Sources */,
 				204662E1281BE8CF00F3635B /* Define.swift in Sources */,

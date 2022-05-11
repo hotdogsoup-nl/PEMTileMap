@@ -1,3 +1,6 @@
+import Foundation
+import zlib
+
 extension Data {
     /// Initialize with a value.
     init<T>(from value: T) {

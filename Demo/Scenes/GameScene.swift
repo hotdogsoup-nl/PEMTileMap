@@ -23,10 +23,9 @@ protocol GameSceneDelegate {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameSceneDelegate : GameSceneDelegate?
-    private var tilemapJS : JSTileMap?
     private var tilemapPEM : PEMTmxMap?
     
-    private var swapButton : SKSpriteNode
+    private var previousMapButton : SKSpriteNode
     private var nextMapButton : SKSpriteNode
     private var currentMapNameLabel : SKLabelNode
     private var currentMapIndex = Int(0)
@@ -42,41 +41,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var doorOpened = false
     
     private var door : SKSpriteNode?
-    private var spawnLayer : TMXLayer?
-    private var terrainLayer : TMXLayer?
+    private var spawnLayer : PEMTmxTileLayer?
+    private var terrainLayer : PEMTmxTileLayer?
     
     // MARK: - Init
     
     override init(size: CGSize) {
-        swapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
-        swapButton.position = CGPoint(x: size.width * 0.5 - swapButton.size.width * 0.6, y: size.height - swapButton.size.height * 0.5 - 10)
+        previousMapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
+        previousMapButton.position = CGPoint(x: size.width * 0.5 - previousMapButton.size.width * 0.6, y: size.height - previousMapButton.size.height * 0.5 - 10)
         
-        var buttonLabel = SKLabelNode(text: "Swap")
-        buttonLabel.fontSize = 16.0
+        var buttonLabel = SKLabelNode(text: "Previous")
+        buttonLabel.fontSize = 14.0
+        buttonLabel.fontName = "Courier"
         buttonLabel.verticalAlignmentMode = .center
         buttonLabel.position = CGPoint.zero
-        swapButton.addChild(buttonLabel)
-
+        previousMapButton.addChild(buttonLabel)
         
+        currentMapNameLabel = SKLabelNode(text: "...")
+        currentMapNameLabel.fontSize = 16.0
+        currentMapNameLabel.fontName = "Courier-Bold"
+        currentMapNameLabel.verticalAlignmentMode = .center
+        currentMapNameLabel.position = CGPoint(x: size.width * 0.5, y: previousMapButton.position.y - previousMapButton.size.height - currentMapNameLabel.calculateAccumulatedFrame().size.height * 0.5)
+
         nextMapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
         nextMapButton.position = CGPoint(x: size.width * 0.5 + nextMapButton.size.width * 0.6, y: size.height - nextMapButton.size.height * 0.5 - 10)
         
-        buttonLabel = SKLabelNode(text: "Next Map")
-        buttonLabel.fontSize = 16.0
+        buttonLabel = SKLabelNode(text: "Next")
+        buttonLabel.fontSize = 14.0
+        buttonLabel.fontName = "Courier"
         buttonLabel.verticalAlignmentMode = .center
         buttonLabel.position = CGPoint.zero
         nextMapButton.addChild(buttonLabel)
         
-        currentMapNameLabel = SKLabelNode(text: "...")
-        currentMapNameLabel.fontSize = 16.0
-        currentMapNameLabel.verticalAlignmentMode = .center
-        currentMapNameLabel.horizontalAlignmentMode = .right
-        currentMapNameLabel.position = CGPoint(x: size.width * 0.9 - currentMapNameLabel.calculateAccumulatedFrame().size.width * 0.5, y: nextMapButton.position.y)
-
         super.init(size: size)
         
         addChild(currentMapNameLabel)
-        addChild(swapButton)
+        addChild(previousMapButton)
         addChild(nextMapButton)
         
         startControl()
@@ -92,7 +92,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor(named: "Game-background")!
         
-        swapMap()
+        loadMapWithPEMTmxMap()
         initLayers()
         addSpawnObjects()
     }
@@ -102,54 +102,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // MARK: - Map
-    
-    private func swapMap() {
-        if tilemapPEM == nil {
-            loadMapWithPEMTmxMap()
-        } else {
-            loadMapWithJSTileMap()
+
+    private func previousMap() {
+        currentMapIndex = currentMapIndex - 1
+        if currentMapIndex < 0 {
+            currentMapIndex = maps.count - 1
         }
+        
+        loadMapWithPEMTmxMap()
     }
-    
+
     private func nextMap() {
         currentMapIndex = currentMapIndex + 1
         if currentMapIndex >= maps.count {
             currentMapIndex = 0
         }
         
-        if tilemapPEM == nil {
-            loadMapWithJSTileMap()
-        } else {
-            loadMapWithPEMTmxMap()
-        }
-    }
-    
-    private func loadMapWithJSTileMap() {
-        tilemapJS?.removeFromParent()
-        tilemapJS = nil
-
-        tilemapPEM?.removeFromParent()
-        tilemapPEM = nil
-        
-        let mapName = maps[currentMapIndex]
-        currentMapNameLabel.text = mapName
-
-        if let map = JSTileMap(named : mapName) {
-            backgroundColor = SKColor(named: "Game-background")!
-
-            tilemapJS = map
-            addChild(map)
-        } else {
-            #if DEBUG
-            print("could not load JSTileMap")
-            #endif
-        }
+        loadMapWithPEMTmxMap()
     }
     
     private func loadMapWithPEMTmxMap() {
-        tilemapJS?.removeFromParent()
-        tilemapJS = nil
-
         tilemapPEM?.removeFromParent()
         tilemapPEM = nil
         
@@ -170,13 +142,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func initLayers() {
         hideScreenLayoutLayer()
-        spawnLayer = tilemapJS?.layerNamed(LayerNameSpawn)
-        terrainLayer = tilemapJS?.layerNamed(LayerNameTerrain)
+//        spawnLayer = tilemapPEM.layerNamed(LayerNameSpawn)
+//        terrainLayer = tilemapPEM.layerNamed(LayerNameTerrain)
     }
     
     private func hideScreenLayoutLayer() {
-        let screenLayoutLayer = tilemapJS?.layerNamed(LayerNameScreenLayout)
-        screenLayoutLayer?.isHidden = !SHOW_SCREENLAYOUT_LAYER
+//        let screenLayoutLayer = tilemapJS?.layerNamed(LayerNameScreenLayout)
+//        screenLayoutLayer?.isHidden = !SHOW_SCREENLAYOUT_LAYER
     }
 
     // MARK: - Spawn
@@ -381,8 +353,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func touchDownAtPoint(_ pos: CGPoint) {
         let node = nodes(at: pos).first
         
-        if node == swapButton || node?.parent == swapButton {
-            swapMap()
+        if node == previousMapButton || node?.parent == previousMapButton {
+            previousMap()
             return
         }
         
@@ -404,7 +376,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func touchUpAtPoint(_ pos: CGPoint) {
         let node = nodes(at: pos).first
         
-        if node == swapButton || node?.parent == swapButton {
+        if node == previousMapButton || node?.parent == previousMapButton {
             return
         }
         

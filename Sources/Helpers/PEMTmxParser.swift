@@ -1,3 +1,5 @@
+import Foundation
+
 enum Elements : String {
     case None
     case Data = "data"
