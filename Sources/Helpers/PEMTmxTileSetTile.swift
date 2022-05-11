@@ -46,6 +46,16 @@ class PEMTmxTileSetTile : NSObject {
             return nil
         }
     }
+    
+    deinit {
+        #if DEBUG
+        #if os(macOS)
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(type(of: self))")
+        #endif
+        #endif
+    }
 
     // MARK: - Setup
     
