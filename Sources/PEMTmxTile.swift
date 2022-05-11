@@ -7,6 +7,8 @@ class PEMTmxTile : SKSpriteNode {
     var flippedVertically : Bool = false { didSet { updateFlip() } }
     var flippedDiagonally : Bool = false { didSet { updateFlip() } }
     
+    // MARK: - Init
+    
     deinit {
         #if DEBUG
         #if os(macOS)
@@ -16,6 +18,8 @@ class PEMTmxTile : SKSpriteNode {
         #endif
         #endif
     }
+    
+    // MARK: - Setup
     
     func updateFlip() {
         if (flippedDiagonally) {
@@ -46,6 +50,8 @@ class PEMTmxTile : SKSpriteNode {
             }
         }
     }
+    
+    // MARK: - Debug
     
     #if DEBUG
     override var description: String {

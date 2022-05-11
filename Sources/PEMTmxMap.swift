@@ -27,18 +27,6 @@ internal enum MapStaggerIndex : String {
     case Odd = "odd"
 }
 
-internal enum DataEncoding : String {
-    case Base64 = "base64"
-    case Csv = "csv"
-}
-
-internal enum DataCompression : String {
-    case None
-    case Gzip = "gzip"
-    case Zlib = "zlib"
-    case Zstd = "zstd"
-}
-
 class PEMTmxMap : SKNode {
     private (set) var version : String?
     private (set) var mapSource : String?
@@ -68,6 +56,8 @@ class PEMTmxMap : SKNode {
 
     internal var tileSets : [PEMTmxTileSet] = []
     internal var tileLayers : [PEMTmxTileLayer] = []
+    
+    // MARK: - Init
         
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -115,7 +105,9 @@ class PEMTmxMap : SKNode {
         generateMap()
     }
     
-    internal func parseAttributes(_ attributes: Dictionary<String, String>) {
+    // MARK: - Setup
+    
+    func parseAttributes(_ attributes: Dictionary<String, String>) {
         guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
         guard let tilewidth = attributes[ElementAttributes.TileWidth.rawValue] else { return }
@@ -199,7 +191,7 @@ class PEMTmxMap : SKNode {
         }
     }
     
-    // MARK: - Map generation
+    // MARK: - Public
     
     private func generateMap() {
         currentZPosition = baseZPosition
@@ -233,41 +225,11 @@ class PEMTmxMap : SKNode {
         }
     }
     
-    // MARK: - Private
-    
-    private func bundleURLForResource(_ resource: String) -> URL? {
-        var fileName = resource
-        var fileExtension : String?
-
-        if resource.range(of: ".") != nil {
-            fileName = (resource as NSString).deletingPathExtension
-            fileExtension = (resource as NSString).pathExtension
-        }
-
-        return Bundle.main.url(forResource: fileName, withExtension: fileExtension)
-    }
+    // MARK: - Debug
     
     #if DEBUG
     override var description: String {
         return "PEMTmxMap: \(mapSource ?? "-") (layers: \(tileLayers.count), tileSets: \(tileSets.count))"
     }
     #endif
-}
-
-// MARK: - Helper functions
-
-internal func tileAttributes(fromGid gid: UInt32) -> (gid: UInt32, flippedHorizontally: Bool, flippedVertically: Bool, flippedDiagonally: Bool) {
-    let flippedDiagonalFlag: UInt32   = 0x20000000
-    let flippedVerticalFlag: UInt32   = 0x40000000
-    let flippedHorizontalFlag: UInt32 = 0x80000000
-
-    let flippedAll = (flippedHorizontalFlag | flippedVerticalFlag | flippedDiagonalFlag)
-    let flippedMask = ~(flippedAll)
-
-    let flippedHorizontally: Bool = (gid & flippedHorizontalFlag) != 0
-    let flippedVertically: Bool = (gid & flippedVerticalFlag) != 0
-    let flippedDiagonally: Bool = (gid & flippedDiagonalFlag) != 0
-
-    let gid = gid & flippedMask
-    return (gid, flippedHorizontally, flippedVertically, flippedDiagonally)
 }

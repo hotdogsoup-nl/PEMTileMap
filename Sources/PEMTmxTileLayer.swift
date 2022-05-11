@@ -15,6 +15,8 @@ class PEMTmxTileLayer : SKNode {
     private (set) var parallaxFactorY = CGFloat(1)
     
     internal var tileData: [UInt32] = []
+    
+    // MARK: - Init
 
     init(attributes: Dictionary<String, String>) {
         super.init()
@@ -80,7 +82,7 @@ class PEMTmxTileLayer : SKNode {
         #endif
     }
     
-    // MARK: - Map generation
+    // MARK: - Public
 
     func generateTiles(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
@@ -119,6 +121,8 @@ class PEMTmxTileLayer : SKNode {
             }
         }
     }
+    
+    // MARK: - Private
 
     private func tileSetFor(gid: UInt32, tileSets: [PEMTmxTileSet]) -> PEMTmxTileSet? {
         for tileSet in tileSets {
@@ -140,6 +144,8 @@ class PEMTmxTileLayer : SKNode {
                                 y: mapHeightInPoints - (tile.coords!.y * tile.size.height + tile.size.height * 0.5))
         addChild(tile)
     }
+    
+    // MARK: - Debug
     
     #if DEBUG
     override var description: String {

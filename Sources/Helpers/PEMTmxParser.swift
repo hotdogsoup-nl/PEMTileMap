@@ -9,6 +9,7 @@ enum Elements : String {
     case ObjectGroup = "objectgroup"
     case Properties = "properties"
     case Template = "template"
+    case Tile = "tile"
     case TileSet = "tileset"
 }
 
@@ -49,6 +50,7 @@ enum ElementAttributes : String {
     case TileWidth = "tilewidth"
     case TintColor = "tintcolor"
     case Trans = "trans"
+    case TypeAttribute = "type" // "Type" is a reserved MetaType name so we use "TypeAttribute" instead
     case Version = "version"
     case Visible = "visible"
     case Width = "width"
@@ -57,13 +59,30 @@ enum ElementAttributes : String {
 }
 
 class PEMTmxParser : XMLParser, XMLParserDelegate {
+    enum DataEncoding : String {
+        case Base64 = "base64"
+        case Csv = "csv"
+    }
+
+    enum DataCompression : String {
+        case None
+        case Gzip = "gzip"
+        case Zlib = "zlib"
+        case Zstd = "zstd"
+    }
+    
     private weak var currentMap : PEMTmxMap?
     
     private var currentParseString : String = ""
     private var currentFirstGid = UInt32(0)
+    private var currentTileGid = UInt32(0)
+    private var currentTileType : String = ""
+    
     private var elementPath : [AnyObject] = []
     private var dataEncoding : DataEncoding?
     private var dataCompression = DataCompression.None
+    
+    // MARK: - Init
     
     init?(map: PEMTmxMap, fileURL: URL) {
         do {
@@ -99,7 +118,6 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        
         switch elementName {
             
         // top level elements
@@ -136,7 +154,30 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         // child elements
         case Elements.Image.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
-                currentElement.setTileAtlasImage(attributes: attributeDict)
+                if currentTileGid != 0 {
+                    print("found image inside tile")
+                    
+                    currentElement.addTileImage(attributes: attributeDict)
+                    break
+                }
+
+                currentElement.setSpriteSheetImage(attributes: attributeDict)
+                break
+            }
+
+            #if DEBUG
+            print("PEMTmxMap: unexpeced <\(elementName)> for \(String(describing: elementPath.last)).")
+            #endif
+            parser.abortParsing()
+        case Elements.Tile.rawValue:
+            if elementPath.last is PEMTmxTileSet {
+                if let value = attributeDict[ElementAttributes.Id.rawValue] {
+                    currentTileGid = UInt32(value)!
+                }
+                
+                if let value = attributeDict[ElementAttributes.TypeAttribute.rawValue] {
+                    currentTileType = value
+                }
                 break
             }
             
@@ -144,6 +185,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             print("PEMTmxMap: unexpeced <\(elementName)> for \(String(describing: elementPath.last)).")
             #endif
             parser.abortParsing()
+            break
         case Elements.Data.rawValue:
             if let value = attributeDict[ElementAttributes.Encoding.rawValue] {
                 if let encoding = DataEncoding(rawValue: value) {
@@ -171,7 +213,6 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        
         switch elementName {
             
         // top level elements
@@ -195,6 +236,9 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         // child elements
         case Elements.Image.rawValue:
             break
+        case Elements.Tile.rawValue:
+            currentTileGid = 0
+            currentTileType = ""
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.tileLayers.last else {
                 #if DEBUG
@@ -247,21 +291,23 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     func parserDidEndDocument(_ parser: XMLParser) {
         elementPath.removeAll()
         currentParseString.removeAll()
+        currentTileGid = 0
+        currentTileType = ""
     }
     
     // MARK: - Decoding data
 
-    fileprivate func decodeData(csv data: String) -> [UInt32] {
+    private func decodeData(csv data: String) -> [UInt32] {
         return cleanString(data).components(separatedBy: ",").map {UInt32($0)!}
     }
     
-    fileprivate func cleanString(_ string: String) -> String {
+    private func cleanString(_ string: String) -> String {
         var result = string.replacingOccurrences(of: "\n", with: "")
         result = result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         return result.replacingOccurrences(of: " ", with: "")
     }
     
-    fileprivate func decodeData(base64 data: String, compression: DataCompression = .None) -> [UInt32]? {
+    private func decodeData(base64 data: String, compression: DataCompression = .None) -> [UInt32]? {
         guard let decodedData = Data(base64Encoded: data, options: .ignoreUnknownCharacters) else {
             #if DEBUG
             print("PEMTmxMap: data is not base64 encoded.")
