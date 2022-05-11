@@ -31,9 +31,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var map : PEMTmxMap?
     private var cameraNode : SKCameraNode?
     
-    private var previousMapButton : SKSpriteNode
-    private var nextMapButton : SKSpriteNode
-    private var currentMapNameLabel : SKLabelNode
+    private var previousMapButton : SKShapeNode?
+    private var nextMapButton : SKShapeNode?
+    private var currentMapNameLabel : SKLabelNode?
     private var currentMapIndex = Int(0)
     private var maps = [
                         "level3.tmx",
@@ -53,39 +53,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Init
     
     override init(size: CGSize) {
+        super.init(size: size)
+
         cameraNode = SKCameraNode()
         cameraNode?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
 
-        previousMapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
-        previousMapButton.position = CGPoint(x: previousMapButton.size.width * -0.6, y: size.height * 0.5 - previousMapButton.size.height * 0.5 - 10)
-        cameraNode?.addChild(previousMapButton)
-
-        var buttonLabel = SKLabelNode(text: "Previous")
-        buttonLabel.fontSize = 14.0
-        buttonLabel.fontName = "Courier"
-        buttonLabel.verticalAlignmentMode = .center
-        buttonLabel.position = CGPoint.zero
-        previousMapButton.addChild(buttonLabel)
-        
-        currentMapNameLabel = SKLabelNode(text: "...")
-        currentMapNameLabel.fontSize = 16.0
-        currentMapNameLabel.fontName = "Courier-Bold"
-        currentMapNameLabel.verticalAlignmentMode = .center
-        currentMapNameLabel.position = CGPoint(x: 0, y: previousMapButton.position.y - previousMapButton.size.height - currentMapNameLabel.calculateAccumulatedFrame().size.height * 0.5)
-        cameraNode?.addChild(currentMapNameLabel)
-
-        nextMapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
-        nextMapButton.position = CGPoint(x: nextMapButton.size.width * 0.6, y: size.height * 0.5 - nextMapButton.size.height * 0.5 - 10)
-        cameraNode?.addChild(nextMapButton)
-
-        buttonLabel = SKLabelNode(text: "Next")
-        buttonLabel.fontSize = 14.0
-        buttonLabel.fontName = "Courier"
-        buttonLabel.verticalAlignmentMode = .center
-        buttonLabel.position = CGPoint.zero
-        nextMapButton.addChild(buttonLabel)
-        
-        super.init(size: size)
         addChild(cameraNode!)
         camera = cameraNode
         
@@ -102,6 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor(named: "Game-background")!
         
+        addHud()
         loadMap()
         initLayers()
         addSpawnObjects()
@@ -109,6 +82,53 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     deinit {
         print("deinit: \(self)")
+    }
+    
+    // MARK: - HUD
+    
+    private func addHud() {
+        let buttonSize = CGSize(width: 100.0, height: 30.0)
+        
+        #if os(iOS)
+        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: buttonSize.height * 0.2, height: buttonSize.height * 0.2)).cgPath
+        #else
+        let path = CGPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), cornerWidth: buttonSize.height * 0.2, cornerHeight: buttonSize.height * 0.2, transform: nil)
+        #endif
+        
+        previousMapButton = SKShapeNode.init(path: path)
+        previousMapButton?.fillColor = .red
+        previousMapButton?.lineWidth = buttonSize.height * 0.05
+        previousMapButton?.strokeColor = .white
+        previousMapButton?.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
+        cameraNode?.addChild(previousMapButton!)
+
+        var buttonLabel = SKLabelNode(text: "Previous")
+        buttonLabel.fontSize = 14.0
+        buttonLabel.fontName = "Courier"
+        buttonLabel.verticalAlignmentMode = .center
+        buttonLabel.position = CGPoint.zero
+        previousMapButton!.addChild(buttonLabel)
+        
+        currentMapNameLabel = SKLabelNode(text: "...")
+        currentMapNameLabel!.fontSize = 16.0
+        currentMapNameLabel!.fontName = "Courier-Bold"
+        currentMapNameLabel!.verticalAlignmentMode = .center
+        currentMapNameLabel!.position = CGPoint(x: 0, y: previousMapButton!.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5)
+        cameraNode?.addChild(currentMapNameLabel!)
+
+        nextMapButton = SKShapeNode.init(path: path)
+        nextMapButton?.fillColor = .red
+        nextMapButton?.lineWidth = buttonSize.height * 0.05
+        nextMapButton?.strokeColor = .white
+        nextMapButton?.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
+        cameraNode?.addChild(nextMapButton!)
+
+        buttonLabel = SKLabelNode(text: "Next")
+        buttonLabel.fontSize = 14.0
+        buttonLabel.fontName = "Courier"
+        buttonLabel.verticalAlignmentMode = .center
+        buttonLabel.position = CGPoint.zero
+        nextMapButton!.addChild(buttonLabel)
     }
     
     // MARK: - Map
@@ -136,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         map = nil
         
         let mapName = maps[currentMapIndex]
-        currentMapNameLabel.text = mapName
+        currentMapNameLabel?.text = mapName
 
         if let newMap = PEMTmxMap(mapName : mapName) {
             if newMap.backgroundColor != nil {
