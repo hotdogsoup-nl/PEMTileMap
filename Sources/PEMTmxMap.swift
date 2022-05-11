@@ -33,10 +33,12 @@ class PEMTmxMap : SKNode {
     private (set) var tiledversion : String?
 
     private (set) var mapSizeInTiles = CGSize.zero
+    private (set) var mapSizeInPoints = CGSize.zero
     private (set) var tileSizeInPoints = CGSize.zero
     private (set) var hexSideLengthInPoints = Int(0)
     private (set) var parallaxOriginInPoints = CGPoint.zero
-    
+    private (set) var currentZPosition = CGFloat(0)
+
     private (set) var backgroundColor : SKColor?
     private (set) var infinite = false
     
@@ -51,7 +53,6 @@ class PEMTmxMap : SKNode {
     private var textureFilteringMode = SKTextureFilteringMode.nearest
 
     private var baseZPosition = CGFloat(0)
-    private var currentZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
 
     internal var tileSets : [PEMTmxTileSet] = []
@@ -102,7 +103,7 @@ class PEMTmxMap : SKNode {
         self.zPositionLayerDelta = zPositionLayerDelta
         self.textureFilteringMode = textureFilteringMode
         
-        generateMap()
+        renderMap()
     }
     
     // MARK: - Setup
@@ -193,7 +194,7 @@ class PEMTmxMap : SKNode {
     
     // MARK: - Public
     
-    private func generateMap() {
+    private func renderMap() {
         currentZPosition = baseZPosition
 
         #if DEBUG
@@ -210,6 +211,8 @@ class PEMTmxMap : SKNode {
         // add image layers
         
         // add objects
+        
+        mapSizeInPoints = calculateAccumulatedFrame().size
     }
     
     private func addLayers() {

@@ -37,12 +37,8 @@ public class GameController: NSObject, GameSceneDelegate {
             
             currentScene = nextScene
 
-            let transition = SKTransition.doorsOpenVertical(withDuration: 0.3)
+            let transition = SKTransition.fade(withDuration: 0.3)
             view!.presentScene(nextScene, transition: transition)
-
-//            if let cameraNode = nextScene.camera, let tilemap = nextScene.tilemapJS {
-//                self.fitSceneToView(tilemap: tilemap, cameraNode: cameraNode, newSize: self.view!.bounds.size)
-//            }
         }
     }
     
@@ -52,26 +48,5 @@ public class GameController: NSObject, GameSceneDelegate {
     }
     
     func levelCompleted() {
-    }
-    
-    // MARK: - View
-    
-    private func fitSceneToView(tilemap : PEMTmxMap, cameraNode: SKCameraNode, newSize: CGSize, portrait: Bool = false, transition: TimeInterval = 0) {
-        if (!FIT_SCENE_TO_VIEW) {
-            return
-        }
-//                
-//        let mapsize = tilemap.mapSize
-//        let maxWidthScale = newSize.width / mapsize.width
-//        let maxHeightScale = newSize.height / mapsize.height
-//        var contentScale : CGFloat = 1.0
-//        
-//        if portrait {
-//            contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
-//        } else {
-//            contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
-//        }
-//
-//        cameraNode.setScale(contentScale)
     }
 }

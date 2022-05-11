@@ -4,26 +4,32 @@ let LayerNameScreenLayout = "ScreenLayout"
 let LayerNameTerrain = "Terrain"
 let LayerNameSpawn = "Spawn"
 
-enum TileQueryPosition : Int {
-    case AboveLeft
-    case Above
-    case AboveRight
-    case ToTheLeft
-    case AtCenter
-    case ToTheRight
-    case BelowLeft
-    case Below
-    case BelowRight
-}
-
 protocol GameSceneDelegate {
     func gameOver()
     func levelCompleted()
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    private enum CameraViewMode {
+        case AspectFit
+        case AspectFill
+    }
+    
+    private enum TileQueryPosition : Int {
+        case AboveLeft
+        case Above
+        case AboveRight
+        case ToTheLeft
+        case AtCenter
+        case ToTheRight
+        case BelowLeft
+        case Below
+        case BelowRight
+    }
+    
     var gameSceneDelegate : GameSceneDelegate?
-    private var tilemapPEM : PEMTmxMap?
+    private var map : PEMTmxMap?
+    private var cameraNode : SKCameraNode?
     
     private var previousMapButton : SKSpriteNode
     private var nextMapButton : SKSpriteNode
@@ -47,9 +53,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Init
     
     override init(size: CGSize) {
+        cameraNode = SKCameraNode()
+        cameraNode?.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+
         previousMapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
-        previousMapButton.position = CGPoint(x: size.width * 0.5 - previousMapButton.size.width * 0.6, y: size.height - previousMapButton.size.height * 0.5 - 10)
-        
+        previousMapButton.position = CGPoint(x: previousMapButton.size.width * -0.6, y: size.height * 0.5 - previousMapButton.size.height * 0.5 - 10)
+        cameraNode?.addChild(previousMapButton)
+
         var buttonLabel = SKLabelNode(text: "Previous")
         buttonLabel.fontSize = 14.0
         buttonLabel.fontName = "Courier"
@@ -61,11 +71,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         currentMapNameLabel.fontSize = 16.0
         currentMapNameLabel.fontName = "Courier-Bold"
         currentMapNameLabel.verticalAlignmentMode = .center
-        currentMapNameLabel.position = CGPoint(x: size.width * 0.5, y: previousMapButton.position.y - previousMapButton.size.height - currentMapNameLabel.calculateAccumulatedFrame().size.height * 0.5)
+        currentMapNameLabel.position = CGPoint(x: 0, y: previousMapButton.position.y - previousMapButton.size.height - currentMapNameLabel.calculateAccumulatedFrame().size.height * 0.5)
+        cameraNode?.addChild(currentMapNameLabel)
 
         nextMapButton = SKSpriteNode.init(color: .red, size: CGSize(width: 100, height: 30))
-        nextMapButton.position = CGPoint(x: size.width * 0.5 + nextMapButton.size.width * 0.6, y: size.height - nextMapButton.size.height * 0.5 - 10)
-        
+        nextMapButton.position = CGPoint(x: nextMapButton.size.width * 0.6, y: size.height * 0.5 - nextMapButton.size.height * 0.5 - 10)
+        cameraNode?.addChild(nextMapButton)
+
         buttonLabel = SKLabelNode(text: "Next")
         buttonLabel.fontSize = 14.0
         buttonLabel.fontName = "Courier"
@@ -74,10 +86,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nextMapButton.addChild(buttonLabel)
         
         super.init(size: size)
-        
-        addChild(currentMapNameLabel)
-        addChild(previousMapButton)
-        addChild(nextMapButton)
+        addChild(cameraNode!)
+        camera = cameraNode
         
         startControl()
     }
@@ -92,7 +102,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor(named: "Game-background")!
         
-        loadMapWithPEMTmxMap()
+        loadMap()
         initLayers()
         addSpawnObjects()
     }
@@ -109,7 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             currentMapIndex = maps.count - 1
         }
         
-        loadMapWithPEMTmxMap()
+        loadMap()
     }
 
     private func nextMap() {
@@ -118,23 +128,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             currentMapIndex = 0
         }
         
-        loadMapWithPEMTmxMap()
+        loadMap()
     }
     
-    private func loadMapWithPEMTmxMap() {
-        tilemapPEM?.removeFromParent()
-        tilemapPEM = nil
+    private func loadMap() {
+        map?.removeFromParent()
+        map = nil
         
         let mapName = maps[currentMapIndex]
         currentMapNameLabel.text = mapName
 
-        if let map = PEMTmxMap(mapName : mapName) {
-            if map.backgroundColor != nil {
-                backgroundColor = map.backgroundColor!
+        if let newMap = PEMTmxMap(mapName : mapName) {
+            if newMap.backgroundColor != nil {
+                backgroundColor = newMap.backgroundColor!
             }
             
-            tilemapPEM = map
-            addChild(map)
+            newMap.position = CGPoint(x: size.width * 0.5 - newMap.mapSizeInPoints.width * 0.5, y: size.height * 0.5 - newMap.mapSizeInPoints.height * 0.5)
+            addChild(newMap)
+            map = newMap
+            
+            cameraNode?.zPosition = newMap.currentZPosition + 1
+            
+            zoomCamera(viewMode: .AspectFit)
         }
     }
     
@@ -327,6 +342,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func gameOverSequence() {
         gameSceneDelegate?.gameOver()
+    }
+    
+    // MARK: - Camera
+    
+    private func zoomCamera(viewMode: CameraViewMode) {
+        if (!FIT_SCENE_TO_VIEW) {
+            return
+        }
+                
+        if let mapsize = map?.mapSizeInPoints {
+            let maxWidthScale = size.width / mapsize.width
+            let maxHeightScale = size.height / mapsize.height
+            var contentScale : CGFloat = 1.0
+            
+            switch viewMode {
+            case .AspectFit:
+                contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
+            case .AspectFill:
+                contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
+            }
+
+            camera?.setScale(1.0 / contentScale)
+        }
     }
     
     // MARK: - Coords
