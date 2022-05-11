@@ -1,8 +1,8 @@
 <p align="center">
 <a href="https://github.com/p-edge-media/PEMTmxMap"><img src="Demo/Assets.xcassets/logo.imageset/logo.png" height="100"/>
 <p align="center">
-<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-5.5-brightgreen.svg"></a>
-<a href="https://developer.apple.com/download/more/"><img src="https://img.shields.io/badge/Xcode-11.0-orange.svg"></a>
+<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-5-brightgreen.svg"></a>
+<a href="https://developer.apple.com/download/more/"><img src="https://img.shields.io/badge/Xcode-orange.svg"></a>
 <a href="https://www.apple.com"><img src="https://img.shields.io/badge/platforms-iOS%20%7C%20tvOS%20%7C%20macOS-red.svg"></a>
 </p>
 
