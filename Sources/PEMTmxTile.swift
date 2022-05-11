@@ -2,6 +2,7 @@ import SpriteKit
 
 class PEMTmxTile : SKSpriteNode {
     var coords : CGPoint?
+    var gid = UInt32(0)
     var flippedHorizontally : Bool = false { didSet { updateFlip() } }
     var flippedVertically : Bool = false { didSet { updateFlip() } }
     var flippedDiagonally : Bool = false { didSet { updateFlip() } }
@@ -45,4 +46,10 @@ class PEMTmxTile : SKSpriteNode {
             }
         }
     }
+    
+    #if DEBUG
+    override var description: String {
+        return "PEMTmxTile: \(gid), (\(Int(coords!.x)), \(Int(coords!.y)))"
+    }
+    #endif
 }

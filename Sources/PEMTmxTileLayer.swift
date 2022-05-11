@@ -101,12 +101,12 @@ class PEMTmxTileLayer : SKNode {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
                     
+                    tile.gid = tileAttributes.gid
                     tile.coords = CGPoint(x: CGFloat(x), y: CGFloat(y))
                     tile.flippedHorizontally = tileAttributes.flippedHorizontally
                     tile.flippedVertically = tileAttributes.flippedVertically
                     tile.flippedDiagonally = tileAttributes.flippedDiagonally
-                    tile.name = String(format: "PEMTmxTile - gid:%ld (%ld, %ld)", tileAttributes.gid, Int(tile.coords!.x), Int(tile.coords!.y))
-                    
+                                        
                     addTile(tile)
                 } else {
                     #if DEBUG
