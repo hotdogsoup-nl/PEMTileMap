@@ -29,7 +29,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var swapButton : SKSpriteNode
     private var nextMapButton : SKSpriteNode
     private var currentMapNameLabel : SKLabelNode
-    private var currentMapNumber = Int(2)
+    private var currentMapIndex = Int(0)
+    private var maps = [
+                        "level3.tmx",
+                        "level4.tmx",
+                        "level1.tmx",
+                        "level2.tmx",
+    ]
 
     private var player : Player?
     private var previousUpdateTime = TimeInterval(0)
@@ -106,9 +112,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func nextMap() {
-        currentMapNumber = currentMapNumber + 1
-        if currentMapNumber > 3 {
-            currentMapNumber = 1
+        currentMapIndex = currentMapIndex + 1
+        if currentMapIndex >= maps.count {
+            currentMapIndex = 0
         }
         
         if tilemapPEM == nil {
@@ -125,7 +131,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tilemapPEM?.removeFromParent()
         tilemapPEM = nil
         
-        let mapName = String(format: "level%ld.tmx", currentMapNumber)
+        let mapName = maps[currentMapIndex]
         currentMapNameLabel.text = mapName
 
         if let map = JSTileMap(named : mapName) {
@@ -147,7 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tilemapPEM?.removeFromParent()
         tilemapPEM = nil
         
-        let mapName = String(format: "level%ld.tmx", currentMapNumber)
+        let mapName = maps[currentMapIndex]
         currentMapNameLabel.text = mapName
 
         if let map = PEMTmxMap(mapName : mapName) {
