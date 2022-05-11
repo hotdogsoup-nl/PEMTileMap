@@ -2,7 +2,7 @@
 
 Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
 
-This project also contains the Demo game based on SuperKoalio to show an example of how to use the TMX Tile Map in a SpriteKit game.
+This project also contains a Demo game based on SuperKoalio to show an example of how to use the TMX Tile Map in a SpriteKit game.
 
 ## TMX Features
 
