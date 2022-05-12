@@ -3,6 +3,9 @@ import SpriteKit
 class PEMTmxTileSetTile : NSObject {
     private (set) var gid = UInt32(0)
     private (set) var textureImage : SKTexture?
+    private (set) var type : String?
+    private (set) var probability = UInt32(0)
+
     private var textureImageSize : CGSize?
     private var textureImageSource : String?
     private var format : String? // unsupported
@@ -11,25 +14,26 @@ class PEMTmxTileSetTile : NSObject {
 
     // MARK: - Init
     
+    /// Initialiser used when created from within a PEMTmxTileSet.
     init?(gid: UInt32, attributes: Dictionary<String, String>) {
-        super.init()
-        
         guard let width = attributes[ElementAttributes.Width.rawValue] else { return nil }
         guard let height = attributes[ElementAttributes.Height.rawValue] else { return nil }
-        guard let source = attributes[ElementAttributes.Source.rawValue] else { return nil }
+
+        super.init()
         
-        if let path = bundlePathForResource(source) {
-            self.gid = gid
+        self.gid = gid
+        if let tilewidth = attributes[ElementAttributes.TileWidth.rawValue],
+           let tileheight = attributes[ElementAttributes.TileHeight.rawValue] {
+            tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
+        }
+
+        if let source = attributes[ElementAttributes.Source.rawValue],
+           let path = bundlePathForResource(source) {
             textureImageSource = source
             textureImage = SKTexture(imageNamed: path)
             textureImageSize = textureImage?.size()
 
             format = attributes[ElementAttributes.Format.rawValue]
-
-            if let tilewidth = attributes[ElementAttributes.TileWidth.rawValue],
-               let tileheight = attributes[ElementAttributes.TileHeight.rawValue] {
-                tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
-            }
 
             if let value = attributes[ElementAttributes.Trans.rawValue] {
                 transparentColor = SKColor.init(hexString: value)
@@ -40,11 +44,18 @@ class PEMTmxTileSetTile : NSObject {
                 print("PEMTmxTileSetTile: tileset <image> size mismatch: \(source)")
                 #endif
             }
-            
-            print (self)
-        } else {
-            return nil
         }
+    }
+    
+    /// Initialiser used when created from within a PEMTmxTileSetSpriteSheet.
+    init?(gid: UInt32, texture: SKTexture, textureImageSource: String, tileSizeInPoints: CGSize) {
+        super.init()
+
+        self.gid = gid
+        self.tileSizeInPoints = tileSizeInPoints
+        self.textureImageSource = textureImageSource
+        textureImage = texture
+        textureImageSize = textureImage?.size()
     }
     
     deinit {
@@ -59,10 +70,16 @@ class PEMTmxTileSetTile : NSObject {
 
     // MARK: - Setup
     
-    // MARK: - Public
-    
-    // MARK: - Private
+    func addAttributes(_ attributes: Dictionary<String, String>) {
+        if let value = attributes[ElementAttributes.TypeAttribute.rawValue] {
+            type = value
+        }
 
+        if let value = attributes[ElementAttributes.Probability.rawValue] {
+            probability = UInt32(value)!
+        }
+    }
+    
     // MARK: - Debug
 
     #if DEBUG
