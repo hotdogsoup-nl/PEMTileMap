@@ -10,7 +10,7 @@
 
 Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
 
-I also have a modern Swift version of the SuperKoalio game, which uses PEMTmxMap to generate the map. [You can find it here][superkoalio-project-url]. 
+I also have a [modern Swift version of the SuperKoalio game][superkoalio-project-url], which uses PEMTmxMap to generate the map.
 
 ## TMX Features
 
@@ -55,5 +55,5 @@ I also have a modern Swift version of the SuperKoalio game, which uses PEMTmxMap
 [tmx-map-url]:https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#
 [tiled-url]:http://www.mapeditor.org
 [jstilemap-url]:https://github.com/slycrel/JSTileMap
-[superkoalio-project-url]:
+[superkoalio-project-url]:https://github.com/p-edge-media/PEMSuperKoalio
 [superkoalio-url]:https://www.raywenderlich.com/2554-sprite-kit-tutorial-how-to-make-a-platform-game-like-super-mario-brothers-part-1
