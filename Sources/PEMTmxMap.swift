@@ -108,7 +108,7 @@ class PEMTmxMap : SKNode {
     
     // MARK: - Setup
     
-    func parseAttributes(_ attributes: Dictionary<String, String>) {
+    func addAttributes(_ attributes: Dictionary<String, String>) {
         guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
         guard let tilewidth = attributes[ElementAttributes.TileWidth.rawValue] else { return }

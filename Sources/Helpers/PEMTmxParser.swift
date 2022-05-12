@@ -123,7 +123,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             
         // top level elements
         case Elements.Map.rawValue:
-            currentMap?.parseAttributes(attributeDict)
+            currentMap?.addAttributes(attributeDict)
             elementPath.append(self)
         case Elements.TileSet.rawValue :
             if let value = attributeDict[ElementAttributes.Source.rawValue] {
