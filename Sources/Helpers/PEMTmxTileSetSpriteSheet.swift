@@ -63,7 +63,7 @@ class PEMTmxTileSetSpriteSheet : NSObject {
     func generateTileSetTiles() -> [PEMTmxTileSetTile]? {
         var result : [PEMTmxTileSetTile] = []
         for gid in firstGid...lastGid {
-            if let newTile = createTile(gid: gid) {
+            if let newTile = createTileSetTile(gid: gid) {
                 result.append(newTile)
             }
         }
@@ -90,7 +90,7 @@ class PEMTmxTileSetSpriteSheet : NSObject {
     
     // MARK: - Private
     
-    private func createTile(gid: UInt32) -> PEMTmxTileSetTile? {
+    private func createTileSetTile(gid: UInt32) -> PEMTmxTileSetTile? {
         return PEMTmxTileSetTile(gid: gid, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
     }
     

@@ -68,7 +68,7 @@ class PEMTmxTileSet : NSObject {
                 objectAlignment = tileSetObjectAlignment
             } else {
                 #if DEBUG
-                print("PEMTmxMap: unsupported tileset object alignment: \(String(describing: value))")
+                print("PEMTmxTileSet: unsupported tileset object alignment: \(String(describing: value))")
                 #endif
             }
         }

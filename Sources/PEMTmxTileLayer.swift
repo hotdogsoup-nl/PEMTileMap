@@ -111,12 +111,12 @@ class PEMTmxTileLayer : SKNode {
                     addTile(tile)
                 } else {
                     #if DEBUG
-                    print("PEMTmxMap: no tile found with gid: \(tileAttributes.gid) in tileSet: \(tileSet)")
+                    print("PEMTmxTileLayer: no tile found with gid: \(tileAttributes.gid) in tileSet: \(tileSet)")
                     #endif
                 }
             } else {
                 #if DEBUG
-                print("PEMTmxMap: no tileSet found for tile with gid: \(tileAttributes.gid)")
+                print("PEMTmxTileLayer: no tileSet found for tile with gid: \(tileAttributes.gid)")
                 #endif
             }
         }

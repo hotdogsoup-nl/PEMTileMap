@@ -126,7 +126,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.TileSet.rawValue :
             if let value = attributeDict[ElementAttributes.Source.rawValue] {
                 #if DEBUG
-                print("PEMTmxMap: external tilesets are unsupported: \(value)")
+                print("PEMTmxParser: external tilesets are unsupported: \(value)")
                 #endif
                 parser.abortParsing()
                 return
@@ -163,7 +163,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
 
             #if DEBUG
-            print("PEMTmxMap: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
+            print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
             #endif
             parser.abortParsing()
         case Elements.Tile.rawValue:
@@ -180,7 +180,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
 //            }
             
             #if DEBUG
-            print("PEMTmxMap: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
+            print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
             #endif
             parser.abortParsing()
             break
@@ -190,7 +190,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                     dataEncoding = encoding
                 } else {
                     #if DEBUG
-                    print("PEMTmxMap: unsupported data encoding: \(String(describing: value))")
+                    print("PEMTmxParser: unsupported data encoding: \(String(describing: value))")
                     #endif
                     parser.abortParsing()
                 }
@@ -205,7 +205,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
         default:
             #if DEBUG
-            print("PEMTmxMap: unsupported TMX element name: <\(elementName)>")
+            print("PEMTmxParser: unsupported TMX element name: <\(elementName)>")
             #endif
         }
     }
@@ -239,7 +239,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.tileLayers.last else {
                 #if DEBUG
-                print("PEMTmxMap: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
+                print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
                 #endif
                 parser.abortParsing()
                 return
@@ -262,13 +262,13 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 }
             } else {
                 #if DEBUG
-                print("PEMTmxMap: could not decode layer data for layer: \(String(describing: tileLayer.layerName))")
+                print("PEMTmxParser: could not decode layer data for layer: \(String(describing: tileLayer.layerName))")
                 #endif
                 parser.abortParsing()
             }
         default:
             #if DEBUG
-            print("PEMTmxMap: unsupported TMX element name: <\(elementName)>")
+            print("PEMTmxParser: unsupported TMX element name: <\(elementName)>")
             #endif
         }
         
@@ -281,7 +281,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         #if DEBUG
-        print("PEMTmxMap: parseErrorOccurred: \(parseError)")
+        print("PEMTmxParser: parseErrorOccurred: \(parseError)")
         #endif
     }
     
@@ -305,7 +305,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     private func decodeData(base64 data: String, compression: DataCompression = .None) -> [UInt32]? {
         guard let decodedData = Data(base64Encoded: data, options: .ignoreUnknownCharacters) else {
             #if DEBUG
-            print("PEMTmxMap: data is not base64 encoded.")
+            print("PEMTmxParser: data is not base64 encoded.")
             #endif
             return nil
         }
@@ -317,7 +317,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 }
             case .Zstd:
                 #if DEBUG
-                print("PEMTmxMap: zstd compression is not supported.")
+                print("PEMTmxParser: zstd compression is not supported.")
                 #endif
                 return nil
             default:
