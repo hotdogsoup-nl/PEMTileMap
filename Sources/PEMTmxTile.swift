@@ -3,11 +3,26 @@ import SpriteKit
 class PEMTmxTile : SKSpriteNode {
     var coords : CGPoint?
     var gid = UInt32(0)
+    var type : String?
+    var probability = UInt32(0)
+    
     var flippedHorizontally : Bool = false { didSet { updateFlip() } }
     var flippedVertically : Bool = false { didSet { updateFlip() } }
     var flippedDiagonally : Bool = false { didSet { updateFlip() } }
     
     // MARK: - Init
+    
+    init?(tileSetTile: PEMTmxTileSetTile) {
+        super.init(texture: tileSetTile.textureImage, color: .clear, size: tileSetTile.textureImageSize!)
+        
+        gid = tileSetTile.gid
+        type = tileSetTile.type
+        probability = tileSetTile.probability
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     deinit {
         #if DEBUG

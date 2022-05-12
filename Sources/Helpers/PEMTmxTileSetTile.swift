@@ -3,10 +3,10 @@ import SpriteKit
 class PEMTmxTileSetTile : NSObject {
     private (set) var gid = UInt32(0)
     private (set) var textureImage : SKTexture?
+    private (set) var textureImageSize : CGSize?
     private (set) var type : String?
     private (set) var probability = UInt32(0)
-
-    private var textureImageSize : CGSize?
+    
     private var textureImageSource : String?
     private var format : String? // unsupported
     private var tileSizeInPoints = CGSize.zero
