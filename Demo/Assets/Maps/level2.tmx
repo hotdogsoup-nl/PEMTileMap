@@ -4,16 +4,7 @@
   <property name="prop1" value="0"/>
  </properties>
  <tileset firstgid="1" name="tileSet" tilewidth="16" tileheight="16" tilecount="256" columns="16">
-  <properties>
-   <property name="prop1" value="0"/>
-  </properties>
   <image source="Tiles/tileSet.png" width="256" height="256"/>
-  <tile id="67" type="tiletype?"/>
-  <tile id="127">
-   <properties>
-    <property name="prop1" value="question mark tile"/>
-   </properties>
-  </tile>
  </tileset>
  <layer id="1" name="Background" width="16" height="12">
   <properties>
