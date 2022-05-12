@@ -168,8 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             map = newMap
             
             cameraNode?.zPosition = newMap.currentZPosition + 1
-            
-            zoomCamera(viewMode: .AspectFit)
+            zoomCamera(viewMode: .AspectFit, factor:0.8)
         }
     }
     
@@ -366,7 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: - Camera
     
-    private func zoomCamera(viewMode: CameraViewMode) {
+    private func zoomCamera(viewMode: CameraViewMode, factor:CGFloat = 0.8) {
         if (!FIT_SCENE_TO_VIEW) {
             return
         }
@@ -383,7 +382,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
             }
 
-            camera?.setScale(1.0 / contentScale)
+            camera?.setScale(1.0 / contentScale / factor)
         }
     }
     
