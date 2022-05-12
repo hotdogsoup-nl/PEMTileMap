@@ -19,31 +19,17 @@ class PEMTmxTileSetSpriteSheet : NSObject {
     
     // MARK: - Init
     
-    init?(firstGid : UInt32, tileSizeInPoints : CGSize, marginInPoints : UInt, spacingInPoints : UInt) {
+    init?(firstGid : UInt32, tileSizeInPoints : CGSize, marginInPoints : UInt, spacingInPoints : UInt, attributes: Dictionary<String, String>) {
+        guard let width = attributes[ElementAttributes.Width.rawValue] else { return nil }
+        guard let height = attributes[ElementAttributes.Height.rawValue] else { return nil }
+        guard let source = attributes[ElementAttributes.Source.rawValue] else { return nil }
+
         super.init()
         
         self.firstGid = firstGid
         self.tileSizeInPoints = tileSizeInPoints
         self.marginInPoints = marginInPoints
         self.spacingInPoints = spacingInPoints
-    }
-    
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-    
-    // MARK: - Setup
-    
-    func parseAttributes(_ attributes: Dictionary<String, String>) {
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
-        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
         
         if let path = bundlePathForResource(source) {
             textureImageSource = source
@@ -62,9 +48,31 @@ class PEMTmxTileSetSpriteSheet : NSObject {
         }
     }
     
+    deinit {
+        #if DEBUG
+        #if os(macOS)
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(type(of: self))")
+        #endif
+        #endif
+    }
+        
     // MARK: - Public
     
-    func tileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
+    func generateTileSetTiles() -> [PEMTmxTileSetTile]? {
+        var result : [PEMTmxTileSetTile] = []
+        for gid in firstGid...lastGid {
+            if let newTile = createTile(gid: gid, textureFilteringMode: .nearest) {
+                result.append(newTile)
+            }
+        }
+        return result
+    }
+    
+    // MARK: - Private
+    
+    private func createTile(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTileSetTile? {
         let tileAttributes = tileAttributes(fromGid: gid)
         let textureGid = tileAttributes.gid - firstGid
         
@@ -79,10 +87,8 @@ class PEMTmxTileSetSpriteSheet : NSObject {
         let texture = SKTexture(rect: rect, in: textureImage!)
         texture.filteringMode = textureFilteringMode
         
-        return PEMTmxTile(texture: texture)
+        return PEMTmxTileSetTile(gid: gid, texture: texture, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
     }
-    
-    // MARK: - Private
     
     private func rowFrom(gid: UInt32) -> UInt {
         return UInt(gid) / tilesPerRow
