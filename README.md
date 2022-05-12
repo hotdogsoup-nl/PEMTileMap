@@ -10,7 +10,7 @@
 
 Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
 
-This project also contains a Demo game based on SuperKoalio to show an example of how to use the TMX Tile Map in a SpriteKit game.
+I also have a modern Swift version of the SuperKoalio game, which uses PEMTmxMap to generate the map. [You can find it here][superkoalio-project-url]. 
 
 ## TMX Features
 
@@ -52,19 +52,8 @@ This project also contains a Demo game based on SuperKoalio to show an example o
 - [ ] scroll using the TMX parallax properties
 - [ ] Touch, Mouse, Keyboard control
 
-## Superkoalio Demo Game Features
-- [ ] load map
-- [ ] spawn player on the map
-- [ ] collision detection
-- [ ] level completed, load next map
-- [ ] game over
-- [ ] sound & music with Audio Unit effects
-- [ ] input: touch screen control
-- [ ] input: keyboard and mouse
-- [ ] input: Apple TV remote controller
-- [ ] input: external game controllers
-
 [tmx-map-url]:https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#
 [tiled-url]:http://www.mapeditor.org
 [jstilemap-url]:https://github.com/slycrel/JSTileMap
-[superkoalio-url]:https://www.raywenderlich.com/2891-how-to-make-a-platform-game-like-super-mario-brothers-part-1
+[superkoalio-project-url]:
+[superkoalio-url]:https://www.raywenderlich.com/2554-sprite-kit-tutorial-how-to-make-a-platform-game-like-super-mario-brothers-part-1
