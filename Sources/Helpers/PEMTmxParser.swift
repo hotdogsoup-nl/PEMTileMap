@@ -40,6 +40,7 @@ enum ElementAttributes : String {
     case ParallaxY = "parallaxy"
     case ParallaxOriginX = "parallaxoriginx"
     case ParallaxOriginY = "parallaxoriginy"
+    case Probability = "probability"
     case RenderOrder = "renderorder"
     case Rows = "rows"
     case Source = "source"
@@ -76,9 +77,6 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     private weak var currentMap : PEMTmxMap?
     
     private var currentParseString : String = ""
-    private var currentTileId = UInt32(0)
-    private var currentTileType : String = ""
-    
     private var elementPath : [AnyObject] = []
     private var dataEncoding : DataEncoding?
     private var dataCompression = DataCompression.None
@@ -155,33 +153,34 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         // child elements
         case Elements.Image.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
-                if currentTileId != 0 {
-                    currentElement.addTileImage(id: currentTileId, attributes: attributeDict)
-                    break
-                }
+//                if currentTileId != 0 {
+//                    currentElement.addTileImage(id: currentTileId, attributes: attributeDict)
+//                    break
+//                }
 
                 currentElement.setSpriteSheetImage(attributes: attributeDict)
                 break
             }
 
             #if DEBUG
-            print("PEMTmxMap: unexpeced <\(elementName)> for \(String(describing: elementPath.last)).")
+            print("PEMTmxMap: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
             #endif
             parser.abortParsing()
         case Elements.Tile.rawValue:
-            if elementPath.last is PEMTmxTileSet {
-                if let value = attributeDict[ElementAttributes.Id.rawValue] {
-                    currentTileId = UInt32(value)!
-                }
-                
-                if let value = attributeDict[ElementAttributes.TypeAttribute.rawValue] {
-                    currentTileType = value
-                }
-                break
+            if let currentElement = elementPath.last as? PEMTmxTileSet {
+                currentElement.addTile(attributes: attributeDict)
             }
             
+            
+//            if elementPath.last is PEMTmxTileSet {
+//                if let value = attributeDict[ElementAttributes.Id.rawValue] {
+//                    currentTileId = UInt32(value)!
+//                }
+//                break
+//            }
+            
             #if DEBUG
-            print("PEMTmxMap: unexpeced <\(elementName)> for \(String(describing: elementPath.last)).")
+            print("PEMTmxMap: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
             #endif
             parser.abortParsing()
             break
@@ -236,8 +235,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Image.rawValue:
             break
         case Elements.Tile.rawValue:
-            currentTileId = 0
-            currentTileType = ""
+            break
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.tileLayers.last else {
                 #if DEBUG
@@ -290,8 +288,6 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     func parserDidEndDocument(_ parser: XMLParser) {
         elementPath.removeAll()
         currentParseString.removeAll()
-        currentTileId = 0
-        currentTileType = ""
     }
     
     // MARK: - Decoding data

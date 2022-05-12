@@ -103,13 +103,11 @@ class PEMTmxTileSet : NSObject {
         let tileGid = firstGid + UInt32(tileID)!
         
         if let existingTile = tileSetTileFor(gid: tileGid) {
-            print("update existing tile: \(existingTile)")
             existingTile.addAttributes(attributes)
             return
         }
 
         if let newTile = PEMTmxTileSetTile(gid: tileGid, attributes: attributes) {
-            print("new tile: \(newTile)")
             tiles.append(newTile)
         }
     }
@@ -119,7 +117,6 @@ class PEMTmxTileSet : NSObject {
 
         if bundlePathForResource(source) != nil {
             if let newTile = PEMTmxTileSetTile(gid: firstGid + id, attributes: attributes) {
-                print("add tile image: \(newTile)")
                 tiles.append(newTile)
             }
         }

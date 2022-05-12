@@ -98,7 +98,7 @@ class PEMTmxTileLayer : SKNode {
             let tileAttributes = tileAttributes(fromGid: tileIdFromData)
         
             if let tileSet = tileSetFor(gid: tileAttributes.gid, tileSets: tileSets) {
-                if let tile = tileSet.tileFor(gid: tileAttributes.gid, textureFilteringMode: textureFilteringMode) {
+                if let tile = tileSet.tileFor(gid: tileAttributes.gid) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
                     
