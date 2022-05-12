@@ -25,19 +25,12 @@ class PEMTmxTileSet : NSObject {
     private var externalSource : String?
     private var firstGid = UInt32(0)
     private var lastGid: UInt32 {
-        if spriteSheet != nil {
-            return spriteSheet!.lastGid
-        }
         return tiles.last?.gid ?? 0
     }
     private var gidRange: ClosedRange<UInt32> {
         return firstGid...lastGid
     }
-    
-    // spritesheet
-    private var spriteSheet : PEMTmxTileSetSpriteSheet?
-    
-    // tiles as separate images
+        
     private var tiles : [PEMTmxTileSetTile] = []
     
     // MARK: - Init
@@ -96,10 +89,28 @@ class PEMTmxTileSet : NSObject {
         guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
         
         if bundlePathForResource(source) != nil {
-            if let newSpriteSheet = PEMTmxTileSetSpriteSheet(firstGid: firstGid, tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints) {
-                newSpriteSheet.parseAttributes(attributes)
-                spriteSheet = newSpriteSheet
+            if let newSpriteSheet = PEMTmxTileSetSpriteSheet(firstGid: firstGid, tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
+                
+                if let newTiles = newSpriteSheet.generateTileSetTiles() {
+                    tiles.append(contentsOf: newTiles)
+                }
             }
+        }
+    }
+    
+    func addTile(attributes: Dictionary<String, String>) {
+        guard let tileID = attributes[ElementAttributes.Id.rawValue] else { return }
+        let tileGid = firstGid + UInt32(tileID)!
+        
+        if let existingTile = tileSetTileFor(gid: tileGid) {
+            print("update existing tile: \(existingTile)")
+            existingTile.addAttributes(attributes)
+            return
+        }
+
+        if let newTile = PEMTmxTileSetTile(gid: tileGid, attributes: attributes) {
+            print("new tile: \(newTile)")
+            tiles.append(newTile)
         }
     }
     
@@ -108,6 +119,7 @@ class PEMTmxTileSet : NSObject {
 
         if bundlePathForResource(source) != nil {
             if let newTile = PEMTmxTileSetTile(gid: firstGid + id, attributes: attributes) {
+                print("add tile image: \(newTile)")
                 tiles.append(newTile)
             }
         }
@@ -115,26 +127,22 @@ class PEMTmxTileSet : NSObject {
     
     // MARK: - Public
 
-    func tileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
-        if spriteSheet != nil {
-            return spriteSheet!.tileFor(gid: gid, textureFilteringMode: textureFilteringMode)
+    func tileFor(gid: UInt32) -> PEMTmxTile? {
+        if let tilesetTile = tiles.filter({ $0.gid == gid }).first {
+            return PEMTmxTile(tileSetTile: tilesetTile)
         }
         
-        return tileSetTileFor(gid: gid, textureFilteringMode: textureFilteringMode)
+        return nil
     }
-        
+    
     func contains(globalID gid: UInt32) -> Bool {
         return gidRange ~= gid
     }
     
     // MARK: - Private
     
-    private func tileSetTileFor(gid: UInt32, textureFilteringMode: SKTextureFilteringMode) -> PEMTmxTile? {
-        if let tile = tiles.filter({ $0.gid == gid }).first {
-            return PEMTmxTile(texture: tile.textureImage)
-        }
-        
-        return nil
+    private func tileSetTileFor(gid: UInt32) -> PEMTmxTileSetTile? {
+        return tiles.filter({ $0.gid == gid }).first
     }
     
     // MARK: - Debug
