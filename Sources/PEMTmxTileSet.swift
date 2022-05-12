@@ -22,6 +22,7 @@ class PEMTmxTileSet : NSObject {
     private (set) var spacingInPoints = UInt(0)
     private (set) var marginInPoints = UInt(0)
 
+    private var spriteSheet : PEMTmxTileSetSpriteSheet?
     private var externalSource : String?
     private var firstGid = UInt32(0)
     private var lastGid: UInt32 {
@@ -90,7 +91,7 @@ class PEMTmxTileSet : NSObject {
         
         if bundlePathForResource(source) != nil {
             if let newSpriteSheet = PEMTmxTileSetSpriteSheet(firstGid: firstGid, tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
-                
+                spriteSheet = newSpriteSheet
                 if let newTiles = newSpriteSheet.generateTileSetTiles() {
                     tiles.append(contentsOf: newTiles)
                 }
@@ -126,6 +127,10 @@ class PEMTmxTileSet : NSObject {
 
     func tileFor(gid: UInt32) -> PEMTmxTile? {
         if let tilesetTile = tiles.filter({ $0.gid == gid }).first {
+            if tilesetTile.usesSpriteSheet && tilesetTile.textureImage == nil {
+                tilesetTile.textureImage = spriteSheet?.generateTextureFor(tileSetTile: tilesetTile)
+            }
+            
             return PEMTmxTile(tileSetTile: tilesetTile)
         }
         

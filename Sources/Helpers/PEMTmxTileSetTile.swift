@@ -1,12 +1,14 @@
 import SpriteKit
 
 class PEMTmxTileSetTile : NSObject {
+    var textureImage : SKTexture?
+
     private (set) var gid = UInt32(0)
-    private (set) var textureImage : SKTexture?
-    private (set) var textureImageSize : CGSize?
     private (set) var type : String?
     private (set) var probability = UInt32(0)
-    
+
+    private (set) var usesSpriteSheet = false
+
     private var textureImageSource : String?
     private var format : String? // unsupported
     private var tileSizeInPoints = CGSize.zero
@@ -31,7 +33,7 @@ class PEMTmxTileSetTile : NSObject {
            let path = bundlePathForResource(source) {
             textureImageSource = source
             textureImage = SKTexture(imageNamed: path)
-            textureImageSize = textureImage?.size()
+            let textureImageSize = textureImage?.size()
 
             format = attributes[ElementAttributes.Format.rawValue]
 
@@ -45,17 +47,18 @@ class PEMTmxTileSetTile : NSObject {
                 #endif
             }
         }
+        
+        usesSpriteSheet = false
     }
     
     /// Initialiser used when created from within a PEMTmxTileSetSpriteSheet.
-    init?(gid: UInt32, texture: SKTexture, textureImageSource: String, tileSizeInPoints: CGSize) {
+    init?(gid: UInt32, textureImageSource: String, tileSizeInPoints: CGSize) {
         super.init()
-
+        
         self.gid = gid
         self.tileSizeInPoints = tileSizeInPoints
         self.textureImageSource = textureImageSource
-        textureImage = texture
-        textureImageSize = textureImage?.size()
+        usesSpriteSheet = true
     }
     
     deinit {
@@ -84,7 +87,7 @@ class PEMTmxTileSetTile : NSObject {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetTile: \(gid), (\(textureImageSource ?? "-"), \(Int(textureImageSize!.width)) x \(Int(textureImageSize!.height)))"
+        return "PEMTmxTileSetTile: \(gid), (\(textureImageSource ?? "-"))"
     }
     #endif
 }

@@ -13,11 +13,16 @@ class PEMTmxTile : SKSpriteNode {
     // MARK: - Init
     
     init?(tileSetTile: PEMTmxTileSetTile) {
-        super.init(texture: tileSetTile.textureImage, color: .clear, size: tileSetTile.textureImageSize!)
+        if let texture = tileSetTile.textureImage {
+            super.init(texture: texture, color: .clear, size: texture.size())
+            
+            gid = tileSetTile.gid
+            type = tileSetTile.type
+            probability = tileSetTile.probability
+            return
+        }
         
-        gid = tileSetTile.gid
-        type = tileSetTile.type
-        probability = tileSetTile.probability
+        return nil
     }
     
     required init?(coder aDecoder: NSCoder) {
