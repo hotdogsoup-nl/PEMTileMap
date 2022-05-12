@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxTileSetTile : NSObject {
+class PEMTmxTileSetTileData : NSObject {
     var textureImage : SKTexture?
 
     private (set) var gid = UInt32(0)
@@ -10,44 +10,16 @@ class PEMTmxTileSetTile : NSObject {
     private (set) var usesSpriteSheet = false
 
     private var textureImageSource : String?
-    private var format : String? // unsupported
     private var tileSizeInPoints = CGSize.zero
-    private var transparentColor : SKColor? // unsupported
 
     // MARK: - Init
     
     /// Initialiser used when created from within a PEMTmxTileSet.
     init?(gid: UInt32, attributes: Dictionary<String, String>) {
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return nil }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return nil }
-
         super.init()
         
         self.gid = gid
-        if let tilewidth = attributes[ElementAttributes.TileWidth.rawValue],
-           let tileheight = attributes[ElementAttributes.TileHeight.rawValue] {
-            tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
-        }
-
-        if let source = attributes[ElementAttributes.Source.rawValue],
-           let path = bundlePathForResource(source) {
-            textureImageSource = source
-            textureImage = SKTexture(imageNamed: path)
-            let textureImageSize = textureImage?.size()
-
-            format = attributes[ElementAttributes.Format.rawValue]
-
-            if let value = attributes[ElementAttributes.Trans.rawValue] {
-                transparentColor = SKColor.init(hexString: value)
-            }
-            
-            if textureImageSize!.width != CGFloat(Int(width)!) || textureImageSize!.height != CGFloat(Int(height)!) {
-                #if DEBUG
-                print("PEMTmxTileSetTile: tileset <image> size mismatch: \(source)")
-                #endif
-            }
-        }
-        
+        addAttributes(attributes)
         usesSpriteSheet = false
     }
     
@@ -80,6 +52,19 @@ class PEMTmxTileSetTile : NSObject {
 
         if let value = attributes[ElementAttributes.Probability.rawValue] {
             probability = UInt32(value)!
+        }
+    }
+    
+    func addTileImage(attributes: Dictionary<String, String>) {
+        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
+        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
+        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
+
+        tileSizeInPoints = CGSize(width: Int(width)!, height: Int(height)!)
+        
+        if let path = bundlePathForResource(source) {
+            textureImageSource = source
+            textureImage = SKTexture(imageNamed: path)
         }
     }
     

@@ -153,12 +153,12 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         // child elements
         case Elements.Image.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
-//                if currentTileId != 0 {
-//                    currentElement.addTileImage(id: currentTileId, attributes: attributeDict)
-//                    break
-//                }
-
                 currentElement.setSpriteSheetImage(attributes: attributeDict)
+                break
+            }
+            
+            if let currentElement = elementPath.last as? PEMTmxTileSetTileData {
+                currentElement.addTileImage(attributes: attributeDict)
                 break
             }
 
@@ -168,16 +168,11 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             parser.abortParsing()
         case Elements.Tile.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
-                currentElement.addTile(attributes: attributeDict)
+                if let tileSetTile = currentElement.addOrUpdateTileData(attributes: attributeDict) {
+                    elementPath.append(tileSetTile)
+                }
+                break
             }
-            
-            
-//            if elementPath.last is PEMTmxTileSet {
-//                if let value = attributeDict[ElementAttributes.Id.rawValue] {
-//                    currentTileId = UInt32(value)!
-//                }
-//                break
-//            }
             
             #if DEBUG
             print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
@@ -235,6 +230,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Image.rawValue:
             break
         case Elements.Tile.rawValue:
+            elementPath.removeLast()
             break
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.tileLayers.last else {

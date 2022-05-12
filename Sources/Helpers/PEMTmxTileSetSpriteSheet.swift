@@ -60,18 +60,18 @@ class PEMTmxTileSetSpriteSheet : NSObject {
         
     // MARK: - Public
     
-    func generateTileSetTiles() -> [PEMTmxTileSetTile]? {
-        var result : [PEMTmxTileSetTile] = []
+    func generateTileSetTileData() -> [PEMTmxTileSetTileData]? {
+        var result : [PEMTmxTileSetTileData] = []
         for gid in firstGid...lastGid {
-            if let newTile = createTileSetTile(gid: gid) {
+            if let newTile = createTileSetTileData(gid: gid) {
                 result.append(newTile)
             }
         }
         return result
     }
     
-    func generateTextureFor(tileSetTile: PEMTmxTileSetTile) -> SKTexture? {
-        let tileAttributes = tileAttributes(fromGid: tileSetTile.gid)
+    func generateTextureFor(tileSetTileData: PEMTmxTileSetTileData) -> SKTexture? {
+        let tileAttributes = tileAttributes(fromGid: tileSetTileData.gid)
         let textureGid = tileAttributes.gid - firstGid
         
         let spriteSheetCoords = CGPoint(x: Int(rowFrom(gid: textureGid)), y: Int(columnFrom(gid: textureGid)))
@@ -90,8 +90,8 @@ class PEMTmxTileSetSpriteSheet : NSObject {
     
     // MARK: - Private
     
-    private func createTileSetTile(gid: UInt32) -> PEMTmxTileSetTile? {
-        return PEMTmxTileSetTile(gid: gid, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
+    private func createTileSetTileData(gid: UInt32) -> PEMTmxTileSetTileData? {
+        return PEMTmxTileSetTileData(gid: gid, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
     }
     
     private func rowFrom(gid: UInt32) -> UInt {
