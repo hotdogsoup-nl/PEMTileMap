@@ -13,7 +13,7 @@ class PEMTmxTile : SKSpriteNode {
     // MARK: - Init
     
     init?(tileSetTileData: PEMTmxTileSetTileData) {
-        if let texture = tileSetTileData.textureImage {
+        if let texture = tileSetTileData.texture {
             super.init(texture: texture, color: .clear, size: texture.size())
             
             gid = tileSetTileData.gid

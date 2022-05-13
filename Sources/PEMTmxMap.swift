@@ -214,7 +214,7 @@ class PEMTmxMap : SKNode {
         #endif
         
         // add tile layers
-        addLayers()
+        renderLayers()
         
         // add image layers
         
@@ -223,7 +223,7 @@ class PEMTmxMap : SKNode {
         mapSizeInPoints = calculateAccumulatedFrame().size
     }
     
-    private func addLayers() {
+    private func renderLayers() {
         for tileLayer in tileLayers {
             if tileLayer.visible {
                 currentZPosition += zPositionLayerDelta

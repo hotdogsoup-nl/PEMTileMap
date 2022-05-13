@@ -1,7 +1,7 @@
 import SpriteKit
 
 class PEMTmxTileSetTileData : NSObject {
-    var textureImage : SKTexture?
+    var texture : SKTexture?
 
     private (set) var gid = UInt32(0)
     private (set) var type : String?
@@ -64,7 +64,7 @@ class PEMTmxTileSetTileData : NSObject {
         
         if let path = bundlePathForResource(source) {
             textureImageSource = source
-            textureImage = SKTexture(imageNamed: path)
+            texture = SKTexture(imageNamed: path)
         }
     }
     

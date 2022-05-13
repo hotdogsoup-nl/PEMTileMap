@@ -107,6 +107,7 @@ class PEMTmxTileLayer : SKNode {
                     tile.flippedHorizontally = tileAttributes.flippedHorizontally
                     tile.flippedVertically = tileAttributes.flippedVertically
                     tile.flippedDiagonally = tileAttributes.flippedDiagonally
+                    tile.texture?.filteringMode = textureFilteringMode
                                         
                     addTile(tile)
                 } else {

@@ -83,10 +83,7 @@ class PEMTmxTileSetSpriteSheet : NSObject {
         
         let rect = CGRect(x: columnInPoints, y: rowInPoints, width: tileUnitSize!.width, height: tileUnitSize!.height)
         
-        let texture = SKTexture(rect: rect, in: textureImage!)
-        texture.filteringMode = .nearest
-        
-        return texture
+        return SKTexture(rect: rect, in: textureImage!)
     }
     
     // MARK: - Private
