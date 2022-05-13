@@ -56,6 +56,9 @@
 		2041C830282EB4A600F584AF /* hotdogsoup-icon-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 2041C82F282EB4A600F584AF /* hotdogsoup-icon-full.png */; };
 		2041C831282EB4A600F584AF /* hotdogsoup-icon-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 2041C82F282EB4A600F584AF /* hotdogsoup-icon-full.png */; };
 		2041C832282EB4A600F584AF /* hotdogsoup-icon-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 2041C82F282EB4A600F584AF /* hotdogsoup-icon-full.png */; };
+		2041C834282EB4CE00F584AF /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2041C833282EB4CE00F584AF /* objecttemplate.tx */; };
+		2041C835282EB4CE00F584AF /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2041C833282EB4CE00F584AF /* objecttemplate.tx */; };
+		2041C836282EB4CE00F584AF /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2041C833282EB4CE00F584AF /* objecttemplate.tx */; };
 		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		20562E4F28252C00005CE60A /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
@@ -116,6 +119,7 @@
 		204097CD282A753300603024 /* PEMTmxTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTile.swift; sourceTree = "<group>"; };
 		2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxImageLayer.swift; sourceTree = "<group>"; };
 		2041C82F282EB4A600F584AF /* hotdogsoup-icon-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotdogsoup-icon-full.png"; sourceTree = "<group>"; };
+		2041C833282EB4CE00F584AF /* objecttemplate.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = objecttemplate.tx; sourceTree = "<group>"; };
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileLayer.swift; sourceTree = "<group>"; };
 		20562E13282521C1005CE60A /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				2037A5FE2825B0DC00E13452 /* level2.tmx */,
 				205BF6AC2826A95600077DB2 /* level3.tmx */,
 				2000FD3F282BCDC900699DAF /* level4.tmx */,
+				2041C833282EB4CE00F584AF /* objecttemplate.tx */,
 				205BF6A82826A85F00077DB2 /* Tiles */,
 			);
 			path = Maps;
@@ -442,6 +447,7 @@
 			files = (
 				2037A5E128258C4900E13452 /* Main.storyboard in Resources */,
 				205BF6AF2826A95600077DB2 /* level3.tmx in Resources */,
+				2041C836282EB4CE00F584AF /* objecttemplate.tx in Resources */,
 				2037A5EB28258D9D00E13452 /* Colors.xcassets in Resources */,
 				205BF6AB2826A85F00077DB2 /* Tiles in Resources */,
 				2000FD42282BCDC900699DAF /* level4.tmx in Resources */,
@@ -460,6 +466,7 @@
 			files = (
 				207D3DBE2812AD5700FC4C77 /* Main.storyboard in Resources */,
 				205BF6AD2826A95600077DB2 /* level3.tmx in Resources */,
+				2041C834282EB4CE00F584AF /* objecttemplate.tx in Resources */,
 				205BF6A92826A85F00077DB2 /* Tiles in Resources */,
 				2037A5FF2825B0DC00E13452 /* level2.tmx in Resources */,
 				2000FD40282BCDC900699DAF /* level4.tmx in Resources */,
@@ -481,6 +488,7 @@
 				2000FD45282BDB7400699DAF /* README.md in Resources */,
 				20CA158328181D8700797A7C /* Colors.xcassets in Resources */,
 				205BF6AE2826A95600077DB2 /* level3.tmx in Resources */,
+				2041C835282EB4CE00F584AF /* objecttemplate.tx in Resources */,
 				2041C831282EB4A600F584AF /* hotdogsoup-icon-full.png in Resources */,
 				207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */,
 				2000FD41282BCDC900699DAF /* level4.tmx in Resources */,
