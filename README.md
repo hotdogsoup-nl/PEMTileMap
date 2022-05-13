@@ -31,7 +31,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [ ] terraintypes and wangsets
 - [ ] object groups
 - [ ] object template files
-- [ ] image layers
+- [X] image layers
 - [ ] grouped layers
 - [X] layer tinting
 - [X] flipped tiles
