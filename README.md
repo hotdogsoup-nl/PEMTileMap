@@ -27,7 +27,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] embedded tile sets
 - [X] tilesets based on a tileset image
 - [X] tilesets based on a collection of images
-- [ ] external TSX tile sets
+- [X] external TSX tile sets
 - [ ] terraintypes and wangsets
 - [ ] object groups
 - [ ] object template files
@@ -45,7 +45,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] iOS (>13.6), macOS (>10.15), tvOS (>13.4)
 - [ ] watchOS support
 - [X] generates the TMX map as an `SKNode` with child elements as `SKNode` subclasses (eg. a tile as a `SKSpriteNode` etc.)
-- [X] supports both nearest neighbor and linear texture antialiasing
+- [ ] supports both nearest neighbor and linear texture antialiasing
 - [ ] access layers, tiles, objects
 - [ ] camera tilt and zoom
 - [ ] anti-tearing (removing tear lines between tiles)
