@@ -369,8 +369,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (!FIT_SCENE_TO_VIEW) {
             return
         }
+        
+        if factor <= 0.0 || factor > 1.0 {
+            return
+        }
                 
         if let mapsize = map?.mapSizeInPoints {
+            if mapsize.width == 0 || mapsize.height == 0 {
+                return
+            }
+            
             let maxWidthScale = size.width / mapsize.width
             let maxHeightScale = size.height / mapsize.height
             var contentScale : CGFloat = 1.0
