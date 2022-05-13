@@ -85,18 +85,20 @@ class PEMTmxMap : SKNode {
 
         if let url = bundleURLForResource(mapName),
            let parser = PEMTmxParser(map: self, fileURL: url) {
-                if (!parser.parse()) {
-                    #if DEBUG
-                    print("PEMTmxMap: Error parsing map: ", parser.parserError as Any)
-                    #endif
-                    return nil
-                }
+            if (!parser.parse()) {
+                #if DEBUG
+                print("PEMTmxMap: Error parsing map: ", parser.parserError as Any)
+                #endif
+                return nil
+            }
         } else {
             #if DEBUG
             print("PEMTmxMap: Map file not found: \(mapName)")
             #endif
             return nil
         }
+        
+        parseExternalFiles()
         
         mapSource = mapName
         self.baseZPosition = baseZPosition
@@ -192,7 +194,13 @@ class PEMTmxMap : SKNode {
         }
     }
     
-    // MARK: - Public
+    // MARK: - Private
+    
+    private func parseExternalFiles() {
+        for tileSet in tileSets {
+            tileSet.parseExternalTileSet()
+        }
+    }
     
     private func renderMap() {
         currentZPosition = baseZPosition
