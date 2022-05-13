@@ -35,6 +35,10 @@ class PEMTmxMap : SKNode {
     private (set) var mapSizeInTiles = CGSize.zero
     private (set) var mapSizeInPoints = CGSize.zero
     private (set) var tileSizeInPoints = CGSize.zero
+    var mapSizeInPointsFromTileSize : CGSize {
+        return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
+    }
+    
     private (set) var hexSideLengthInPoints = Int(0)
     private (set) var parallaxOriginInPoints = CGPoint.zero
     private (set) var currentZPosition = CGFloat(0)
@@ -56,7 +60,7 @@ class PEMTmxMap : SKNode {
     private var zPositionLayerDelta = CGFloat(20)
 
     internal var tileSets : [PEMTmxTileSet] = []
-    internal var tileLayers : [PEMTmxTileLayer] = []
+    internal var layers : [AnyObject] = []
     
     // MARK: - Init
         
@@ -224,19 +228,32 @@ class PEMTmxMap : SKNode {
     }
     
     private func renderLayers() {
-        for tileLayer in tileLayers {
-            if tileLayer.visible {
-                currentZPosition += zPositionLayerDelta
+        for layer in layers {
+            if let tileLayer = layer as? PEMTmxTileLayer {
+                if tileLayer.visible {
+                    currentZPosition += zPositionLayerDelta
 
-                tileLayer.generateTiles(mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
-                tileLayer.zPosition = currentZPosition
-                
-                addChild(tileLayer)
-                
-                #if DEBUG
-                print (tileLayer)
-                #endif
+                    tileLayer.render(mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
+                    tileLayer.zPosition = currentZPosition
+                    
+                    addChild(tileLayer)
+                }
             }
+            
+            if let imageLayer = layer as? PEMTmxImageLayer {
+                if imageLayer.visible {
+                    currentZPosition += zPositionLayerDelta
+                    
+                    imageLayer.render(mapSizeInPoints: mapSizeInPointsFromTileSize, textureFilteringMode:textureFilteringMode)
+                    imageLayer.zPosition = currentZPosition
+                    
+                    addChild(imageLayer)
+                }
+            }
+            
+            #if DEBUG
+            print (layer)
+            #endif
         }
     }
     
@@ -244,7 +261,7 @@ class PEMTmxMap : SKNode {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxMap: \(mapSource ?? "-") (layers: \(tileLayers.count), tileSets: \(tileSets.count))"
+        return "PEMTmxMap: \(mapSource ?? "-") (layers: \(layers.count), tileSets: \(tileSets.count))"
     }
     #endif
 }

@@ -42,6 +42,8 @@ enum ElementAttributes : String {
     case ParallaxOriginY = "parallaxoriginy"
     case Probability = "probability"
     case RenderOrder = "renderorder"
+    case RepeatX = "repeatx"
+    case RepeatY = "repeaty"
     case Rows = "rows"
     case Source = "source"
     case Spacing = "spacing"
@@ -162,12 +164,14 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
         case Elements.Layer.rawValue:
             let layer = PEMTmxTileLayer(attributes: attributeDict)
-            currentMap?.tileLayers.append(layer)
+            currentMap?.layers.append(layer)
             elementPath.append(layer)
         case Elements.ObjectGroup.rawValue:
             break
         case Elements.ImageLayer.rawValue:
-            break
+            let layer = PEMTmxImageLayer(attributes: attributeDict)
+            currentMap?.layers.append(layer)
+            elementPath.append(layer)
         case Elements.Group.rawValue:
             break
         case Elements.Properties.rawValue:
@@ -184,6 +188,11 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             
             if let currentElement = elementPath.last as? PEMTmxTileSetTileData {
                 currentElement.addTileImage(attributes: attributeDict)
+                break
+            }
+
+            if let currentElement = elementPath.last as? PEMTmxImageLayer {
+                currentElement.setImage(attributes: attributeDict)
                 break
             }
 
@@ -243,7 +252,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.ObjectGroup.rawValue:
             break
         case Elements.ImageLayer.rawValue:
-            break
+            elementPath.removeLast()
         case Elements.Group.rawValue:
             break
         case Elements.Properties.rawValue:
@@ -258,7 +267,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             elementPath.removeLast()
             break
         case Elements.Data.rawValue:
-            guard let tileLayer = currentMap?.tileLayers.last else {
+            guard let tileLayer = currentMap?.layers.last as? PEMTmxTileLayer else {
                 #if DEBUG
                 print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
                 #endif

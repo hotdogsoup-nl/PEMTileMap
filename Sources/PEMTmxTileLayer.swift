@@ -84,7 +84,7 @@ class PEMTmxTileLayer : SKNode {
     
     // MARK: - Public
 
-    func generateTiles(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
+    func render(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
         
@@ -108,8 +108,16 @@ class PEMTmxTileLayer : SKNode {
                     tile.flippedVertically = tileAttributes.flippedVertically
                     tile.flippedDiagonally = tileAttributes.flippedDiagonally
                     tile.texture?.filteringMode = textureFilteringMode
+                    
+                    if tintColor != nil {
+                        tile.color = tintColor!
+                        tile.colorBlendFactor = 1.0
+                    }
+                    
+                    let mapHeightInPoints = sizeInTiles.height * tile.size.height
+                    tile.position = CGPoint(x: tile.coords!.x * tile.size.width + tile.size.width * 0.5, y: mapHeightInPoints - (tile.coords!.y * tile.size.height + tile.size.height * 0.5))
                                         
-                    addTile(tile)
+                    addChild(tile)
                 } else {
                     #if DEBUG
                     print("PEMTmxTileLayer: no tile found with gid: \(tileAttributes.gid) in tileSet: \(tileSet)")
@@ -132,18 +140,6 @@ class PEMTmxTileLayer : SKNode {
             }
         }
         return nil
-    }
-    
-    private func addTile(_ tile: PEMTmxTile) {
-        if tintColor != nil {
-            tile.color = tintColor!
-            tile.colorBlendFactor = 1.0
-        }
-        
-        let mapHeightInPoints = sizeInTiles.height * tile.size.height
-        tile.position = CGPoint(x: tile.coords!.x * tile.size.width + tile.size.width * 0.5,
-                                y: mapHeightInPoints - (tile.coords!.y * tile.size.height + tile.size.height * 0.5))
-        addChild(tile)
     }
     
     // MARK: - Debug
