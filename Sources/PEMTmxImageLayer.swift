@@ -103,7 +103,7 @@ class PEMTmxImageLayer : SKSpriteNode {
             if repeatX || repeatY {
                 if repeatX {
                     let horCanvas = SKNode()
-                    for index in 0...Int(mapSizeInPoints.width / size.width - 1) {
+                    for index in 0...Int(mapSizeInPoints.width / size.width - 0.5) {
                         let tile = SKSpriteNode(texture: atexture, size: size)
                         tile.position = CGPoint(x: index * Int(size.width), y: 0)
                         horCanvas.addChild(tile)
@@ -119,7 +119,7 @@ class PEMTmxImageLayer : SKSpriteNode {
             
                 if repeatY {
                     let verCanvas = SKNode()
-                    for index in 0...Int(mapSizeInPoints.height / size.height - 1) {
+                    for index in 0...Int(mapSizeInPoints.height / size.height - 0.5) {
                         let tile = SKSpriteNode(texture: atexture, size: size)
                         tile.position = CGPoint(x: 0, y: index * Int(size.height))
                         verCanvas.addChild(tile)
