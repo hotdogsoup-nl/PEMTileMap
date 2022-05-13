@@ -22,8 +22,8 @@ class PEMTmxTileSet : NSObject {
     private (set) var spacingInPoints = UInt(0)
     private (set) var marginInPoints = UInt(0)
 
-    private var spriteSheet : PEMTmxTileSetSpriteSheet?
     private var externalSource : String?
+    private var spriteSheet : PEMTmxTileSetSpriteSheet?
     private var firstGid = UInt32(0)
     private var lastGid = UInt32(0)
     private var gidRange: ClosedRange<UInt32> {
@@ -34,15 +34,33 @@ class PEMTmxTileSet : NSObject {
     
     // MARK: - Init
     
-    init(attributes: Dictionary<String, String>) {
+    init?(attributes: Dictionary<String, String>) {
+        guard let firstGid = attributes[ElementAttributes.FirstGid.rawValue] else { return nil }
+
         super.init()
 
-        if let value = attributes[ElementAttributes.FirstGid.rawValue] {
-            firstGid = UInt32(value)!
-            lastGid = firstGid
-        }
+        self.firstGid = UInt32(firstGid)!
+        self.lastGid = self.firstGid
 
         externalSource = attributes[ElementAttributes.Source.rawValue]
+        if externalSource == nil {
+            addAttributes(attributes)
+        }
+    }
+    
+    deinit {
+        #if DEBUG
+        #if os(macOS)
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(type(of: self))")
+        #endif
+        #endif
+    }
+    
+    // MARK: - Setup
+    
+    func addAttributes(_ attributes: Dictionary<String, String>) {
         name = attributes[ElementAttributes.Name.rawValue]
 
         if let tilewidth = attributes[ElementAttributes.TileWidth.rawValue],
@@ -72,18 +90,6 @@ class PEMTmxTileSet : NSObject {
             }
         }
     }
-    
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-    
-    // MARK: - Setup
     
     func setSpriteSheetImage(attributes: Dictionary<String, String>) {
         guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
@@ -127,6 +133,27 @@ class PEMTmxTileSet : NSObject {
     }
     
     // MARK: - Public
+    
+    func parseExternalTileSet() {
+        if externalSource == nil {
+            return
+        }
+        
+        if let url = bundleURLForResource(externalSource!),
+           let parser = PEMTmxParser(tileSet: self, fileURL: url) {
+            if (!parser.parse()) {
+                #if DEBUG
+                print("PEMTmxTileSet: Error parsing external tileset: ", parser.parserError as Any)
+                #endif
+                return
+            }
+        } else {
+            #if DEBUG
+            print("PEMTmxTileSet: External tileset file not found: \(externalSource ?? "-")")
+            #endif
+            return
+        }
+    }
 
     func tileFor(gid: UInt32) -> PEMTmxTile? {
         if let tilesetTileData = tileData.filter({ $0.gid == gid }).first {
@@ -161,7 +188,7 @@ class PEMTmxTileSet : NSObject {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSet: \(name ?? "-"), (firstGid: \(firstGid), lastGid: \(lastGid))"
+        return "PEMTmxTileSet: \(name ?? "-"), (file: \(externalSource ?? "-"), firstGid: \(firstGid), lastGid: \(lastGid))"
     }
     #endif
 }
