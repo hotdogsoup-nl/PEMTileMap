@@ -74,8 +74,15 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Zstd = "zstd"
     }
     
-    private weak var currentMap : PEMTmxMap?
+    enum ParseFileType {
+        case Tmx
+        case Tsx
+    }
     
+    private weak var currentMap : PEMTmxMap?
+    private weak var currentTileSet : PEMTmxTileSet?
+
+    private var currentFileType : ParseFileType
     private var currentParseString : String = ""
     private var elementPath : [AnyObject] = []
     private var dataEncoding : DataEncoding?
@@ -84,6 +91,9 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     // MARK: - Init
     
     init?(map: PEMTmxMap, fileURL: URL) {
+        currentFileType = .Tmx
+        currentMap = map
+
         do {
             let data = try Data(contentsOf:fileURL)
             super.init(data: data)
@@ -92,12 +102,28 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             return nil
         }
 
-        currentMap = map
         delegate = self
-        
         shouldProcessNamespaces = false
         shouldReportNamespacePrefixes = false
         shouldResolveExternalEntities = false        
+    }
+    
+    init?(tileSet: PEMTmxTileSet, fileURL: URL) {
+        currentFileType = .Tsx
+        currentTileSet = tileSet
+
+        do {
+            let data = try Data(contentsOf:fileURL)
+            super.init(data: data)
+        }
+        catch {
+            return nil
+        }
+
+        delegate = self
+        shouldProcessNamespaces = false
+        shouldReportNamespacePrefixes = false
+        shouldResolveExternalEntities = false
     }
     
     deinit {
@@ -124,17 +150,16 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             currentMap?.addAttributes(attributeDict)
             elementPath.append(self)
         case Elements.TileSet.rawValue :
-            if let value = attributeDict[ElementAttributes.Source.rawValue] {
-                #if DEBUG
-                print("PEMTmxParser: external tilesets are unsupported: \(value)")
-                #endif
-                parser.abortParsing()
-                return
+            switch currentFileType {
+            case .Tmx:
+                if let tileSet = PEMTmxTileSet(attributes: attributeDict) {
+                    currentMap?.tileSets.append(tileSet)
+                    elementPath.append(tileSet)
+                }
+            case .Tsx:
+                currentTileSet?.addAttributes(attributeDict)
+                elementPath.append(currentTileSet!)
             }
-            
-            let tileSet = PEMTmxTileSet(attributes: attributeDict)
-            currentMap?.tileSets.append(tileSet)
-            elementPath.append(tileSet)
         case Elements.Layer.rawValue:
             let layer = PEMTmxTileLayer(attributes: attributeDict)
             currentMap?.tileLayers.append(layer)
