@@ -122,13 +122,13 @@ class PEMTmxTileLayer : SKNode {
                         var frameTiles: Dictionary<UInt32, SKTexture> = [:]
                         
                         for animationFrame in tile.animation!.frames {
-                            print(animationFrame)
-                            
-                            if let frameTile = tileSet.tileFor(gid: animationFrame.tileId) {
+                            if let frameTile = tileSet.tileFor(id: animationFrame.tileId) {
+                                frameTile.texture?.filteringMode = textureFilteringMode
                                 frameTiles[animationFrame.tileId] = frameTile.texture
                             }
                         }
                         
+                        tile.startAnimation(frameTiles: frameTiles)
                     }
                 } else {
                     #if DEBUG

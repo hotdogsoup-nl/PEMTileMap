@@ -157,7 +157,11 @@ class PEMTmxTileSet : NSObject {
     }
 
     func tileFor(gid: UInt32) -> PEMTmxTile? {
-        if let tilesetTileData = tileData.filter({ $0.id == gid - firstGid }).first {
+        return tileFor(id: gid - firstGid)
+    }
+    
+    func tileFor(id: UInt32) -> PEMTmxTile? {
+        if let tilesetTileData = tileData.filter({ $0.id == id }).first {
             if tilesetTileData.usesSpriteSheet && tilesetTileData.texture == nil {
                 tilesetTileData.texture = spriteSheet?.generateTextureFor(tileSetTileData: tilesetTileData)
             }
@@ -165,7 +169,7 @@ class PEMTmxTileSet : NSObject {
             return PEMTmxTile(tileSetTileData: tilesetTileData)
         }
         
-        if let newTileData = spriteSheet?.createTileSetTileData(id: gid - firstGid) {
+        if let newTileData = spriteSheet?.createTileSetTileData(id: id) {
             newTileData.texture = spriteSheet?.generateTextureFor(tileSetTileData: newTileData)
             tileData.append(newTileData)
             

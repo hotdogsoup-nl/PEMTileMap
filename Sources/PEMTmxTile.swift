@@ -72,6 +72,29 @@ class PEMTmxTile : SKSpriteNode {
         }
     }
     
+    // MARK: - Public
+    
+    func startAnimation(frameTiles: Dictionary<UInt32, SKTexture>) {
+        if animation == nil {
+            return
+        }
+        
+        if frameTiles.count == 0 {
+            return
+        }
+        
+        var actions : [SKAction] = []
+                
+        for frame in animation!.frames {
+            if let texture = frameTiles[frame.tileId] {
+                actions.append(SKAction.setTexture(texture))
+                actions.append(SKAction.wait(forDuration: Double(frame.duration) / 1000))
+            }
+        }
+        
+        run(SKAction.repeatForever(SKAction.sequence(actions)))
+    }
+    
     // MARK: - Debug
     
     #if DEBUG
