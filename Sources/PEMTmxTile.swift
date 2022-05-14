@@ -75,7 +75,7 @@ class PEMTmxTile : SKSpriteNode {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTile: \(gid), (\(Int(coords!.x)), \(Int(coords!.y)))"
+        return "PEMTmxTile: \(gid), type: \(type ?? "-"), (\(Int(coords!.x)), \(Int(coords!.y)))"
     }
     #endif
 }

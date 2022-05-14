@@ -72,7 +72,7 @@ class PEMTmxTileSetTileData : NSObject {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetTile: \(gid), (\(textureImageSource ?? "-"))"
+        return "PEMTmxTileSetTileData: \(gid), (\(textureImageSource ?? "-"))"
     }
     #endif
 }
