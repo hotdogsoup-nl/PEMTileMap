@@ -2,7 +2,9 @@ import Foundation
 
 enum Elements : String {
     case None
+    case Animation = "animation"
     case Data = "data"
+    case Frame = "frame"
     case Group = "group"
     case Image = "image"
     case ImageLayer = "imagelayer"
@@ -20,6 +22,7 @@ enum ElementAttributes : String {
     case Columns = "columns"
     case Compression = "compression"
     case CompressionLevel = "compressionlevel"
+    case Duration = "duration"
     case Encoding = "encoding"
     case FirstGid = "firstgid"
     case Format = "format"
@@ -50,6 +53,7 @@ enum ElementAttributes : String {
     case StaggerAxis = "staggeraxis"
     case StaggerIndex = "staggerindex"
     case TileCount = "tilecount"
+    case TileId = "tileid"
     case TiledVersion = "tiledversion"
     case TileHeight = "tileheight"
     case TileWidth = "tilewidth"
@@ -198,17 +202,26 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.Tile.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
-                if let tileSetTile = currentElement.addOrUpdateTileData(attributes: attributeDict) {
-                    elementPath.append(tileSetTile)
+                if let tileSetTileData = currentElement.addOrUpdateTileData(attributes: attributeDict) {
+                    elementPath.append(tileSetTileData)
                 }
                 break
             }
-            
-            #if DEBUG
-            print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
-            #endif
-            parser.abortParsing()
-            break
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.Animation.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxTileSetTileData {
+                if let animation = currentElement.addAnimation() {
+                    elementPath.append(animation)
+                }
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.Frame.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxTileSetTileDataAnimation {
+                currentElement.addAnimationFrame(attributes: attributeDict)
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.Data.rawValue:
             if let value = attributeDict[ElementAttributes.Encoding.rawValue] {
                 if let encoding = DataEncoding(rawValue: value) {
@@ -287,6 +300,8 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
+        case Elements.Frame.rawValue:
+            break
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.layers.last as? PEMTmxTileLayer else {
                 abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)

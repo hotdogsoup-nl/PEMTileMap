@@ -6,6 +6,12 @@ class PEMTmxTile : SKSpriteNode {
     var flippedHorizontally : Bool = false { didSet { updateFlip() } }
     var flippedVertically : Bool = false { didSet { updateFlip() } }
     var flippedDiagonally : Bool = false { didSet { updateFlip() } }
+
+    private (set) var animation : PEMTmxTileSetTileDataAnimation?
+
+    private var type : String?
+    private var probability = UInt32(0)
+
     // MARK: - Init
     
     init?(tileSetTileData: PEMTmxTileSetTileData) {
@@ -15,6 +21,8 @@ class PEMTmxTile : SKSpriteNode {
             id = tileSetTileData.id
             type = tileSetTileData.type
             probability = tileSetTileData.probability
+            
+            animation = tileSetTileData.animation
             return
         }
         

@@ -119,6 +119,19 @@ class PEMTmxTileLayer : SKNode {
                                             y: mapHeightInPoints - ((tile.coords!.y + 1) * tileSizeInPoints.height))
                                         
                     addChild(tile)
+                    
+                    if tile.animation != nil {
+                        var frameTiles: Dictionary<UInt32, SKTexture> = [:]
+                        
+                        for animationFrame in tile.animation!.frames {
+                            print(animationFrame)
+                            
+                            if let frameTile = tileSet.tileFor(gid: animationFrame.tileId) {
+                                frameTiles[animationFrame.tileId] = frameTile.texture
+                            }
+                        }
+                        
+                    }
                 } else {
                     #if DEBUG
                     print("PEMTmxTileLayer: no tile found with gid: \(tileAttributes.id) in tileSet: \(tileSet)")

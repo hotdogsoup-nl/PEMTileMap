@@ -28,27 +28,27 @@ internal enum MapStaggerIndex : String {
 }
 
 class PEMTmxMap : SKNode {
-    private (set) var version : String?
-    private (set) var mapSource : String?
-    private (set) var tiledversion : String?
-
-    private (set) var mapSizeInTiles = CGSize.zero
     private (set) var mapSizeInPoints = CGSize.zero
-    private (set) var tileSizeInPoints = CGSize.zero
+    private (set) var currentZPosition = CGFloat(0)
+    private (set) var backgroundColor : SKColor?
+
+    private var version : String?
+    private var mapSource : String?
+    private var tiledversion : String?
+
+    private var mapSizeInTiles = CGSize.zero
+    private var tileSizeInPoints = CGSize.zero
     var mapSizeInPointsFromTileSize : CGSize {
         return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
     }
     
-    private (set) var hexSideLengthInPoints = Int(0)
-    private (set) var parallaxOriginInPoints = CGPoint.zero
-    private (set) var currentZPosition = CGFloat(0)
-
-    private (set) var backgroundColor : SKColor?
-    private (set) var infinite = false
+    private var hexSideLengthInPoints = Int(0)
+    private var parallaxOriginInPoints = CGPoint.zero
+    private var infinite = false
     
-    private (set) var orientation : Orientation?
-    private (set) var staggerAxis : MapStaggerAxis?
-    private (set) var staggerIndex : MapStaggerIndex?
+    private var orientation : Orientation?
+    private var staggerAxis : MapStaggerAxis?
+    private var staggerIndex : MapStaggerIndex?
 
     private var compressionLevel = Int(-1)
     private var nextLayerId = UInt(0)
@@ -225,6 +225,14 @@ class PEMTmxMap : SKNode {
         // add objects
         
         mapSizeInPoints = calculateAccumulatedFrame().size
+        
+        if mapSizeInPoints.width < mapSizeInPointsFromTileSize.width {
+            mapSizeInPoints.width = mapSizeInPointsFromTileSize.width
+        }
+
+        if mapSizeInPoints.height < mapSizeInPointsFromTileSize.height {
+            mapSizeInPoints.height = mapSizeInPointsFromTileSize.height
+        }
     }
     
     private func renderLayers() {
@@ -233,7 +241,7 @@ class PEMTmxMap : SKNode {
                 if tileLayer.visible {
                     currentZPosition += zPositionLayerDelta
 
-                    tileLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
+                    tileLayer.renderTiles(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
                     tileLayer.zPosition = currentZPosition
                     
                     addChild(tileLayer)

@@ -36,8 +36,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var currentMapNameLabel : SKLabelNode?
     private var currentMapIndex = Int(0)
     private var maps = [
-                        "level5.tmx",
                         "level2.tmx",
+                        "level5.tmx",
                         "level3.tmx",
                         "level4.tmx",
                         "level1.tmx",
