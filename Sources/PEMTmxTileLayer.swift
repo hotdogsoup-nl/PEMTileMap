@@ -86,7 +86,7 @@ class PEMTmxTileLayer : SKNode {
 
     func renderTiles(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
-        position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
+        position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
         
         for index in tileData.indices {
             let tileGid = tileData[index]
