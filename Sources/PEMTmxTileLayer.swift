@@ -4,15 +4,15 @@ import SpriteKit
 class PEMTmxTileLayer : SKNode {
     private (set) var layerId : String?
     private (set) var layerName : String?
-    
-    private (set) var coordsInTiles = CGPoint.zero // not supported
-    private (set) var sizeInTiles = CGSize.zero
-    private (set) var opacity = CGFloat(1)
     private (set) var visible = true
-    private (set) var tintColor : SKColor?
-    private (set) var offSetInPoints = CGPoint.zero
-    private (set) var parallaxFactorX = CGFloat(1)
-    private (set) var parallaxFactorY = CGFloat(1)
+
+    private var coordsInTiles = CGPoint.zero // not supported
+    private var sizeInTiles = CGSize.zero
+    private var opacity = CGFloat(1)
+    private var tintColor : SKColor?
+    private var offSetInPoints = CGPoint.zero
+    private var parallaxFactorX = CGFloat(1)
+    private var parallaxFactorY = CGFloat(1)
     
     internal var tileData: [UInt32] = []
     
@@ -84,25 +84,24 @@ class PEMTmxTileLayer : SKNode {
     
     // MARK: - Public
 
-    func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
+    func renderTiles(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
         
         for index in tileData.indices {
-            let tileIdFromData = tileData[index]
+            let tileGid = tileData[index]
             
-            if (tileIdFromData == 0) {
+            if (tileGid == 0) {
                 continue
             }
             
-            let tileAttributes = tileAttributes(fromGid: tileIdFromData)
+            let tileAttributes = tileAttributes(fromId: tileGid)
         
-            if let tileSet = tileSetFor(gid: tileAttributes.gid, tileSets: tileSets) {
-                if let tile = tileSet.tileFor(gid: tileAttributes.gid) {
+            if let tileSet = tileSetFor(gid: tileAttributes.id, tileSets: tileSets) {                
+                if let tile = tileSet.tileFor(gid: tileAttributes.id) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
                     
-                    tile.gid = tileAttributes.gid
                     tile.coords = CGPoint(x: CGFloat(x), y: CGFloat(y))
                     tile.flippedHorizontally = tileAttributes.flippedHorizontally
                     tile.flippedVertically = tileAttributes.flippedVertically
@@ -122,12 +121,12 @@ class PEMTmxTileLayer : SKNode {
                     addChild(tile)
                 } else {
                     #if DEBUG
-                    print("PEMTmxTileLayer: no tile found with gid: \(tileAttributes.gid) in tileSet: \(tileSet)")
+                    print("PEMTmxTileLayer: no tile found with gid: \(tileAttributes.id) in tileSet: \(tileSet)")
                     #endif
                 }
             } else {
                 #if DEBUG
-                print("PEMTmxTileLayer: no tileSet found for tile with gid: \(tileAttributes.gid)")
+                print("PEMTmxTileLayer: no tileSet found for tile with gid: \(tileAttributes.id)")
                 #endif
             }
         }
@@ -137,7 +136,7 @@ class PEMTmxTileLayer : SKNode {
 
     private func tileSetFor(gid: UInt32, tileSets: [PEMTmxTileSet]) -> PEMTmxTileSet? {
         for tileSet in tileSets {
-            if tileSet.contains(globalID: gid) {
+            if tileSet.containsTileWith(gid: gid) {
                 return tileSet
             }
         }

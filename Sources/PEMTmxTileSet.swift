@@ -15,19 +15,21 @@ internal enum ObjectAlignment: String {
 }
 
 class PEMTmxTileSet : NSObject {
-    private (set) var name : String?
-    private (set) var tileSizeInPoints = CGSize.zero
-    private (set) var tileCount = UInt(0)
-    private (set) var objectAlignment = ObjectAlignment.Unspecified // unsupported
-    private (set) var spacingInPoints = UInt(0)
-    private (set) var marginInPoints = UInt(0)
+    private (set) var firstGid = UInt32(0)
+    
+    private var name : String?
+    private var tileSizeInPoints = CGSize.zero
+    private var tileCount = UInt(0)
+    private var objectAlignment = ObjectAlignment.Unspecified // unsupported
+    private var spacingInPoints = UInt(0)
+    private var marginInPoints = UInt(0)
 
     private var externalSource : String?
     private var spriteSheet : PEMTmxTileSetSpriteSheet?
-    private var firstGid = UInt32(0)
-    private var lastGid = UInt32(0)
-    private var gidRange: ClosedRange<UInt32> {
-        return firstGid...lastGid
+    private var firstId = UInt32(0)
+    private var lastId = UInt32(0)
+    private var idRange: ClosedRange<UInt32> {
+        return firstId...lastId
     }
         
     private var tileData : [PEMTmxTileSetTileData] = []
@@ -40,8 +42,7 @@ class PEMTmxTileSet : NSObject {
         super.init()
 
         self.firstGid = UInt32(firstGid)!
-        self.lastGid = self.firstGid
-
+        
         externalSource = attributes[ElementAttributes.Source.rawValue]
         if externalSource == nil {
             addAttributes(attributes)
@@ -102,30 +103,30 @@ class PEMTmxTileSet : NSObject {
         }
         
         if bundlePathForResource(source) != nil {
-            if let newSpriteSheet = PEMTmxTileSetSpriteSheet(firstGid: firstGid, tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
+            if let newSpriteSheet = PEMTmxTileSetSpriteSheet(tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
                 spriteSheet = newSpriteSheet
-                lastGid = newSpriteSheet.lastGid
+                lastId = newSpriteSheet.lastId
             }
         }
     }
     
     func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTmxTileSetTileData? {
-        guard let tileID = attributes[ElementAttributes.Id.rawValue] else { return nil }
-        let tileGid = firstGid + UInt32(tileID)!
+        guard let value = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        let tileId = UInt32(value)!
                 
-        if let existingTile = tileSetTileDataFor(gid: tileGid) {
+        if let existingTile = tileSetTileDataFor(id: tileId) {
             existingTile.addAttributes(attributes)
             return existingTile
         }
 
-        if let newTile = PEMTmxTileSetTileData(gid: tileGid, attributes: attributes) {
+        if let newTile = PEMTmxTileSetTileData(id: tileId, attributes: attributes) {
             tileData.append(newTile)
 
             let tileDataWithHighestGid = tileData.max(by: { (a, b) -> Bool in
-                return a.gid < b.gid
+                return a.id < b.id
             })
             
-            lastGid = tileDataWithHighestGid!.gid
+            lastId = tileDataWithHighestGid!.id
             return newTile
         }
                 
@@ -156,7 +157,7 @@ class PEMTmxTileSet : NSObject {
     }
 
     func tileFor(gid: UInt32) -> PEMTmxTile? {
-        if let tilesetTileData = tileData.filter({ $0.gid == gid }).first {
+        if let tilesetTileData = tileData.filter({ $0.id == gid - firstGid }).first {
             if tilesetTileData.usesSpriteSheet && tilesetTileData.texture == nil {
                 tilesetTileData.texture = spriteSheet?.generateTextureFor(tileSetTileData: tilesetTileData)
             }
@@ -164,7 +165,7 @@ class PEMTmxTileSet : NSObject {
             return PEMTmxTile(tileSetTileData: tilesetTileData)
         }
         
-        if let newTileData = spriteSheet?.createTileSetTileData(gid: gid) {
+        if let newTileData = spriteSheet?.createTileSetTileData(id: gid - firstGid) {
             newTileData.texture = spriteSheet?.generateTextureFor(tileSetTileData: newTileData)
             tileData.append(newTileData)
             
@@ -174,21 +175,21 @@ class PEMTmxTileSet : NSObject {
         return nil
     }
     
-    func contains(globalID gid: UInt32) -> Bool {
-        return gidRange ~= gid
+    func containsTileWith(gid: UInt32) -> Bool {
+        return idRange ~=  gid - firstGid
     }
     
     // MARK: - Private
     
-    private func tileSetTileDataFor(gid: UInt32) -> PEMTmxTileSetTileData? {
-        return tileData.filter({ $0.gid == gid }).first
+    private func tileSetTileDataFor(id: UInt32) -> PEMTmxTileSetTileData? {
+        return tileData.filter({ $0.id == id }).first
     }
     
     // MARK: - Debug
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSet: \(name ?? "-"), (file: \(externalSource ?? "-"), firstGid: \(firstGid), lastGid: \(lastGid))"
+        return "PEMTmxTileSet: \(name ?? "-"), (file: \(externalSource ?? "-"), firstGid: \(firstGid), firstId: \(firstId), lastId: \(lastId))"
     }
     #endif
 }

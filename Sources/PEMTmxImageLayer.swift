@@ -2,19 +2,20 @@ import Foundation
 import SpriteKit
 
 class PEMTmxImageLayer : SKSpriteNode {
-    private (set) var layerId : String?
-    private (set) var layerName : String?
-    
-    private (set) var textureImageSource : String?
-    private (set) var offSetInPoints = CGPoint.zero
-    private (set) var imageSizeInPoints = CGSize.zero
-    private (set) var opacity = CGFloat(1)
     private (set) var visible = true
-    private (set) var tintColor : SKColor?
-    private (set) var parallaxFactorX = CGFloat(1)
-    private (set) var parallaxFactorY = CGFloat(1)
-    private (set) var repeatX = false
-    private (set) var repeatY = false
+
+    private var layerId : String?
+    private var layerName : String?
+    
+    private var textureImageSource : String?
+    private var offSetInPoints = CGPoint.zero
+    private var imageSizeInPoints = CGSize.zero
+    private var opacity = CGFloat(1)
+    private var tintColor : SKColor?
+    private var parallaxFactorX = CGFloat(1)
+    private var parallaxFactorY = CGFloat(1)
+    private var repeatX = false
+    private var repeatY = false
 
     // MARK: - Init
 

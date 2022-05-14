@@ -3,7 +3,7 @@ import SpriteKit
 class PEMTmxTileSetTileData : NSObject {
     var texture : SKTexture?
 
-    private (set) var gid = UInt32(0)
+    private (set) var id = UInt32(0)
     private (set) var type : String?
     private (set) var probability = UInt32(0)
 
@@ -15,19 +15,19 @@ class PEMTmxTileSetTileData : NSObject {
     // MARK: - Init
     
     /// Initialiser used when created from within a PEMTmxTileSet.
-    init?(gid: UInt32, attributes: Dictionary<String, String>) {
+    init?(id: UInt32, attributes: Dictionary<String, String>) {
         super.init()
         
-        self.gid = gid
+        self.id = id
         addAttributes(attributes)
         usesSpriteSheet = false
     }
     
     /// Initialiser used when created from within a PEMTmxTileSetSpriteSheet.
-    init?(gid: UInt32, textureImageSource: String, tileSizeInPoints: CGSize) {
+    init?(id: UInt32, textureImageSource: String, tileSizeInPoints: CGSize) {
         super.init()
         
-        self.gid = gid
+        self.id = id
         self.tileSizeInPoints = tileSizeInPoints
         self.textureImageSource = textureImageSource
         usesSpriteSheet = true
@@ -65,14 +65,24 @@ class PEMTmxTileSetTileData : NSObject {
         if let path = bundlePathForResource(source) {
             textureImageSource = source
             texture = SKTexture(imageNamed: path)
+        } else {
+            #if DEBUG
+            print("PEMTmxTileSetTileData: image file \(source) not found for tile with id: \(id)")
+            #endif
         }
+    }
+    
+    func addAnimation() -> PEMTmxTileSetTileDataAnimation? {
+        animation = PEMTmxTileSetTileDataAnimation()
+        
+        return animation
     }
     
     // MARK: - Debug
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetTileData: \(gid), (\(textureImageSource ?? "-"))"
+        return "PEMTmxTileSetTileData: \(id), (\(textureImageSource ?? "-"))"
     }
     #endif
 }
