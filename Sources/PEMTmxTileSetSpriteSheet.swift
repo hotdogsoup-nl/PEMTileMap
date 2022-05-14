@@ -64,7 +64,9 @@ class PEMTmxTileSetSpriteSheet : NSObject {
     // MARK: - Public
     
     func createTileSetTileData(id: UInt32) -> PEMTmxTileSetTileData? {
-        if contains(id: id) {
+        let tileAttributes = tileAttributes(fromId: id)
+
+        if contains(id: tileAttributes.id) {
             return PEMTmxTileSetTileData(id: id, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
         }
         

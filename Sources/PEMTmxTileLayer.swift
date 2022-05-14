@@ -103,9 +103,7 @@ class PEMTmxTileLayer : SKNode {
                     let y: Int = index / Int(mapSizeInTiles.width)
                     
                     tile.coords = CGPoint(x: CGFloat(x), y: CGFloat(y))
-                    tile.flippedHorizontally = tileAttributes.flippedHorizontally
-                    tile.flippedVertically = tileAttributes.flippedVertically
-                    tile.flippedDiagonally = tileAttributes.flippedDiagonally
+                    tile.applyTileFlipping(horizontally: tileAttributes.flippedHorizontally, vertically: tileAttributes.flippedVertically, diagonally: tileAttributes.flippedDiagonally)
                     tile.texture?.filteringMode = textureFilteringMode
                     
                     if tintColor != nil {
@@ -134,12 +132,12 @@ class PEMTmxTileLayer : SKNode {
                     }
                 } else {
                     #if DEBUG
-                    print("PEMTmxTileLayer: no tile found with gid: \(tileAttributes.id) in tileSet: \(tileSet)")
+                    print("PEMTmxTileLayer: no tile found with gid: \(tileGid) in tileSet: \(tileSet)")
                     #endif
                 }
             } else {
                 #if DEBUG
-                print("PEMTmxTileLayer: no tileSet found for tile with gid: \(tileAttributes.id)")
+                print("PEMTmxTileLayer: no tileSet found for tile with gid: \(tileGid)")
                 #endif
             }
         }
@@ -148,8 +146,10 @@ class PEMTmxTileLayer : SKNode {
     // MARK: - Private
 
     private func tileSetFor(gid: UInt32, tileSets: [PEMTmxTileSet]) -> PEMTmxTileSet? {
+        let tileAttributes = tileAttributes(fromId: gid)
+
         for tileSet in tileSets {
-            if tileSet.containsTileWith(gid: gid) {
+            if tileSet.containsTileWith(gid: tileAttributes.id) {
                 return tileSet
             }
         }

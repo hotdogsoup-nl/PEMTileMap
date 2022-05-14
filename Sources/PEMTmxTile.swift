@@ -1,12 +1,9 @@
 import SpriteKit
 
 class PEMTmxTile : SKSpriteNode {
-    private (set) var id = UInt32(0)
     var coords : CGPoint?
-    var flippedHorizontally : Bool = false { didSet { updateFlip() } }
-    var flippedVertically : Bool = false { didSet { updateFlip() } }
-    var flippedDiagonally : Bool = false { didSet { updateFlip() } }
 
+    private (set) var id = UInt32(0)
     private (set) var animation : PEMTmxTileSetTileDataAnimation?
 
     private var type : String?
@@ -21,8 +18,8 @@ class PEMTmxTile : SKSpriteNode {
             id = tileSetTileData.id
             type = tileSetTileData.type
             probability = tileSetTileData.probability
-            
             animation = tileSetTileData.animation
+            
             return
         }
         
@@ -45,31 +42,31 @@ class PEMTmxTile : SKSpriteNode {
     
     // MARK: - Setup
     
-    func updateFlip() {
-        if (flippedDiagonally) {
-            if (flippedHorizontally && !flippedVertically) {
+    func applyTileFlipping(horizontally: Bool, vertically: Bool, diagonally: Bool) {
+        if diagonally {
+            if (horizontally && !vertically) {
                 zRotation = CGFloat(-Double.pi / 2)
             }
 
-            if (flippedHorizontally && flippedVertically) {
+            if (horizontally && vertically) {
                 zRotation = CGFloat(-Double.pi / 2)
                 xScale *= -1
             }
 
-            if (!flippedHorizontally && flippedVertically) {
+            if (!horizontally && vertically) {
                 zRotation = CGFloat(Double.pi / 2)
             }
 
-            if (!flippedHorizontally && !flippedVertically) {
+            if (!horizontally && !vertically) {
                 zRotation = CGFloat(Double.pi / 2)
                 xScale *= -1
             }
         } else {
-            if (flippedHorizontally == true) {
+            if horizontally {
                 xScale *= -1
             }
 
-            if (flippedVertically == true) {
+            if vertically {
                 yScale *= -1
             }
         }
