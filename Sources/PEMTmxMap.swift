@@ -233,10 +233,13 @@ class PEMTmxMap : SKNode {
                 if tileLayer.visible {
                     currentZPosition += zPositionLayerDelta
 
-                    tileLayer.render(mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
+                    tileLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
                     tileLayer.zPosition = currentZPosition
                     
                     addChild(tileLayer)
+                    #if DEBUG
+                    print(layer)
+                    #endif
                 }
             }
             
@@ -248,12 +251,11 @@ class PEMTmxMap : SKNode {
                     imageLayer.zPosition = currentZPosition
                     
                     addChild(imageLayer)
+                    #if DEBUG
+                    print(layer)
+                    #endif
                 }
             }
-            
-            #if DEBUG
-            print (layer)
-            #endif
         }
     }
     

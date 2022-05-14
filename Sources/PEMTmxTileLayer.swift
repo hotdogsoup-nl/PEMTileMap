@@ -84,7 +84,7 @@ class PEMTmxTileLayer : SKNode {
     
     // MARK: - Public
 
-    func render(mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
+    func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
         
@@ -114,8 +114,10 @@ class PEMTmxTileLayer : SKNode {
                         tile.colorBlendFactor = 1.0
                     }
                     
-                    let mapHeightInPoints = sizeInTiles.height * tile.size.height
-                    tile.position = CGPoint(x: tile.coords!.x * tile.size.width + tile.size.width * 0.5, y: mapHeightInPoints - (tile.coords!.y * tile.size.height + tile.size.height * 0.5))
+                    let mapHeightInPoints = sizeInTiles.height * tileSizeInPoints.height
+                    tile.anchorPoint = .zero
+                    tile.position = CGPoint(x: tile.coords!.x * tileSizeInPoints.width,
+                                            y: mapHeightInPoints - ((tile.coords!.y + 1) * tileSizeInPoints.height))
                                         
                     addChild(tile)
                 } else {
@@ -146,7 +148,7 @@ class PEMTmxTileLayer : SKNode {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileLayer: \(layerId ?? "-"), (name: \(layerName ?? "-"), zPosition: \(zPosition))"
+        return "PEMTmxTileLayer: \(layerId ?? "-"), (name: \(layerName ?? "-"), zPosition: \(zPosition), tiles:\(children.count))"
     }
     #endif
 }
