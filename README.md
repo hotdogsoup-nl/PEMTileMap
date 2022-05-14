@@ -35,7 +35,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [ ] grouped layers
 - [X] layer tinting
 - [X] flipped tiles
-- [ ] animated tiles
+- [X] animated tiles
 - [ ] properties
 
 ## PEMTmxMap Features
