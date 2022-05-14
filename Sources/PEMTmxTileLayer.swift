@@ -112,9 +112,9 @@ class PEMTmxTileLayer : SKNode {
                     }
                     
                     let mapHeightInPoints = sizeInTiles.height * tileSizeInPoints.height
-                    tile.anchorPoint = .zero
-                    tile.position = CGPoint(x: tile.coords!.x * tileSizeInPoints.width,
-                                            y: mapHeightInPoints - ((tile.coords!.y + 1) * tileSizeInPoints.height))
+                    let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
+                    tile.position = CGPoint(x: tile.coords!.x * tileSizeInPoints.width + sizeDeviation.width * 0.5,
+                                            y: mapHeightInPoints - ((tile.coords!.y + 1) * tileSizeInPoints.height) + sizeDeviation.height * 0.5)
                                         
                     addChild(tile)
                     
