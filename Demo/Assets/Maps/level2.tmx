@@ -6,17 +6,6 @@
  <tileset firstgid="1" name="tileSet" tilewidth="16" tileheight="16" tilecount="256" columns="16">
   <image source="Tiles/tileSet.png" width="256" height="256"/>
  </tileset>
- <tileset firstgid="257" name="Collection" tilewidth="16" tileheight="16" tilecount="2" columns="0" objectalignment="center">
-  <tile id="10" type="its a type">
-   <properties>
-    <property name="eenprop" value="klopt"/>
-   </properties>
-   <image width="16" height="16" source="Tiles/disk_01.png"/>
-  </tile>
-  <tile id="11">
-   <image width="16" height="16" source="Tiles/disk_02.png"/>
-  </tile>
- </tileset>
  <layer id="1" name="Background" width="16" height="12">
   <properties>
    <property name="layer prop" value="3"/>
