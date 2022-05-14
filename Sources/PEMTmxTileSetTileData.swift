@@ -1,46 +1,5 @@
 import SpriteKit
 
-class PEMTmxTileSetTileDataAnimation : NSObject {
-    private (set) var frames : [PEMTmxTileSetTileDataAnimationFrame] = []
-    
-    func addAnimationFrame(attributes: Dictionary<String, String>) {
-        if let animationFrame = PEMTmxTileSetTileDataAnimationFrame(attributes: attributes) {
-            frames.append(animationFrame)
-        }
-    }
-    
-    // MARK: - Debug
-
-    #if DEBUG
-    override var description: String {
-        return "PEMTmxTileSetTileDataAnimation: frames:\(frames.count))"
-    }
-    #endif
-}
-
-class PEMTmxTileSetTileDataAnimationFrame : NSObject {
-    private (set) var tileId = UInt32(0)
-    private (set) var duration = UInt32(0)
-    
-    init?(attributes: Dictionary<String, String>) {
-        guard let tileId = attributes[ElementAttributes.TileId.rawValue] else { return nil }
-        guard let duration = attributes[ElementAttributes.Duration.rawValue] else { return nil }
-        
-        super.init()
-
-        self.tileId = UInt32(tileId)!
-        self.duration = UInt32(duration)!
-    }
-    
-    // MARK: - Debug
-
-    #if DEBUG
-    override var description: String {
-        return "PEMTmxTileSetTileDataAnimationFrame: tileId: \(tileId), duration: (\(duration))"
-    }
-    #endif
-}
-
 class PEMTmxTileSetTileData : NSObject {
     var texture : SKTexture?
 

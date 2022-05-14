@@ -28,6 +28,12 @@
 		2014E98828169C4500A12253 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
 		2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
 		2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
+		2029D9CA283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */; };
+		2029D9CB283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */; };
+		2029D9CC283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */; };
+		2029D9CE283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */; };
+		2029D9CF283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */; };
+		2029D9D0283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */; };
 		2037A5C9282587AB00E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
 		2037A5CE282587AC00E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
 		2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5D528258C4900E13452 /* AppDelegate.swift */; };
@@ -119,6 +125,8 @@
 		2014E98328168E6100A12253 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2014E98628169C4500A12253 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
 		2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLayoutHelper.swift; sourceTree = "<group>"; };
+		2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSetTileDataAnimation.swift; sourceTree = "<group>"; };
+		2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSetTileDataAnimationFrame.swift; sourceTree = "<group>"; };
 		2037A5D328258C4800E13452 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXDemo.app; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037A5D528258C4900E13452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -206,12 +214,17 @@
 		206E238B282667560039C4FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
+				2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */,
 				2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */,
-				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
-				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
+				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
+				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
 				204097CD282A753300603024 /* PEMTmxTile.swift */,
-				209AB9A62827C4730021A297 /* Helpers */,
+				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
+				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
+				2000FD33282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift */,
+				2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */,
+				2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */,
+				2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */,
 				209AB9A72827C8510021A297 /* Extensions */,
 			);
 			path = Sources;
@@ -300,17 +313,6 @@
 				207D3DCC2812AD5700FC4C77 /* Main.storyboard */,
 			);
 			path = macOS;
-			sourceTree = "<group>";
-		};
-		209AB9A62827C4730021A297 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */,
-				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
-				2000FD33282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift */,
-				2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		209AB9A72827C8510021A297 /* Extensions */ = {
@@ -536,6 +538,7 @@
 				2037A5EC28258DA000E13452 /* GameScene.swift in Sources */,
 				2000FD3A282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */,
 				2037A5ED28258DA300E13452 /* Player.swift in Sources */,
+				2029D9CC283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */,
 				2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */,
 				205BF69C282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
@@ -545,6 +548,7 @@
 				20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
 				2041C82E282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3152828111B001E505D /* Data+Compression.swift in Sources */,
+				2029D9D0283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
 				2000FD3E282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
@@ -562,6 +566,7 @@
 				2014E98428168E6100A12253 /* Player.swift in Sources */,
 				2000FD38282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */,
 				207D3DD42812AD5700FC4C77 /* GameScene.swift in Sources */,
+				2029D9CA283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */,
 				207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */,
 				205BF69A282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */,
@@ -571,6 +576,7 @@
 				20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */,
 				2041C82C282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3132828111B001E505D /* Data+Compression.swift in Sources */,
+				2029D9CE283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
 				2000FD3C282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
@@ -588,6 +594,7 @@
 				2014E98528168E6100A12253 /* Player.swift in Sources */,
 				2000FD39282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */,
 				207D3DD52812AD5700FC4C77 /* GameScene.swift in Sources */,
+				2029D9CB283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */,
 				20CA139B281815DD00797A7C /* GameViewController.swift in Sources */,
 				205BF69B282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
@@ -597,6 +604,7 @@
 				20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
 				2041C82D282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3142828111B001E505D /* Data+Compression.swift in Sources */,
+				2029D9CF283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
 				2000FD3D282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 			);
