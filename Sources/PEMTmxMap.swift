@@ -241,7 +241,7 @@ class PEMTmxMap : SKNode {
                 if tileLayer.visible {
                     currentZPosition += zPositionLayerDelta
 
-                    tileLayer.renderTiles(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
+                    tileLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
                     tileLayer.zPosition = currentZPosition
                     
                     addChild(tileLayer)
