@@ -162,6 +162,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let newMap = PEMTmxMap(mapName : mapName) {
             if newMap.backgroundColor != nil {
                 backgroundColor = newMap.backgroundColor!
+            } else {
+                backgroundColor = .clear
             }
             
             newMap.position = CGPoint(x: size.width * 0.5 - newMap.mapSizeInPoints.width * 0.5, y: size.height * 0.5 - newMap.mapSizeInPoints.height * 0.5)
