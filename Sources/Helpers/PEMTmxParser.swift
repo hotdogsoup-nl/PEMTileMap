@@ -240,15 +240,31 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             
         // top level elements
         case Elements.Map.rawValue:
-            elementPath.removeLast()
+            if elementPath.last is PEMTmxMap {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.TileSet.rawValue :
-            elementPath.removeLast()
+            if elementPath.last is PEMTmxTileSet {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.Layer.rawValue:
-            elementPath.removeLast()
+            if elementPath.last is PEMTmxTileLayer {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.ObjectGroup.rawValue:
             break
         case Elements.ImageLayer.rawValue:
-            elementPath.removeLast()
+            if elementPath.last is PEMTmxImageLayer {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.Group.rawValue:
             break
         case Elements.Properties.rawValue:
@@ -260,8 +276,17 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Image.rawValue:
             break
         case Elements.Tile.rawValue:
-            elementPath.removeLast()
-            break
+            if elementPath.last is PEMTmxTileSetTileData {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
+        case Elements.Animation.rawValue:
+            if elementPath.last is PEMTmxTileSetTileDataAnimation {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.layers.last as? PEMTmxTileLayer else {
                 abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
