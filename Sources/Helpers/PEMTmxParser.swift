@@ -150,7 +150,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         // top level elements
         case Elements.Map.rawValue:
             currentMap?.addAttributes(attributeDict)
-            elementPath.append(self)
+            elementPath.append(currentMap!)
         case Elements.TileSet.rawValue :
             switch currentFileType {
             case .Tmx:
