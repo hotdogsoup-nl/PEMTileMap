@@ -195,11 +195,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 currentElement.setImage(attributes: attributeDict)
                 break
             }
-
-            #if DEBUG
-            print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
-            #endif
-            parser.abortParsing()
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.Tile.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
                 if let tileSetTile = currentElement.addOrUpdateTileData(attributes: attributeDict) {
@@ -268,11 +264,8 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             break
         case Elements.Data.rawValue:
             guard let tileLayer = currentMap?.layers.last as? PEMTmxTileLayer else {
-                #if DEBUG
-                print("PEMTmxParser: unexpected <\(elementName)> for \(String(describing: elementPath.last)).")
-                #endif
-                parser.abortParsing()
-                return
+                abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
+                break
             }
             
             var decodedData : [UInt32]?
@@ -318,6 +311,20 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     func parserDidEndDocument(_ parser: XMLParser) {
         elementPath.removeAll()
         currentParseString.removeAll()
+    }
+    
+    private func abortWithUnexpected(closingElementName: String, inside element: AnyObject?) {
+        #if DEBUG
+        print("PEMTmxParser: unexpected closing element: <\(closingElementName)> current element: \(String(describing: element)).")
+        #endif
+        abortParsing()
+    }
+    
+    private func abortWithUnexpected(elementName: String, inside element: AnyObject?) {
+        #if DEBUG
+        print("PEMTmxParser: unexpected <\(elementName)> inside \(String(describing: element)).")
+        #endif
+        abortParsing()
     }
     
     // MARK: - Decoding data
