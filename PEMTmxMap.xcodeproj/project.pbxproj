@@ -103,6 +103,12 @@
 		207D3DD52812AD5700FC4C77 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DAF2812AD5600FC4C77 /* GameScene.swift */; };
 		207D3DD62812AD5700FC4C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DB02812AD5700FC4C77 /* Assets.xcassets */; };
 		207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DB02812AD5700FC4C77 /* Assets.xcassets */; };
+		2091DE2E2830FA3D00F476C8 /* Collection.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 2091DE2D2830FA3C00F476C8 /* Collection.tsx */; };
+		2091DE2F2830FA3D00F476C8 /* Collection.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 2091DE2D2830FA3C00F476C8 /* Collection.tsx */; };
+		2091DE302830FA3D00F476C8 /* Collection.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 2091DE2D2830FA3C00F476C8 /* Collection.tsx */; };
+		2091DE32283100D900F476C8 /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091DE31283100D900F476C8 /* PEMTmxProperty.swift */; };
+		2091DE33283100D900F476C8 /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091DE31283100D900F476C8 /* PEMTmxProperty.swift */; };
+		2091DE34283100D900F476C8 /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091DE31283100D900F476C8 /* PEMTmxProperty.swift */; };
 		20CA139B281815DD00797A7C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139A281815DD00797A7C /* GameViewController.swift */; };
 		20CA139E2818168600797A7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* GameController.swift */; };
 		20CA139F2818168600797A7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* GameController.swift */; };
@@ -160,6 +166,8 @@
 		207D3DC62812AD5700FC4C77 /* PEMTmxMap Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DC82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2091DE2D2830FA3C00F476C8 /* Collection.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Collection.tsx; sourceTree = "<group>"; };
+		2091DE31283100D900F476C8 /* PEMTmxProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxProperty.swift; sourceTree = "<group>"; };
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		20CA139D2818168600797A7C /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		20CA158128181D8700797A7C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -225,6 +233,7 @@
 				2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */,
 				2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */,
 				2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */,
+				2091DE31283100D900F476C8 /* PEMTmxProperty.swift */,
 				209AB9A72827C8510021A297 /* Extensions */,
 			);
 			path = Sources;
@@ -261,6 +270,7 @@
 			children = (
 				2055FE64282FC3640020104C /* animated1.png */,
 				2055FE65282FC3640020104C /* animated2.png */,
+				2091DE2D2830FA3C00F476C8 /* Collection.tsx */,
 				2041C82F282EB4A600F584AF /* hotdogsoup-icon-full.png */,
 				20562E3E28252C00005CE60A /* level1.tmx */,
 				2037A5FE2825B0DC00E13452 /* level2.tmx */,
@@ -469,6 +479,7 @@
 				2037A5EB28258D9D00E13452 /* Colors.xcassets in Resources */,
 				2055FE6F2830049A0020104C /* level5.tmx in Resources */,
 				205BF6AB2826A85F00077DB2 /* Tiles in Resources */,
+				2091DE302830FA3D00F476C8 /* Collection.tsx in Resources */,
 				2055FE68282FC3640020104C /* animated1.png in Resources */,
 				2000FD42282BCDC900699DAF /* level4.tmx in Resources */,
 				2037A6012825B0DC00E13452 /* level2.tmx in Resources */,
@@ -491,6 +502,7 @@
 				205BF6A92826A85F00077DB2 /* Tiles in Resources */,
 				2055FE6D2830049A0020104C /* level5.tmx in Resources */,
 				2037A5FF2825B0DC00E13452 /* level2.tmx in Resources */,
+				2091DE2E2830FA3D00F476C8 /* Collection.tsx in Resources */,
 				2055FE66282FC3640020104C /* animated1.png in Resources */,
 				2000FD40282BCDC900699DAF /* level4.tmx in Resources */,
 				207D3DC12812AD5700FC4C77 /* LaunchScreen.storyboard in Resources */,
@@ -516,6 +528,7 @@
 				205BF6AE2826A95600077DB2 /* level3.tmx in Resources */,
 				2041C835282EB4CE00F584AF /* objecttemplate.tx in Resources */,
 				2041C831282EB4A600F584AF /* hotdogsoup-icon-full.png in Resources */,
+				2091DE2F2830FA3D00F476C8 /* Collection.tsx in Resources */,
 				207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */,
 				2000FD41282BCDC900699DAF /* level4.tmx in Resources */,
 				205BF6AA2826A85F00077DB2 /* Tiles in Resources */,
@@ -539,6 +552,7 @@
 				2000FD3A282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */,
 				2037A5ED28258DA300E13452 /* Player.swift in Sources */,
 				2029D9CC283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */,
+				2091DE34283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
 				2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */,
 				205BF69C282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
@@ -567,6 +581,7 @@
 				2000FD38282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */,
 				207D3DD42812AD5700FC4C77 /* GameScene.swift in Sources */,
 				2029D9CA283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */,
+				2091DE32283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
 				207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */,
 				205BF69A282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */,
@@ -595,6 +610,7 @@
 				2000FD39282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */,
 				207D3DD52812AD5700FC4C77 /* GameScene.swift in Sources */,
 				2029D9CB283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift in Sources */,
+				2091DE33283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
 				20CA139B281815DD00797A7C /* GameViewController.swift in Sources */,
 				205BF69B282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
