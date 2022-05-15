@@ -1,10 +1,11 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxTileLayer : SKNode {
+class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     private (set) var layerId : String?
     private (set) var layerName : String?
     private (set) var visible = true
+    private (set) var properties : Dictionary<String, Any>?
 
     private var coordsInTiles = CGPoint.zero // not supported
     private var sizeInTiles = CGSize.zero
@@ -141,6 +142,13 @@ class PEMTmxTileLayer : SKNode {
                 #endif
             }
         }
+    }
+    
+    // MARK: - PEMTmxPropertiesProtocol
+    
+    func addProperties(_ newProperties: [PEMTmxProperty]) {
+        properties = convertProperties(newProperties)
+        print(properties)
     }
     
     // MARK: - Private

@@ -27,10 +27,11 @@ internal enum MapStaggerIndex : String {
     case Odd = "odd"
 }
 
-class PEMTmxMap : SKNode {
+class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     private (set) var mapSizeInPoints = CGSize.zero
     private (set) var currentZPosition = CGFloat(0)
     private (set) var backgroundColor : SKColor?
+    private (set) var properties : Dictionary<String, Any>?
 
     private var version : String?
     private var mapSource : String?
@@ -196,6 +197,13 @@ class PEMTmxMap : SKNode {
         if let value = attributes[ElementAttributes.Infinite.rawValue] {
             infinite = value == "1"
         }
+    }
+    
+    // MARK: - PEMTmxPropertiesProtocol
+    
+    func addProperties(_ newProperties: [PEMTmxProperty]) {
+        properties = convertProperties(newProperties)
+        print(properties)
     }
     
     // MARK: - Private

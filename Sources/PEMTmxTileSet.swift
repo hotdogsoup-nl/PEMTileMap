@@ -14,9 +14,10 @@ internal enum ObjectAlignment: String {
     case BottomRight = "bottomright"
 }
 
-class PEMTmxTileSet : NSObject {
+class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     private (set) var firstGid = UInt32(0)
-    
+    private (set) var properties : Dictionary<String, Any>?
+
     private var name : String?
     private var tileSizeInPoints = CGSize.zero
     private var tileCount = UInt(0)
@@ -181,6 +182,13 @@ class PEMTmxTileSet : NSObject {
     
     func containsTileWith(gid: UInt32) -> Bool {
         return idRange ~=  gid - firstGid
+    }
+    
+    // MARK: - PEMTmxPropertiesProtocol
+    
+    func addProperties(_ newProperties: [PEMTmxProperty]) {
+        properties = convertProperties(newProperties)
+        print(properties)
     }
     
     // MARK: - Private

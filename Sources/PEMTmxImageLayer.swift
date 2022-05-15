@@ -1,8 +1,9 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxImageLayer : SKSpriteNode {
+class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
+    private (set) var properties : Dictionary<String, Any>?
 
     private var layerId : String?
     private var layerName : String?
@@ -147,6 +148,13 @@ class PEMTmxImageLayer : SKSpriteNode {
 
         imageSizeInPoints = CGSize(width: Int(width)!, height: Int(height)!)
         textureImageSource = source
+    }
+    
+    // MARK: - PEMTmxPropertiesProtocol
+    
+    func addProperties(_ newProperties: [PEMTmxProperty]) {
+        properties = convertProperties(newProperties)
+        print(properties)
     }
     
     // MARK: - Debug

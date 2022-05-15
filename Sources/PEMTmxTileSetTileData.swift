@@ -1,11 +1,12 @@
 import SpriteKit
 
-class PEMTmxTileSetTileData : NSObject {
+class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
     var texture : SKTexture?
 
     private (set) var id = UInt32(0)
     private (set) var type : String?
     private (set) var probability = UInt32(0)
+    private (set) var properties : Dictionary<String, Any>?
 
     private (set) var usesSpriteSheet = false
     private (set) var animation : PEMTmxTileSetTileDataAnimation?
@@ -77,6 +78,13 @@ class PEMTmxTileSetTileData : NSObject {
         animation = PEMTmxTileSetTileDataAnimation()
         
         return animation
+    }
+    
+    // MARK: - PEMTmxPropertiesProtocol
+    
+    func addProperties(_ newProperties: [PEMTmxProperty]) {
+        properties = convertProperties(newProperties)
+        print(properties)
     }
     
     // MARK: - Debug

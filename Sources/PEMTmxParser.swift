@@ -12,6 +12,7 @@ enum Elements : String {
     case Map = "map"
     case ObjectGroup = "objectgroup"
     case Properties = "properties"
+    case Property = "property"
     case Template = "template"
     case Tile = "tile"
     case TileSet = "tileset"
@@ -44,6 +45,7 @@ enum ElementAttributes : String {
     case ParallaxOriginX = "parallaxoriginx"
     case ParallaxOriginY = "parallaxoriginy"
     case Probability = "probability"
+    case Propertytype = "propertytype"
     case RenderOrder = "renderorder"
     case RepeatX = "repeatx"
     case RepeatY = "repeaty"
@@ -60,11 +62,16 @@ enum ElementAttributes : String {
     case TintColor = "tintcolor"
     case Trans = "trans"
     case TypeAttribute = "type" // "Type" is a reserved MetaType name so we use "TypeAttribute" instead
+    case Value = "value"
     case Version = "version"
     case Visible = "visible"
     case Width = "width"
     case X = "x"
     case Y = "y"
+}
+
+protocol PEMTmxPropertiesProtocol {
+    func addProperties(_ newProperties: [PEMTmxProperty])
 }
 
 class PEMTmxParser : XMLParser, XMLParserDelegate {
@@ -89,6 +96,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     private weak var currentTileSet : PEMTmxTileSet?
 
     private var currentFileType : ParseFileType
+    private var currentProperties : [PEMTmxProperty]?
     private var currentParseString : String = ""
     private var elementPath : [AnyObject] = []
     private var dataEncoding : DataEncoding?
@@ -179,7 +187,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Group.rawValue:
             break
         case Elements.Properties.rawValue:
-            break
+            currentProperties = []
         case Elements.Template.rawValue:
             break
 
@@ -241,6 +249,10 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                     dataCompression = .None
                 }
             }
+        case Elements.Property.rawValue:
+            if let property = PEMTmxProperty(attributes: attributeDict) {
+                currentProperties?.append(property)
+            }
         default:
             #if DEBUG
             print("PEMTmxParser: unsupported TMX element name: <\(elementName)>")
@@ -281,7 +293,18 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Group.rawValue:
             break
         case Elements.Properties.rawValue:
-            break
+            if currentProperties == nil {
+                break
+            }
+            if let currentElement = elementPath.last as? PEMTmxPropertiesProtocol {
+                currentElement.addProperties(currentProperties!)
+                currentProperties = nil
+                break
+            }
+            #if DEBUG
+            print("PEMTmxParser: properties protocol not implemented on: \(String(describing: elementPath.last))")
+            #endif
+            currentProperties = nil
         case Elements.Template.rawValue:
             break
             
@@ -329,6 +352,8 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 #endif
                 parser.abortParsing()
             }
+        case Elements.Property.rawValue:
+            break
         default:
             #if DEBUG
             print("PEMTmxParser: unsupported TMX element name: <\(elementName)>")

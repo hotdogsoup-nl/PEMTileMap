@@ -5,6 +5,7 @@ class PEMTmxTile : SKSpriteNode {
 
     private (set) var id = UInt32(0)
     private (set) var animation : PEMTmxTileSetTileDataAnimation?
+    private (set) var properties : Dictionary<String, Any>?
 
     private var type : String?
     private var probability = UInt32(0)
@@ -19,6 +20,7 @@ class PEMTmxTile : SKSpriteNode {
             type = tileSetTileData.type
             probability = tileSetTileData.probability
             animation = tileSetTileData.animation
+            properties = tileSetTileData.properties
             
             return
         }
@@ -94,7 +96,7 @@ class PEMTmxTile : SKSpriteNode {
         
         run(SKAction.repeatForever(SKAction.sequence(actions)))
     }
-    
+        
     // MARK: - Debug
     
     #if DEBUG
