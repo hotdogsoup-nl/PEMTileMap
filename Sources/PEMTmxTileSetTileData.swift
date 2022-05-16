@@ -7,8 +7,6 @@ class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
     private (set) var type : String?
     private (set) var probability = UInt32(0)
     private (set) var properties : Dictionary<String, Any>?
-
-    private (set) var usesSpriteSheet = false
     private (set) var animation : PEMTmxTileSetTileDataAnimation?
 
     private var textureImageSource : String?
@@ -22,7 +20,6 @@ class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
         
         self.id = id
         addAttributes(attributes)
-        usesSpriteSheet = false
     }
     
     /// Initialiser used when created from within a PEMTmxTileSetSpriteSheet.
@@ -32,7 +29,6 @@ class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
         self.id = id
         self.tileSizeInPoints = tileSizeInPoints
         self.textureImageSource = textureImageSource
-        usesSpriteSheet = true
     }
     
     deinit {
