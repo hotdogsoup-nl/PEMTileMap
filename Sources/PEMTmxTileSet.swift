@@ -129,12 +129,14 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
 
         if let newTile = PEMTmxTileSetTileData(id: tileId, attributes: attributes) {
             tileData.append(newTile)
-
-            let tileDataWithHighestGid = tileData.max(by: { (a, b) -> Bool in
-                return a.id < b.id
-            })
             
-            lastId = tileDataWithHighestGid!.id
+            if tileSetType == .CollectionOfImages {
+                let tileDataWithHighestGid = tileData.max(by: { (a, b) -> Bool in
+                    return a.id < b.id
+                })
+                
+                lastId = tileDataWithHighestGid!.id
+            }
             return newTile
         }
                 
