@@ -31,9 +31,9 @@
 		2029D9CA283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */; };
 		2029D9CB283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */; };
 		2029D9CC283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */; };
-		2029D9CE283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */; };
-		2029D9CF283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */; };
-		2029D9D0283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */; };
+		2029D9CE283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */; };
+		2029D9CF283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */; };
+		2029D9D0283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */; };
 		2037A5C9282587AB00E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
 		2037A5CE282587AC00E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
 		2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5D528258C4900E13452 /* AppDelegate.swift */; };
@@ -135,7 +135,7 @@
 		2014E98628169C4500A12253 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
 		2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLayoutHelper.swift; sourceTree = "<group>"; };
 		2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileAnimation.swift; sourceTree = "<group>"; };
-		2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSetTileDataAnimationFrame.swift; sourceTree = "<group>"; };
+		2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileAnimationFrame.swift; sourceTree = "<group>"; };
 		2037A5D328258C4800E13452 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXDemo.app; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037A5D528258C4900E13452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -233,12 +233,12 @@
 				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
 				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
 				2091DE31283100D900F476C8 /* PEMTmxProperty.swift */,
-				204097CD282A753300603024 /* PEMTmxTile.swift */,
-				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
 				2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */,
-				2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */,
+				204097CD282A753300603024 /* PEMTmxTile.swift */,
 				2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */,
-				2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */,
+				2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */,
+				2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */,
+				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -567,7 +567,7 @@
 				20D0D3112827EA69001E505D /* PEMTmxLayer.swift in Sources */,
 				2041C82E282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3152828111B001E505D /* Data+Compression.swift in Sources */,
-				2029D9D0283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
+				2029D9D0283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
 				2000FD3E282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 				2056B6A1283239E300595F23 /* PEMTmxGroup.swift in Sources */,
@@ -597,7 +597,7 @@
 				20D0D30F2827EA68001E505D /* PEMTmxLayer.swift in Sources */,
 				2041C82C282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3132828111B001E505D /* Data+Compression.swift in Sources */,
-				2029D9CE283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
+				2029D9CE283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
 				2000FD3C282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 				2056B69F283239E300595F23 /* PEMTmxGroup.swift in Sources */,
@@ -627,7 +627,7 @@
 				20D0D3102827EA69001E505D /* PEMTmxLayer.swift in Sources */,
 				2041C82D282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3142828111B001E505D /* Data+Compression.swift in Sources */,
-				2029D9CF283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
+				2029D9CF283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
 				2000FD3D282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 				2056B6A0283239E300595F23 /* PEMTmxGroup.swift in Sources */,

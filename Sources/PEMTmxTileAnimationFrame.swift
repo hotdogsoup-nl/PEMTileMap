@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxTileSetTileDataAnimationFrame : NSObject {
+class PEMTmxTileAnimationFrame : NSObject {
     private (set) var tileId = UInt32(0)
     private (set) var duration = UInt32(0)
     
@@ -28,7 +28,7 @@ class PEMTmxTileSetTileDataAnimationFrame : NSObject {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetTileDataAnimationFrame: tileId: \(tileId), duration: (\(duration))"
+        return "PEMTmxTileAnimationFrame: tileId: \(tileId), duration: (\(duration))"
     }
     #endif
 }

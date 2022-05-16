@@ -1,7 +1,7 @@
 import SpriteKit
 
 class PEMTmxTileAnimation : NSObject {
-    private (set) var frames : [PEMTmxTileSetTileDataAnimationFrame] = []
+    private (set) var frames : [PEMTmxTileAnimationFrame] = []
     
     deinit {
         #if DEBUG
@@ -16,7 +16,7 @@ class PEMTmxTileAnimation : NSObject {
     // MARK: - Setup
     
     func addAnimationFrame(attributes: Dictionary<String, String>) {
-        if let animationFrame = PEMTmxTileSetTileDataAnimationFrame(attributes: attributes) {
+        if let animationFrame = PEMTmxTileAnimationFrame(attributes: attributes) {
             frames.append(animationFrame)
         }
     }
