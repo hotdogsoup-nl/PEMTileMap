@@ -175,17 +175,22 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 elementPath.append(currentTileSet!)
             }
         case Elements.Layer.rawValue:
-            let layer = PEMTmxTileLayer(attributes: attributeDict)
+            let currentGroup = elementPath.last as? PEMTmxGroup
+            let layer = PEMTmxTileLayer(attributes: attributeDict, group:currentGroup)
             currentMap?.layers.append(layer)
             elementPath.append(layer)
         case Elements.ObjectGroup.rawValue:
             break
         case Elements.ImageLayer.rawValue:
-            let layer = PEMTmxImageLayer(attributes: attributeDict)
+            let currentGroup = elementPath.last as? PEMTmxGroup
+            let layer = PEMTmxImageLayer(attributes: attributeDict, group:currentGroup)
             currentMap?.layers.append(layer)
             elementPath.append(layer)
         case Elements.Group.rawValue:
-            break
+            let currentGroup = elementPath.last as? PEMTmxGroup
+            if let group = PEMTmxGroup(attributes: attributeDict, group:currentGroup) {
+                elementPath.append(group)
+            }
         case Elements.Properties.rawValue:
             currentProperties = []
         case Elements.Template.rawValue:
@@ -291,7 +296,11 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.Group.rawValue:
-            break
+            if elementPath.last is PEMTmxGroup {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.Properties.rawValue:
             if currentProperties == nil {
                 break
