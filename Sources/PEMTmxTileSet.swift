@@ -1,20 +1,19 @@
 import Foundation
 import SpriteKit
 
-internal enum ObjectAlignment: String {
-    case Unspecified = "unspecified"
-    case TopLeft = "topleft"
-    case Top = "top"
-    case TopRight = "topright"
-    case Left = "left"
-    case Center = "center"
-    case Right = "right"
-    case BottomLeft = "bottomleft"
-    case Bottom = "bottom"
-    case BottomRight = "bottomright"
-}
-
 class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
+    enum ObjectAlignment: String {
+        case Unspecified = "unspecified"
+        case TopLeft = "topleft"
+        case Top = "top"
+        case TopRight = "topright"
+        case Left = "left"
+        case Center = "center"
+        case Right = "right"
+        case BottomLeft = "bottomleft"
+        case Bottom = "bottom"
+        case BottomRight = "bottomright"
+    }
     private (set) var firstGid = UInt32(0)
     private (set) var properties : Dictionary<String, Any>?
 

@@ -96,15 +96,15 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
                 continue
             }
             
-            let tileAttributes = tileAttributes(fromId: tileGid)
+            let tileGidAttributes = tileAttributes(fromId: tileGid)
         
-            if let tileSet = tileSetFor(gid: tileAttributes.id, tileSets: tileSets) {                
-                if let tile = tileSet.tileFor(gid: tileAttributes.id) {
+            if let tileSet = tileSetFor(gid: tileGidAttributes.id, tileSets: tileSets) {       
+                if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
                     
                     tile.coords = CGPoint(x: CGFloat(x), y: CGFloat(y))
-                    tile.applyTileFlipping(horizontally: tileAttributes.flippedHorizontally, vertically: tileAttributes.flippedVertically, diagonally: tileAttributes.flippedDiagonally)
+                    tile.applyTileFlipping(horizontally: tileGidAttributes.flippedHorizontally, vertically: tileGidAttributes.flippedVertically, diagonally: tileGidAttributes.flippedDiagonally)
                     tile.texture?.filteringMode = textureFilteringMode
                     
                     if tintColor != nil {
