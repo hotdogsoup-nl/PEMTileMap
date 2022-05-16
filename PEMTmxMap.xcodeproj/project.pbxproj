@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2000FD34282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift */; };
-		2000FD35282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift */; };
-		2000FD36282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift */; };
+		2000FD34282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */; };
+		2000FD35282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */; };
+		2000FD36282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */; };
 		2000FD38282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */; };
 		2000FD39282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */; };
 		2000FD3A282BB4D500699DAF /* PEMTmxTileSetTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */; };
@@ -126,7 +126,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2000FD33282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSetSpriteSheet.swift; sourceTree = "<group>"; };
+		2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxSpriteSheet.swift; sourceTree = "<group>"; };
 		2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSetTileData.swift; sourceTree = "<group>"; };
 		2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxHelper.swift; sourceTree = "<group>"; };
 		2000FD3F282BCDC900699DAF /* level4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level4.tmx; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 				2091DE31283100D900F476C8 /* PEMTmxProperty.swift */,
 				204097CD282A753300603024 /* PEMTmxTile.swift */,
 				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
-				2000FD33282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift */,
+				2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */,
 				2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */,
 				2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */,
 				2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */,
@@ -562,7 +562,7 @@
 				205BF69C282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
-				2000FD36282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift in Sources */,
+				2000FD36282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
 				20D0D3112827EA69001E505D /* PEMTmxLayer.swift in Sources */,
 				2041C82E282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
@@ -592,7 +592,7 @@
 				205BF69A282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
-				2000FD34282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift in Sources */,
+				2000FD34282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				20CA139E2818168600797A7C /* GameController.swift in Sources */,
 				20D0D30F2827EA68001E505D /* PEMTmxLayer.swift in Sources */,
 				2041C82C282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
@@ -622,7 +622,7 @@
 				205BF69B282687A800077DB2 /* SKColor+Hex.swift in Sources */,
 				205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
-				2000FD35282BB49F00699DAF /* PEMTmxTileSetSpriteSheet.swift in Sources */,
+				2000FD35282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				20CA139F2818168600797A7C /* GameController.swift in Sources */,
 				20D0D3102827EA69001E505D /* PEMTmxLayer.swift in Sources */,
 				2041C82D282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,

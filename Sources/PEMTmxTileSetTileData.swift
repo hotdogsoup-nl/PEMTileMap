@@ -22,7 +22,7 @@ class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
         addAttributes(attributes)
     }
     
-    /// Initialiser used when created from within a PEMTmxTileSetSpriteSheet.
+    /// Initialiser used when created from within a PEMTmxSpriteSheet.
     init?(id: UInt32, textureImageSource: String, tileSizeInPoints: CGSize) {
         super.init()
         

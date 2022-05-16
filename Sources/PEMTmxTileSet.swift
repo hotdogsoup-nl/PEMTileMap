@@ -31,7 +31,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     private var marginInPoints = UInt(0)
 
     private var externalSource : String?
-    private var spriteSheet : PEMTmxTileSetSpriteSheet?
+    private var spriteSheet : PEMTmxSpriteSheet?
     private var tileSetType = PEMTmxTileSetType.CollectionOfImages
     private var firstId = UInt32(0)
     private var lastId = UInt32(0)
@@ -111,7 +111,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
         tileSetType = .SpriteSheet
         
         if bundlePathForResource(source) != nil {
-            if let newSpriteSheet = PEMTmxTileSetSpriteSheet(tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
+            if let newSpriteSheet = PEMTmxSpriteSheet(tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
                 spriteSheet = newSpriteSheet
                 lastId = newSpriteSheet.lastId
             }

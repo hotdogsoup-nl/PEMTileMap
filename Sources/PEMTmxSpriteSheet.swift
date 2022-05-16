@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxTileSetSpriteSheet : NSObject {
+class PEMTmxSpriteSheet : NSObject {
     private (set) var firstId = UInt32(0)
     
     var lastId: UInt32 {
@@ -46,7 +46,7 @@ class PEMTmxTileSetSpriteSheet : NSObject {
             
             if textureImageSize!.width != CGFloat(Int(width)!) || textureImageSize!.height != CGFloat(Int(height)!) {
                 #if DEBUG
-                print("PEMTmxTileSetSpriteSheet: tileset <image> size mismatch: \(source)")
+                print("PEMTmxSpriteSheet: tileset <image> size mismatch: \(source)")
                 #endif
             }
         }
