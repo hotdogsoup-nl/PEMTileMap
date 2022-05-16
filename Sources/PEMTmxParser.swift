@@ -348,7 +348,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 }
             } else {
                 #if DEBUG
-                print("PEMTmxParser: could not decode layer data for layer: \(String(describing: tileLayer.layerName))")
+                print("PEMTmxParser: could not decode layer data for layer: \(tileLayer))")
                 #endif
                 parser.abortParsing()
             }

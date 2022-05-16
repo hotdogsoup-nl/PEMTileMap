@@ -5,9 +5,8 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
     private (set) var properties : Dictionary<String, Any>?
 
-    private var layerId : String?
+    private var id = UInt32(0)
     private var layerName : String?
-    
     private var textureImageSource : String?
     private var offSetInPoints = CGPoint.zero
     private var imageSizeInPoints = CGSize.zero
@@ -24,12 +23,10 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
         super.init(texture: nil, color: .clear, size: .zero)
 
         if let value = attributes[ElementAttributes.Id.rawValue] {
-            layerId = value
+            id = UInt32(value)!
         }
 
-        if let value = attributes[ElementAttributes.Name.rawValue] {
-            layerName = value
-        }
+        layerName = attributes[ElementAttributes.Name.rawValue]
         
         if let dx = attributes[ElementAttributes.OffsetX.rawValue],
            let dy = attributes[ElementAttributes.OffsetY.rawValue] {
@@ -160,7 +157,7 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxImageLayer: \(layerId ?? "-"), (name: \(layerName ?? "-"), zPosition: \(zPosition))"
+        return "PEMTmxImageLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition))"
     }
     #endif
 }

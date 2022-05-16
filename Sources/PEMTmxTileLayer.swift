@@ -2,11 +2,11 @@ import Foundation
 import SpriteKit
 
 class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
-    private (set) var layerId : String?
-    private (set) var layerName : String?
     private (set) var visible = true
     private (set) var properties : Dictionary<String, Any>?
 
+    private var id = UInt32(0)
+    private var layerName : String?
     private var coordsInTiles = CGPoint.zero // not supported
     private var sizeInTiles = CGSize.zero
     private var opacity = CGFloat(1)
@@ -23,12 +23,10 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
         super.init()
         
         if let value = attributes[ElementAttributes.Id.rawValue] {
-            layerId = value
+            id = UInt32(value)!
         }
-
-        if let value = attributes[ElementAttributes.Name.rawValue] {
-            layerName = value
-        }
+        
+        layerName = attributes[ElementAttributes.Name.rawValue]
         
         if let x = attributes[ElementAttributes.X.rawValue],
            let y = attributes[ElementAttributes.Y.rawValue] {
@@ -167,7 +165,7 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileLayer: \(layerId ?? "-"), (name: \(layerName ?? "-"), zPosition: \(zPosition), tiles:\(children.count))"
+        return "PEMTmxTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), tiles:\(children.count))"
     }
     #endif
 }

@@ -2,6 +2,7 @@ import SpriteKit
 
 class PEMTmxTileSetSpriteSheet : NSObject {
     private (set) var firstId = UInt32(0)
+    
     var lastId: UInt32 {
         return firstId + UInt32((tilesPerRow * tilesPerColumn)) - 1
     }
