@@ -78,6 +78,9 @@
 		2055FE6F2830049A0020104C /* level5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2055FE6C2830049A0020104C /* level5.tmx */; };
 		20562E4F28252C00005CE60A /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
 		20562E5028252C00005CE60A /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20562E3E28252C00005CE60A /* level1.tmx */; };
+		2056B69F283239E300595F23 /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2056B69E283239E300595F23 /* PEMTmxGroup.swift */; };
+		2056B6A0283239E300595F23 /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2056B69E283239E300595F23 /* PEMTmxGroup.swift */; };
+		2056B6A1283239E300595F23 /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2056B69E283239E300595F23 /* PEMTmxGroup.swift */; };
 		205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
 		205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
 		205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
@@ -151,6 +154,7 @@
 		20562E13282521C1005CE60A /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
 		20562E15282521C1005CE60A /* PEMTmxTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSet.swift; sourceTree = "<group>"; };
 		20562E3E28252C00005CE60A /* level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level1.tmx; sourceTree = "<group>"; };
+		2056B69E283239E300595F23 /* PEMTmxGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxGroup.swift; sourceTree = "<group>"; };
 		205BF67028266D4200077DB2 /* PEMTmxParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxParser.swift; sourceTree = "<group>"; };
 		205BF699282687A800077DB2 /* SKColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKColor+Hex.swift"; sourceTree = "<group>"; };
 		205BF6A82826A85F00077DB2 /* Tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tiles; sourceTree = "<group>"; };
@@ -222,10 +226,11 @@
 		206E238B282667560039C4FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */,
+				2056B69E283239E300595F23 /* PEMTmxGroup.swift */,
 				2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */,
 				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
 				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
+				2091DE31283100D900F476C8 /* PEMTmxProperty.swift */,
 				204097CD282A753300603024 /* PEMTmxTile.swift */,
 				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
 				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
@@ -233,8 +238,7 @@
 				2000FD37282BB4D500699DAF /* PEMTmxTileSetTileData.swift */,
 				2029D9C9283023C40019FAB4 /* PEMTmxTileSetTileDataAnimation.swift */,
 				2029D9CD283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift */,
-				2091DE31283100D900F476C8 /* PEMTmxProperty.swift */,
-				209AB9A72827C8510021A297 /* Extensions */,
+				209AB9A72827C8510021A297 /* Helpers */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -325,13 +329,14 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		209AB9A72827C8510021A297 /* Extensions */ = {
+		209AB9A72827C8510021A297 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				205BF699282687A800077DB2 /* SKColor+Hex.swift */,
 				20D0D3122828111B001E505D /* Data+Compression.swift */,
+				2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */,
+				205BF699282687A800077DB2 /* SKColor+Hex.swift */,
 			);
-			path = Extensions;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		20C9979028227A3400EEBDE0 /* Objects */ = {
@@ -565,6 +570,7 @@
 				2029D9D0283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
 				2000FD3E282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */,
+				2056B6A1283239E300595F23 /* PEMTmxGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +600,7 @@
 				2029D9CE283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
 				2000FD3C282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */,
+				2056B69F283239E300595F23 /* PEMTmxGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +630,7 @@
 				2029D9CF283023E50019FAB4 /* PEMTmxTileSetTileDataAnimationFrame.swift in Sources */,
 				2000FD3D282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
 				205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */,
+				2056B6A0283239E300595F23 /* PEMTmxGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
