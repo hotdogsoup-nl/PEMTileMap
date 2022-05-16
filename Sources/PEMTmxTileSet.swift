@@ -14,6 +14,12 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
         case Bottom = "bottom"
         case BottomRight = "bottomright"
     }
+    
+    enum PEMTmxTileSetType {
+        case SpriteSheet
+        case CollectionOfImages
+    }
+    
     private (set) var firstGid = UInt32(0)
     private (set) var properties : Dictionary<String, Any>?
 
@@ -26,6 +32,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
 
     private var externalSource : String?
     private var spriteSheet : PEMTmxTileSetSpriteSheet?
+    private var tileSetType = PEMTmxTileSetType.CollectionOfImages
     private var firstId = UInt32(0)
     private var lastId = UInt32(0)
     private var idRange: ClosedRange<UInt32> {
@@ -40,7 +47,6 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
         guard let firstGid = attributes[ElementAttributes.FirstGid.rawValue] else { return nil }
 
         super.init()
-
         self.firstGid = UInt32(firstGid)!
         
         externalSource = attributes[ElementAttributes.Source.rawValue]
@@ -101,6 +107,8 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
             #endif
             return
         }
+        
+        tileSetType = .SpriteSheet
         
         if bundlePathForResource(source) != nil {
             if let newSpriteSheet = PEMTmxTileSetSpriteSheet(tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
