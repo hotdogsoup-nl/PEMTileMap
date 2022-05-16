@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
+class PEMTmxLayer : SKNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
     private (set) var properties : Dictionary<String, Any>?
 
@@ -135,12 +135,12 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
                     }
                 } else {
                     #if DEBUG
-                    print("PEMTmxTileLayer: no tile found with gid: \(tileGid) in tileSet: \(tileSet)")
+                    print("PEMTmxLayer: no tile found with gid: \(tileGid) in tileSet: \(tileSet)")
                     #endif
                 }
             } else {
                 #if DEBUG
-                print("PEMTmxTileLayer: no tileSet found for tile with gid: \(tileGid)")
+                print("PEMTmxLayer: no tileSet found for tile with gid: \(tileGid)")
                 #endif
             }
         }
@@ -169,7 +169,7 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles:\(children.count))"
+        return "PEMTmxLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles:\(children.count))"
     }
     #endif
 }

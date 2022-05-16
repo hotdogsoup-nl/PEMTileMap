@@ -48,8 +48,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var doorOpened = false
     
     private var door : SKSpriteNode?
-    private var spawnLayer : PEMTmxTileLayer?
-    private var terrainLayer : PEMTmxTileLayer?
+    private var spawnLayer : PEMTmxLayer?
+    private var terrainLayer : PEMTmxLayer?
     
     // MARK: - Init
     

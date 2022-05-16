@@ -244,7 +244,7 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     
     private func renderLayers() {
         for layer in layers {
-            if let tileLayer = layer as? PEMTmxTileLayer {
+            if let tileLayer = layer as? PEMTmxLayer {
                 if tileLayer.visible {
                     currentZPosition += zPositionLayerDelta
 
