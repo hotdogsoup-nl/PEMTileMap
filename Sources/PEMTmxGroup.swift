@@ -1,6 +1,8 @@
 import SpriteKit
 
-class PEMTmxGroup : NSObject {
+class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
+    private (set) var properties : Dictionary<String, Any>?
+
     private var id = UInt32(0)
     private var name : String?
     private var visible = true
@@ -46,6 +48,12 @@ class PEMTmxGroup : NSObject {
         print("deinit: \(type(of: self))")
         #endif
         #endif
+    }
+    
+    // MARK: - PEMTmxPropertiesProtocol
+    
+    func addProperties(_ newProperties: [PEMTmxProperty]) {
+        properties = convertProperties(newProperties)
     }
     
     // MARK: - Debug
