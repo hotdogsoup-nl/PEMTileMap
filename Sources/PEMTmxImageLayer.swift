@@ -154,7 +154,6 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     
     func addProperties(_ newProperties: [PEMTmxProperty]) {
         properties = convertProperties(newProperties)
-        print(properties)
     }
     
     // MARK: - Debug

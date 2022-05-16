@@ -80,7 +80,6 @@ class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
     
     func addProperties(_ newProperties: [PEMTmxProperty]) {
         properties = convertProperties(newProperties)
-        print(properties)
     }
     
     // MARK: - Debug
