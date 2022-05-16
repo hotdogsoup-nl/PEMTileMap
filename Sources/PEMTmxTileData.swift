@@ -7,7 +7,7 @@ class PEMTmxTileData : NSObject, PEMTmxPropertiesProtocol {
     private (set) var type : String?
     private (set) var probability = UInt32(0)
     private (set) var properties : Dictionary<String, Any>?
-    private (set) var animation : PEMTmxTileSetTileDataAnimation?
+    private (set) var animation : PEMTmxTileAnimation?
 
     private var textureImageSource : String?
     private var tileSizeInPoints = CGSize.zero
@@ -70,8 +70,8 @@ class PEMTmxTileData : NSObject, PEMTmxPropertiesProtocol {
         }
     }
     
-    func addAnimation() -> PEMTmxTileSetTileDataAnimation? {
-        animation = PEMTmxTileSetTileDataAnimation()
+    func addAnimation() -> PEMTmxTileAnimation? {
+        animation = PEMTmxTileAnimation()
         
         return animation
     }

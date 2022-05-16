@@ -230,7 +230,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.Frame.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxTileSetTileDataAnimation {
+            if let currentElement = elementPath.last as? PEMTmxTileAnimation {
                 currentElement.addAnimationFrame(attributes: attributeDict)
                 break
             }
@@ -327,7 +327,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.Animation.rawValue:
-            if elementPath.last is PEMTmxTileSetTileDataAnimation {
+            if elementPath.last is PEMTmxTileAnimation {
                 elementPath.removeLast()
                 break
             }

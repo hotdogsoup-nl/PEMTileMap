@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxTileSetTileDataAnimation : NSObject {
+class PEMTmxTileAnimation : NSObject {
     private (set) var frames : [PEMTmxTileSetTileDataAnimationFrame] = []
     
     deinit {
@@ -25,7 +25,7 @@ class PEMTmxTileSetTileDataAnimation : NSObject {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetTileDataAnimation: frames:\(frames.count))"
+        return "PEMTmxTileAnimation: frames:\(frames.count))"
     }
     #endif
 }

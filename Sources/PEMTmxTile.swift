@@ -4,7 +4,7 @@ class PEMTmxTile : SKSpriteNode {
     var coords : CGPoint?
 
     private (set) var id = UInt32(0)
-    private (set) var animation : PEMTmxTileSetTileDataAnimation?
+    private (set) var animation : PEMTmxTileAnimation?
     private (set) var properties : Dictionary<String, Any>?
 
     private var type : String?
