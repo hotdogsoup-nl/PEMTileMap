@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="21" tileheight="21" infinite="0" backgroundcolor="#5e81a2" nextlayerid="3" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="21" tileheight="21" infinite="0" backgroundcolor="#5e81a2" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" name="Spaced with margin" tilewidth="21" tileheight="21" spacing="2" margin="3" tilecount="480" columns="30">
   <image source="Tiles/tileSet2.png" width="694" height="372"/>
   <tile id="169">
@@ -18,11 +18,12 @@
    </animation>
   </tile>
  </tileset>
- <layer id="1" name="Tile Layer 1" width="10" height="10">
-  <properties>
-   <property name="layer prop" value="gers"/>
-  </properties>
-  <data encoding="csv">
+ <group id="3" name="Group 1" locked="1">
+  <layer id="1" name="Tile Layer 1" width="10" height="10">
+   <properties>
+    <property name="layer prop" value="gers"/>
+   </properties>
+   <data encoding="csv">
 1,0,480,0,0,0,0,0,170,0,
 0,0,0,0,0,0,0,0,0,0,
 0,434,0,0,0,0,0,0,0,0,
@@ -34,5 +35,6 @@
 317,0,227,228,0,0,103,0,0,0,
 4,4,4,4,4,4,4,4,4,4
 </data>
- </layer>
+  </layer>
+ </group>
 </map>
