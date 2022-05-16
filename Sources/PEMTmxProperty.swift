@@ -34,6 +34,16 @@ class PEMTmxProperty : NSObject {
         }
     }
     
+    deinit {
+        #if DEBUG
+        #if os(macOS)
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(type(of: self))")
+        #endif
+        #endif
+    }
+    
     // MARK: - Debug
 
     #if DEBUG
