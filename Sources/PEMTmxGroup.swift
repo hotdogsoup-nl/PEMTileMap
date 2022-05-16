@@ -8,12 +8,15 @@ class PEMTmxGroup : NSObject {
     private var opacity = CGFloat(1)
     private var tintColor : SKColor?
 
-    init?(attributes: Dictionary<String, String>) {
+    private var parentGroup : PEMTmxGroup?
+
+    init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
         guard let value = attributes[ElementAttributes.Id.rawValue] else { return nil }
-        id = UInt32(value)!
-        
         super.init()
-        
+
+        id = UInt32(value)!
+        parentGroup = group
+
         name = attributes[ElementAttributes.Name.rawValue]
         
         if let value = attributes[ElementAttributes.Opacity.rawValue] {
@@ -39,7 +42,7 @@ class PEMTmxGroup : NSObject {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxGroup: \(id), (name: \(name ?? "-"))"
+        return "PEMTmxGroup: \(id), (name: \(name ?? "-"), parent: \(String(describing: parentGroup)))"
     }
     #endif
 }

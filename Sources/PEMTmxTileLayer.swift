@@ -17,10 +17,14 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     
     internal var tileData: [UInt32] = []
     
+    private var parentGroup : PEMTmxGroup?
+    
     // MARK: - Init
 
-    init(attributes: Dictionary<String, String>) {
+    init(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
         super.init()
+        
+        parentGroup = group
         
         if let value = attributes[ElementAttributes.Id.rawValue] {
             id = UInt32(value)!
@@ -165,7 +169,7 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), tiles:\(children.count))"
+        return "PEMTmxTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles:\(children.count))"
     }
     #endif
 }

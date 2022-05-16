@@ -16,11 +16,15 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     private var parallaxFactorY = CGFloat(1)
     private var repeatX = false
     private var repeatY = false
+    
+    private var parentGroup : PEMTmxGroup?
 
     // MARK: - Init
 
-    init(attributes: Dictionary<String, String>) {
+    init(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
         super.init(texture: nil, color: .clear, size: .zero)
+        
+        parentGroup = group
 
         if let value = attributes[ElementAttributes.Id.rawValue] {
             id = UInt32(value)!
@@ -157,7 +161,7 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxImageLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition))"
+        return "PEMTmxImageLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)))"
     }
     #endif
 }
