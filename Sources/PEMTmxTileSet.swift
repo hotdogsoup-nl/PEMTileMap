@@ -170,7 +170,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     
     func tileFor(id: UInt32) -> PEMTmxTile? {
         if let tilesetTileData = tileData.filter({ $0.id == id }).first {
-            if tilesetTileData.usesSpriteSheet && tilesetTileData.texture == nil {
+            if tileSetType == .SpriteSheet && tilesetTileData.texture == nil {
                 tilesetTileData.texture = spriteSheet?.generateTextureFor(tileSetTileData: tilesetTileData)
             }
             
@@ -208,7 +208,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSet: \(name ?? "-"), (file: \(externalSource ?? "-"), firstGid: \(firstGid), firstId: \(firstId), lastId: \(lastId))"
+        return "PEMTmxTileSet: \(name ?? "-"), (type: \(tileSetType), file: \(externalSource ?? "-"), firstGid: \(firstGid), firstId: \(firstId), lastId: \(lastId))"
     }
     #endif
 }
