@@ -12,15 +12,15 @@ class PEMTmxTile : SKSpriteNode {
 
     // MARK: - Init
     
-    init?(tileSetTileData: PEMTmxTileSetTileData) {
-        if let texture = tileSetTileData.texture {
+    init?(tileData: PEMTmxTileData) {
+        if let texture = tileData.texture {
             super.init(texture: texture, color: .clear, size: texture.size())
             
-            id = tileSetTileData.id
-            type = tileSetTileData.type
-            probability = tileSetTileData.probability
-            animation = tileSetTileData.animation
-            properties = tileSetTileData.properties
+            id = tileData.id
+            type = tileData.type
+            probability = tileData.probability
+            animation = tileData.animation
+            properties = tileData.properties
             
             return
         }

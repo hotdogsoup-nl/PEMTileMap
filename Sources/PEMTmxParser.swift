@@ -203,7 +203,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 break
             }
             
-            if let currentElement = elementPath.last as? PEMTmxTileSetTileData {
+            if let currentElement = elementPath.last as? PEMTmxTileData {
                 currentElement.addTileImage(attributes: attributeDict)
                 break
             }
@@ -215,14 +215,14 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.Tile.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
-                if let tileSetTileData = currentElement.addOrUpdateTileData(attributes: attributeDict) {
-                    elementPath.append(tileSetTileData)
+                if let tileData = currentElement.addOrUpdateTileData(attributes: attributeDict) {
+                    elementPath.append(tileData)
                 }
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.Animation.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxTileSetTileData {
+            if let currentElement = elementPath.last as? PEMTmxTileData {
                 if let animation = currentElement.addAnimation() {
                     elementPath.append(animation)
                 }
@@ -321,7 +321,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Image.rawValue:
             break
         case Elements.Tile.rawValue:
-            if elementPath.last is PEMTmxTileSetTileData {
+            if elementPath.last is PEMTmxTileData {
                 elementPath.removeLast()
                 break
             }

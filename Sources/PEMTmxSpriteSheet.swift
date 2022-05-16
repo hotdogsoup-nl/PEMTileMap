@@ -64,18 +64,18 @@ class PEMTmxSpriteSheet : NSObject {
         
     // MARK: - Public
     
-    func createTileSetTileData(id: UInt32) -> PEMTmxTileSetTileData? {
+    func createTileData(id: UInt32) -> PEMTmxTileData? {
         let tileAttributes = tileAttributes(fromId: id)
 
         if contains(id: tileAttributes.id) {
-            return PEMTmxTileSetTileData(id: id, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
+            return PEMTmxTileData(id: id, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
         }
         
         return nil
     }
 
-    func generateTextureFor(tileSetTileData: PEMTmxTileSetTileData) -> SKTexture? {
-        let tileAttributes = tileAttributes(fromId: tileSetTileData.id)
+    func generateTextureFor(tileData: PEMTmxTileData) -> SKTexture? {
+        let tileAttributes = tileAttributes(fromId: tileData.id)
         
         let spriteSheetCoords = CGPoint(x: Int(rowFrom(id: tileAttributes.id)), y: Int(columnFrom(id: tileAttributes.id)))
         var rowInPoints = (((tileSizeInPoints.height + CGFloat(spacingInPoints)) * spriteSheetCoords.x) + CGFloat(marginInPoints)) / textureImageSize!.height

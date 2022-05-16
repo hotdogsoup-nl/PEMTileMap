@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
+class PEMTmxTileData : NSObject, PEMTmxPropertiesProtocol {
     var texture : SKTexture?
 
     private (set) var id = UInt32(0)
@@ -65,7 +65,7 @@ class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
             texture = SKTexture(imageNamed: path)
         } else {
             #if DEBUG
-            print("PEMTmxTileSetTileData: image file \(source) not found for tile with id: \(id)")
+            print("PEMTmxTileData: image file \(source) not found for tile with id: \(id)")
             #endif
         }
     }
@@ -86,7 +86,7 @@ class PEMTmxTileSetTileData : NSObject, PEMTmxPropertiesProtocol {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetTileData: \(id), (\(textureImageSource ?? "-"))"
+        return "PEMTmxTileData: \(id), (\(textureImageSource ?? "-"))"
     }
     #endif
 }
