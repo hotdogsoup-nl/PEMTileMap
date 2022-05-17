@@ -7,17 +7,12 @@
   <property name="float prop" type="float" value="25.1"/>
   <property name="int prop" type="int" value="16"/>
   <property name="object prop" type="object" value="1"/>
-  <property name="string prop" value="stringnieweu regel"/>
+  <property name="string prop">een
+twee</property>
  </properties>
  <tileset firstgid="1" name="Collection" tilewidth="64" tileheight="64" tilecount="5" columns="0">
   <grid orientation="orthogonal" width="16" height="16"/>
-  <properties>
-   <property name="tileset prop" value="proppo"/>
-  </properties>
   <tile id="10" type="its a type">
-   <properties>
-    <property name="tile prop" value="klopt"/>
-   </properties>
    <image width="16" height="16" source="Tiles/disk_01.png"/>
   </tile>
   <tile id="11">
@@ -39,7 +34,9 @@
  </tileset>
  <layer id="1" name="Tile Layer 1" width="12" height="16">
   <properties>
-   <property name="layer prop" value="quecque"/>
+   <property name="korte string" value="kort"/>
+   <property name="lange string">lange
+string</property>
   </properties>
   <data encoding="csv">
 0,12,11,11,11,11,11,11,11,11,12,0,
