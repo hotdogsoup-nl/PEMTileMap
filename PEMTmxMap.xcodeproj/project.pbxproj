@@ -87,9 +87,9 @@
 		205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
 		205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
 		205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
-		205BF69A282687A800077DB2 /* SKColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Hex.swift */; };
-		205BF69B282687A800077DB2 /* SKColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Hex.swift */; };
-		205BF69C282687A800077DB2 /* SKColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Hex.swift */; };
+		205BF69A282687A800077DB2 /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Extension.swift */; };
+		205BF69B282687A800077DB2 /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Extension.swift */; };
+		205BF69C282687A800077DB2 /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Extension.swift */; };
 		205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTmxTileSet.swift */; };
 		205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTmxTileSet.swift */; };
 		205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTmxTileSet.swift */; };
@@ -160,7 +160,7 @@
 		20562E3E28252C00005CE60A /* level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level1.tmx; sourceTree = "<group>"; };
 		2056B69E283239E300595F23 /* PEMTmxGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxGroup.swift; sourceTree = "<group>"; };
 		205BF67028266D4200077DB2 /* PEMTmxParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxParser.swift; sourceTree = "<group>"; };
-		205BF699282687A800077DB2 /* SKColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKColor+Hex.swift"; sourceTree = "<group>"; };
+		205BF699282687A800077DB2 /* SKColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKColor+Extension.swift"; sourceTree = "<group>"; };
 		205BF6A82826A85F00077DB2 /* Tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tiles; sourceTree = "<group>"; };
 		205BF6AC2826A95600077DB2 /* level3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level3.tmx; sourceTree = "<group>"; };
 		205C86332823D8D800360A29 /* Objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -339,7 +339,7 @@
 			children = (
 				20D0D3122828111B001E505D /* Data+Compression.swift */,
 				2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */,
-				205BF699282687A800077DB2 /* SKColor+Hex.swift */,
+				205BF699282687A800077DB2 /* SKColor+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -565,7 +565,7 @@
 				2029D9CC283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */,
 				2091DE34283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
 				2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */,
-				205BF69C282687A800077DB2 /* SKColor+Hex.swift in Sources */,
+				205BF69C282687A800077DB2 /* SKColor+Extension.swift in Sources */,
 				205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2000FD36282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
@@ -596,7 +596,7 @@
 				2029D9CA283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */,
 				2091DE32283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
 				207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */,
-				205BF69A282687A800077DB2 /* SKColor+Hex.swift in Sources */,
+				205BF69A282687A800077DB2 /* SKColor+Extension.swift in Sources */,
 				205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				2000FD34282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
@@ -627,7 +627,7 @@
 				2029D9CB283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */,
 				2091DE33283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
 				20CA139B281815DD00797A7C /* GameViewController.swift in Sources */,
-				205BF69B282687A800077DB2 /* SKColor+Hex.swift in Sources */,
+				205BF69B282687A800077DB2 /* SKColor+Extension.swift in Sources */,
 				205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				2000FD35282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,

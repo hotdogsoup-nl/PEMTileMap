@@ -79,7 +79,7 @@ class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
         
         if let value = parentGroup?.tintColor {
             if tintColor != nil {
-                tintColor = tintColor?.blend(colors: [value])
+                tintColor = tintColor?.multiplyColor(value)
             } else {
                 tintColor = value
             }

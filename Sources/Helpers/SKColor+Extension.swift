@@ -1,18 +1,14 @@
 import SpriteKit
 
 extension SKColor {
-    public func blend(colors: [SKColor]) -> SKColor {
-        let numberOfColors = CGFloat(colors.count)
-        var (red, green, blue, alpha) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
-
-        let componentsSum = colors.reduce((red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: CGFloat())) { temp, color in
-            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-            return (temp.red+red, temp.green + green, temp.blue + blue, temp.alpha+alpha)
-        }
-        return SKColor(red: componentsSum.red / numberOfColors,
-                           green: componentsSum.green / numberOfColors,
-                           blue: componentsSum.blue / numberOfColors,
-                           alpha: componentsSum.alpha / numberOfColors)
+    func multiplyColor(_ color: SKColor) -> SKColor {
+        var (r, g, b, a) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
+        var (multR, multG, multB, multA) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
+        
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        color.getRed(&multR, green: &multG, blue: &multB, alpha: &multA)
+        
+        return SKColor(red: r * multR, green: g * multG, blue: b * multB, alpha: a * multA)
     }
     
     public convenience init(hexString: String) {
