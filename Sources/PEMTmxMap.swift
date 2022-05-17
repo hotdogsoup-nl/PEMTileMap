@@ -296,6 +296,8 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
                 if let objectLayer = layer as? PEMTmxObjectGroup {
                     if objectLayer.visible {
                         currentZPosition += zPositionLayerDelta
+                        
+                        objectLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInPoints: mapSizeInPointsFromTileSize, textureFilteringMode:textureFilteringMode)
                         objectLayer.zPosition = currentZPosition
                         
                         addChild(objectLayer)

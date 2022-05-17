@@ -87,6 +87,27 @@ class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
         }
     }
     
+    // MARK: - Public
+
+    func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
+        
+        alpha = opacity
+        
+        position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
+        
+        
+        for object in objects {
+
+            if let objectNode = nodeFor(object) {
+                addChild(objectNode)
+            }
+            
+        }
+
+
+
+    }
+    
     // MARK: - PEMTmxPropertiesProtocol
     
     func addProperties(_ newProperties: [PEMTmxProperty]) {
@@ -94,6 +115,10 @@ class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
     }
     
     // MARK: - Private
+    
+    private func nodeFor(_ object : PEMTmxObjectData) -> SKNode? {
+        return nil
+    }
     
     private func applyParentGroupAttributes() {
         if parentGroup == nil {
