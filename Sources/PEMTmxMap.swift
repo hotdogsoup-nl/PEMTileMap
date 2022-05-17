@@ -111,12 +111,28 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
         
         parseExternalFiles()
         
+        #if DEBUG
+        let parseTimeInterval = -parseStartTime.timeIntervalSinceNow
+        #endif
+
         mapSource = mapName
         self.baseZPosition = baseZPosition
         self.zPositionLayerDelta = zPositionLayerDelta
         self.textureFilteringMode = textureFilteringMode
+        self.showObjectGroups = showObjectGroups
+        
+        #if DEBUG
+        let renderStartTime = Date()
+        #endif
         
         renderMap()
+        
+        #if DEBUG
+        let renderTimeInterval = -renderStartTime.timeIntervalSinceNow
+        
+        print("Parsed files in:", parseTimeInterval.stringValue())
+        print("Rendered map in:", renderTimeInterval.stringValue())
+        #endif
     }
     
     // MARK: - Setup
