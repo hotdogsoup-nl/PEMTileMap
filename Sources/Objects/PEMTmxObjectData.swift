@@ -35,7 +35,11 @@ class PEMTmxObjectData : NSObject {
         
         if let width = attributes[ElementAttributes.Width.rawValue],
            let height = attributes[ElementAttributes.Height.rawValue] {
-            sizeInPoints = CGSize(width: Int(width)!, height: Int(height)!)
+            
+            let widthString : NSString = width as NSString
+            let heightString : NSString = height as NSString
+
+            sizeInPoints = CGSize(width: CGFloat(widthString.doubleValue), height: CGFloat(heightString.doubleValue))
         }
         
         if let value = attributes[ElementAttributes.Opacity.rawValue] {
