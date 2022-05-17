@@ -5,23 +5,26 @@ import SpriteKit
 func convertProperties(_ newProperties: [PEMTmxProperty]) -> Dictionary<String, Any>? {
     var properties : Dictionary<String, Any>? = [:]
     for property in newProperties {
-        switch property.type {
-        
-        case .bool:
-            properties?[property.name] = Bool(property.value)
-        case .color:
-            properties?[property.name] = SKColor.init(hexString: property.value)
-        case .int:
-            properties?[property.name] = Int(property.value)!
-        case .file:
-            properties?[property.name] = property.value
-        case .float:
-            let valueString : NSString = property.value as NSString
-            properties?[property.name] = CGFloat(valueString.doubleValue)
-        case .object:
-            properties?[property.name] = UInt32(property.value)!
-        case .string:
-            properties?[property.name] = property.value
+        if let value = property.value {
+
+            switch property.type {
+            
+            case .bool:
+                properties?[property.name] = Bool(value)
+            case .color:
+                properties?[property.name] = SKColor.init(hexString: value)
+            case .int:
+                properties?[property.name] = Int(value)!
+            case .file:
+                properties?[property.name] = value
+            case .float:
+                let valueString : NSString = value as NSString
+                properties?[property.name] = CGFloat(valueString.doubleValue)
+            case .object:
+                properties?[property.name] = UInt32(value)!
+            case .string:
+                properties?[property.name] = value
+            }
         }
     }
     

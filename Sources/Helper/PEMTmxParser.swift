@@ -159,6 +159,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     
     func parserDidStartDocument(_ parser: XMLParser) {
         elementPath.removeAll()
+        currentParseString.removeAll()
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
@@ -247,6 +248,8 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.data.rawValue:
+            currentParseString.removeAll()
+
             if let value = attributeDict[ElementAttributes.encoding.rawValue] {
                 if let encoding = DataEncoding(rawValue: value) {
                     dataEncoding = encoding
@@ -266,8 +269,10 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 }
             }
         case Elements.property.rawValue:
+            currentParseString.removeAll()
             if let property = PEMTmxProperty(attributes: attributeDict) {
                 currentProperties?.append(property)
+                elementPath.append(property)
             }
         case Elements.tileOffset.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
@@ -389,7 +394,14 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 parser.abortParsing()
             }
         case Elements.property.rawValue:
-            break
+            if let currentElement = elementPath.last as? PEMTmxProperty {
+                if currentParseString.count > 0 && currentElement.type == .string {
+                    currentElement.setValue(currentParseString)
+                }
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.tileOffset.rawValue:
             break
         case Elements.object.rawValue:

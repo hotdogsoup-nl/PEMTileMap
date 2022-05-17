@@ -13,18 +13,17 @@ enum PropertyType : String {
 class PEMTmxProperty : NSObject {
     private (set) var name : String
     private (set) var type = PropertyType.string
-    private (set) var value : String
+    private (set) var value : String?
 
     init?(attributes: Dictionary<String, String>) {
         guard let propertyName = attributes[ElementAttributes.name.rawValue] else { return nil }
-        guard let propertyValue = attributes[ElementAttributes.value.rawValue] else { return nil }
         name = propertyName
-        value = propertyValue
-        
         super.init()
         
-        if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
-            if let propertyType = PropertyType(rawValue: value) {
+        value = attributes[ElementAttributes.value.rawValue]
+        
+        if let propertyValue = attributes[ElementAttributes.typeAttribute.rawValue] {
+            if let propertyType = PropertyType(rawValue: propertyValue) {
                 type = propertyType
             } else {
                 #if DEBUG
@@ -44,11 +43,17 @@ class PEMTmxProperty : NSObject {
         #endif
     }
     
+    // MARK: - Setup
+    
+    func setValue(_ text: String) {
+        value = text
+    }
+    
     // MARK: - Debug
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxProperty: name: \(name), (type: \(type), value: \(value))"
+        return "PEMTmxProperty: name: \(name), (type: \(type), value: \(value ?? "-"))"
     }
     #endif
 }
