@@ -34,7 +34,6 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] image layers
 - [X] layer groups
 - [X] layer tinting
-- [ ] group tinting on top of layer tinting
 - [X] flipped tiles
 - [X] animated tiles
 - [X] properties
