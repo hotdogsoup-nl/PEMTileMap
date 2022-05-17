@@ -120,9 +120,9 @@
 		20CA139F2818168600797A7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* GameController.swift */; };
 		20CA158228181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		20CA158328181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
-		20D0D30F2827EA68001E505D /* PEMTmxLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxLayer.swift */; };
-		20D0D3102827EA69001E505D /* PEMTmxLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxLayer.swift */; };
-		20D0D3112827EA69001E505D /* PEMTmxLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxLayer.swift */; };
+		20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
+		20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
+		20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
 		20D0D3132828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
 		20D0D3142828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
 		20D0D3152828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
@@ -154,7 +154,7 @@
 		2055FE64282FC3640020104C /* animated1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animated1.png; sourceTree = "<group>"; };
 		2055FE65282FC3640020104C /* animated2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animated2.png; sourceTree = "<group>"; };
 		2055FE6C2830049A0020104C /* level5.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level5.tmx; sourceTree = "<group>"; };
-		20562E11282521C1005CE60A /* PEMTmxLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxLayer.swift; sourceTree = "<group>"; };
+		20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileLayer.swift; sourceTree = "<group>"; };
 		20562E13282521C1005CE60A /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
 		20562E15282521C1005CE60A /* PEMTmxTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSet.swift; sourceTree = "<group>"; };
 		20562E3E28252C00005CE60A /* level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level1.tmx; sourceTree = "<group>"; };
@@ -233,7 +233,6 @@
 				209AB9A72827C8510021A297 /* Helpers */,
 				2056B69E283239E300595F23 /* PEMTmxGroup.swift */,
 				2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */,
-				20562E11282521C1005CE60A /* PEMTmxLayer.swift */,
 				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
 				2045AEED2833A4A600614F38 /* PEMTmxObjectLayer.swift */,
 				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
@@ -243,6 +242,7 @@
 				2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */,
 				2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */,
 				2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */,
+				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
 				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
 			);
 			path = Sources;
@@ -570,7 +570,7 @@
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2000FD36282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
-				20D0D3112827EA69001E505D /* PEMTmxLayer.swift in Sources */,
+				20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
 				2041C82E282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3152828111B001E505D /* Data+Compression.swift in Sources */,
 				2029D9D0283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
@@ -601,7 +601,7 @@
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				2000FD34282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				20CA139E2818168600797A7C /* GameController.swift in Sources */,
-				20D0D30F2827EA68001E505D /* PEMTmxLayer.swift in Sources */,
+				20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */,
 				2041C82C282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3132828111B001E505D /* Data+Compression.swift in Sources */,
 				2029D9CE283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
@@ -632,7 +632,7 @@
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				2000FD35282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				20CA139F2818168600797A7C /* GameController.swift in Sources */,
-				20D0D3102827EA69001E505D /* PEMTmxLayer.swift in Sources */,
+				20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
 				2041C82D282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
 				20D0D3142828111B001E505D /* Data+Compression.swift in Sources */,
 				2029D9CF283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,

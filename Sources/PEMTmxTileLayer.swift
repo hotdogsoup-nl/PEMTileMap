@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxLayer : SKNode, PEMTmxPropertiesProtocol {
+class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
     private (set) var properties : Dictionary<String, Any>?
 
