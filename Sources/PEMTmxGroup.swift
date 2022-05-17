@@ -29,14 +29,14 @@ class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
         if let value = attributes[ElementAttributes.Visible.rawValue] {
             visible = value == "1"
         }
-        
-        if let value = attributes[ElementAttributes.TintColor.rawValue] {
-            tintColor = SKColor.init(hexString: value)
-        }
-        
+                
         if let dx = attributes[ElementAttributes.OffsetX.rawValue],
            let dy = attributes[ElementAttributes.OffsetY.rawValue] {
             offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
+        }
+        
+        if let value = attributes[ElementAttributes.TintColor.rawValue] {
+            tintColor = SKColor.init(hexString: value)
         }
         
         applyParentGroupAttributes()
