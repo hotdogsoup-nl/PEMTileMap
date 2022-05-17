@@ -235,7 +235,7 @@
 			path = tvOS;
 			sourceTree = "<group>";
 		};
-		2045AEF62833CBAB00614F38 /* Objects */ = {
+		2045AEF62833CBAB00614F38 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				2056B69E283239E300595F23 /* PEMTmxGroup.swift */,
@@ -247,14 +247,14 @@
 				2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */,
 				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
 			);
-			path = Objects;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		206E238B282667560039C4FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				209AB9A72827C8510021A297 /* Helpers */,
-				2045AEF62833CBAB00614F38 /* Objects */,
+				209AB9A72827C8510021A297 /* Helper */,
+				2045AEF62833CBAB00614F38 /* Model */,
 				2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */,
 				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
 				2045AEED2833A4A600614F38 /* PEMTmxObjectGroup.swift */,
@@ -350,7 +350,7 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		209AB9A72827C8510021A297 /* Helpers */ = {
+		209AB9A72827C8510021A297 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
 				20D0D3122828111B001E505D /* Data+Compression.swift */,
@@ -359,7 +359,7 @@
 				205BF699282687A800077DB2 /* SKColor+Extension.swift */,
 				2045AEF72833D0B500614F38 /* TimeInterval+Extension.swift */,
 			);
-			path = Helpers;
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		20C9979028227A3400EEBDE0 /* Objects */ = {
