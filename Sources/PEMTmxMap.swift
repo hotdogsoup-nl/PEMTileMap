@@ -292,21 +292,19 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
                 continue
             }
 
-            if !showObjectGroups {
-                continue
-            }
-
-            if let objectLayer = layer as? PEMTmxObjectGroup {
-                if objectLayer.visible {
-                    currentZPosition += zPositionLayerDelta
-                    objectLayer.zPosition = currentZPosition
-                    
-                    addChild(objectLayer)
-                    #if DEBUG
-                    print(layer)
-                    #endif
+            if showObjectGroups {
+                if let objectLayer = layer as? PEMTmxObjectGroup {
+                    if objectLayer.visible {
+                        currentZPosition += zPositionLayerDelta
+                        objectLayer.zPosition = currentZPosition
+                        
+                        addChild(objectLayer)
+                        #if DEBUG
+                        print(layer)
+                        #endif
+                    }
+                    continue
                 }
-                continue
             }
         }
     }
