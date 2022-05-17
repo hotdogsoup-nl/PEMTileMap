@@ -54,8 +54,10 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     private var compressionLevel = Int(-1)
     private var nextLayerId = UInt(0)
     private var nextObjectId = UInt(0)
+    
     private var renderOrder = MapRenderOrder.RightDown
     private var textureFilteringMode = SKTextureFilteringMode.nearest
+    private var showObjectGroups = false
 
     private var baseZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
@@ -85,8 +87,12 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     /// - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is 20.
     /// - parameter textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
     /// - returns: `PEMTmxMap?` tilemap node.
-    init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest) {
+    init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest, showObjectGroups: Bool = false) {
         super.init()
+        
+        #if DEBUG
+        let parseStartTime = Date()
+        #endif
 
         if let url = bundleURLForResource(mapName),
            let parser = PEMTmxParser(map: self, fileURL: url) {
@@ -251,8 +257,10 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
                     print(layer)
                     #endif
                 }
+                
+                continue
             }
-            
+
             if let imageLayer = layer as? PEMTmxImageLayer {
                 if imageLayer.visible {
                     currentZPosition += zPositionLayerDelta
@@ -265,6 +273,24 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
                     print(layer)
                     #endif
                 }
+                continue
+            }
+
+            if !showObjectGroups {
+                continue
+            }
+
+            if let objectLayer = layer as? PEMTmxObjectGroup {
+                if objectLayer.visible {
+                    currentZPosition += zPositionLayerDelta
+                    objectLayer.zPosition = currentZPosition
+                    
+                    addChild(objectLayer)
+                    #if DEBUG
+                    print(layer)
+                    #endif
+                }
+                continue
             }
         }
     }
