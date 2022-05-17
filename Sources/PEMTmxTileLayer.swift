@@ -21,15 +21,13 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     
     // MARK: - Init
 
-    init(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
+    init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
+        guard let layerId = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        id = UInt32(layerId)!
+        
         super.init()
         
         parentGroup = group
-                
-        if let value = attributes[ElementAttributes.Id.rawValue] {
-            id = UInt32(value)!
-        }
-        
         layerName = attributes[ElementAttributes.Name.rawValue]
         
         if let x = attributes[ElementAttributes.X.rawValue],
@@ -176,11 +174,7 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
         if let value = parentGroup?.opacity {
             opacity *= CGFloat(value)
         }
-        
-        if let value = parentGroup?.visible {
-            visible = visible && value
-        }
-        
+                
         if let value = parentGroup?.offSetInPoints {
             offSetInPoints = CGPoint(x: offSetInPoints.x + value.x, y: offSetInPoints.y + value.y)
         }

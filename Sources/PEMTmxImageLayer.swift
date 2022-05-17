@@ -169,11 +169,7 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
         if let value = parentGroup?.opacity {
             opacity *= CGFloat(value)
         }
-        
-        if let value = parentGroup?.visible {
-            visible = visible && value
-        }
-        
+                
         if let value = parentGroup?.offSetInPoints {
             offSetInPoints = CGPoint(x: offSetInPoints.x + value.x, y: offSetInPoints.y + value.y)
         }
