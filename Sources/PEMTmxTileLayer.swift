@@ -192,7 +192,7 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles:\(children.count))"
+        return "PEMTmxTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles: \(children.count))"
     }
     #endif
 }

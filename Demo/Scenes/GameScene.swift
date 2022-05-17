@@ -159,7 +159,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let mapName = maps[currentMapIndex]
         currentMapNameLabel?.text = mapName
 
-        if let newMap = PEMTmxMap(mapName : mapName) {
+        if let newMap = PEMTmxMap(mapName: mapName, showObjectGroups: true) {
             if newMap.backgroundColor != nil {
                 backgroundColor = newMap.backgroundColor!
             } else {

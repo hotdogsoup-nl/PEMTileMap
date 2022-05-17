@@ -5,7 +5,7 @@ internal enum DrawOrder : String {
     case Index = "index"
 }
 
-class PEMTmxObjectLayer : NSObject, PEMTmxPropertiesProtocol {
+class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
     private (set) var properties : Dictionary<String, Any>?
     private (set) var opacity = CGFloat(1.0)
     private (set) var visible = true
@@ -14,8 +14,10 @@ class PEMTmxObjectLayer : NSObject, PEMTmxPropertiesProtocol {
     private (set) var color : SKColor?
 
     private var id = UInt32(0)
-    private var name : String?
+    private var groupName : String?
     private var drawOrder = DrawOrder.TopDown
+    
+    internal var objects: [PEMTmxObjectData] = []
 
     private var parentGroup : PEMTmxGroup?
 
@@ -26,7 +28,7 @@ class PEMTmxObjectLayer : NSObject, PEMTmxPropertiesProtocol {
         id = UInt32(groupId)!
         parentGroup = group
 
-        name = attributes[ElementAttributes.Name.rawValue]
+        groupName = attributes[ElementAttributes.Name.rawValue]
         
         if let value = attributes[ElementAttributes.Opacity.rawValue] {
             let valueString : NSString = value as NSString
@@ -59,10 +61,12 @@ class PEMTmxObjectLayer : NSObject, PEMTmxPropertiesProtocol {
                 #endif
             }
         }
-
-    
         
         applyParentGroupAttributes()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -73,6 +77,14 @@ class PEMTmxObjectLayer : NSObject, PEMTmxPropertiesProtocol {
         print("deinit: \(type(of: self))")
         #endif
         #endif
+    }
+    
+    // MARK: - Setup
+        
+    func addObject(attributes: Dictionary<String, String>) {
+        if let object = PEMTmxObjectData(attributes: attributes) {
+            objects.append(object)
+        }
     }
     
     // MARK: - PEMTmxPropertiesProtocol
@@ -113,7 +125,7 @@ class PEMTmxObjectLayer : NSObject, PEMTmxPropertiesProtocol {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxObjectGroup: \(id), (name: \(name ?? "-"), parent: \(String(describing: parentGroup)))"
+        return "PEMTmxObjectGroup: \(id), (name: \(groupName ?? "-"), parent: \(String(describing: parentGroup)), objects: \(objects.count))"
     }
     #endif
 }

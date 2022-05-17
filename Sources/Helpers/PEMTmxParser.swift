@@ -10,6 +10,7 @@ enum Elements : String {
     case ImageLayer = "imagelayer"
     case Layer = "layer"
     case Map = "map"
+    case Object = "object"
     case ObjectGroup = "objectgroup"
     case Properties = "properties"
     case Property = "property"
@@ -30,6 +31,7 @@ enum ElementAttributes : String {
     case Encoding = "encoding"
     case FirstGid = "firstgid"
     case Format = "format"
+    case Gid = "gid"
     case Height = "height"
     case HexSideLength = "hexsidelength"
     case Id = "id"
@@ -179,13 +181,15 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
         case Elements.Layer.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
-            let tileLayer = PEMTmxTileLayer(attributes: attributeDict, group:currentGroup)
-            currentMap?.layers.append(tileLayer)
-            elementPath.append(tileLayer)
+            if let tileLayer = PEMTmxTileLayer(attributes: attributeDict, group:currentGroup) {
+                currentMap?.layers.append(tileLayer)
+                elementPath.append(tileLayer)
+            }
         case Elements.ObjectGroup.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
-            if let group = PEMTmxObjectLayer(attributes: attributeDict, group:currentGroup) {
-                elementPath.append(group)
+            if let groupLayer = PEMTmxObjectGroup(attributes: attributeDict, group:currentGroup) {
+                currentMap?.layers.append(groupLayer)
+                elementPath.append(groupLayer)
             }
             break
         case Elements.ImageLayer.rawValue:
@@ -271,6 +275,12 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.Object.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxObjectGroup {
+                currentElement.addObject(attributes: attributeDict)
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         default:
             #if DEBUG
             print("PEMTmxParser: unsupported TMX element name: <\(elementName)>")
@@ -301,7 +311,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.ObjectGroup.rawValue:
-            if elementPath.last is PEMTmxObjectLayer {
+            if elementPath.last is PEMTmxObjectGroup {
                 elementPath.removeLast()
                 break
             }
@@ -381,6 +391,8 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.Property.rawValue:
             break
         case Elements.TileOffset.rawValue:
+            break
+        case Elements.Object.rawValue:
             break
         default:
             #if DEBUG
