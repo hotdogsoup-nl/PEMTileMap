@@ -15,6 +15,7 @@ enum Elements : String {
     case Property = "property"
     case Template = "template"
     case Tile = "tile"
+    case TileOffset = "tileoffset"
     case TileSet = "tileset"
 }
 
@@ -258,6 +259,12 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             if let property = PEMTmxProperty(attributes: attributeDict) {
                 currentProperties?.append(property)
             }
+        case Elements.TileOffset.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxTileSet {
+                currentElement.setTileOffset(attributes: attributeDict)
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         default:
             #if DEBUG
             print("PEMTmxParser: unsupported TMX element name: <\(elementName)>")
@@ -362,6 +369,8 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 parser.abortParsing()
             }
         case Elements.Property.rawValue:
+            break
+        case Elements.TileOffset.rawValue:
             break
         default:
             #if DEBUG

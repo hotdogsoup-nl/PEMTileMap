@@ -22,6 +22,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     
     private (set) var firstGid = UInt32(0)
     private (set) var properties : Dictionary<String, Any>?
+    private (set) var tileOffSetInPoints = CGPoint.zero
 
     private var name : String?
     private var tileSizeInPoints = CGSize.zero
@@ -141,6 +142,13 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
         }
                 
         return nil
+    }
+    
+    func setTileOffset(attributes: Dictionary<String, String>) {
+        if let dx = attributes[ElementAttributes.X.rawValue],
+           let dy = attributes[ElementAttributes.Y.rawValue] {
+            tileOffSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
+        }
     }
     
     // MARK: - Public
