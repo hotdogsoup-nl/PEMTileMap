@@ -6,6 +6,6 @@ extension TimeInterval{
         let s = Int(self) % 60
         let mn = (Int(self) / 60) % 60
         
-        return String(format: "%0.2d:%0.2d:%0.3d", mn, s, ms)
+        return String(format: "%0.2d'%0.2d\"%0.3d", mn, s, ms)
     }
 }
