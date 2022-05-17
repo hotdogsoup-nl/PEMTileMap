@@ -1,8 +1,8 @@
 import SpriteKit
 
 internal enum DrawOrder : String {
-    case TopDown = "topdown"
-    case Index = "index"
+    case index = "index"
+    case topDown = "topdown"
 }
 
 class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
@@ -15,44 +15,44 @@ class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
 
     private var id = UInt32(0)
     private var groupName : String?
-    private var drawOrder = DrawOrder.TopDown
+    private var drawOrder = DrawOrder.topDown
     
     internal var objects: [PEMTmxObjectData] = []
 
     private var parentGroup : PEMTmxGroup?
 
     init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
-        guard let groupId = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }
         super.init()
 
         id = UInt32(groupId)!
         parentGroup = group
 
-        groupName = attributes[ElementAttributes.Name.rawValue]
+        groupName = attributes[ElementAttributes.name.rawValue]
         
-        if let value = attributes[ElementAttributes.Opacity.rawValue] {
+        if let value = attributes[ElementAttributes.opacity.rawValue] {
             let valueString : NSString = value as NSString
             opacity = CGFloat(valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.Visible.rawValue] {
+        if let value = attributes[ElementAttributes.visible.rawValue] {
             visible = value == "1"
         }
                 
-        if let dx = attributes[ElementAttributes.OffsetX.rawValue],
-           let dy = attributes[ElementAttributes.OffsetY.rawValue] {
+        if let dx = attributes[ElementAttributes.offsetX.rawValue],
+           let dy = attributes[ElementAttributes.offsetY.rawValue] {
             offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
         
-        if let value = attributes[ElementAttributes.TintColor.rawValue] {
+        if let value = attributes[ElementAttributes.tintColor.rawValue] {
             tintColor = SKColor.init(hexString: value)
         }
         
-        if let value = attributes[ElementAttributes.Color.rawValue] {
+        if let value = attributes[ElementAttributes.color.rawValue] {
             color = SKColor.init(hexString: value)
         }
         
-        if let value = attributes[ElementAttributes.DrawOrder.rawValue] {
+        if let value = attributes[ElementAttributes.drawOrder.rawValue] {
             if let groupRenderOrder = DrawOrder(rawValue: value) {
                 drawOrder = groupRenderOrder
             } else {
@@ -101,7 +101,6 @@ class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
             if let objectNode = nodeFor(object) {
                 addChild(objectNode)
             }
-            
         }
 
 

@@ -3,21 +3,21 @@ import SpriteKit
 
 class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     enum ObjectAlignment: String {
-        case Unspecified = "unspecified"
-        case TopLeft = "topleft"
-        case Top = "top"
-        case TopRight = "topright"
-        case Left = "left"
-        case Center = "center"
-        case Right = "right"
-        case BottomLeft = "bottomleft"
-        case Bottom = "bottom"
-        case BottomRight = "bottomright"
+        case bottom = "bottom"
+        case bottomLeft = "bottomleft"
+        case bottomRight = "bottomright"
+        case center = "center"
+        case left = "left"
+        case right = "right"
+        case top = "top"
+        case topLeft = "topleft"
+        case topRight = "topright"
+        case unspecified = "unspecified"
     }
     
     enum PEMTmxTileSetType {
-        case SpriteSheet
-        case CollectionOfImages
+        case collectionOfImages
+        case spriteSheet
     }
     
     private (set) var firstGid = UInt32(0)
@@ -27,13 +27,13 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     private var name : String?
     private var tileSizeInPoints = CGSize.zero
     private var tileCount = UInt(0)
-    private var objectAlignment = ObjectAlignment.Unspecified // unsupported
+    private var objectAlignment = ObjectAlignment.unspecified // unsupported
     private var spacingInPoints = UInt(0)
     private var marginInPoints = UInt(0)
 
     private var externalSource : String?
     private var spriteSheet : PEMTmxSpriteSheet?
-    private var tileSetType = PEMTmxTileSetType.CollectionOfImages
+    private var tileSetType = PEMTmxTileSetType.collectionOfImages
     private var firstId = UInt32(0)
     private var lastId = UInt32(0)
     private var idRange: ClosedRange<UInt32> {
@@ -45,12 +45,12 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     // MARK: - Init
     
     init?(attributes: Dictionary<String, String>) {
-        guard let firstGid = attributes[ElementAttributes.FirstGid.rawValue] else { return nil }
+        guard let firstGid = attributes[ElementAttributes.firstGid.rawValue] else { return nil }
 
         super.init()
         self.firstGid = UInt32(firstGid)!
         
-        externalSource = attributes[ElementAttributes.Source.rawValue]
+        externalSource = attributes[ElementAttributes.source.rawValue]
         if externalSource == nil {
             addAttributes(attributes)
         }
@@ -69,26 +69,26 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     // MARK: - Setup
     
     func addAttributes(_ attributes: Dictionary<String, String>) {
-        name = attributes[ElementAttributes.Name.rawValue]
+        name = attributes[ElementAttributes.name.rawValue]
 
-        if let tilewidth = attributes[ElementAttributes.TileWidth.rawValue],
-           let tileheight = attributes[ElementAttributes.TileHeight.rawValue] {
+        if let tilewidth = attributes[ElementAttributes.tileWidth.rawValue],
+           let tileheight = attributes[ElementAttributes.tileHeight.rawValue] {
             tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
         }
 
-        if let value = attributes[ElementAttributes.Spacing.rawValue] {
+        if let value = attributes[ElementAttributes.spacing.rawValue] {
             spacingInPoints = UInt(value) ?? 0
         }
         
-        if let value = attributes[ElementAttributes.Margin.rawValue] {
+        if let value = attributes[ElementAttributes.margin.rawValue] {
             marginInPoints = UInt(value) ?? 0
         }
 
-        if let value = attributes[ElementAttributes.TileCount.rawValue] {
+        if let value = attributes[ElementAttributes.tileCount.rawValue] {
             tileCount = UInt(value) ?? 0
         }
         
-        if let value = attributes[ElementAttributes.ObjectAlignment.rawValue] {
+        if let value = attributes[ElementAttributes.objectAlignment.rawValue] {
             if let tileSetObjectAlignment = ObjectAlignment(rawValue: value) {
                 objectAlignment = tileSetObjectAlignment
             } else {
@@ -100,7 +100,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     }
     
     func setSpriteSheetImage(attributes: Dictionary<String, String>) {
-        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
+        guard let source = attributes[ElementAttributes.source.rawValue] else { return }
         
         if !tileData.isEmpty {
             #if DEBUG
@@ -109,7 +109,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
             return
         }
         
-        tileSetType = .SpriteSheet
+        tileSetType = .spriteSheet
         
         if bundlePathForResource(source) != nil {
             if let newSpriteSheet = PEMTmxSpriteSheet(tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
@@ -120,7 +120,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     }
     
     func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTmxTileData? {
-        guard let tileIdValue = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        guard let tileIdValue = attributes[ElementAttributes.id.rawValue] else { return nil }
         let tileId = UInt32(tileIdValue)!
                 
         if let existingTile = tileDataFor(id: tileId) {
@@ -131,7 +131,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
         if let newTile = PEMTmxTileData(id: tileId, attributes: attributes) {
             tileData.append(newTile)
             
-            if tileSetType == .CollectionOfImages {
+            if tileSetType == .collectionOfImages {
                 let tileDataWithHighestGid = tileData.max(by: { (a, b) -> Bool in
                     return a.id < b.id
                 })
@@ -145,8 +145,8 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     }
     
     func setTileOffset(attributes: Dictionary<String, String>) {
-        if let dx = attributes[ElementAttributes.X.rawValue],
-           let dy = attributes[ElementAttributes.Y.rawValue] {
+        if let dx = attributes[ElementAttributes.x.rawValue],
+           let dy = attributes[ElementAttributes.y.rawValue] {
             tileOffSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
     }
@@ -180,7 +180,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     
     func tileFor(id: UInt32) -> PEMTmxTile? {
         if let tileData = tileData.filter({ $0.id == id }).first {
-            if tileSetType == .SpriteSheet && tileData.texture == nil {
+            if tileSetType == .spriteSheet && tileData.texture == nil {
                 tileData.texture = spriteSheet?.generateTextureFor(tileData: tileData)
             }
             

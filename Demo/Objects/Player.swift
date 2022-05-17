@@ -4,16 +4,16 @@ import CoreGraphics
 let SpawnTypePlayer = "Player"
 
 enum MovementDirection {
-    case Idle
-    case Left
-    case Right
+    case idle
+    case left
+    case right
 }
 
 class Player : SKSpriteNode {
     var isDead = false
     var onGround = false
     var shouldJump = false
-    var direction = MovementDirection.Idle
+    var direction = MovementDirection.idle
     var desiredPosition = CGPoint.zero
     var velocity = CGPoint.zero
 
@@ -60,14 +60,14 @@ class Player : SKSpriteNode {
                 
         if !isDead {
             switch direction {
-            case .Idle:
+            case .idle:
                 velocity = CGPoint(x: 0, y: velocity.y)
                 break
-            case .Left:
+            case .left:
                 velocity = CGPoint(x: -movementForce, y: velocity.y)
                 xScale = -1.0
                 break
-            case .Right:
+            case .right:
                 velocity = CGPoint(x: movementForce, y: velocity.y)
                 xScale = 1.0
                 break

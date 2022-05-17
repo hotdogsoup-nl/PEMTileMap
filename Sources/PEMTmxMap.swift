@@ -4,27 +4,27 @@ import zlib
 import CoreGraphics
 
 internal enum Orientation : String {
-    case Orthogonal = "orthogonal"
-    case Isometric = "isometric"
-    case Staggered = "staggered"
-    case Hexagonal = "hexagonal"
+    case hexagonal = "hexagonal"
+    case isometric = "isometric"
+    case orthogonal = "orthogonal"
+    case staggered = "staggered"
 }
 
 internal enum MapRenderOrder : String {
-    case RightDown = "right-down"
-    case RightUp = "right-up"
-    case LeftDown = "left-down"
-    case LeftUp = "left-up"
+    case leftDown = "left-down"
+    case leftUp = "left-up"
+    case rightDown = "right-down"
+    case rightUp = "right-up"
 }
 
 internal enum MapStaggerAxis : String {
-    case X = "x"
-    case Y = "y"
+    case x = "x"
+    case y = "y"
 }
 
 internal enum MapStaggerIndex : String {
-    case Even = "even"
-    case Odd = "odd"
+    case even = "even"
+    case odd = "odd"
 }
 
 class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
@@ -55,7 +55,7 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     private var nextLayerId = UInt(0)
     private var nextObjectId = UInt(0)
     
-    private var renderOrder = MapRenderOrder.RightDown
+    private var renderOrder = MapRenderOrder.rightDown
     private var textureFilteringMode = SKTextureFilteringMode.nearest
     private var showObjectGroups = false
 
@@ -138,14 +138,14 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     // MARK: - Setup
     
     func addAttributes(_ attributes: Dictionary<String, String>) {
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
-        guard let tilewidth = attributes[ElementAttributes.TileWidth.rawValue] else { return }
-        guard let tileheight = attributes[ElementAttributes.TileHeight.rawValue] else { return }
-        guard let orientationValue = attributes[ElementAttributes.Orientation.rawValue] else { return }
+        guard let width = attributes[ElementAttributes.width.rawValue] else { return }
+        guard let height = attributes[ElementAttributes.height.rawValue] else { return }
+        guard let tilewidth = attributes[ElementAttributes.tileWidth.rawValue] else { return }
+        guard let tileheight = attributes[ElementAttributes.tileHeight.rawValue] else { return }
+        guard let orientationValue = attributes[ElementAttributes.orientation.rawValue] else { return }
                 
-        version = attributes[ElementAttributes.Version.rawValue]
-        tiledversion = attributes[ElementAttributes.TiledVersion.rawValue]
+        version = attributes[ElementAttributes.version.rawValue]
+        tiledversion = attributes[ElementAttributes.tiledVersion.rawValue]
         
         if let mapOrientation = Orientation(rawValue: orientationValue) {
             orientation = mapOrientation
@@ -155,7 +155,7 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
             #endif
         }
         
-        if let value = attributes[ElementAttributes.RenderOrder.rawValue] {
+        if let value = attributes[ElementAttributes.renderOrder.rawValue] {
             if let mapRenderOrder = MapRenderOrder(rawValue: value) {
                 renderOrder = mapRenderOrder
             } else {
@@ -165,18 +165,18 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
             }
         }
         
-        if let value = attributes[ElementAttributes.CompressionLevel.rawValue] {
+        if let value = attributes[ElementAttributes.compressionLevel.rawValue] {
             compressionLevel = Int(value)!
         }
         
         mapSizeInTiles = CGSize(width: Int(width)!, height: Int(height)!)
         tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
         
-        if let value = attributes[ElementAttributes.HexSideLength.rawValue] {
+        if let value = attributes[ElementAttributes.hexSideLength.rawValue] {
             hexSideLengthInPoints = Int(value) ?? 0
         }
         
-        if let value = attributes[ElementAttributes.StaggerAxis.rawValue] {
+        if let value = attributes[ElementAttributes.staggerAxis.rawValue] {
             if let mapStaggerAxis = MapStaggerAxis(rawValue: value) {
                 staggerAxis = mapStaggerAxis
             } else {
@@ -186,7 +186,7 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
             }
         }
 
-        if let value = attributes[ElementAttributes.StaggerIndex.rawValue] {
+        if let value = attributes[ElementAttributes.staggerIndex.rawValue] {
             if let mapStaggerIndex = MapStaggerIndex(rawValue: value) {
                 staggerIndex = mapStaggerIndex
             } else {
@@ -196,27 +196,27 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
             }
         }
         
-        if let value = attributes[ElementAttributes.ParallaxOriginX.rawValue] {
+        if let value = attributes[ElementAttributes.parallaxOriginX.rawValue] {
             parallaxOriginInPoints.x = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[ElementAttributes.ParallaxOriginY.rawValue] {
+        if let value = attributes[ElementAttributes.parallaxOriginY.rawValue] {
             parallaxOriginInPoints.y = CGFloat(Int(value) ?? 0)
         }
 
-        if let value = attributes[ElementAttributes.BackgroundColor.rawValue] {
+        if let value = attributes[ElementAttributes.backgroundColor.rawValue] {
             backgroundColor = SKColor.init(hexString: value)
         }
         
-        if let value = attributes[ElementAttributes.NextLayerId.rawValue] {
+        if let value = attributes[ElementAttributes.nextLayerId.rawValue] {
             nextLayerId = UInt(value)!
         }
 
-        if let value = attributes[ElementAttributes.NextObjectId.rawValue] {
+        if let value = attributes[ElementAttributes.nextObjectId.rawValue] {
             nextObjectId = UInt(value)!
         }
 
-        if let value = attributes[ElementAttributes.Infinite.rawValue] {
+        if let value = attributes[ElementAttributes.infinite.rawValue] {
             infinite = value == "1"
         }
     }

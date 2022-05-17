@@ -13,29 +13,29 @@ class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
     private var parentGroup : PEMTmxGroup?
 
     init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
-        guard let groupId = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }
         super.init()
 
         id = UInt32(groupId)!
         parentGroup = group
 
-        name = attributes[ElementAttributes.Name.rawValue]
+        name = attributes[ElementAttributes.name.rawValue]
         
-        if let value = attributes[ElementAttributes.Opacity.rawValue] {
+        if let value = attributes[ElementAttributes.opacity.rawValue] {
             let valueString : NSString = value as NSString
             opacity = CGFloat(valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.Visible.rawValue] {
+        if let value = attributes[ElementAttributes.visible.rawValue] {
             visible = value == "1"
         }
                 
-        if let dx = attributes[ElementAttributes.OffsetX.rawValue],
-           let dy = attributes[ElementAttributes.OffsetY.rawValue] {
+        if let dx = attributes[ElementAttributes.offsetX.rawValue],
+           let dy = attributes[ElementAttributes.offsetY.rawValue] {
             offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
         
-        if let value = attributes[ElementAttributes.TintColor.rawValue] {
+        if let value = attributes[ElementAttributes.tintColor.rawValue] {
             tintColor = SKColor.init(hexString: value)
         }
         

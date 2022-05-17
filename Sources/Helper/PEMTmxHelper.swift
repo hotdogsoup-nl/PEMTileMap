@@ -7,20 +7,20 @@ func convertProperties(_ newProperties: [PEMTmxProperty]) -> Dictionary<String, 
     for property in newProperties {
         switch property.type {
         
-        case .Bool:
+        case .bool:
             properties?[property.name] = Bool(property.value)
-        case .Color:
+        case .color:
             properties?[property.name] = SKColor.init(hexString: property.value)
-        case .Int:
+        case .int:
             properties?[property.name] = Int(property.value)!
-        case .File:
+        case .file:
             properties?[property.name] = property.value
-        case .Float:
+        case .float:
             let valueString : NSString = property.value as NSString
             properties?[property.name] = CGFloat(valueString.doubleValue)
-        case .Object:
+        case .object:
             properties?[property.name] = UInt32(property.value)!
-        case .String:
+        case .string:
             properties?[property.name] = property.value
         }
     }

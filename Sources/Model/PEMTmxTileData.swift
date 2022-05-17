@@ -44,19 +44,19 @@ class PEMTmxTileData : NSObject, PEMTmxPropertiesProtocol {
     // MARK: - Setup
     
     func addAttributes(_ attributes: Dictionary<String, String>) {
-        if let value = attributes[ElementAttributes.TypeAttribute.rawValue] {
+        if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
             type = value
         }
 
-        if let value = attributes[ElementAttributes.Probability.rawValue] {
+        if let value = attributes[ElementAttributes.probability.rawValue] {
             probability = UInt32(value)!
         }
     }
     
     func addTileImage(attributes: Dictionary<String, String>) {
-        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
+        guard let source = attributes[ElementAttributes.source.rawValue] else { return }
+        guard let width = attributes[ElementAttributes.width.rawValue] else { return }
+        guard let height = attributes[ElementAttributes.height.rawValue] else { return }
 
         tileSizeInPoints = CGSize(width: Int(width)!, height: Int(height)!)
         

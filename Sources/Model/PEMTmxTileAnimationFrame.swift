@@ -5,8 +5,8 @@ class PEMTmxTileAnimationFrame : NSObject {
     private (set) var duration = UInt32(0)
     
     init?(attributes: Dictionary<String, String>) {
-        guard let tileId = attributes[ElementAttributes.TileId.rawValue] else { return nil }
-        guard let duration = attributes[ElementAttributes.Duration.rawValue] else { return nil }
+        guard let tileId = attributes[ElementAttributes.tileId.rawValue] else { return nil }
+        guard let duration = attributes[ElementAttributes.duration.rawValue] else { return nil }
         
         super.init()
 

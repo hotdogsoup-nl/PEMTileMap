@@ -22,48 +22,48 @@ class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
     // MARK: - Init
 
     init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
-        guard let layerId = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        guard let layerId = attributes[ElementAttributes.id.rawValue] else { return nil }
         id = UInt32(layerId)!
         
         super.init()
         
         parentGroup = group
-        layerName = attributes[ElementAttributes.Name.rawValue]
+        layerName = attributes[ElementAttributes.name.rawValue]
         
-        if let x = attributes[ElementAttributes.X.rawValue],
-           let y = attributes[ElementAttributes.Y.rawValue] {
+        if let x = attributes[ElementAttributes.x.rawValue],
+           let y = attributes[ElementAttributes.y.rawValue] {
             coordsInTiles = CGPoint(x: Int(x)!, y: Int(y)!)
         }
 
-        if let width = attributes[ElementAttributes.Width.rawValue],
-           let height = attributes[ElementAttributes.Height.rawValue] {
+        if let width = attributes[ElementAttributes.width.rawValue],
+           let height = attributes[ElementAttributes.height.rawValue] {
             sizeInTiles = CGSize(width: Int(width)!, height: Int(height)!)
         }
         
-        if let value = attributes[ElementAttributes.Opacity.rawValue] {
+        if let value = attributes[ElementAttributes.opacity.rawValue] {
             let valueString : NSString = value as NSString
             opacity = CGFloat(valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.Visible.rawValue] {
+        if let value = attributes[ElementAttributes.visible.rawValue] {
             visible = value == "1"
         }
         
-        if let value = attributes[ElementAttributes.TintColor.rawValue] {
+        if let value = attributes[ElementAttributes.tintColor.rawValue] {
             tintColor = SKColor.init(hexString: value)
         }
         
-        if let dx = attributes[ElementAttributes.OffsetX.rawValue],
-           let dy = attributes[ElementAttributes.OffsetY.rawValue] {
+        if let dx = attributes[ElementAttributes.offsetX.rawValue],
+           let dy = attributes[ElementAttributes.offsetY.rawValue] {
             offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
         
-        if let value = attributes[ElementAttributes.ParallaxX.rawValue] {
+        if let value = attributes[ElementAttributes.parallaxX.rawValue] {
             let valueString : NSString = value as NSString
             parallaxFactorX = CGFloat(valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.ParallaxY.rawValue] {
+        if let value = attributes[ElementAttributes.parallaxY.rawValue] {
             let valueString : NSString = value as NSString
             parallaxFactorY = CGFloat(valueString.doubleValue)
         }

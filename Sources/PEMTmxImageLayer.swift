@@ -26,45 +26,45 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
         
         parentGroup = group
 
-        if let value = attributes[ElementAttributes.Id.rawValue] {
+        if let value = attributes[ElementAttributes.id.rawValue] {
             id = UInt32(value)!
         }
 
-        layerName = attributes[ElementAttributes.Name.rawValue]
+        layerName = attributes[ElementAttributes.name.rawValue]
         
-        if let dx = attributes[ElementAttributes.OffsetX.rawValue],
-           let dy = attributes[ElementAttributes.OffsetY.rawValue] {
+        if let dx = attributes[ElementAttributes.offsetX.rawValue],
+           let dy = attributes[ElementAttributes.offsetY.rawValue] {
             offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
 
-        if let value = attributes[ElementAttributes.Opacity.rawValue] {
+        if let value = attributes[ElementAttributes.opacity.rawValue] {
             let valueString : NSString = value as NSString
             opacity = CGFloat(valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.Visible.rawValue] {
+        if let value = attributes[ElementAttributes.visible.rawValue] {
             visible = value == "1"
         }
         
-        if let value = attributes[ElementAttributes.TintColor.rawValue] {
+        if let value = attributes[ElementAttributes.tintColor.rawValue] {
             tintColor = SKColor.init(hexString: value)
         }
         
-        if let value = attributes[ElementAttributes.ParallaxX.rawValue] {
+        if let value = attributes[ElementAttributes.parallaxX.rawValue] {
             let valueString : NSString = value as NSString
             parallaxFactorX = CGFloat(valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.ParallaxY.rawValue] {
+        if let value = attributes[ElementAttributes.parallaxY.rawValue] {
             let valueString : NSString = value as NSString
             parallaxFactorY = CGFloat(valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.RepeatX.rawValue] {
+        if let value = attributes[ElementAttributes.repeatX.rawValue] {
             repeatX = value == "1"
         }
 
-        if let value = attributes[ElementAttributes.RepeatY.rawValue] {
+        if let value = attributes[ElementAttributes.repeatY.rawValue] {
             repeatY = value == "1"
         }
         
@@ -145,9 +145,9 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     }
     
     func setImage(attributes: Dictionary<String, String>) {
-        guard let source = attributes[ElementAttributes.Source.rawValue] else { return }
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return }
+        guard let source = attributes[ElementAttributes.source.rawValue] else { return }
+        guard let width = attributes[ElementAttributes.width.rawValue] else { return }
+        guard let height = attributes[ElementAttributes.height.rawValue] else { return }
 
         imageSizeInPoints = CGSize(width: Int(width)!, height: Int(height)!)
         textureImageSource = source

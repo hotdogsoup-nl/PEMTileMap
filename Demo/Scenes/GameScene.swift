@@ -11,20 +11,20 @@ protocol GameSceneDelegate {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     private enum CameraViewMode {
-        case AspectFit
-        case AspectFill
+        case aspectFit
+        case aspectFill
     }
     
     private enum TileQueryPosition : Int {
-        case AboveLeft
-        case Above
-        case AboveRight
-        case ToTheLeft
-        case AtCenter
-        case ToTheRight
-        case BelowLeft
-        case Below
-        case BelowRight
+        case atCenter
+        case above
+        case aboveLeft
+        case aboveRight
+        case below
+        case belowLeft
+        case belowRight
+        case toTheLeft
+        case toTheRight
     }
     
     var gameSceneDelegate : GameSceneDelegate?
@@ -171,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             map = newMap
             
             cameraNode?.zPosition = newMap.currentZPosition + 1
-            zoomCamera(viewMode: .AspectFit, factor:0.8)
+            zoomCamera(viewMode: .aspectFit, factor:0.8)
         }
     }
     
@@ -387,9 +387,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var contentScale : CGFloat = 1.0
             
             switch viewMode {
-            case .AspectFit:
+            case .aspectFit:
                 contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
-            case .AspectFill:
+            case .aspectFill:
                 contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
             }
 
@@ -432,9 +432,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if pos.x > 0 {
-            player!.direction = .Right
+            player!.direction = .right
         } else {
-            player!.direction = .Left
+            player!.direction = .left
         }
     }
 
@@ -453,12 +453,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if pos.x > 0 {
-            if player!.direction == .Right {
-                player!.direction = .Idle
+            if player!.direction == .right {
+                player!.direction = .idle
             }
         } else {
-            if player!.direction == .Left {
-                player!.direction = .Idle
+            if player!.direction == .left {
+                player!.direction = .idle
             }
         }
     }
@@ -497,10 +497,10 @@ extension GameScene {
     override func keyDown(with event: NSEvent) {
         switch event.keyCode {
         case 124: // ->
-            player!.direction = .Right
+            player!.direction = .right
             return
         case 123: // <-
-            player!.direction = .Left
+            player!.direction = .left
             return
         default:
             return
@@ -510,13 +510,13 @@ extension GameScene {
     override func keyUp(with event: NSEvent) {
         switch event.keyCode {
         case 124: // ->
-            if player!.direction == .Right {
-                player!.direction = .Idle
+            if player!.direction == .right {
+                player!.direction = .idle
             }
             return
         case 123: // <-
-            if player!.direction == .Left {
-                player!.direction = .Idle
+            if player!.direction == .left {
+                player!.direction = .idle
             }
             return
         default:

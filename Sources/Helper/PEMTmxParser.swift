@@ -1,78 +1,78 @@
 import Foundation
 
 enum Elements : String {
-    case None
-    case Animation = "animation"
-    case Data = "data"
-    case Frame = "frame"
-    case Group = "group"
-    case Image = "image"
-    case ImageLayer = "imagelayer"
-    case Layer = "layer"
-    case Map = "map"
-    case Object = "object"
-    case ObjectGroup = "objectgroup"
-    case Properties = "properties"
-    case Property = "property"
-    case Template = "template"
-    case Tile = "tile"
-    case TileOffset = "tileoffset"
-    case TileSet = "tileset"
+    case none
+    case animation = "animation"
+    case data = "data"
+    case frame = "frame"
+    case group = "group"
+    case image = "image"
+    case imageLayer = "imagelayer"
+    case layer = "layer"
+    case map = "map"
+    case object = "object"
+    case objectGroup = "objectgroup"
+    case properties = "properties"
+    case property = "property"
+    case template = "template"
+    case tile = "tile"
+    case tileOffset = "tileoffset"
+    case tileSet = "tileset"
 }
 
 enum ElementAttributes : String {
-    case BackgroundColor = "backgroundcolor"
-    case Columns = "columns"
-    case Color = "color"
-    case Compression = "compression"
-    case CompressionLevel = "compressionlevel"
-    case DrawOrder = "draworder"
-    case Duration = "duration"
-    case Encoding = "encoding"
-    case FirstGid = "firstgid"
-    case Format = "format"
-    case Gid = "gid"
-    case Height = "height"
-    case HexSideLength = "hexsidelength"
-    case Id = "id"
-    case Infinite = "infinite"
-    case Margin = "margin"
-    case Name = "name"
-    case NextLayerId = "nextlayerid"
-    case NextObjectId = "nextobjectid"
-    case ObjectAlignment = "objectalignment"
-    case OffsetX = "offsetx"
-    case OffsetY = "offsety"
-    case Orientation = "orientation"
-    case Opacity = "opacity"
-    case ParallaxX = "parallaxx"
-    case ParallaxY = "parallaxy"
-    case ParallaxOriginX = "parallaxoriginx"
-    case ParallaxOriginY = "parallaxoriginy"
-    case Probability = "probability"
-    case Propertytype = "propertytype"
-    case RenderOrder = "renderorder"
-    case RepeatX = "repeatx"
-    case RepeatY = "repeaty"
-    case Rows = "rows"
-    case Source = "source"
-    case Spacing = "spacing"
-    case StaggerAxis = "staggeraxis"
-    case StaggerIndex = "staggerindex"
-    case TileCount = "tilecount"
-    case TileId = "tileid"
-    case TiledVersion = "tiledversion"
-    case TileHeight = "tileheight"
-    case TileWidth = "tilewidth"
-    case TintColor = "tintcolor"
-    case Trans = "trans"
-    case TypeAttribute = "type" // "Type" is a reserved MetaType name so we use "TypeAttribute" instead
-    case Value = "value"
-    case Version = "version"
-    case Visible = "visible"
-    case Width = "width"
-    case X = "x"
-    case Y = "y"
+    case backgroundColor = "backgroundcolor"
+    case columns = "columns"
+    case color = "color"
+    case compression = "compression"
+    case compressionLevel = "compressionlevel"
+    case drawOrder = "draworder"
+    case duration = "duration"
+    case encoding = "encoding"
+    case firstGid = "firstgid"
+    case format = "format"
+    case gid = "gid"
+    case height = "height"
+    case hexSideLength = "hexsidelength"
+    case id = "id"
+    case infinite = "infinite"
+    case margin = "margin"
+    case name = "name"
+    case nextLayerId = "nextlayerid"
+    case nextObjectId = "nextobjectid"
+    case objectAlignment = "objectalignment"
+    case offsetX = "offsetx"
+    case offsetY = "offsety"
+    case orientation = "orientation"
+    case opacity = "opacity"
+    case parallaxX = "parallaxx"
+    case parallaxY = "parallaxy"
+    case parallaxOriginX = "parallaxoriginx"
+    case parallaxOriginY = "parallaxoriginy"
+    case probability = "probability"
+    case propertytype = "propertytype"
+    case renderOrder = "renderorder"
+    case repeatX = "repeatx"
+    case repeatY = "repeaty"
+    case rows = "rows"
+    case source = "source"
+    case spacing = "spacing"
+    case staggerAxis = "staggeraxis"
+    case staggerIndex = "staggerindex"
+    case tileCount = "tilecount"
+    case tileId = "tileid"
+    case tiledVersion = "tiledversion"
+    case tileHeight = "tileheight"
+    case tileWidth = "tilewidth"
+    case tintColor = "tintcolor"
+    case trans = "trans"
+    case typeAttribute = "type" // "Type" is a reserved MetaType name so we use "TypeAttribute" instead
+    case value = "value"
+    case version = "version"
+    case visible = "visible"
+    case width = "width"
+    case x = "x"
+    case y = "y"
 }
 
 protocol PEMTmxPropertiesProtocol {
@@ -81,20 +81,20 @@ protocol PEMTmxPropertiesProtocol {
 
 class PEMTmxParser : XMLParser, XMLParserDelegate {
     enum DataEncoding : String {
-        case Base64 = "base64"
-        case Csv = "csv"
+        case base64 = "base64"
+        case csv = "csv"
     }
 
     enum DataCompression : String {
-        case None
-        case Gzip = "gzip"
-        case Zlib = "zlib"
-        case Zstd = "zstd"
+        case none
+        case gzip = "gzip"
+        case zlib = "zlib"
+        case zstd = "zstd"
     }
     
     enum ParseFileType {
-        case Tmx
-        case Tsx
+        case tmx
+        case tsx
     }
     
     private weak var currentMap : PEMTmxMap?
@@ -105,12 +105,12 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     private var currentParseString : String = ""
     private var elementPath : [AnyObject] = []
     private var dataEncoding : DataEncoding?
-    private var dataCompression = DataCompression.None
+    private var dataCompression = DataCompression.none
     
     // MARK: - Init
     
     init?(map: PEMTmxMap, fileURL: URL) {
-        currentFileType = .Tmx
+        currentFileType = .tmx
         currentMap = map
 
         do {
@@ -128,7 +128,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
     }
     
     init?(tileSet: PEMTmxTileSet, fileURL: URL) {
-        currentFileType = .Tsx
+        currentFileType = .tsx
         currentTileSet = tileSet
 
         do {
@@ -165,50 +165,50 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         switch elementName {
             
         // top level elements
-        case Elements.Map.rawValue:
+        case Elements.map.rawValue:
             currentMap?.addAttributes(attributeDict)
             elementPath.append(currentMap!)
-        case Elements.TileSet.rawValue :
+        case Elements.tileSet.rawValue :
             switch currentFileType {
-            case .Tmx:
+            case .tmx:
                 if let tileSet = PEMTmxTileSet(attributes: attributeDict) {
                     currentMap?.tileSets.append(tileSet)
                     elementPath.append(tileSet)
                 }
-            case .Tsx:
+            case .tsx:
                 currentTileSet?.addAttributes(attributeDict)
                 elementPath.append(currentTileSet!)
             }
-        case Elements.Layer.rawValue:
+        case Elements.layer.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
             if let tileLayer = PEMTmxTileLayer(attributes: attributeDict, group:currentGroup) {
                 currentMap?.layers.append(tileLayer)
                 elementPath.append(tileLayer)
             }
-        case Elements.ObjectGroup.rawValue:
+        case Elements.objectGroup.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
             if let groupLayer = PEMTmxObjectGroup(attributes: attributeDict, group:currentGroup) {
                 currentMap?.layers.append(groupLayer)
                 elementPath.append(groupLayer)
             }
             break
-        case Elements.ImageLayer.rawValue:
+        case Elements.imageLayer.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
             let layer = PEMTmxImageLayer(attributes: attributeDict, group:currentGroup)
             currentMap?.layers.append(layer)
             elementPath.append(layer)
-        case Elements.Group.rawValue:
+        case Elements.group.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
             if let group = PEMTmxGroup(attributes: attributeDict, group:currentGroup) {
                 elementPath.append(group)
             }
-        case Elements.Properties.rawValue:
+        case Elements.properties.rawValue:
             currentProperties = []
-        case Elements.Template.rawValue:
+        case Elements.template.rawValue:
             break
 
         // child elements
-        case Elements.Image.rawValue:
+        case Elements.image.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
                 currentElement.setSpriteSheetImage(attributes: attributeDict)
                 break
@@ -224,7 +224,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
-        case Elements.Tile.rawValue:
+        case Elements.tile.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
                 if let tileData = currentElement.addOrUpdateTileData(attributes: attributeDict) {
                     elementPath.append(tileData)
@@ -232,7 +232,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
-        case Elements.Animation.rawValue:
+        case Elements.animation.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileData {
                 if let animation = currentElement.addAnimation() {
                     elementPath.append(animation)
@@ -240,14 +240,14 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
-        case Elements.Frame.rawValue:
+        case Elements.frame.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileAnimation {
                 currentElement.addAnimationFrame(attributes: attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
-        case Elements.Data.rawValue:
-            if let value = attributeDict[ElementAttributes.Encoding.rawValue] {
+        case Elements.data.rawValue:
+            if let value = attributeDict[ElementAttributes.encoding.rawValue] {
                 if let encoding = DataEncoding(rawValue: value) {
                     dataEncoding = encoding
                 } else {
@@ -258,24 +258,24 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 }
             }
             
-            if let value = attributeDict[ElementAttributes.Compression.rawValue] {
+            if let value = attributeDict[ElementAttributes.compression.rawValue] {
                 if let compression = DataCompression(rawValue: value) {
                     dataCompression = compression
                 } else {
-                    dataCompression = .None
+                    dataCompression = .none
                 }
             }
-        case Elements.Property.rawValue:
+        case Elements.property.rawValue:
             if let property = PEMTmxProperty(attributes: attributeDict) {
                 currentProperties?.append(property)
             }
-        case Elements.TileOffset.rawValue:
+        case Elements.tileOffset.rawValue:
             if let currentElement = elementPath.last as? PEMTmxTileSet {
                 currentElement.setTileOffset(attributes: attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
-        case Elements.Object.rawValue:
+        case Elements.object.rawValue:
             if let currentElement = elementPath.last as? PEMTmxObjectGroup {
                 currentElement.addObject(attributes: attributeDict)
                 break
@@ -292,43 +292,43 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         switch elementName {
             
         // top level elements
-        case Elements.Map.rawValue:
+        case Elements.map.rawValue:
             if elementPath.last is PEMTmxMap {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.TileSet.rawValue :
+        case Elements.tileSet.rawValue :
             if elementPath.last is PEMTmxTileSet {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.Layer.rawValue:
+        case Elements.layer.rawValue:
             if elementPath.last is PEMTmxTileLayer {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.ObjectGroup.rawValue:
+        case Elements.objectGroup.rawValue:
             if elementPath.last is PEMTmxObjectGroup {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.ImageLayer.rawValue:
+        case Elements.imageLayer.rawValue:
             if elementPath.last is PEMTmxImageLayer {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.Group.rawValue:
+        case Elements.group.rawValue:
             if elementPath.last is PEMTmxGroup {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.Properties.rawValue:
+        case Elements.properties.rawValue:
             if currentProperties == nil {
                 break
             }
@@ -341,27 +341,27 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             print("PEMTmxParser: properties protocol not implemented on: \(String(describing: elementPath.last))")
             #endif
             currentProperties = nil
-        case Elements.Template.rawValue:
+        case Elements.template.rawValue:
             break
             
         // child elements
-        case Elements.Image.rawValue:
+        case Elements.image.rawValue:
             break
-        case Elements.Tile.rawValue:
+        case Elements.tile.rawValue:
             if elementPath.last is PEMTmxTileData {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.Animation.rawValue:
+        case Elements.animation.rawValue:
             if elementPath.last is PEMTmxTileAnimation {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-        case Elements.Frame.rawValue:
+        case Elements.frame.rawValue:
             break
-        case Elements.Data.rawValue:
+        case Elements.data.rawValue:
             guard let tileLayer = currentMap?.layers.last as? PEMTmxTileLayer else {
                 abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
                 break
@@ -369,10 +369,10 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             
             var decodedData : [UInt32]?
             switch dataEncoding {
-            case .Base64:
+            case .base64:
                 decodedData = decodeData(base64: currentParseString, compression: dataCompression)
                 break
-            case .Csv:
+            case .csv:
                 decodedData = decodeData(csv: currentParseString)
             default:
                 break
@@ -388,11 +388,11 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
                 #endif
                 parser.abortParsing()
             }
-        case Elements.Property.rawValue:
+        case Elements.property.rawValue:
             break
-        case Elements.TileOffset.rawValue:
+        case Elements.tileOffset.rawValue:
             break
-        case Elements.Object.rawValue:
+        case Elements.object.rawValue:
             break
         default:
             #if DEBUG
@@ -444,7 +444,7 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         return result.replacingOccurrences(of: " ", with: "")
     }
     
-    private func decodeData(base64 data: String, compression: DataCompression = .None) -> [UInt32]? {
+    private func decodeData(base64 data: String, compression: DataCompression = .none) -> [UInt32]? {
         guard let decodedData = Data(base64Encoded: data, options: .ignoreUnknownCharacters) else {
             #if DEBUG
             print("PEMTmxParser: data is not base64 encoded.")
@@ -453,11 +453,11 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         }
         
         switch compression {
-            case .Zlib, .Gzip:
+            case .zlib, .gzip:
                 if let decompressed = try? decodedData.gunzipped() {
                     return decompressed.toArray(type: UInt32.self)
                 }
-            case .Zstd:
+            case .zstd:
                 #if DEBUG
                 print("PEMTmxParser: zstd compression is not supported.")
                 #endif

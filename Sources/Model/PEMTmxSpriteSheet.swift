@@ -24,9 +24,9 @@ class PEMTmxSpriteSheet : NSObject {
     // MARK: - Init
     
     init?(tileSizeInPoints : CGSize, marginInPoints : UInt, spacingInPoints : UInt, attributes: Dictionary<String, String>) {
-        guard let width = attributes[ElementAttributes.Width.rawValue] else { return nil }
-        guard let height = attributes[ElementAttributes.Height.rawValue] else { return nil }
-        guard let source = attributes[ElementAttributes.Source.rawValue] else { return nil }
+        guard let width = attributes[ElementAttributes.width.rawValue] else { return nil }
+        guard let height = attributes[ElementAttributes.height.rawValue] else { return nil }
+        guard let source = attributes[ElementAttributes.source.rawValue] else { return nil }
 
         super.init()
         
