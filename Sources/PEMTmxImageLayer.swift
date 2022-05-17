@@ -67,6 +67,8 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
         if let value = attributes[ElementAttributes.RepeatY.rawValue] {
             repeatY = value == "1"
         }
+        
+        applyParentGroupAttributes()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -155,6 +157,34 @@ class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
     
     func addProperties(_ newProperties: [PEMTmxProperty]) {
         properties = convertProperties(newProperties)
+    }
+    
+    // MARK: - Private
+    
+    private func applyParentGroupAttributes() {
+        if parentGroup == nil {
+            return
+        }
+
+        if let value = parentGroup?.opacity {
+            opacity *= CGFloat(value)
+        }
+        
+        if let value = parentGroup?.visible {
+            visible = visible && value
+        }
+        
+        if let value = parentGroup?.offSetInPoints {
+            offSetInPoints = CGPoint(x: offSetInPoints.x + value.x, y: offSetInPoints.y + value.y)
+        }
+        
+        if let value = parentGroup?.tintColor {
+            if tintColor != nil {
+                tintColor = tintColor?.blend(colors: [value])
+            } else {
+                tintColor = value
+            }
+        }
     }
     
     // MARK: - Debug

@@ -224,13 +224,8 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
         }
         #endif
         
-        // add tile layers
         renderLayers()
-        
-        // add image layers
-        
-        // add objects
-        
+
         mapSizeInPoints = calculateAccumulatedFrame().size
         
         if mapSizeInPoints.width < mapSizeInPointsFromTileSize.width {

@@ -2,21 +2,21 @@ import SpriteKit
 
 class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
     private (set) var properties : Dictionary<String, Any>?
+    private (set) var opacity = CGFloat(1.0)
+    private (set) var visible = true
+    private (set) var offSetInPoints = CGPoint.zero
+    private (set) var tintColor : SKColor?
 
     private var id = UInt32(0)
     private var name : String?
-    private var visible = true
-    private var offSetInPoints = CGPoint.zero
-    private var opacity = CGFloat(1)
-    private var tintColor : SKColor?
 
     private var parentGroup : PEMTmxGroup?
 
     init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
-        guard let value = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        guard let groupId = attributes[ElementAttributes.Id.rawValue] else { return nil }
         super.init()
 
-        id = UInt32(value)!
+        id = UInt32(groupId)!
         parentGroup = group
 
         name = attributes[ElementAttributes.Name.rawValue]
@@ -38,6 +38,8 @@ class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
            let dy = attributes[ElementAttributes.OffsetY.rawValue] {
             offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
+        
+        applyParentGroupAttributes()
     }
     
     deinit {
@@ -54,6 +56,34 @@ class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
     
     func addProperties(_ newProperties: [PEMTmxProperty]) {
         properties = convertProperties(newProperties)
+    }
+    
+    // MARK: - Private
+    
+    private func applyParentGroupAttributes() {
+        if parentGroup == nil {
+            return
+        }
+        
+        if let value = parentGroup?.opacity {
+            opacity *= CGFloat(value)
+        }
+        
+        if let value = parentGroup?.visible {
+            visible = visible && value
+        }
+        
+        if let value = parentGroup?.offSetInPoints {
+            offSetInPoints = CGPoint(x: offSetInPoints.x + value.x, y: offSetInPoints.y + value.y)
+        }
+        
+        if let value = parentGroup?.tintColor {
+            if tintColor != nil {
+                tintColor = tintColor?.blend(colors: [value])
+            } else {
+                tintColor = value
+            }
+        }
     }
     
     // MARK: - Debug

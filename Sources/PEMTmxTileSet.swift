@@ -120,8 +120,8 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     }
     
     func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTmxTileData? {
-        guard let value = attributes[ElementAttributes.Id.rawValue] else { return nil }
-        let tileId = UInt32(value)!
+        guard let tileIdValue = attributes[ElementAttributes.Id.rawValue] else { return nil }
+        let tileId = UInt32(tileIdValue)!
                 
         if let existingTile = tileDataFor(id: tileId) {
             existingTile.addAttributes(attributes)

@@ -25,7 +25,7 @@ class PEMTmxLayer : SKNode, PEMTmxPropertiesProtocol {
         super.init()
         
         parentGroup = group
-        
+                
         if let value = attributes[ElementAttributes.Id.rawValue] {
             id = UInt32(value)!
         }
@@ -68,7 +68,9 @@ class PEMTmxLayer : SKNode, PEMTmxPropertiesProtocol {
         if let value = attributes[ElementAttributes.ParallaxY.rawValue] {
             let valueString : NSString = value as NSString
             parallaxFactorY = CGFloat(valueString.doubleValue)
-        }        
+        }
+        
+        applyParentGroupAttributes()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -89,6 +91,7 @@ class PEMTmxLayer : SKNode, PEMTmxPropertiesProtocol {
 
     func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
+        
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
         
         for index in tileData.indices {
@@ -163,6 +166,32 @@ class PEMTmxLayer : SKNode, PEMTmxPropertiesProtocol {
             }
         }
         return nil
+    }
+    
+    private func applyParentGroupAttributes() {
+        if parentGroup == nil {
+            return
+        }
+
+        if let value = parentGroup?.opacity {
+            opacity *= CGFloat(value)
+        }
+        
+        if let value = parentGroup?.visible {
+            visible = visible && value
+        }
+        
+        if let value = parentGroup?.offSetInPoints {
+            offSetInPoints = CGPoint(x: offSetInPoints.x + value.x, y: offSetInPoints.y + value.y)
+        }
+        
+        if let value = parentGroup?.tintColor {
+            if tintColor != nil {
+                tintColor = tintColor?.blend(colors: [value])
+            } else {
+                tintColor = value
+            }
+        }
     }
     
     // MARK: - Debug
