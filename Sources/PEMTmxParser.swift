@@ -22,8 +22,10 @@ enum Elements : String {
 enum ElementAttributes : String {
     case BackgroundColor = "backgroundcolor"
     case Columns = "columns"
+    case Color = "color"
     case Compression = "compression"
     case CompressionLevel = "compressionlevel"
+    case DrawOrder = "draworder"
     case Duration = "duration"
     case Encoding = "encoding"
     case FirstGid = "firstgid"
@@ -181,6 +183,10 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             currentMap?.layers.append(layer)
             elementPath.append(layer)
         case Elements.ObjectGroup.rawValue:
+            let currentGroup = elementPath.last as? PEMTmxGroup
+            if let group = PEMTmxObjectLayer(attributes: attributeDict, group:currentGroup) {
+                elementPath.append(group)
+            }
             break
         case Elements.ImageLayer.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
@@ -295,7 +301,11 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.ObjectGroup.rawValue:
-            break
+            if elementPath.last is PEMTmxObjectLayer {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.ImageLayer.rawValue:
             if elementPath.last is PEMTmxImageLayer {
                 elementPath.removeLast()

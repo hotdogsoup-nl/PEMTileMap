@@ -65,6 +65,9 @@
 		2041C834282EB4CE00F584AF /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2041C833282EB4CE00F584AF /* objecttemplate.tx */; };
 		2041C835282EB4CE00F584AF /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2041C833282EB4CE00F584AF /* objecttemplate.tx */; };
 		2041C836282EB4CE00F584AF /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2041C833282EB4CE00F584AF /* objecttemplate.tx */; };
+		2045AEEE2833A4A600614F38 /* PEMTmxObjectLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEED2833A4A600614F38 /* PEMTmxObjectLayer.swift */; };
+		2045AEEF2833A4A600614F38 /* PEMTmxObjectLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEED2833A4A600614F38 /* PEMTmxObjectLayer.swift */; };
+		2045AEF02833A4A600614F38 /* PEMTmxObjectLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEED2833A4A600614F38 /* PEMTmxObjectLayer.swift */; };
 		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		2055FE66282FC3640020104C /* animated1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2055FE64282FC3640020104C /* animated1.png */; };
@@ -146,6 +149,7 @@
 		2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxImageLayer.swift; sourceTree = "<group>"; };
 		2041C82F282EB4A600F584AF /* hotdogsoup-icon-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotdogsoup-icon-full.png"; sourceTree = "<group>"; };
 		2041C833282EB4CE00F584AF /* objecttemplate.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = objecttemplate.tx; sourceTree = "<group>"; };
+		2045AEED2833A4A600614F38 /* PEMTmxObjectLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxObjectLayer.swift; sourceTree = "<group>"; };
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		2055FE64282FC3640020104C /* animated1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animated1.png; sourceTree = "<group>"; };
 		2055FE65282FC3640020104C /* animated2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animated2.png; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 				2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */,
 				20562E11282521C1005CE60A /* PEMTmxLayer.swift */,
 				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
+				2045AEED2833A4A600614F38 /* PEMTmxObjectLayer.swift */,
 				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
 				2091DE31283100D900F476C8 /* PEMTmxProperty.swift */,
 				2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */,
@@ -549,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */,
+				2045AEF02833A4A600614F38 /* PEMTmxObjectLayer.swift in Sources */,
 				2037A5F528258DB500E13452 /* PEMTmxMap.swift in Sources */,
 				2037A5EE28258DA500E13452 /* GameController.swift in Sources */,
 				204097D0282A753300603024 /* PEMTmxTile.swift in Sources */,
@@ -579,6 +585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2014E98728169C4500A12253 /* MathHelper.swift in Sources */,
+				2045AEEE2833A4A600614F38 /* PEMTmxObjectLayer.swift in Sources */,
 				2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
 				2037A5C9282587AB00E13452 /* PEMTmxMap.swift in Sources */,
 				204097CE282A753300603024 /* PEMTmxTile.swift in Sources */,
@@ -609,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2014E98828169C4500A12253 /* MathHelper.swift in Sources */,
+				2045AEEF2833A4A600614F38 /* PEMTmxObjectLayer.swift in Sources */,
 				2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
 				2037A5CE282587AC00E13452 /* PEMTmxMap.swift in Sources */,
 				204097CF282A753300603024 /* PEMTmxTile.swift in Sources */,
