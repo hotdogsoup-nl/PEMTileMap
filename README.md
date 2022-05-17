@@ -32,7 +32,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [ ] object groups
 - [ ] object template files
 - [X] image layers
-- [ ] grouped layers
+- [X] layer groups
 - [X] layer tinting
 - [ ] group tinting on top of layer tinting
 - [X] flipped tiles
