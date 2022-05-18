@@ -1,6 +1,6 @@
 import Foundation
 
-enum PropertyType : String {
+enum PropertyType: String {
     case bool = "bool"
     case color = "color"
     case int = "int"
@@ -10,10 +10,10 @@ enum PropertyType : String {
     case string = "string"
 }
 
-class PEMTmxProperty : NSObject {
-    private (set) var name : String
+class PEMTmxProperty: NSObject {
+    private (set) var name: String
     private (set) var type = PropertyType.string
-    private (set) var value : String?
+    private (set) var value: String?
 
     init?(attributes: Dictionary<String, String>) {
         guard let propertyName = attributes[ElementAttributes.name.rawValue] else { return nil }

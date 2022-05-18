@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
+class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
     enum ObjectAlignment: String {
         case bottom = "bottom"
         case bottomLeft = "bottomleft"
@@ -21,18 +21,18 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
     }
     
     private (set) var firstGid = UInt32(0)
-    private (set) var properties : Dictionary<String, Any>?
+    private (set) var properties: Dictionary<String, Any>?
     private (set) var tileOffSetInPoints = CGPoint.zero
 
-    private var name : String?
+    private var name: String?
     private var tileSizeInPoints = CGSize.zero
     private var tileCount = UInt(0)
     private var objectAlignment = ObjectAlignment.unspecified // unsupported
     private var spacingInPoints = UInt(0)
     private var marginInPoints = UInt(0)
 
-    private var externalSource : String?
-    private var spriteSheet : PEMTmxSpriteSheet?
+    private var externalSource: String?
+    private var spriteSheet: PEMTmxSpriteSheet?
     private var tileSetType = PEMTmxTileSetType.collectionOfImages
     private var firstId = UInt32(0)
     private var lastId = UInt32(0)
@@ -40,7 +40,7 @@ class PEMTmxTileSet : NSObject, PEMTmxPropertiesProtocol {
         return firstId...lastId
     }
         
-    private var tileData : [PEMTmxTileData] = []
+    private var tileData: [PEMTmxTileData] = []
     
     // MARK: - Init
     

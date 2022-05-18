@@ -1,13 +1,13 @@
 import SpriteKit
 
-class PEMTmxTile : SKSpriteNode {
-    var coords : CGPoint?
+class PEMTmxTile: SKSpriteNode {
+    var coords: CGPoint?
 
     private (set) var id = UInt32(0)
-    private (set) var animation : PEMTmxTileAnimation?
-    private (set) var properties : Dictionary<String, Any>?
+    private (set) var animation: PEMTmxTileAnimation?
+    private (set) var properties: Dictionary<String, Any>?
 
-    private var type : String?
+    private var type: String?
     private var probability = UInt32(0)
 
     // MARK: - Init

@@ -3,43 +3,43 @@ import SpriteKit
 import zlib
 import CoreGraphics
 
-internal enum Orientation : String {
+internal enum Orientation: String {
     case hexagonal = "hexagonal"
     case isometric = "isometric"
     case orthogonal = "orthogonal"
     case staggered = "staggered"
 }
 
-internal enum MapRenderOrder : String {
+internal enum MapRenderOrder: String {
     case leftDown = "left-down"
     case leftUp = "left-up"
     case rightDown = "right-down"
     case rightUp = "right-up"
 }
 
-internal enum MapStaggerAxis : String {
+internal enum MapStaggerAxis: String {
     case x = "x"
     case y = "y"
 }
 
-internal enum MapStaggerIndex : String {
+internal enum MapStaggerIndex: String {
     case even = "even"
     case odd = "odd"
 }
 
-class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
+class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     private (set) var mapSizeInPoints = CGSize.zero
     private (set) var currentZPosition = CGFloat(0)
-    private (set) var backgroundColor : SKColor?
-    private (set) var properties : Dictionary<String, Any>?
+    private (set) var backgroundColor: SKColor?
+    private (set) var properties: Dictionary<String, Any>?
 
-    private var version : String?
-    private var mapSource : String?
-    private var tiledversion : String?
+    private var version: String?
+    private var mapSource: String?
+    private var tiledversion: String?
 
     private var mapSizeInTiles = CGSize.zero
     private var tileSizeInPoints = CGSize.zero
-    var mapSizeInPointsFromTileSize : CGSize {
+    var mapSizeInPointsFromTileSize: CGSize {
         return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
     }
     
@@ -47,9 +47,9 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     private var parallaxOriginInPoints = CGPoint.zero
     private var infinite = false
     
-    private var orientation : Orientation?
-    private var staggerAxis : MapStaggerAxis?
-    private var staggerIndex : MapStaggerIndex?
+    private var orientation: Orientation?
+    private var staggerAxis: MapStaggerAxis?
+    private var staggerIndex: MapStaggerIndex?
 
     private var compressionLevel = Int(-1)
     private var nextLayerId = UInt(0)
@@ -62,8 +62,8 @@ class PEMTmxMap : SKNode, PEMTmxPropertiesProtocol {
     private var baseZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
 
-    internal var tileSets : [PEMTmxTileSet] = []
-    internal var layers : [AnyObject] = []
+    internal var tileSets: [PEMTmxTileSet] = []
+    internal var layers: [AnyObject] = []
     
     // MARK: - Init
         

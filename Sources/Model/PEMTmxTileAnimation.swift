@@ -1,7 +1,7 @@
 import SpriteKit
 
-class PEMTmxTileAnimation : NSObject {
-    private (set) var frames : [PEMTmxTileAnimationFrame] = []
+class PEMTmxTileAnimation: NSObject {
+    private (set) var frames: [PEMTmxTileAnimationFrame] = []
     
     deinit {
         #if DEBUG

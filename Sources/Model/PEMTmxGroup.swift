@@ -1,16 +1,16 @@
 import SpriteKit
 
-class PEMTmxGroup : NSObject, PEMTmxPropertiesProtocol {
-    private (set) var properties : Dictionary<String, Any>?
+class PEMTmxGroup: NSObject, PEMTmxPropertiesProtocol {
+    private (set) var properties: Dictionary<String, Any>?
     private (set) var opacity = CGFloat(1.0)
     private (set) var visible = true
     private (set) var offSetInPoints = CGPoint.zero
-    private (set) var tintColor : SKColor?
+    private (set) var tintColor: SKColor?
 
     private var id = UInt32(0)
-    private var name : String?
+    private var name: String?
 
-    private var parentGroup : PEMTmxGroup?
+    private var parentGroup: PEMTmxGroup?
 
     init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
         guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }

@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxTileAnimationFrame : NSObject {
+class PEMTmxTileAnimationFrame: NSObject {
     private (set) var tileId = UInt32(0)
     private (set) var duration = UInt32(0)
     

@@ -15,7 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case aspectFill
     }
     
-    private enum TileQueryPosition : Int {
+    private enum TileQueryPosition: Int {
         case atCenter
         case above
         case aboveLeft
@@ -28,7 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     var gameSceneDelegate : GameSceneDelegate?
-    private var map : PEMTmxMap?
+    private var map: PEMTmxMap?
     private var cameraNode : SKCameraNode?
     
     private var previousMapButton : SKShapeNode?

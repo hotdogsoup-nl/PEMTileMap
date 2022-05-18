@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxSpriteSheet : NSObject {
+class PEMTmxSpriteSheet: NSObject {
     private (set) var firstId = UInt32(0)
     
     var lastId: UInt32 {
@@ -14,10 +14,10 @@ class PEMTmxSpriteSheet : NSObject {
     private var marginInPoints = UInt(0)
     private var spacingInPoints = UInt(0)
     
-    private var textureImage : SKTexture?
-    private var textureImageSize : CGSize?
-    private var textureImageSource : String?
-    private var tileUnitSize : CGSize?
+    private var textureImage: SKTexture?
+    private var textureImageSize: CGSize?
+    private var textureImageSource: String?
+    private var tileUnitSize: CGSize?
     private var tilesPerRow = UInt(0)
     private var tilesPerColumn = UInt(0)
     

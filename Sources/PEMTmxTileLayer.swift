@@ -1,23 +1,23 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxTileLayer : SKNode, PEMTmxPropertiesProtocol {
+class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
-    private (set) var properties : Dictionary<String, Any>?
+    private (set) var properties: Dictionary<String, Any>?
 
     private var id = UInt32(0)
-    private var layerName : String?
+    private var layerName: String?
     private var coordsInTiles = CGPoint.zero // not supported
     private var sizeInTiles = CGSize.zero
     private var opacity = CGFloat(1)
-    private var tintColor : SKColor?
+    private var tintColor: SKColor?
     private var offSetInPoints = CGPoint.zero
     private var parallaxFactorX = CGFloat(1)
     private var parallaxFactorY = CGFloat(1)
     
     internal var tileData: [UInt32] = []
     
-    private var parentGroup : PEMTmxGroup?
+    private var parentGroup: PEMTmxGroup?
     
     // MARK: - Init
 

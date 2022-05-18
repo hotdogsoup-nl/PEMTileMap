@@ -1,13 +1,13 @@
 import SpriteKit
 
-class PEMTmxTileData : NSObject, PEMTmxPropertiesProtocol {
-    var texture : SKTexture?
+class PEMTmxTileData: NSObject, PEMTmxPropertiesProtocol {
+    var texture: SKTexture?
 
     private (set) var id = UInt32(0)
-    private (set) var type : String?
+    private (set) var type: String?
     private (set) var probability = UInt32(0)
-    private (set) var properties : Dictionary<String, Any>?
-    private (set) var animation : PEMTmxTileAnimation?
+    private (set) var properties: Dictionary<String, Any>?
+    private (set) var animation: PEMTmxTileAnimation?
 
     private var textureImageSource : String?
     private var tileSizeInPoints = CGSize.zero

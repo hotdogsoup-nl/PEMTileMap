@@ -1,23 +1,23 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxImageLayer : SKSpriteNode, PEMTmxPropertiesProtocol {
+class PEMTmxImageLayer: SKSpriteNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
-    private (set) var properties : Dictionary<String, Any>?
+    private (set) var properties: Dictionary<String, Any>?
 
     private var id = UInt32(0)
-    private var layerName : String?
-    private var textureImageSource : String?
+    private var layerName: String?
+    private var textureImageSource: String?
     private var offSetInPoints = CGPoint.zero
     private var imageSizeInPoints = CGSize.zero
     private var opacity = CGFloat(1)
-    private var tintColor : SKColor?
+    private var tintColor: SKColor?
     private var parallaxFactorX = CGFloat(1)
     private var parallaxFactorY = CGFloat(1)
     private var repeatX = false
     private var repeatY = false
     
-    private var parentGroup : PEMTmxGroup?
+    private var parentGroup: PEMTmxGroup?
 
     // MARK: - Init
 

@@ -3,7 +3,7 @@ import SpriteKit
 // MARK: - Properties
 
 func convertProperties(_ newProperties: [PEMTmxProperty]) -> Dictionary<String, Any>? {
-    var properties : Dictionary<String, Any>? = [:]
+    var properties: Dictionary<String, Any>? = [:]
     for property in newProperties {
         if let value = property.value {
 
@@ -57,7 +57,7 @@ func tileAttributes(fromId id: UInt32) -> (id: UInt32, flippedHorizontally: Bool
 
 func bundlePathForResource(_ resource: String) -> String? {
     var fileName = resource
-    var fileExtension : String?
+    var fileExtension: String?
 
     if resource.range(of: ".") != nil {
         fileName = (resource as NSString).deletingPathExtension
@@ -69,7 +69,7 @@ func bundlePathForResource(_ resource: String) -> String? {
 
 func bundleURLForResource(_ resource: String) -> URL? {
     var fileName = resource
-    var fileExtension : String?
+    var fileExtension: String?
 
     if resource.range(of: ".") != nil {
         fileName = (resource as NSString).deletingPathExtension
