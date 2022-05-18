@@ -1,25 +1,25 @@
 import SpriteKit
 
-internal enum DrawOrder : String {
+internal enum DrawOrder: String {
     case index = "index"
     case topDown = "topdown"
 }
 
-class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
-    private (set) var properties : Dictionary<String, Any>?
+class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
+    private (set) var properties: Dictionary<String, Any>?
     private (set) var opacity = CGFloat(1.0)
     private (set) var visible = true
     private (set) var offSetInPoints = CGPoint.zero
-    private (set) var tintColor : SKColor?
-    private (set) var color : SKColor?
+    private (set) var tintColor: SKColor?
+    private (set) var color: SKColor?
 
     private var id = UInt32(0)
-    private var groupName : String?
+    private var groupName: String?
     private var drawOrder = DrawOrder.topDown
     
     internal var objects: [PEMTmxObjectData] = []
 
-    private var parentGroup : PEMTmxGroup?
+    private var parentGroup: PEMTmxGroup?
 
     init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
         guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }
@@ -81,10 +81,13 @@ class PEMTmxObjectGroup : SKNode, PEMTmxPropertiesProtocol {
     
     // MARK: - Setup
         
-    func addObject(attributes: Dictionary<String, String>) {
-        if let object = PEMTmxObjectData(attributes: attributes) {
-            objects.append(object)
+    func addObjectData(attributes: Dictionary<String, String>) -> PEMTmxObjectData? {
+        if let objectData = PEMTmxObjectData(attributes: attributes) {
+            objects.append(objectData)
+            return objectData
         }
+        
+        return nil
     }
     
     // MARK: - Public

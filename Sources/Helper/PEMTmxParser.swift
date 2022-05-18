@@ -1,9 +1,10 @@
 import Foundation
 
-enum Elements : String {
+enum Elements: String {
     case none
     case animation = "animation"
     case data = "data"
+    case ellipse = "ellipse"
     case frame = "frame"
     case group = "group"
     case image = "image"
@@ -12,16 +13,21 @@ enum Elements : String {
     case map = "map"
     case object = "object"
     case objectGroup = "objectgroup"
+    case point = "point"
+    case polygon = "polygon"
+    case polyline = "polyline"
     case properties = "properties"
     case property = "property"
     case template = "template"
+    case text = "text"
     case tile = "tile"
     case tileOffset = "tileoffset"
     case tileSet = "tileset"
 }
 
-enum ElementAttributes : String {
+enum ElementAttributes: String {
     case backgroundColor = "backgroundcolor"
+    case bold = "bold"
     case columns = "columns"
     case color = "color"
     case compression = "compression"
@@ -30,12 +36,16 @@ enum ElementAttributes : String {
     case duration = "duration"
     case encoding = "encoding"
     case firstGid = "firstgid"
+    case fontFamily = "fontfamily"
     case format = "format"
     case gid = "gid"
+    case hAlign = "halign"
     case height = "height"
     case hexSideLength = "hexsidelength"
     case id = "id"
     case infinite = "infinite"
+    case italic = "italic"
+    case kerning = "kerning"
     case margin = "margin"
     case name = "name"
     case nextLayerId = "nextlayerid"
@@ -49,6 +59,8 @@ enum ElementAttributes : String {
     case parallaxY = "parallaxy"
     case parallaxOriginX = "parallaxoriginx"
     case parallaxOriginY = "parallaxoriginy"
+    case pixelSize = "pixelsize"
+    case points = "points"
     case probability = "probability"
     case propertytype = "propertytype"
     case renderOrder = "renderorder"
@@ -59,6 +71,7 @@ enum ElementAttributes : String {
     case spacing = "spacing"
     case staggerAxis = "staggeraxis"
     case staggerIndex = "staggerindex"
+    case strikeout = "strikeout"
     case tileCount = "tilecount"
     case tileId = "tileid"
     case tiledVersion = "tiledversion"
@@ -67,10 +80,13 @@ enum ElementAttributes : String {
     case tintColor = "tintcolor"
     case trans = "trans"
     case typeAttribute = "type" // "Type" is a reserved MetaType name so we use "TypeAttribute" instead
+    case underline = "underline"
+    case vAlign = "valign"
     case value = "value"
     case version = "version"
     case visible = "visible"
     case width = "width"
+    case wrap = "wrap"
     case x = "x"
     case y = "y"
 }
@@ -79,13 +95,13 @@ protocol PEMTmxPropertiesProtocol {
     func addProperties(_ newProperties: [PEMTmxProperty])
 }
 
-class PEMTmxParser : XMLParser, XMLParserDelegate {
-    enum DataEncoding : String {
+class PEMTmxParser: XMLParser, XMLParserDelegate {
+    enum DataEncoding: String {
         case base64 = "base64"
         case csv = "csv"
     }
 
-    enum DataCompression : String {
+    enum DataCompression: String {
         case none
         case gzip = "gzip"
         case zlib = "zlib"
@@ -97,14 +113,14 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case tsx
     }
     
-    private weak var currentMap : PEMTmxMap?
-    private weak var currentTileSet : PEMTmxTileSet?
+    private weak var currentMap: PEMTmxMap?
+    private weak var currentTileSet: PEMTmxTileSet?
 
-    private var currentFileType : ParseFileType
-    private var currentProperties : [PEMTmxProperty]?
-    private var currentParseString : String = ""
-    private var elementPath : [AnyObject] = []
-    private var dataEncoding : DataEncoding?
+    private var currentFileType: ParseFileType
+    private var currentProperties: [PEMTmxProperty]?
+    private var currentParseString: String = ""
+    private var elementPath: [AnyObject] = []
+    private var dataEncoding: DataEncoding?
     private var dataCompression = DataCompression.none
     
     // MARK: - Init
@@ -282,7 +298,41 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.object.rawValue:
             if let currentElement = elementPath.last as? PEMTmxObjectGroup {
-                currentElement.addObject(attributes: attributeDict)
+                if let objectData = currentElement.addObjectData(attributes: attributeDict) {
+                    elementPath.append(objectData)
+                }
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.ellipse.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxObjectData {
+                currentElement.setObjectType(.ellipse)
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.point.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxObjectData {
+                currentElement.setObjectType(.point)
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.polygon.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxObjectData {
+                currentElement.setObjectType(.polygon, attributes: attributeDict)
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.polyline.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxObjectData {
+                currentElement.setObjectType(.polyline, attributes: attributeDict)
+                break
+            }
+            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+        case Elements.text.rawValue:
+            currentParseString.removeAll()
+
+            if let currentElement = elementPath.last as? PEMTmxObjectData {
+                currentElement.setObjectType(.text, attributes: attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
@@ -405,7 +455,26 @@ class PEMTmxParser : XMLParser, XMLParserDelegate {
         case Elements.tileOffset.rawValue:
             break
         case Elements.object.rawValue:
+            if elementPath.last is PEMTmxObjectData {
+                elementPath.removeLast()
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
+        case Elements.ellipse.rawValue:
             break
+        case Elements.point.rawValue:
+            break
+        case Elements.polygon.rawValue:
+            break
+        case Elements.polyline.rawValue:
+            break
+        case Elements.text.rawValue:
+            if let currentElement = elementPath.last as? PEMTmxObjectData {
+                currentElement.setText(currentParseString)
+                break
+            }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
+            currentParseString.removeAll()
         default:
             #if DEBUG
             print("PEMTmxParser: unsupported TMX element name: <\(elementName)>")
