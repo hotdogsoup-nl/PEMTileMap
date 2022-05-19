@@ -58,7 +58,7 @@ string</property>
 </data>
  </layer>
  <objectgroup id="3" name="Object Layer 1">
-  <object id="1" name="Spawn object" x="96" y="64">
+  <object id="1" name="Spawn object" x="103" y="112">
    <point/>
   </object>
  </objectgroup>
