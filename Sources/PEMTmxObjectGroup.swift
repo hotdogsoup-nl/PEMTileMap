@@ -94,18 +94,10 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
 
     func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
-        
-        
-        
-        
-        
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
                 
         for object in objects {
             var node : SKNode?
-            
-            print(object)
-            
             
             var objectSize = object.sizeInPoints
             if objectSize == .zero {
@@ -116,12 +108,14 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
                 }
             }
             
+            var position = CGPoint(x: object.coordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - object.coordsInPoints.y - tileSizeInPoints.height * 0.5)
 
             switch object.objectType {
             case .ellipse:
                 node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
             case .point:
                 node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
+                position = CGPoint(x: position.x - objectSize.width * 0.5, y: position.y + objectSize.height * 0.5)
             case .polygon:
                 break
             case .polyline:
@@ -159,18 +153,13 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
             }
             
             if let objectNode = node as? SKSpriteNode {
+                objectNode.anchorPoint = CGPoint(x: 0.0, y: 1.0)
                 if tintColor != nil {
                     objectNode.color = tintColor!
                     objectNode.colorBlendFactor = 1.0
                 }
             }
             
-            var position = CGPoint(x: object.coordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - object.coordsInPoints.y - tileSizeInPoints.height * 0.5)
-            
-            if object.objectType == .point {
-                position = CGPoint(x: position.x - objectSize.width * 0.5, y: position.y + objectSize.height * 0.5)
-            }
-
             node?.position = position
             node?.zRotation = object.rotation.radians()
             addChild(node!)

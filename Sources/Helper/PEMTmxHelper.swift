@@ -77,9 +77,9 @@ func highResolutionLabel(text: String,
     }
     label.verticalAlignmentMode = alignmentVertical
 
+    let size = label.calculateAccumulatedFrame().size
     let spriteText = SKSpriteNode(texture: SKView().texture(from: label))
-    spriteText.xScale = 1 / scaleFactor
-    spriteText.yScale = 1 / scaleFactor
+    spriteText.size = CGSize(width: size.width / scaleFactor, height: size.height / scaleFactor)
     return spriteText
 }
 
