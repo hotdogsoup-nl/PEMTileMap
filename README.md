@@ -29,7 +29,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] tilesets based on a collection of images
 - [X] external TSX tile sets
 - [ ] terraintypes and wangsets
-- [ ] object groups
+- [X] object groups
 - [ ] object template files
 - [X] image layers
 - [X] layer groups
