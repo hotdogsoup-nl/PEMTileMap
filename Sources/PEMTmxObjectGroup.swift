@@ -11,7 +11,7 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
     private (set) var offSetInPoints = CGPoint.zero
     private (set) var tintColor: SKColor?
-    private (set) var color = SKColor.clear
+    private (set) var color = SKColor.lightGray
 
     private var id = UInt32(0)
     private var groupName: String?
@@ -154,9 +154,12 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
             
             if let objectNode = node as? SKSpriteNode {
                 objectNode.anchorPoint = CGPoint(x: 0.0, y: 1.0)
-                if tintColor != nil {
-                    objectNode.color = tintColor!
-                    objectNode.colorBlendFactor = 1.0
+                
+                if object.objectType != .text {
+                    if tintColor != nil {
+                        objectNode.color = tintColor!
+                        objectNode.colorBlendFactor = 1.0
+                    }
                 }
             }
             
@@ -180,7 +183,7 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     // MARK: - Private
     
     private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode {
-        let spriteLabel = highResolutionLabel(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white)
+        let spriteLabel = highResolutionLabel(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5)
         var size = spriteLabel.calculateAccumulatedFrame().size
         size = CGSize(width: size.width * 1.1, height: size.height * 1.5)
         let shape = SKShapeNode(rectOf: size, cornerRadius: size.height * 0.2)

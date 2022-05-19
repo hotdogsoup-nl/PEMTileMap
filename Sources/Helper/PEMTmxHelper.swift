@@ -13,7 +13,10 @@ func highResolutionLabel(text: String,
                          kerning: Bool = false,
                          wordWrapWidth: CGFloat = 0,
                          hAlign: TextHorizontalAlignment = .left,
-                         vAlign: TextVerticalAlignment = .center) -> SKSpriteNode {
+                         vAlign: TextVerticalAlignment = .center,
+                         shadowColor: SKColor = .clear,
+                         shadowOffset: CGSize = .zero,
+                         shadowBlurRadius: CGFloat = 0) -> SKSpriteNode {
     
     let scaleFactor = 5.0
     
@@ -66,7 +69,10 @@ func highResolutionLabel(text: String,
                                                 alignment: alignmentHorizontal,
                                                 underline: underline,
                                                 strikeThrough: strikeOut,
-                                                kerning: kerning ? 1 : 0)
+                                                kerning: kerning ? 1 : 0,
+                                                shadowColor: shadowColor,
+                                                shadowOffset: shadowOffset,
+                                                shadowBlurRadius: shadowBlurRadius)
     
     let label = SKLabelNode(attributedText: attributedString)
     if wordWrapWidth > 0 {
