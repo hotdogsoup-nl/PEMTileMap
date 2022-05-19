@@ -199,13 +199,13 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
         case Elements.layer.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
-            if let tileLayer = PEMTmxTileLayer(attributes: attributeDict, group:currentGroup) {
+            if let tileLayer = PEMTmxTileLayer(attributes: attributeDict, map:currentMap, group:currentGroup) {
                 currentMap?.layers.append(tileLayer)
                 elementPath.append(tileLayer)
             }
         case Elements.objectGroup.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
-            if let groupLayer = PEMTmxObjectGroup(attributes: attributeDict, group:currentGroup) {
+            if let groupLayer = PEMTmxObjectGroup(attributes: attributeDict, map:currentMap, group:currentGroup) {
                 currentMap?.layers.append(groupLayer)
                 elementPath.append(groupLayer)
             }

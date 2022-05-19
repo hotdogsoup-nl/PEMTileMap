@@ -16,17 +16,19 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
     private var parallaxFactorY = CGFloat(1)
     
     internal var tileData: [UInt32] = []
-    
     private var parentGroup: PEMTmxGroup?
+    
+    weak var map : PEMTmxMap?
     
     // MARK: - Init
 
-    init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
+    init?(attributes: Dictionary<String, String>, map: PEMTmxMap?, group: PEMTmxGroup?) {
         guard let layerId = attributes[ElementAttributes.id.rawValue] else { return nil }
         id = UInt32(layerId)!
         
         super.init()
         
+        self.map = map
         parentGroup = group
         layerName = attributes[ElementAttributes.name.rawValue]
         
@@ -87,7 +89,7 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
     
     // MARK: - Public
 
-    func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, tileSets: [PEMTmxTileSet], textureFilteringMode: SKTextureFilteringMode) {
+    func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
         
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
@@ -101,7 +103,7 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
             
             let tileGidAttributes = tileAttributes(fromId: tileGid)
         
-            if let tileSet = tileSetFor(gid: tileGidAttributes.id, tileSets: tileSets) {       
+            if let tileSet = map?.tileSetFor(gid: tileGidAttributes.id) {       
                 if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
@@ -117,8 +119,7 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
                     
                     let mapHeightInPoints = sizeInTiles.height * tileSizeInPoints.height
                     let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
-                    tile.position = CGPoint(x: (tile.coords!.x * tileSizeInPoints.width) + sizeDeviation.width * 0.5 + tileSet.tileOffSetInPoints.x,
-                                            y: mapHeightInPoints - ((tile.coords!.y + 1) * tileSizeInPoints.height) + sizeDeviation.height * 0.5 - tileSet.tileOffSetInPoints.y)
+                    tile.position = CGPoint(x: (tile.coords!.x * tileSizeInPoints.width) + sizeDeviation.width * 0.5 + tileSet.tileOffSetInPoints.x, y: mapHeightInPoints - ((tile.coords!.y + 1) * tileSizeInPoints.height) + sizeDeviation.height * 0.5 - tileSet.tileOffSetInPoints.y)
                                         
                     addChild(tile)
                     
@@ -134,15 +135,7 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
                         
                         tile.startAnimation(frameTiles: frameTiles)
                     }
-                } else {
-                    #if DEBUG
-                    print("PEMTmxLayer: no tile found with gid: \(tileGid) in tileSet: \(tileSet)")
-                    #endif
                 }
-            } else {
-                #if DEBUG
-                print("PEMTmxLayer: no tileSet found for tile with gid: \(tileGid)")
-                #endif
             }
         }
     }
@@ -154,17 +147,6 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
     }
     
     // MARK: - Private
-
-    private func tileSetFor(gid: UInt32, tileSets: [PEMTmxTileSet]) -> PEMTmxTileSet? {
-        let tileAttributes = tileAttributes(fromId: gid)
-
-        for tileSet in tileSets {
-            if tileSet.containsTileWith(gid: tileAttributes.id) {
-                return tileSet
-            }
-        }
-        return nil
-    }
     
     private func applyParentGroupAttributes() {
         if parentGroup == nil {

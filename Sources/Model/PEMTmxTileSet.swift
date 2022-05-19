@@ -194,6 +194,10 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
             return PEMTmxTile(tileData: newTileData)
         }
         
+        #if DEBUG
+        print("PEMTmxTileSet: no tile found with id: \(id) in tileSet: \(self)")
+        #endif
+        
         return nil
     }
     

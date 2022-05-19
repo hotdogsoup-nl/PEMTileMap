@@ -227,6 +227,24 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         properties = convertProperties(newProperties)
     }
     
+    // MARK: - Public
+        
+    func tileSetFor(gid: UInt32) -> PEMTmxTileSet? {
+        let tileAttributes = tileAttributes(fromId: gid)
+
+        for tileSet in tileSets {
+            if tileSet.containsTileWith(gid: tileAttributes.id) {
+                return tileSet
+            }
+        }
+        
+        #if DEBUG
+        print("PEMTmxMap: no tileSet found for tile with gid: \(gid)")
+        #endif
+
+        return nil
+    }
+    
     // MARK: - Private
     
     private func parseExternalFiles() {
@@ -265,7 +283,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
                 if tileLayer.visible {
                     currentZPosition += zPositionLayerDelta
 
-                    tileLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, tileSets: tileSets, textureFilteringMode: textureFilteringMode)
+                    tileLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, textureFilteringMode: textureFilteringMode)
                     tileLayer.zPosition = currentZPosition
                     
                     addChild(tileLayer)

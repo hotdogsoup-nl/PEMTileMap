@@ -18,16 +18,18 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     private var drawOrder = DrawOrder.topDown
     
     internal var objects: [PEMTmxObjectData] = []
-
     private var parentGroup: PEMTmxGroup?
+    
+    weak var map : PEMTmxMap?
 
-    init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
+    init?(attributes: Dictionary<String, String>, map: PEMTmxMap?, group: PEMTmxGroup?) {
         guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }
+        id = UInt32(groupId)!
+
         super.init()
 
-        id = UInt32(groupId)!
+        self.map = map
         parentGroup = group
-
         groupName = attributes[ElementAttributes.name.rawValue]
         
         if let value = attributes[ElementAttributes.opacity.rawValue] {
