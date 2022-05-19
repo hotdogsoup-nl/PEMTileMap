@@ -105,6 +105,12 @@
 		205BF6AD2826A95600077DB2 /* level3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6AC2826A95600077DB2 /* level3.tmx */; };
 		205BF6AE2826A95600077DB2 /* level3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6AC2826A95600077DB2 /* level3.tmx */; };
 		205BF6AF2826A95600077DB2 /* level3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205BF6AC2826A95600077DB2 /* level3.tmx */; };
+		2077912D28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */; };
+		2077912E28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */; };
+		2077912F28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */; };
+		20779131283630EB00E3EA9D /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20779130283630EB00E3EA9D /* PEMFontHelper.swift */; };
+		20779132283630EB00E3EA9D /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20779130283630EB00E3EA9D /* PEMFontHelper.swift */; };
+		20779133283630EB00E3EA9D /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20779130283630EB00E3EA9D /* PEMFontHelper.swift */; };
 		207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DB82812AD5700FC4C77 /* AppDelegate.swift */; };
 		207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DBA2812AD5700FC4C77 /* GameViewController.swift */; };
 		207D3DBE2812AD5700FC4C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DBC2812AD5700FC4C77 /* Main.storyboard */; };
@@ -172,6 +178,8 @@
 		205BF6A82826A85F00077DB2 /* Tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tiles; sourceTree = "<group>"; };
 		205BF6AC2826A95600077DB2 /* level3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level3.tmx; sourceTree = "<group>"; };
 		205C86332823D8D800360A29 /* Objc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridging-Header.h"; sourceTree = "<group>"; };
+		2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
+		20779130283630EB00E3EA9D /* PEMFontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMFontHelper.swift; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		207D3DB02812AD5700FC4C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXMapDemo.app; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -353,7 +361,9 @@
 		209AB9A72827C8510021A297 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */,
 				20D0D3122828111B001E505D /* Data+Compression.swift */,
+				20779130283630EB00E3EA9D /* PEMFontHelper.swift */,
 				2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */,
 				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
 				205BF699282687A800077DB2 /* SKColor+Extension.swift */,
@@ -571,6 +581,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20779133283630EB00E3EA9D /* PEMFontHelper.swift in Sources */,
 				2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */,
 				2045AEF02833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */,
 				2037A5F528258DB500E13452 /* PEMTmxMap.swift in Sources */,
@@ -594,6 +605,7 @@
 				20D0D3152828111B001E505D /* Data+Compression.swift in Sources */,
 				2029D9D0283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
 				2000FD3E282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
+				2077912F28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */,
 				205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 				2056B6A1283239E300595F23 /* PEMTmxGroup.swift in Sources */,
 				2045AEFA2833D0B500614F38 /* TimeInterval+Extension.swift in Sources */,
@@ -604,6 +616,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20779131283630EB00E3EA9D /* PEMFontHelper.swift in Sources */,
 				2014E98728169C4500A12253 /* MathHelper.swift in Sources */,
 				2045AEEE2833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */,
 				2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
@@ -627,6 +640,7 @@
 				20D0D3132828111B001E505D /* Data+Compression.swift in Sources */,
 				2029D9CE283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
 				2000FD3C282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
+				2077912D28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */,
 				205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 				2056B69F283239E300595F23 /* PEMTmxGroup.swift in Sources */,
 				2045AEF82833D0B500614F38 /* TimeInterval+Extension.swift in Sources */,
@@ -637,6 +651,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20779132283630EB00E3EA9D /* PEMFontHelper.swift in Sources */,
 				2014E98828169C4500A12253 /* MathHelper.swift in Sources */,
 				2045AEEF2833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */,
 				2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
@@ -660,6 +675,7 @@
 				20D0D3142828111B001E505D /* Data+Compression.swift in Sources */,
 				2029D9CF283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
 				2000FD3D282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
+				2077912E28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */,
 				205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */,
 				2056B6A0283239E300595F23 /* PEMTmxGroup.swift in Sources */,
 				2045AEF92833D0B500614F38 /* TimeInterval+Extension.swift in Sources */,

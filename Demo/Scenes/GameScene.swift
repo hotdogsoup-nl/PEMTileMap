@@ -492,7 +492,7 @@ extension GameScene {
 }
 #endif
 
-#if os(OSX)
+#if os(macOS)
 extension GameScene {
     override func keyDown(with event: NSEvent) {
         switch event.keyCode {

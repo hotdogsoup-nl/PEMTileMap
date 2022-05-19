@@ -12,44 +12,44 @@ enum ObjectType {
     case unknown
 }
 
+enum TextHorizontalAlignment: String {
+    case center
+    case justify
+    case left
+    case right
+}
+
+enum TextVerticalAlignment: String {
+    case bottom
+    case center
+    case top
+}
+
 class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
-    enum TextHorizontalAlignment: String {
-        case center
-        case justify
-        case left
-        case right
-    }
-    
-    enum TextVerticalAlignment: String {
-        case bottom
-        case center
-        case top
-    }
     private (set) var id = UInt32(0)
     private (set) var objectType = ObjectType.unknown
     private (set) var visible = true
+    private (set) var coordsInPoints = CGPoint.zero
+    private (set) var sizeInPoints = CGSize.zero
+    private (set) var rotation = CGFloat(0)
+    private (set) var objectName: String?
+    private (set) var text = ""
+    private (set) var textColor = SKColor.white
+    private (set) var fontFamily = "Arial"
+    private (set) var bold = false
+    private (set) var italic = false
+    private (set) var pixelSize = CGFloat(16)
+    private (set) var underline = false
+    private (set) var strikeOut = false
+    private (set) var kerning = true
+    private (set) var hAlign = TextHorizontalAlignment.left
+    private (set) var vAlign = TextVerticalAlignment.top
+    private (set) var wrap = false
 
-    private var objectName: String?
     private var type: String?
-    
-    private var coordsInPoints = CGPoint.zero
-    private var sizeInPoints = CGSize.zero
-    private var rotation = CGFloat(0)
 
     private var tileGid = UInt32(0)
-    private var text: String?
     private var points: [CGPoint]?
-    private var textColor: SKColor?
-    private var fontFamily: String?
-    private var bold = false
-    private var italic = false
-    private var pixelSize = CGFloat(16)
-    private var underline = false
-    private var strikeOut = false
-    private var kerning = true
-    private var hAlign = TextHorizontalAlignment.left
-    private var vAlign = TextVerticalAlignment.top
-    private var wrap = true
 
     private (set) var properties : Dictionary<String, Any>?
 
@@ -81,9 +81,9 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
             sizeInPoints = CGSize(width: CGFloat(widthString.doubleValue), height: CGFloat(heightString.doubleValue))
         }
         
-        if let value = attributes[ElementAttributes.opacity.rawValue] {
+        if let value = attributes[ElementAttributes.rotation.rawValue] {
             let valueString : NSString = value as NSString
-            rotation = CGFloat(valueString.doubleValue)
+            rotation = CGFloat(360.0 - valueString.doubleValue)
         }
         
         if let value = attributes[ElementAttributes.gid.rawValue] {
@@ -105,7 +105,9 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
             return
         }
         
-        fontFamily = attributes[ElementAttributes.fontFamily.rawValue]
+        if let value = attributes[ElementAttributes.fontFamily.rawValue] {
+            fontFamily = value
+        }
         
         if let value = attributes[ElementAttributes.color.rawValue] {
             textColor = SKColor.init(hexString: value)

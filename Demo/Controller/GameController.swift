@@ -1,9 +1,9 @@
 import Foundation
 import SpriteKit
-#if os(iOS) || os(tvOS)
-import UIKit
-#else
+#if os(macOS)
 import Cocoa
+#else
+import UIKit
 #endif
 
 public class GameController: NSObject, GameSceneDelegate {

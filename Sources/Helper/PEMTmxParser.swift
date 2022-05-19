@@ -66,6 +66,7 @@ enum ElementAttributes: String {
     case renderOrder = "renderorder"
     case repeatX = "repeatx"
     case repeatY = "repeaty"
+    case rotation = "rotation"
     case rows = "rows"
     case source = "source"
     case spacing = "spacing"

@@ -37,7 +37,7 @@ class PEMTmxTile: SKSpriteNode {
         #if os(macOS)
         print("deinit: \(self.className.components(separatedBy: ".").last! )")
         #else
-        print("deinit: \(type(of: self))")
+        print("deinit: \(Swift.type(of: self))")
         #endif
         #endif
     }

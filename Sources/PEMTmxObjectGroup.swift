@@ -11,7 +11,7 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     private (set) var visible = true
     private (set) var offSetInPoints = CGPoint.zero
     private (set) var tintColor: SKColor?
-    private (set) var color: SKColor?
+    private (set) var color = SKColor.clear
 
     private var id = UInt32(0)
     private var groupName: String?
@@ -93,21 +93,93 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     // MARK: - Public
 
     func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
-        
         alpha = opacity
         
+        
+        
+        
+        
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
-        
-        
+                
         for object in objects {
-
-            if let objectNode = nodeFor(object) {
-                addChild(objectNode)
+            var node : SKNode?
+            
+            print(object)
+            
+            
+            var objectSize = object.sizeInPoints
+            if objectSize == .zero {
+                if object.objectType == .point {
+                    objectSize = CGSize(width: tileSizeInPoints.width * 0.25, height: tileSizeInPoints.height * 0.25)
+                } else {
+                    objectSize = tileSizeInPoints
+                }
             }
+            
+
+            switch object.objectType {
+            case .ellipse:
+                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
+            case .point:
+                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
+            case .polygon:
+                break
+            case .polyline:
+                break
+            case .rectangle:
+                node = SKShapeNode(rect: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
+            case .text:
+                node = highResolutionLabel(text: object.text,
+                                           fontName: object.fontFamily,
+                                           fontSize: object.pixelSize,
+                                           fontColor: object.textColor,
+                                           bold: object.bold,
+                                           italic: object.italic,
+                                           underline: object.underline,
+                                           strikeOut: object.strikeOut,
+                                           kerning: object.kerning,
+                                           wordWrapWidth: object.wrap ? objectSize.width : 0,
+                                           hAlign: object.hAlign,
+                                           vAlign: object.vAlign)
+            case .tile:
+                break
+            case .unknown:
+                break
+            }
+            
+            if node == nil {
+                continue
+            }
+            
+            if let objectNode = node as? SKShapeNode {
+                objectNode.lineWidth = 0.25
+                objectNode.strokeColor = color
+                objectNode.fillColor = color.withAlphaComponent(0.5)
+                objectNode.isAntialiased = true
+            }
+            
+            if let objectNode = node as? SKSpriteNode {
+                if tintColor != nil {
+                    objectNode.color = tintColor!
+                    objectNode.colorBlendFactor = 1.0
+                }
+            }
+            
+            var position = CGPoint(x: object.coordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - object.coordsInPoints.y - tileSizeInPoints.height * 0.5)
+            
+            if object.objectType == .point {
+                position = CGPoint(x: position.x - objectSize.width * 0.5, y: position.y + objectSize.height * 0.5)
+            }
+
+            node?.position = position
+            node?.zRotation = object.rotation.radians()
+            addChild(node!)
+            
+            let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.25, color:color)
+            label.position = CGPoint(x: objectSize.width * 0.5, y: label.calculateAccumulatedFrame().size.height * 0.7)
+            label.zRotation = -node!.zRotation
+            node?.addChild(label)
         }
-
-
-
     }
     
     // MARK: - PEMTmxPropertiesProtocol
@@ -118,8 +190,16 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     
     // MARK: - Private
     
-    private func nodeFor(_ object : PEMTmxObjectData) -> SKNode? {
-        return nil
+    private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode {
+        let spriteLabel = highResolutionLabel(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white)
+        var size = spriteLabel.calculateAccumulatedFrame().size
+        size = CGSize(width: size.width * 1.1, height: size.height * 1.5)
+        let shape = SKShapeNode(rectOf: size, cornerRadius: size.height * 0.2)
+        shape.fillColor = color
+        shape.strokeColor = color
+        
+        shape.addChild(spriteLabel)
+        return shape
     }
     
     private func applyParentGroupAttributes() {
