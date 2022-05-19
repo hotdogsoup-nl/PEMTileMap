@@ -33,6 +33,7 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
     private (set) var sizeInPoints = CGSize.zero
     private (set) var rotation = CGFloat(0)
     private (set) var objectName: String?
+    private (set) var tileGid = UInt32(0)
     private (set) var text = ""
     private (set) var textColor = SKColor.white
     private (set) var fontFamily = "Arial"
@@ -48,7 +49,6 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
 
     private var type: String?
 
-    private var tileGid = UInt32(0)
     private var points: [CGPoint]?
 
     private (set) var properties : Dictionary<String, Any>?

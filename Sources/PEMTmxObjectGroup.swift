@@ -125,7 +125,7 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
             case .rectangle:
                 node = SKShapeNode(rect: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
             case .text:
-                node = highResolutionLabel(text: object.text,
+                let text = highResolutionLabel(text: object.text,
                                            fontName: object.fontFamily,
                                            fontSize: object.pixelSize,
                                            fontColor: object.textColor,
@@ -137,8 +137,46 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
                                            wordWrapWidth: object.wrap ? objectSize.width : 0,
                                            hAlign: object.hAlign,
                                            vAlign: object.vAlign)
+                text.anchorPoint = CGPoint(x: 0.0, y: 1.0)
+                node = text
             case .tile:
-                break
+                let tileGid = object.tileGid
+                let tileGidAttributes = tileAttributes(fromId: tileGid)
+                
+                if let tileSet = map?.tileSetFor(gid: tileGidAttributes.id) {
+                    if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
+                        tile.applyTileFlipping(horizontally: tileGidAttributes.flippedHorizontally, vertically: tileGidAttributes.flippedVertically, diagonally: tileGidAttributes.flippedDiagonally)
+                        tile.texture?.filteringMode = textureFilteringMode
+                        
+                        if tintColor != nil {
+                            tile.color = tintColor!
+                            tile.colorBlendFactor = 1.0
+                        }
+                        
+                        let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
+                        
+                        tile.position = CGPoint(x: tileSizeInPoints.width * 0.5, y: tileSizeInPoints.height * 0.5)
+                        
+//                        position = CGPoint(x: position.x + tileSet.tileOffSetInPoints.x + sizeDeviation.width * 0.5 + tileSizeInPoints.width * 0.5, y: position.y - tileSet.tileOffSetInPoints.y + sizeDeviation.height * 0.5 + tileSizeInPoints.height * 0.5)
+                        
+                        node = SKNode()
+                        node?.addChild(tile)
+                        
+                        if tile.animation != nil {
+                            var frameTiles: Dictionary<UInt32, SKTexture> = [:]
+                            
+                            for animationFrame in tile.animation!.frames {
+                                if let frameTile = tileSet.tileFor(id: animationFrame.tileId) {
+                                    frameTile.texture?.filteringMode = textureFilteringMode
+                                    frameTiles[animationFrame.tileId] = frameTile.texture
+                                }
+                            }
+                            
+                            tile.startAnimation(frameTiles: frameTiles)
+                        }
+                    }
+                }
+
             case .unknown:
                 break
             }
@@ -154,25 +192,26 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
                 objectNode.isAntialiased = true
             }
             
-            if let objectNode = node as? SKSpriteNode {
-                objectNode.anchorPoint = CGPoint(x: 0.0, y: 1.0)
-                
-                if object.objectType != .text {
-                    if tintColor != nil {
-                        objectNode.color = tintColor!
-                        objectNode.colorBlendFactor = 1.0
-                    }
-                }
-            }
-            
             node?.position = position
             node?.zRotation = object.rotation.radians()
-            addChild(node!)
             
-            let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.25, color:color)
-            label.position = CGPoint(x: objectSize.width * 0.5, y: label.calculateAccumulatedFrame().size.height * 0.7)
-            label.zRotation = -node!.zRotation
-            node?.addChild(label)
+            if object.objectName != nil {
+                let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.25, color:color)
+                
+                if object.objectType == .tile {
+                    label.position = CGPoint(x: objectSize.width * 0.5, y: objectSize.height +  label.calculateAccumulatedFrame().size.height * 0.7)
+
+                } else {
+                    label.position = CGPoint(x: objectSize.width * 0.5, y: label.calculateAccumulatedFrame().size.height * 0.7)
+                }
+                
+                label.zRotation = -node!.zRotation
+                label.zPosition = node!.zPosition + 1
+                node?.addChild(label)
+            }
+            
+            addChild(node!)
+
         }
     }
     
