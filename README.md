@@ -17,6 +17,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] read and parse TMX map files
 - [X] CSV, Base64 layer formats with gzip, zlib or no compression
 - [ ] Zstandard compression 
+- [ ] world files
 - [X] fixed size maps
 - [ ] infinite maps
 - [X] orthogonal map types
