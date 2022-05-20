@@ -53,10 +53,11 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
     private (set) var polygonPoints: [CGPoint] = []
 
     init?(attributes: Dictionary<String, String>) {
-        guard let objectId = attributes[ElementAttributes.id.rawValue] else { return nil }
-        id = UInt32(objectId)!
-        
         super.init()
+        
+        if let value = attributes[ElementAttributes.id.rawValue] {
+            id = UInt32(value)!
+        }
 
         objectName = attributes[ElementAttributes.name.rawValue]
         type = attributes[ElementAttributes.typeAttribute.rawValue]
