@@ -23,14 +23,15 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     weak var map : PEMTmxMap?
 
     init?(attributes: Dictionary<String, String>, map: PEMTmxMap?, group: PEMTmxGroup?) {
-        guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }
-        id = UInt32(groupId)!
-
         super.init()
 
         self.map = map
         parentGroup = group
         groupName = attributes[ElementAttributes.name.rawValue]
+        
+        if let value = attributes[ElementAttributes.id.rawValue] {
+            id = UInt32(value)!
+        }
         
         if let value = attributes[ElementAttributes.opacity.rawValue] {
             let valueString : NSString = value as NSString
