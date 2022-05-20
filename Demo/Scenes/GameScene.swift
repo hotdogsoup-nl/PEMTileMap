@@ -35,12 +35,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var nextMapButton: SKShapeNode?
     private var currentMapNameLabel: SKLabelNode?
     private var currentMapIndex = Int(0)
-    private var maps = [
+    private var maps =
+    
+    // "TestMaps" folder
+//    [
+//        "level1.tmx",
+//        "level2.tmx",
+//        "level3.tmx",
+//        "level4.tmx",
+//        "level5.tmx",
+//    ]
+    
+    // "Maps" folder
+    [
         "gameart2d-desert.tmx",
         "jb-32.tmx",
         "level25.tmx",
         "MagicLand.tmx",
     ]
+    
+    // "Tiled Examples" folder
+//    [
+//        "desert.tmx",
+//        "orthogonal-outside.tmx",
+//        "sewers.tmx",
+//        "hexagonal-mini.tmx",
+//        "isometric_grass_and_water.tmx",
+//        "isometric_staggered_grass_and_water.tmx",
+//        "perspective_walls.tmx",
+//        "test_hexagonal_tile_60x60x30.tmx",
+//    ]
 
     private var player: Player?
     private var previousUpdateTime = TimeInterval(0)
