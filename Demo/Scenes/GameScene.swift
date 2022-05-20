@@ -48,6 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // "Maps" folder
     [
+        "mylevel1.tmx",
         "gameart2d-desert.tmx",
         "jb-32.tmx",
         "level25.tmx",
