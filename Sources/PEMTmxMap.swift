@@ -32,6 +32,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     private (set) var currentZPosition = CGFloat(0)
     private (set) var backgroundColor: SKColor?
     private (set) var properties: Dictionary<String, Any>?
+    private (set) var orientation: Orientation?
 
     private var version: String?
     private var mapSource: String?
@@ -47,7 +48,6 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     private var parallaxOriginInPoints = CGPoint.zero
     private var infinite = false
     
-    private var orientation: Orientation?
     private var staggerAxis: MapStaggerAxis?
     private var staggerIndex: MapStaggerIndex?
 
