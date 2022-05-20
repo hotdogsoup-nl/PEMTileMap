@@ -102,26 +102,19 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
             var node : SKNode?
             
             var objectSize = object.sizeInPoints
-            if objectSize == .zero {
-                if object.objectType == .point {
-                    objectSize = CGSize(width: tileSizeInPoints.width * 0.25, height: tileSizeInPoints.height * 0.25)
-                } else {
-                    objectSize = tileSizeInPoints
-                }
-            }
-            
             var position = CGPoint(x: object.coordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - object.coordsInPoints.y - tileSizeInPoints.height * 0.5)
 
             switch object.objectType {
             case .ellipse:
                 node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
             case .point:
+                objectSize = CGSize(width: tileSizeInPoints.width * 0.25, height: tileSizeInPoints.height * 0.25)
                 node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
                 position = CGPoint(x: position.x - objectSize.width * 0.5, y: position.y + objectSize.height * 0.5)
-            case .polygon:
-                break
-            case .polyline:
-                break
+            case .polygon, .polyline:
+                var points = object.polygonPoints
+                node = SKShapeNode(points: &points, count: points.count)
+                objectSize = node!.calculateAccumulatedFrame().size
             case .rectangle:
                 node = SKShapeNode(rect: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
             case .text:
@@ -183,11 +176,17 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
                 continue
             }
             
+            var nodeCenter = CGPoint.zero
+            
             if let objectNode = node as? SKShapeNode {
                 objectNode.lineWidth = 0.25
                 objectNode.strokeColor = color
-                objectNode.fillColor = color.withAlphaComponent(0.5)
+                if object.objectType != .polyline {
+                    objectNode.fillColor = color.withAlphaComponent(0.5)
+                }
                 objectNode.isAntialiased = true
+                
+                nodeCenter = CGPoint(x: objectNode.frame.midX, y: objectNode.frame.midY)
             }
             
             node?.position = position
@@ -195,12 +194,14 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
             
             if object.objectName != nil {
                 let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.25, color:color)
+                let labelSize = label.calculateAccumulatedFrame().size
                 
                 if object.objectType == .tile {
-                    label.position = CGPoint(x: objectSize.width * 0.5, y: objectSize.height +  label.calculateAccumulatedFrame().size.height * 0.7)
-
+                    label.position = CGPoint(x: objectSize.width * 0.5, y: objectSize.height +  labelSize.height * 0.7)
+                } else if object.objectType == .polygon || object.objectType == .polyline {
+                    label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + objectSize.height * 0.5 + labelSize.height * 0.7)
                 } else {
-                    label.position = CGPoint(x: objectSize.width * 0.5, y: label.calculateAccumulatedFrame().size.height * 0.7)
+                    label.position = CGPoint(x: objectSize.width * 0.5, y: labelSize.height * 0.7)
                 }
                 
                 label.zRotation = -node!.zRotation

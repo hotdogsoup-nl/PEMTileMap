@@ -49,9 +49,8 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
 
     private var type: String?
 
-    private var points: [CGPoint]?
-
     private (set) var properties : Dictionary<String, Any>?
+    private (set) var polygonPoints: [CGPoint] = []
 
     init?(attributes: Dictionary<String, String>) {
         guard let objectId = attributes[ElementAttributes.id.rawValue] else { return nil }
@@ -168,7 +167,7 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
                 let coordsArray = point.components(separatedBy: ",")
                 if let x = Int(coordsArray.first!),
                    let y = Int(coordsArray.last!) {
-                    points?.append(CGPoint(x: x, y: y))
+                    polygonPoints.append(CGPoint(x: x, y: -y))
                 }
             }
         }
