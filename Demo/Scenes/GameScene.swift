@@ -47,25 +47,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //    ]
     
     // "Maps" folder
-    [
-        "mylevel1.tmx",
-        "gameart2d-desert.tmx",
-        "jb-32.tmx",
-        "level25.tmx",
-        "MagicLand.tmx",
-    ]
+//    [
+//        "mylevel1.tmx",
+//        "gameart2d-desert.tmx",
+//        "jb-32.tmx",
+//        "level25.tmx",
+//        "MagicLand.tmx",
+//    ]
+    
+    // "sticker-knight-gfx" folder
+//    [
+//    "sandbox2.tmx",
+//    "sandbox.tmx",
+//    ]
+    
+    // "Roguelike" folder
+//    [
+//    "sample_map.tmx",
+//    "sample_indoor.tmx",
+//    ]
     
     // "Tiled Examples" folder
-//    [
-//        "desert.tmx",
-//        "orthogonal-outside.tmx",
-//        "sewers.tmx",
-//        "hexagonal-mini.tmx",
-//        "isometric_grass_and_water.tmx",
-//        "isometric_staggered_grass_and_water.tmx",
-//        "perspective_walls.tmx",
-//        "test_hexagonal_tile_60x60x30.tmx",
-//    ]
+    [
+        "sandbox.tmx",
+        "sandbox2.tmx",
+        "island.tmx",
+        "forest.tmx",
+        "desert.tmx",
+        "orthogonal-outside.tmx",
+        "sewers.tmx",
+        "hexagonal-mini.tmx",
+        "isometric_grass_and_water.tmx",
+        "isometric_staggered_grass_and_water.tmx",
+        "perspective_walls.tmx",
+        "test_hexagonal_tile_60x60x30.tmx",
+    ]
 
     private var player: Player?
     private var previousUpdateTime = TimeInterval(0)
