@@ -23,14 +23,15 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
     // MARK: - Init
 
     init?(attributes: Dictionary<String, String>, map: PEMTmxMap?, group: PEMTmxGroup?) {
-        guard let layerId = attributes[ElementAttributes.id.rawValue] else { return nil }
-        id = UInt32(layerId)!
-        
         super.init()
         
         self.map = map
         parentGroup = group
         layerName = attributes[ElementAttributes.name.rawValue]
+
+        if let value = attributes[ElementAttributes.id.rawValue] {
+            id = UInt32(value)!
+        }
         
         if let x = attributes[ElementAttributes.x.rawValue],
            let y = attributes[ElementAttributes.y.rawValue] {
