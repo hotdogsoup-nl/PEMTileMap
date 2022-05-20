@@ -8,7 +8,7 @@ class PEMTmxTile: SKSpriteNode {
     private (set) var properties: Dictionary<String, Any>?
 
     private var type: String?
-    private var probability = UInt32(0)
+    private var probability = CGFloat(0)
 
     // MARK: - Init
     

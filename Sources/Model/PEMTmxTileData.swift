@@ -5,7 +5,7 @@ class PEMTmxTileData: NSObject, PEMTmxPropertiesProtocol {
 
     private (set) var id = UInt32(0)
     private (set) var type: String?
-    private (set) var probability = UInt32(0)
+    private (set) var probability = CGFloat(0)
     private (set) var properties: Dictionary<String, Any>?
     private (set) var animation: PEMTmxTileAnimation?
 
@@ -49,7 +49,8 @@ class PEMTmxTileData: NSObject, PEMTmxPropertiesProtocol {
         }
 
         if let value = attributes[ElementAttributes.probability.rawValue] {
-            probability = UInt32(value)!
+            let valueString : NSString = value as NSString
+            probability = CGFloat(valueString.doubleValue)
         }
     }
     
