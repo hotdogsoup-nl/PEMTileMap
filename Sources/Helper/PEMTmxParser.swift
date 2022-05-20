@@ -185,6 +185,13 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         // top level elements
         case Elements.map.rawValue:
             currentMap?.addAttributes(attributeDict)
+            if currentMap?.orientation != .orthogonal {
+                #if DEBUG
+                print("PEMTmxParser: unsupported map orientation: \(currentMap!.orientation!.rawValue)")
+                #endif
+                parser.abortParsing()
+                break
+            }
             elementPath.append(currentMap!)
         case Elements.tileSet.rawValue :
             switch currentFileType {
@@ -202,14 +209,17 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             if let tileLayer = PEMTmxTileLayer(attributes: attributeDict, map:currentMap, group:currentGroup) {
                 currentMap?.layers.append(tileLayer)
                 elementPath.append(tileLayer)
+                break
             }
+            abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.objectGroup.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
             if let groupLayer = PEMTmxObjectGroup(attributes: attributeDict, map:currentMap, group:currentGroup) {
                 currentMap?.layers.append(groupLayer)
                 elementPath.append(groupLayer)
+                break
             }
-            break
+            abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.imageLayer.rawValue:
             let currentGroup = elementPath.last as? PEMTmxGroup
             let layer = PEMTmxImageLayer(attributes: attributeDict, group:currentGroup)
@@ -219,7 +229,9 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             let currentGroup = elementPath.last as? PEMTmxGroup
             if let group = PEMTmxGroup(attributes: attributeDict, group:currentGroup) {
                 elementPath.append(group)
+                break
             }
+            abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.properties.rawValue:
             currentProperties = []
         case Elements.template.rawValue:
@@ -500,9 +512,16 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         currentParseString.removeAll()
     }
     
+    private func abortWithFailedCreation(elementName: String, attributes attributeDict: [String : String] = [:], inside element: AnyObject?) {
+        #if DEBUG
+        print("PEMTmxParser: could not create: <\(elementName)> with attributes: <\(attributeDict)>, current element: \(String(describing: element)).")
+        #endif
+        abortParsing()
+    }
+    
     private func abortWithUnexpected(closingElementName: String, inside element: AnyObject?) {
         #if DEBUG
-        print("PEMTmxParser: unexpected closing element: <\(closingElementName)> current element: \(String(describing: element)).")
+        print("PEMTmxParser: unexpected closing element: <\(closingElementName)>, current element: \(String(describing: element)).")
         #endif
         abortParsing()
     }
