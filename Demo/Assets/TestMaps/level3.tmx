@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="12" height="16" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#aa7942" nextlayerid="4" nextobjectid="3">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="12" height="16" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#aa7942" nextlayerid="4" nextobjectid="9">
  <properties>
   <property name="bool prop" type="bool" value="true"/>
   <property name="color prop" type="color" value="#ffff40ff"/>
@@ -58,8 +58,12 @@ string</property>
 </data>
  </layer>
  <objectgroup id="3" name="Object Layer 1">
-  <object id="1" name="Spawn object" x="103" y="112">
-   <point/>
+  <object id="3" name="KANGAAA" gid="3221225487" x="96" y="112" width="16" height="24" rotation="15"/>
+  <object id="6" name="LIJN" x="32" y="144" rotation="25">
+   <polyline points="0,0 16,48 80,16 128,0"/>
+  </object>
+  <object id="8" name="gon" x="128" y="32" rotation="5">
+   <polygon points="0,0 -80,64 -80,0 -64,-32 48,-32 48,64 0,32 16,0"/>
   </object>
  </objectgroup>
  <imagelayer id="2" name="Image Layer 1" visible="0" locked="1" opacity="0.5" repeatx="1" repeaty="1">

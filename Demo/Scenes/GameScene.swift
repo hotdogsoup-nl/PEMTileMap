@@ -27,29 +27,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case toTheRight
     }
     
-    var gameSceneDelegate : GameSceneDelegate?
+    var gameSceneDelegate: GameSceneDelegate?
     private var map: PEMTmxMap?
-    private var cameraNode : SKCameraNode?
+    private var cameraNode: SKCameraNode?
     
-    private var previousMapButton : SKShapeNode?
-    private var nextMapButton : SKShapeNode?
-    private var currentMapNameLabel : SKLabelNode?
+    private var previousMapButton: SKShapeNode?
+    private var nextMapButton: SKShapeNode?
+    private var currentMapNameLabel: SKLabelNode?
     private var currentMapIndex = Int(0)
     private var maps = [
-                        "level5.tmx",
-                        "level3.tmx",
-                        "level2.tmx",
-                        "level4.tmx",
-                        "level1.tmx",
+        "gameart2d-desert.tmx",
+        "jb-32.tmx",
+        "level25.tmx",
+        "MagicLand.tmx",
     ]
 
-    private var player : Player?
+    private var player: Player?
     private var previousUpdateTime = TimeInterval(0)
     private var doorOpened = false
     
-    private var door : SKSpriteNode?
-    private var spawnLayer : PEMTmxTileLayer?
-    private var terrainLayer : PEMTmxTileLayer?
+    private var door: SKSpriteNode?
+    private var spawnLayer: PEMTmxTileLayer?
+    private var terrainLayer: PEMTmxTileLayer?
     
     // MARK: - Init
     
