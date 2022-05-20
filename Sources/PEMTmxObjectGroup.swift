@@ -155,9 +155,7 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
                         
                         let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
                         
-                        tile.position = CGPoint(x: tileSizeInPoints.width * 0.5, y: tileSizeInPoints.height * 0.5)
-                        
-//                        position = CGPoint(x: position.x + tileSet.tileOffSetInPoints.x + sizeDeviation.width * 0.5 + tileSizeInPoints.width * 0.5, y: position.y - tileSet.tileOffSetInPoints.y + sizeDeviation.height * 0.5 + tileSizeInPoints.height * 0.5)
+                        tile.position = CGPoint(x: tileSizeInPoints.width * 0.5 + sizeDeviation.width * 0.5, y: tileSizeInPoints.height * 0.5 + sizeDeviation.height * 0.5)
                         
                         node = SKNode()
                         node?.addChild(tile)
