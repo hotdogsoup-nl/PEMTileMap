@@ -6,9 +6,9 @@ import Cocoa
 import UIKit
 #endif
 
-public class GameController: NSObject, GameSceneDelegate {
+public class DemoViewController: NSObject {
     weak public var view: SKView?
-    private var currentScene : GameScene?
+    private var currentScene : DemoScene?
     
     // MARK: - Life cycle
     
@@ -29,24 +29,14 @@ public class GameController: NSObject, GameSceneDelegate {
     
     private func loadGameScene() {
         DispatchQueue.main.async { [unowned self] in
-            currentScene?.gameSceneDelegate = nil
             
-            let nextScene = GameScene(size: view!.bounds.size)
+            let nextScene = DemoScene(size: view!.bounds.size)
             nextScene.scaleMode = .aspectFill
-            nextScene.gameSceneDelegate = self
             
             currentScene = nextScene
 
             let transition = SKTransition.fade(withDuration: 0.3)
             view!.presentScene(nextScene, transition: transition)
         }
-    }
-    
-    // MARK: - GameSceneDelegate
-    
-    func gameOver() {
-    }
-    
-    func levelCompleted() {
     }
 }

@@ -1,7 +1,7 @@
 import SpriteKit
 
 class GameViewController: NSViewController {
-    let gameController = GameController()
+    let gameController = DemoViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
