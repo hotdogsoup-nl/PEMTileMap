@@ -153,8 +153,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
             addChild(newMap)
-            
-//            map?.moveCamera(sceneSize: size, zoomMode: .aspectFit, viewMode: .center, factor: 0.8, duration: 0.5)
         }
     }
     
@@ -234,14 +232,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 fillColor = .systemBlue
             }
                         
-            
             newButton = button(name: "cameraButton-\(index)", size: buttonSize, text: buttonTitle, textSize: 12, textColor: .white, fillColor: fillColor)
             newButton.position = CGPoint(x: size.width * 0.5 - buttonSize.width * 3 + buttonSize.width * CGFloat(index % 3) + 10 * CGFloat(index % 3), y: size.height * 0.5 - 10 - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - 10 * CGFloat(index / 3))
             map?.cameraNode.addChild(newButton)
 
             index += 1
         }
-        
     }
     
     private func button(name: String?, size: CGSize, text: String, textSize: CGFloat, textColor: SKColor = .white, fillColor: SKColor = .black, strokeColor: SKColor = .white) -> SKShapeNode {
