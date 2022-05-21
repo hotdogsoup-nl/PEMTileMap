@@ -102,11 +102,12 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     }
 
     /// Load a **TMX** tilemap file and return a new `PEMTmxMap` node. Returns nil if the file could not be read or parsed.
-    /// - parameter mapName : TMX file name.
-    /// - parameter baseZPosition : Base zPosition for the node. Default is 0.
-    /// - parameter zPositionLayerDelta : Delta for the zPosition of each layer node. Default is 20.
-    /// - parameter textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
-    /// - returns: `PEMTmxMap?` tilemap node.
+    /// - Parameters:
+    ///     - mapName : TMX file name.
+    ///     - baseZPosition : Base zPosition for the node. Default is 0.
+    ///     - zPositionLayerDelta : Delta for the zPosition of each layer node. Default is 20.
+    ///     - textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
+    /// - returns: A `PEMTmxMap` node if the TMX file could be parsed succesfully.
     init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest, showObjectGroups: Bool = false) {
         cameraNode = SKCameraNode()
 
