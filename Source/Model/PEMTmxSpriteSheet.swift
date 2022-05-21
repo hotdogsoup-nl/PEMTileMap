@@ -17,6 +17,7 @@ class PEMTmxSpriteSheet: NSObject {
     private var textureImage: SKTexture?
     private var textureImageSize: CGSize?
     private var textureImageSource: String?
+    private var transparentColor: SKColor?
     private var tileUnitSize: CGSize?
     private var tilesPerRow = UInt(0)
     private var tilesPerColumn = UInt(0)
@@ -30,14 +31,33 @@ class PEMTmxSpriteSheet: NSObject {
 
         super.init()
         
-        self.firstId = 0
+        firstId = 0
         self.tileSizeInPoints = tileSizeInPoints
         self.marginInPoints = marginInPoints
         self.spacingInPoints = spacingInPoints
         
         if let path = bundlePathForResource(source) {
             textureImageSource = source
-            textureImage = SKTexture(imageNamed: path)
+
+            if let value = attributes[ElementAttributes.trans.rawValue] {
+                transparentColor = SKColor.init(hexString: value)
+
+                #if os(macOS)
+                let image = NSImage(byReferencingFile: path)
+                #else
+                let image = UIImage(named: path)
+                #endif
+
+                if image != nil {
+                    let maskedImage = image!.remove(color: transparentColor!, tolerance: 0)
+                    textureImage = SKTexture(image: maskedImage)
+                } else {
+                    textureImage = SKTexture(imageNamed: path)
+                }
+            } else {
+                textureImage = SKTexture(imageNamed: path)
+            }
+            
             textureImageSize = textureImage?.size()
             tileUnitSize = CGSize(width: tileSizeInPoints.width / textureImageSize!.width, height: tileSizeInPoints.height / textureImageSize!.height)
             
