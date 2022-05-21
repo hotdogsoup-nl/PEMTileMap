@@ -242,7 +242,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func button(name: String?, size: CGSize, text: String, textSize: CGFloat, textColor: SKColor = .white, fillColor: SKColor = .black, strokeColor: SKColor = .white) -> SKShapeNode {
         #if os(iOS)
-        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: buttonSize.height * 0.2, height: buttonSize.height * 0.2)).cgPath
+        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: size.width * -0.5, y: size.height * -0.5), size:size), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: size.height * 0.2, height: size.height * 0.2)).cgPath
         #else
         let path = CGPath.init(roundedRect: CGRect(origin:CGPoint(x: size.width * -0.5, y: size.height * -0.5), size:size), cornerWidth: size.height * 0.2, cornerHeight: size.height * 0.2, transform: nil)
         #endif
@@ -251,7 +251,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         button.name = name
         button.fillColor = fillColor
         button.lineWidth = size.height * 0.05
-        button.strokeColor = .white
+        button.strokeColor = SKColor.white
 
         let buttonLabel = SKLabelNode(text: text)
         buttonLabel.name = name
