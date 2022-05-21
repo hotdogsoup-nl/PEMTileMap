@@ -10,6 +10,7 @@ enum CameraZoomMode {
 }
 
 enum CameraViewMode {
+    case none
     case center
     case left
     case right
@@ -268,56 +269,69 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     
     // MARK: - Camera
     
-    /// Changes the map camera scale using specified `CameraZoomMode`.
-    /// - parameter mode : Aspect fit or fill the view. A value of `.none` means the camera will zoom to the specified `factor`.
-    /// - parameter sceneSize : Size of the `SKScene` the map is a child of.
-    /// - parameter factor : Optional zoom factor. A value of 1.0 will zoom to 100% of the `sceneSize`. A value of 0.8 for example, will result in a margin of 20%.
-    /// - parameter duration : Optional duration to animate the zoom. A value of 0 will result in no animation.
-    /// - parameter completion : Optional completion block which is called when zooming has finished.
-    func zoomCamera(mode: CameraZoomMode, sceneSize: CGSize, factor: CGFloat = 1.0, duration: CGFloat = 0.0, completion:@escaping ()->Void = {}) {
-        if mapSizeInPoints.width == 0 || mapSizeInPoints.height == 0 {
+    /// Changes the map camera scale using the specified `CameraZoomMode` and its position using the specified `CameraViewMode` with optional animation.
+    ///
+    /// Makes it possible to zoom, pan and tilt the camera to any position on the map.
+    ///
+    /// For example in a "Mario" style platform game, when starting a level, the camera will move to the bottom left of the map and zoom in so it fills the screen vertically, leaving the rest of the map outside of the screen to the right.
+    ///
+    /// This can be achieved by calling **moveCamera** with
+    /// * `zoomMode` = **.aspectFill**
+    /// * `viewMode` =  **.bottomLeft**
+    ///
+    /// Both `zoomMode` and `viewMode` can be disabled by using a value of **.none**. This way a camera move can be made without zooming, or vice versa.  (Setting both to **.none** will do nothing.)
+    ///
+    /// - Parameters:
+    ///     - sceneSize : Size of the `SKScene` the map is a child of and in which the camera move is made.
+    ///     - zoomMode : Used to determine the camera zoom scale within the given `sceneSize`.
+    ///     - viewMode : Used to determine how the camera position is aligned within the given `sceneSize`.
+    ///     - factor : Optional movement factor that limits the move. A value of 1.0 means full motion within the given `sceneSize`.
+    ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
+    ///     - completion : Optional completion block which is called when camera movement has finished.
+    func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
+        
+        var newScale = 1.0
+        
+        if zoomMode != .none && mapSizeInPoints.width > 0 && mapSizeInPoints.height > 0 {
+            let maxWidthScale = sceneSize.width / mapSizeInPoints.width
+            let maxHeightScale = sceneSize.height / mapSizeInPoints.height
+            var contentScale : CGFloat = 1.0
+            
+            switch zoomMode {
+            case .aspectFit:
+                contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
+            case .aspectFill:
+                contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
+            case .none:
+                break
+            }
+            
+            newScale = 1.0 / contentScale / factor
+            
+            let zoomAction = SKAction.scale(to: newScale, duration: duration)
+            cameraNode.run(zoomAction)
+        }
+        
+        if viewMode == .none {
+            completion()
             return
         }
         
-        let maxWidthScale = sceneSize.width / mapSizeInPoints.width
-        let maxHeightScale = sceneSize.height / mapSizeInPoints.height
-        var contentScale : CGFloat = 1.0
-        
-        switch mode {
-        case .none:
-            contentScale = factor
-        case .aspectFit:
-            contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
-        case .aspectFill:
-            contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
-        }
-        
-        let zoomAction = SKAction.scale(to: 1.0 / contentScale / factor, duration: duration)
-        cameraNode.run(zoomAction, completion: completion)
-    }
-    
-    /// Changes the map camera position using the specified `CameraViewMode`.
-    /// - parameter mode : Used to determine how the camera position is aligned within the given `sceneSize`.
-    /// - parameter sceneSize : Size of the `SKScene` the map is a child of.
-    /// - parameter factor : Optional movement factor.  Ignored if the `panMode` equals `.center`.
-    /// - parameter duration : Optional duration to animate the movement. A value of 0 will result in no animation.
-    /// - parameter completion : Optional completion block which is called when movement has finished.
-    func moveCamera(mode: CameraViewMode, sceneSize: CGSize, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
         var newPosition = cameraNode.position
 
-        if mode == .center {
+        if viewMode == .center {
             newPosition = .zero
         } else {
-            if mode == .left || mode == .topLeft || mode == .bottomLeft {
-                newPosition.x = sceneSize.width * 0.5 * factor + mapSizeInPoints.width * -0.5
-            } else if mode == .right || mode == .topRight || mode == .bottomRight {
-                newPosition.x = sceneSize.width * -0.5 * factor + mapSizeInPoints.width * 0.5
+            if viewMode == .left || viewMode == .topLeft || viewMode == .bottomLeft {
+                newPosition.x = sceneSize.width * 0.5 * factor * newScale + mapSizeInPoints.width * -0.5
+            } else if viewMode == .right || viewMode == .topRight || viewMode == .bottomRight {
+                newPosition.x = sceneSize.width * -0.5 * factor * newScale + mapSizeInPoints.width * 0.5
             }
             
-            if mode == .top || mode == .topLeft || mode == .topRight {
-                newPosition.y = sceneSize.height * -0.5 * factor + mapSizeInPoints.height * 0.5
-            } else if mode == .bottom || mode == .bottomLeft || mode == .bottomRight {
-                newPosition.y = sceneSize.height * 0.5 * factor + mapSizeInPoints.height * -0.5
+            if viewMode == .top || viewMode == .topLeft || viewMode == .topRight {
+                newPosition.y = sceneSize.height * -0.5 * factor * newScale + mapSizeInPoints.height * 0.5
+            } else if viewMode == .bottom || viewMode == .bottomLeft || viewMode == .bottomRight {
+                newPosition.y = sceneSize.height * 0.5 * factor * newScale + mapSizeInPoints.height * -0.5
             }
         }
                 
@@ -356,7 +370,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
             mapSizeInPoints.height = mapSizeInPointsFromTileSize.height
         }
         
-        cameraNode.zPosition = currentZPosition + 1
+        cameraNode.zPosition = currentZPosition + zPositionLayerDelta
     }
     
     private func renderLayers() {
