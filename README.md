@@ -52,7 +52,6 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] camera tilt and zoom
 - [ ] parallax scroll
 - [ ] anti-tearing (removing tear lines between tiles)
-- [ ] scroll using the TMX parallax properties
 - [ ] Touch, Mouse, Keyboard control
 
 [tmx-map-url]:https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#
