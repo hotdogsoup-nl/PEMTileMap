@@ -3,9 +3,22 @@ import SpriteKit
 import zlib
 import CoreGraphics
 
-enum CameraViewMode {
+enum CameraZoomMode {
+    case none
     case aspectFit
     case aspectFill
+}
+
+enum CameraViewMode {
+    case center
+    case left
+    case right
+    case top
+    case bottom
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
 }
 
 internal enum Orientation: String {
@@ -38,6 +51,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     private (set) var backgroundColor: SKColor?
     private (set) var properties: Dictionary<String, Any>?
     private (set) var orientation: Orientation?
+    private (set) var cameraNode: SKCameraNode
 
     private var version: String?
     private var mapSource: String?
@@ -66,7 +80,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
 
     private var baseZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
-
+    
     internal var tileSets: [PEMTmxTileSet] = []
     internal var layers: [AnyObject] = []
     
@@ -93,6 +107,8 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     /// - parameter textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
     /// - returns: `PEMTmxMap?` tilemap node.
     init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest, showObjectGroups: Bool = false) {
+        cameraNode = SKCameraNode()
+
         super.init()
         
         #if DEBUG
@@ -252,11 +268,13 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     
     // MARK: - Camera
     
-    func zoomCamera(camera: SKCameraNode, viewMode: CameraViewMode, sceneSize: CGSize, factor:CGFloat = 0.8, duration: CGFloat = 0) {
-        if factor <= 0.0 || factor > 1.0 {
-            return
-        }
-                
+    /// Changes the map camera scale using specified `CameraZoomMode`.
+    /// - parameter mode : Aspect fit or fill the view. A value of `.none` means the camera will zoom to the specified `factor`.
+    /// - parameter sceneSize : Size of the `SKScene` the map is a child of.
+    /// - parameter factor : Optional zoom factor. A value of 1.0 will zoom to 100% of the `sceneSize`. A value of 0.8 for example, will result in a margin of 20%.
+    /// - parameter duration : Optional duration to animate the zoom. A value of 0 will result in no animation.
+    /// - parameter completion : Optional completion block which is called when zooming has finished.
+    func zoomCamera(mode: CameraZoomMode, sceneSize: CGSize, factor: CGFloat = 1.0, duration: CGFloat = 0.0, completion:@escaping ()->Void = {}) {
         if mapSizeInPoints.width == 0 || mapSizeInPoints.height == 0 {
             return
         }
@@ -265,7 +283,9 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         let maxHeightScale = sceneSize.height / mapSizeInPoints.height
         var contentScale : CGFloat = 1.0
         
-        switch viewMode {
+        switch mode {
+        case .none:
+            contentScale = factor
         case .aspectFit:
             contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
         case .aspectFill:
@@ -273,7 +293,36 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         }
         
         let zoomAction = SKAction.scale(to: 1.0 / contentScale / factor, duration: duration)
-        camera.run(zoomAction)
+        cameraNode.run(zoomAction, completion: completion)
+    }
+    
+    /// Changes the map camera position using the specified `CameraViewMode`.
+    /// - parameter mode : Used to determine how the camera position is aligned within the given `sceneSize`.
+    /// - parameter sceneSize : Size of the `SKScene` the map is a child of.
+    /// - parameter factor : Optional movement factor.  Ignored if the `panMode` equals `.center`.
+    /// - parameter duration : Optional duration to animate the movement. A value of 0 will result in no animation.
+    /// - parameter completion : Optional completion block which is called when movement has finished.
+    func moveCamera(mode: CameraViewMode, sceneSize: CGSize, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
+        var newPosition = cameraNode.position
+
+        if mode == .center {
+            newPosition = .zero
+        } else {
+            if mode == .left || mode == .topLeft || mode == .bottomLeft {
+                newPosition.x = sceneSize.width * 0.5 * factor + mapSizeInPoints.width * -0.5
+            } else if mode == .right || mode == .topRight || mode == .bottomRight {
+                newPosition.x = sceneSize.width * -0.5 * factor + mapSizeInPoints.width * 0.5
+            }
+            
+            if mode == .top || mode == .topLeft || mode == .topRight {
+                newPosition.y = sceneSize.height * -0.5 * factor + mapSizeInPoints.height * 0.5
+            } else if mode == .bottom || mode == .bottomLeft || mode == .bottomRight {
+                newPosition.y = sceneSize.height * 0.5 * factor + mapSizeInPoints.height * -0.5
+            }
+        }
+                
+        let moveAction = SKAction.move(to: newPosition, duration: duration)
+        cameraNode.run(moveAction, completion: completion)
     }
     
     // MARK: - Private
@@ -306,6 +355,8 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         if mapSizeInPoints.height < mapSizeInPointsFromTileSize.height {
             mapSizeInPoints.height = mapSizeInPointsFromTileSize.height
         }
+        
+        cameraNode.zPosition = currentZPosition + 1
     }
     
     private func renderLayers() {
