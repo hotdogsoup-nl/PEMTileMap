@@ -47,7 +47,7 @@ internal enum MapStaggerIndex: String {
     case odd = "odd"
 }
 
-class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
+public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     private (set) var mapSizeInPoints = CGSize.zero
     private (set) var currentZPosition = CGFloat(0)
     private (set) var backgroundColor: SKColor?
@@ -439,7 +439,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     // MARK: - Debug
     
     #if DEBUG
-    override var description: String {
+    public override var description: String {
         return "PEMTmxMap: \(mapSource ?? "-") (layers: \(layers.count), tileSets: \(tileSets.count))"
     }
     #endif
