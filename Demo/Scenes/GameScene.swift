@@ -24,7 +24,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var gameSceneDelegate: GameSceneDelegate?
     private var map: PEMTmxMap?
-    private var cameraNode: SKCameraNode
     
     private var previousMapButton: SKShapeNode?
     private var nextMapButton: SKShapeNode?
@@ -33,13 +32,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var maps =
     
     // "TestMaps" folder
-//    [
-//        "level1.tmx",
-//        "level2.tmx",
-//        "level3.tmx",
-//        "level4.tmx",
-//        "level5.tmx",
-//    ]
+    [
+        "level1.tmx",
+        "level2.tmx",
+        "level3.tmx",
+        "level4.tmx",
+        "level5.tmx",
+    ]
     
     // "Maps" folder
 //    [
@@ -49,7 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        "level25.tmx",
 //        "MagicLand.tmx",
 //    ]
-    
+        
     // "sticker-knight-gfx" folder
 //    [
 //    "sandbox2.tmx",
@@ -63,20 +62,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //    ]
     
     // "Tiled Examples" folder
-    [
-        "sandbox.tmx",
-        "sandbox2.tmx",
-        "island.tmx",
-        "forest.tmx",
-        "desert.tmx",
-        "orthogonal-outside.tmx",
-        "sewers.tmx",
-        "hexagonal-mini.tmx",
-        "isometric_grass_and_water.tmx",
-        "isometric_staggered_grass_and_water.tmx",
-        "perspective_walls.tmx",
-        "test_hexagonal_tile_60x60x30.tmx",
-    ]
+//    [
+//        "sandbox.tmx",
+//        "sandbox2.tmx",
+//        "island.tmx",
+//        "forest.tmx",
+//        "desert.tmx",
+//        "orthogonal-outside.tmx",
+//        "sewers.tmx",
+//        "hexagonal-mini.tmx",
+//        "isometric_grass_and_water.tmx",
+//        "isometric_staggered_grass_and_water.tmx",
+//        "perspective_walls.tmx",
+//        "test_hexagonal_tile_60x60x30.tmx",
+//    ]
 
     private var player: Player?
     private var previousUpdateTime = TimeInterval(0)
@@ -88,14 +87,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: - Init
     
-    override init(size: CGSize) {
-        cameraNode = SKCameraNode()
-        cameraNode.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
-        
+    override init(size: CGSize) {        
         super.init(size: size)
-
-        addChild(cameraNode)
-        camera = cameraNode
         
         startControl()
     }
@@ -110,7 +103,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor(named: "Game-background")!
         
-        addHud()
         loadMap()
         initLayers()
         addSpawnObjects()
@@ -118,53 +110,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     deinit {
         print("deinit: \(self)")
-    }
-    
-    // MARK: - HUD
-    
-    private func addHud() {
-        let buttonSize = CGSize(width: 100.0, height: 30.0)
-        
-        #if os(iOS)
-        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: buttonSize.height * 0.2, height: buttonSize.height * 0.2)).cgPath
-        #else
-        let path = CGPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), cornerWidth: buttonSize.height * 0.2, cornerHeight: buttonSize.height * 0.2, transform: nil)
-        #endif
-        
-        previousMapButton = SKShapeNode.init(path: path)
-        previousMapButton?.fillColor = .red
-        previousMapButton?.lineWidth = buttonSize.height * 0.05
-        previousMapButton?.strokeColor = .white
-        previousMapButton?.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
-        cameraNode.addChild(previousMapButton!)
-
-        var buttonLabel = SKLabelNode(text: "Previous")
-        buttonLabel.fontSize = 14.0
-        buttonLabel.fontName = "Courier"
-        buttonLabel.verticalAlignmentMode = .center
-        buttonLabel.position = CGPoint.zero
-        previousMapButton!.addChild(buttonLabel)
-        
-        currentMapNameLabel = SKLabelNode(text: "...")
-        currentMapNameLabel!.fontSize = 16.0
-        currentMapNameLabel!.fontName = "Courier-Bold"
-        currentMapNameLabel!.verticalAlignmentMode = .center
-        currentMapNameLabel!.position = CGPoint(x: 0, y: previousMapButton!.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5)
-        cameraNode.addChild(currentMapNameLabel!)
-
-        nextMapButton = SKShapeNode.init(path: path)
-        nextMapButton?.fillColor = .red
-        nextMapButton?.lineWidth = buttonSize.height * 0.05
-        nextMapButton?.strokeColor = .white
-        nextMapButton?.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
-        cameraNode.addChild(nextMapButton!)
-
-        buttonLabel = SKLabelNode(text: "Next")
-        buttonLabel.fontSize = 14.0
-        buttonLabel.fontName = "Courier"
-        buttonLabel.verticalAlignmentMode = .center
-        buttonLabel.position = CGPoint.zero
-        nextMapButton!.addChild(buttonLabel)
     }
     
     // MARK: - Map
@@ -188,29 +133,91 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func loadMap() {
-        map?.removeFromParent()
-        map = nil
+        removeHud()
+        removeMap()
         
         let mapName = maps[currentMapIndex]
-        currentMapNameLabel?.text = mapName
 
         if let newMap = PEMTmxMap(mapName: mapName, showObjectGroups: true) {
+            map = newMap
+
             if newMap.backgroundColor != nil {
                 backgroundColor = newMap.backgroundColor!
             } else {
                 backgroundColor = .clear
             }
+
+            camera = newMap.cameraNode
+            addChild(newMap.cameraNode)
             
-            newMap.position = CGPoint(x: size.width * 0.5 - newMap.mapSizeInPoints.width * 0.5, y: size.height * 0.5 - newMap.mapSizeInPoints.height * 0.5)
+            addHud()
+            currentMapNameLabel?.text = mapName
+
+            newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
             addChild(newMap)
-            map = newMap
-            
-            cameraNode.zPosition = newMap.currentZPosition + 1
-            
-            if (FIT_SCENE_TO_VIEW) {
-                newMap.zoomCamera(camera: cameraNode, viewMode: .aspectFit, sceneSize:size, factor:0.8, duration: 0.3)
+
+            newMap.moveCamera(mode: .right, sceneSize: size, factor: 1.0, duration: 0.5) {
             }
+
+//            newMap.zoomCamera(mode: .aspectFill, sceneSize:size, factor:0.75, duration: 0.3) {
+//            }
         }
+    }
+    
+    func removeMap() {
+        map?.removeFromParent()
+        map = nil
+    }
+    
+    // MARK: - HUD
+    
+    private func addHud() {
+        let buttonSize = CGSize(width: 100.0, height: 30.0)
+        
+        #if os(iOS)
+        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: buttonSize.height * 0.2, height: buttonSize.height * 0.2)).cgPath
+        #else
+        let path = CGPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), cornerWidth: buttonSize.height * 0.2, cornerHeight: buttonSize.height * 0.2, transform: nil)
+        #endif
+        
+        previousMapButton = SKShapeNode.init(path: path)
+        previousMapButton?.fillColor = .red
+        previousMapButton?.lineWidth = buttonSize.height * 0.05
+        previousMapButton?.strokeColor = .white
+        previousMapButton?.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
+        map?.cameraNode.addChild(previousMapButton!)
+
+        var buttonLabel = SKLabelNode(text: "Previous")
+        buttonLabel.fontSize = 14.0
+        buttonLabel.fontName = "Courier"
+        buttonLabel.verticalAlignmentMode = .center
+        buttonLabel.position = CGPoint.zero
+        previousMapButton!.addChild(buttonLabel)
+        
+        currentMapNameLabel = SKLabelNode(text: "...")
+        currentMapNameLabel!.fontSize = 16.0
+        currentMapNameLabel!.fontName = "Courier-Bold"
+        currentMapNameLabel!.verticalAlignmentMode = .center
+        currentMapNameLabel!.position = CGPoint(x: 0, y: previousMapButton!.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5)
+        map?.cameraNode.addChild(currentMapNameLabel!)
+
+        nextMapButton = SKShapeNode.init(path: path)
+        nextMapButton?.fillColor = .red
+        nextMapButton?.lineWidth = buttonSize.height * 0.05
+        nextMapButton?.strokeColor = .white
+        nextMapButton?.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
+        map?.cameraNode.addChild(nextMapButton!)
+
+        buttonLabel = SKLabelNode(text: "Next")
+        buttonLabel.fontSize = 14.0
+        buttonLabel.fontName = "Courier"
+        buttonLabel.verticalAlignmentMode = .center
+        buttonLabel.position = CGPoint.zero
+        nextMapButton!.addChild(buttonLabel)
+    }
+    
+    private func removeHud() {
+        map?.cameraNode.removeAllChildren()
     }
     
     // MARK: - Layers
@@ -438,11 +445,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if pos.x > 0 {
-            player!.direction = .right
-        } else {
-            player!.direction = .left
-        }
+//        if pos.x > 0 {
+//            player!.direction = .right
+//        } else {
+//            player!.direction = .left
+//        }
     }
 
     private func touchMovedToPoint(_ pos: CGPoint) {
@@ -459,15 +466,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
 
-        if pos.x > 0 {
-            if player!.direction == .right {
-                player!.direction = .idle
-            }
-        } else {
-            if player!.direction == .left {
-                player!.direction = .idle
-            }
-        }
+//        if pos.x > 0 {
+//            if player!.direction == .right {
+//                player!.direction = .idle
+//            }
+//        } else {
+//            if player!.direction == .left {
+//                player!.direction = .idle
+//            }
+//        }
     }
 }
 
