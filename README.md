@@ -28,7 +28,7 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] embedded tile sets
 - [X] tilesets based on a tileset image
 - [X] tilesets based on a collection of images
-- [ ] tilesets using a specific color for transparency
+- [X] tilesets using a specific color for transparency
 - [X] external TSX tile sets
 - [ ] terraintypes and wangsets
 - [X] object groups
