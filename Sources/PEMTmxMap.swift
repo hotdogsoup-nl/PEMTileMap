@@ -3,6 +3,11 @@ import SpriteKit
 import zlib
 import CoreGraphics
 
+enum CameraViewMode {
+    case aspectFit
+    case aspectFill
+}
+
 internal enum Orientation: String {
     case hexagonal = "hexagonal"
     case isometric = "isometric"
@@ -227,7 +232,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         properties = convertProperties(newProperties)
     }
     
-    // MARK: - Public
+    // MARK: - Map objects
         
     func tileSetFor(gid: UInt32) -> PEMTmxTileSet? {
         let tileAttributes = tileAttributes(fromId: gid)
@@ -243,6 +248,32 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         #endif
 
         return nil
+    }
+    
+    // MARK: - Camera
+    
+    func zoomCamera(camera: SKCameraNode, viewMode: CameraViewMode, sceneSize: CGSize, factor:CGFloat = 0.8, duration: CGFloat = 0) {
+        if factor <= 0.0 || factor > 1.0 {
+            return
+        }
+                
+        if mapSizeInPoints.width == 0 || mapSizeInPoints.height == 0 {
+            return
+        }
+        
+        let maxWidthScale = sceneSize.width / mapSizeInPoints.width
+        let maxHeightScale = sceneSize.height / mapSizeInPoints.height
+        var contentScale : CGFloat = 1.0
+        
+        switch viewMode {
+        case .aspectFit:
+            contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
+        case .aspectFill:
+            contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
+        }
+        
+        let zoomAction = SKAction.scale(to: 1.0 / contentScale / factor, duration: duration)
+        camera.run(zoomAction)
     }
     
     // MARK: - Private
