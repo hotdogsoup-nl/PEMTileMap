@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://github.com/p-edge-media/PEMTmxMap"><img src="Demo/Assets.xcassets/logo.imageset/logo.png" height="100"/>
+<a href="https://github.com/p-edge-media/PEMTmxMap"><img src="Doc/logo.png" height="100"/>
 <p align="center">
 <a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-5-brightgreen.svg"></a>
 <a href="https://developer.apple.com/download/more/"><img src="https://img.shields.io/badge/Xcode-orange.svg"></a>
@@ -49,7 +49,8 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [X] generates the TMX map as an `SKNode` with child elements as `SKNode` subclasses (eg. a tile as a `SKSpriteNode` etc.)
 - [X] supports both nearest neighbor and linear texture antialiasing
 - [ ] access layers, tiles, objects
-- [ ] camera tilt and zoom
+- [X] camera tilt and zoom
+- [ ] parallax scroll
 - [ ] anti-tearing (removing tear lines between tiles)
 - [ ] scroll using the TMX parallax properties
 - [ ] Touch, Mouse, Keyboard control
