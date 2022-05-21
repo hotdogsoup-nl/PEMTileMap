@@ -5,6 +5,7 @@ import CoreGraphics
 
 enum CameraZoomMode {
     case none
+    case center
     case aspectFit
     case aspectFill
 }
@@ -85,6 +86,10 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     internal var tileSets: [PEMTmxTileSet] = []
     internal var layers: [AnyObject] = []
     
+    private var cameraViewMode = CameraViewMode.none
+    private var cameraZoomMode = CameraZoomMode.none
+    private var cameraScale = CGFloat(1.0)
+
     // MARK: - Init
         
     required init?(coder aDecoder: NSCoder) {
@@ -291,7 +296,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     ///     - completion : Optional completion block which is called when camera movement has finished.
     func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
         
-        var newScale = 1.0
+        var newScale = cameraScale
         
         if zoomMode != .none && mapSizeInPoints.width > 0 && mapSizeInPoints.height > 0 {
             let maxWidthScale = sceneSize.width / mapSizeInPoints.width
@@ -303,6 +308,8 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
                 contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
             case .aspectFill:
                 contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
+            case .center:
+                break
             case .none:
                 break
             }
@@ -311,6 +318,8 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
             
             let zoomAction = SKAction.scale(to: newScale, duration: duration)
             cameraNode.run(zoomAction)
+            cameraScale = newScale
+            cameraZoomMode = zoomMode
         }
         
         if viewMode == .none {
@@ -338,6 +347,7 @@ class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
                 
         let moveAction = SKAction.move(to: newPosition, duration: duration)
         cameraNode.run(moveAction, completion: completion)
+        cameraViewMode = viewMode
     }
     
     // MARK: - Private
