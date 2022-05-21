@@ -48,12 +48,13 @@ internal enum MapStaggerIndex: String {
 }
 
 public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
-    private (set) var mapSizeInPoints = CGSize.zero
+    public private (set) var mapSizeInPoints = CGSize.zero
+    public private (set) var backgroundColor: SKColor?
+    public private (set) var cameraNode: SKCameraNode
+
     private (set) var currentZPosition = CGFloat(0)
-    private (set) var backgroundColor: SKColor?
     private (set) var properties: Dictionary<String, Any>?
     private (set) var orientation: Orientation?
-    public private (set) var cameraNode: SKCameraNode
 
     private var version: String?
     private var mapSource: String?
