@@ -7,33 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2000FD34282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */; };
-		2000FD35282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */; };
-		2000FD36282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */; };
-		2000FD38282BB4D500699DAF /* PEMTmxTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */; };
-		2000FD39282BB4D500699DAF /* PEMTmxTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */; };
-		2000FD3A282BB4D500699DAF /* PEMTmxTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */; };
-		2000FD3C282BB76D00699DAF /* PEMTmxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */; };
-		2000FD3D282BB76D00699DAF /* PEMTmxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */; };
-		2000FD3E282BB76D00699DAF /* PEMTmxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */; };
-		2000FD44282BDB7400699DAF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2000FD43282BDB7400699DAF /* README.md */; };
-		2000FD45282BDB7400699DAF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2000FD43282BDB7400699DAF /* README.md */; };
-		2000FD46282BDB7400699DAF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2000FD43282BDB7400699DAF /* README.md */; };
 		2014E98728169C4500A12253 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
 		2014E98828169C4500A12253 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
 		2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
 		2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
-		201D118228392E4C004BEABC /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201D118128392E4C004BEABC /* Image+Extension.swift */; };
-		201D118328392E4C004BEABC /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201D118128392E4C004BEABC /* Image+Extension.swift */; };
-		201D118428392E4C004BEABC /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201D118128392E4C004BEABC /* Image+Extension.swift */; };
-		2029D9CA283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */; };
-		2029D9CB283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */; };
-		2029D9CC283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */; };
-		2029D9CE283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */; };
-		2029D9CF283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */; };
-		2029D9D0283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */; };
-		2037A5C9282587AB00E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
-		2037A5CE282587AC00E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
 		2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5D528258C4900E13452 /* AppDelegate.swift */; };
 		2037A5DE28258C4900E13452 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5DD28258C4900E13452 /* GameViewController.swift */; };
 		2037A5E128258C4900E13452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5DF28258C4900E13452 /* Main.storyboard */; };
@@ -44,43 +21,9 @@
 		2037A5EE28258DA500E13452 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoViewController.swift */; };
 		2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
 		2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
-		2037A5F528258DB500E13452 /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E13282521C1005CE60A /* PEMTmxMap.swift */; };
 		2037A5F828258E0700E13452 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
-		204097CE282A753300603024 /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204097CD282A753300603024 /* PEMTmxTile.swift */; };
-		204097CF282A753300603024 /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204097CD282A753300603024 /* PEMTmxTile.swift */; };
-		204097D0282A753300603024 /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204097CD282A753300603024 /* PEMTmxTile.swift */; };
-		2041C82C282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */; };
-		2041C82D282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */; };
-		2041C82E282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */; };
-		2045AEEE2833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEED2833A4A600614F38 /* PEMTmxObjectGroup.swift */; };
-		2045AEEF2833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEED2833A4A600614F38 /* PEMTmxObjectGroup.swift */; };
-		2045AEF02833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEED2833A4A600614F38 /* PEMTmxObjectGroup.swift */; };
-		2045AEF22833BFA300614F38 /* PEMTmxObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEF12833BFA300614F38 /* PEMTmxObjectData.swift */; };
-		2045AEF32833BFA300614F38 /* PEMTmxObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEF12833BFA300614F38 /* PEMTmxObjectData.swift */; };
-		2045AEF42833BFA300614F38 /* PEMTmxObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEF12833BFA300614F38 /* PEMTmxObjectData.swift */; };
-		2045AEF82833D0B500614F38 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEF72833D0B500614F38 /* TimeInterval+Extension.swift */; };
-		2045AEF92833D0B500614F38 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEF72833D0B500614F38 /* TimeInterval+Extension.swift */; };
-		2045AEFA2833D0B500614F38 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045AEF72833D0B500614F38 /* TimeInterval+Extension.swift */; };
 		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
-		2056B69F283239E300595F23 /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2056B69E283239E300595F23 /* PEMTmxGroup.swift */; };
-		2056B6A0283239E300595F23 /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2056B69E283239E300595F23 /* PEMTmxGroup.swift */; };
-		2056B6A1283239E300595F23 /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2056B69E283239E300595F23 /* PEMTmxGroup.swift */; };
-		205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
-		205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
-		205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF67028266D4200077DB2 /* PEMTmxParser.swift */; };
-		205BF69A282687A800077DB2 /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Extension.swift */; };
-		205BF69B282687A800077DB2 /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Extension.swift */; };
-		205BF69C282687A800077DB2 /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205BF699282687A800077DB2 /* SKColor+Extension.swift */; };
-		205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTmxTileSet.swift */; };
-		205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTmxTileSet.swift */; };
-		205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E15282521C1005CE60A /* PEMTmxTileSet.swift */; };
-		2077912D28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */; };
-		2077912E28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */; };
-		2077912F28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */; };
-		20779131283630EB00E3EA9D /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20779130283630EB00E3EA9D /* PEMFontHelper.swift */; };
-		20779132283630EB00E3EA9D /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20779130283630EB00E3EA9D /* PEMFontHelper.swift */; };
-		20779133283630EB00E3EA9D /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20779130283630EB00E3EA9D /* PEMFontHelper.swift */; };
 		207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DB82812AD5700FC4C77 /* AppDelegate.swift */; };
 		207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DBA2812AD5700FC4C77 /* GameViewController.swift */; };
 		207D3DBE2812AD5700FC4C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DBC2812AD5700FC4C77 /* Main.storyboard */; };
@@ -91,20 +34,74 @@
 		207D3DD52812AD5700FC4C77 /* DemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DAF2812AD5600FC4C77 /* DemoScene.swift */; };
 		207D3DD62812AD5700FC4C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DB02812AD5700FC4C77 /* Assets.xcassets */; };
 		207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DB02812AD5700FC4C77 /* Assets.xcassets */; };
-		2091DE32283100D900F476C8 /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091DE31283100D900F476C8 /* PEMTmxProperty.swift */; };
-		2091DE33283100D900F476C8 /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091DE31283100D900F476C8 /* PEMTmxProperty.swift */; };
-		2091DE34283100D900F476C8 /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2091DE31283100D900F476C8 /* PEMTmxProperty.swift */; };
+		20B329D8283953180082CE8B /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMTmxGroup.swift */; };
+		20B329D9283953180082CE8B /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMTmxGroup.swift */; };
+		20B329DA283953180082CE8B /* PEMTmxGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMTmxGroup.swift */; };
+		20B329DB283953180082CE8B /* PEMTmxObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C3283953180082CE8B /* PEMTmxObjectData.swift */; };
+		20B329DC283953180082CE8B /* PEMTmxObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C3283953180082CE8B /* PEMTmxObjectData.swift */; };
+		20B329DD283953180082CE8B /* PEMTmxObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C3283953180082CE8B /* PEMTmxObjectData.swift */; };
+		20B329DE283953180082CE8B /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C4283953180082CE8B /* PEMTmxProperty.swift */; };
+		20B329DF283953180082CE8B /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C4283953180082CE8B /* PEMTmxProperty.swift */; };
+		20B329E0283953180082CE8B /* PEMTmxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C4283953180082CE8B /* PEMTmxProperty.swift */; };
+		20B329E1283953180082CE8B /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C5283953180082CE8B /* PEMTmxSpriteSheet.swift */; };
+		20B329E2283953180082CE8B /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C5283953180082CE8B /* PEMTmxSpriteSheet.swift */; };
+		20B329E3283953180082CE8B /* PEMTmxSpriteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C5283953180082CE8B /* PEMTmxSpriteSheet.swift */; };
+		20B329E4283953180082CE8B /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C6283953180082CE8B /* PEMTmxTileAnimation.swift */; };
+		20B329E5283953180082CE8B /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C6283953180082CE8B /* PEMTmxTileAnimation.swift */; };
+		20B329E6283953180082CE8B /* PEMTmxTileAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C6283953180082CE8B /* PEMTmxTileAnimation.swift */; };
+		20B329E7283953180082CE8B /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C7283953180082CE8B /* PEMTmxTileAnimationFrame.swift */; };
+		20B329E8283953180082CE8B /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C7283953180082CE8B /* PEMTmxTileAnimationFrame.swift */; };
+		20B329E9283953180082CE8B /* PEMTmxTileAnimationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C7283953180082CE8B /* PEMTmxTileAnimationFrame.swift */; };
+		20B329EA283953180082CE8B /* PEMTmxTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C8283953180082CE8B /* PEMTmxTileData.swift */; };
+		20B329EB283953180082CE8B /* PEMTmxTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C8283953180082CE8B /* PEMTmxTileData.swift */; };
+		20B329EC283953180082CE8B /* PEMTmxTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C8283953180082CE8B /* PEMTmxTileData.swift */; };
+		20B329ED283953180082CE8B /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C9283953180082CE8B /* PEMTmxTileSet.swift */; };
+		20B329EE283953180082CE8B /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C9283953180082CE8B /* PEMTmxTileSet.swift */; };
+		20B329EF283953180082CE8B /* PEMTmxTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C9283953180082CE8B /* PEMTmxTileSet.swift */; };
+		20B329F0283953180082CE8B /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CA283953180082CE8B /* PEMTmxTileLayer.swift */; };
+		20B329F1283953180082CE8B /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CA283953180082CE8B /* PEMTmxTileLayer.swift */; };
+		20B329F2283953180082CE8B /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CA283953180082CE8B /* PEMTmxTileLayer.swift */; };
+		20B329F3283953180082CE8B /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CB283953180082CE8B /* PEMTmxTile.swift */; };
+		20B329F4283953180082CE8B /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CB283953180082CE8B /* PEMTmxTile.swift */; };
+		20B329F5283953180082CE8B /* PEMTmxTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CB283953180082CE8B /* PEMTmxTile.swift */; };
+		20B329F6283953180082CE8B /* PEMTmxObjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CC283953180082CE8B /* PEMTmxObjectGroup.swift */; };
+		20B329F7283953180082CE8B /* PEMTmxObjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CC283953180082CE8B /* PEMTmxObjectGroup.swift */; };
+		20B329F8283953180082CE8B /* PEMTmxObjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CC283953180082CE8B /* PEMTmxObjectGroup.swift */; };
+		20B329F9283953180082CE8B /* PEMTmxImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CD283953180082CE8B /* PEMTmxImageLayer.swift */; };
+		20B329FA283953180082CE8B /* PEMTmxImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CD283953180082CE8B /* PEMTmxImageLayer.swift */; };
+		20B329FB283953180082CE8B /* PEMTmxImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CD283953180082CE8B /* PEMTmxImageLayer.swift */; };
+		20B329FC283953180082CE8B /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CE283953180082CE8B /* PEMTmxMap.swift */; };
+		20B329FD283953180082CE8B /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CE283953180082CE8B /* PEMTmxMap.swift */; };
+		20B329FE283953180082CE8B /* PEMTmxMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329CE283953180082CE8B /* PEMTmxMap.swift */; };
+		20B329FF283953180082CE8B /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D0283953180082CE8B /* CGFloat+Extension.swift */; };
+		20B32A00283953180082CE8B /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D0283953180082CE8B /* CGFloat+Extension.swift */; };
+		20B32A01283953180082CE8B /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D0283953180082CE8B /* CGFloat+Extension.swift */; };
+		20B32A02283953180082CE8B /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D1283953180082CE8B /* Data+Compression.swift */; };
+		20B32A03283953180082CE8B /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D1283953180082CE8B /* Data+Compression.swift */; };
+		20B32A04283953180082CE8B /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D1283953180082CE8B /* Data+Compression.swift */; };
+		20B32A05283953180082CE8B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D2283953180082CE8B /* Image+Extension.swift */; };
+		20B32A06283953180082CE8B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D2283953180082CE8B /* Image+Extension.swift */; };
+		20B32A07283953180082CE8B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D2283953180082CE8B /* Image+Extension.swift */; };
+		20B32A08283953180082CE8B /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* PEMFontHelper.swift */; };
+		20B32A09283953180082CE8B /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* PEMFontHelper.swift */; };
+		20B32A0A283953180082CE8B /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* PEMFontHelper.swift */; };
+		20B32A0B283953180082CE8B /* PEMTmxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D4283953180082CE8B /* PEMTmxHelper.swift */; };
+		20B32A0C283953180082CE8B /* PEMTmxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D4283953180082CE8B /* PEMTmxHelper.swift */; };
+		20B32A0D283953180082CE8B /* PEMTmxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D4283953180082CE8B /* PEMTmxHelper.swift */; };
+		20B32A0E283953180082CE8B /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D5283953180082CE8B /* PEMTmxParser.swift */; };
+		20B32A0F283953180082CE8B /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D5283953180082CE8B /* PEMTmxParser.swift */; };
+		20B32A10283953180082CE8B /* PEMTmxParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D5283953180082CE8B /* PEMTmxParser.swift */; };
+		20B32A11283953180082CE8B /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D6283953180082CE8B /* SKColor+Extension.swift */; };
+		20B32A12283953180082CE8B /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D6283953180082CE8B /* SKColor+Extension.swift */; };
+		20B32A13283953180082CE8B /* SKColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D6283953180082CE8B /* SKColor+Extension.swift */; };
+		20B32A14283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
+		20B32A15283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
+		20B32A16283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
 		20CA139B281815DD00797A7C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139A281815DD00797A7C /* GameViewController.swift */; };
 		20CA139E2818168600797A7C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoViewController.swift */; };
 		20CA139F2818168600797A7C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoViewController.swift */; };
 		20CA158228181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		20CA158328181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
-		20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
-		20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
-		20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */; };
-		20D0D3132828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
-		20D0D3142828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
-		20D0D3152828111B001E505D /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0D3122828111B001E505D /* Data+Compression.swift */; };
 		20DB79A32837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
 		20DB79A42837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
 		20DB79A52837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
@@ -501,34 +498,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxSpriteSheet.swift; sourceTree = "<group>"; };
-		2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileData.swift; sourceTree = "<group>"; };
-		2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxHelper.swift; sourceTree = "<group>"; };
-		2000FD43282BDB7400699DAF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2014E98628169C4500A12253 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
 		2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLayoutHelper.swift; sourceTree = "<group>"; };
-		201D118128392E4C004BEABC /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
-		2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileAnimation.swift; sourceTree = "<group>"; };
-		2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTileAnimationFrame.swift; sourceTree = "<group>"; };
 		2037A5D328258C4800E13452 /* PEMTMXDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXDemo.app; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037A5D528258C4900E13452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		2037A5E028258C4900E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2037A5E528258C4A00E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		204097CD282A753300603024 /* PEMTmxTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxTile.swift; sourceTree = "<group>"; };
-		2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxImageLayer.swift; sourceTree = "<group>"; };
-		2045AEED2833A4A600614F38 /* PEMTmxObjectGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxObjectGroup.swift; sourceTree = "<group>"; };
-		2045AEF12833BFA300614F38 /* PEMTmxObjectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxObjectData.swift; sourceTree = "<group>"; };
-		2045AEF72833D0B500614F38 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
-		20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileLayer.swift; sourceTree = "<group>"; };
-		20562E13282521C1005CE60A /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
-		20562E15282521C1005CE60A /* PEMTmxTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSet.swift; sourceTree = "<group>"; };
-		2056B69E283239E300595F23 /* PEMTmxGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxGroup.swift; sourceTree = "<group>"; };
-		205BF67028266D4200077DB2 /* PEMTmxParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxParser.swift; sourceTree = "<group>"; };
-		205BF699282687A800077DB2 /* SKColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKColor+Extension.swift"; sourceTree = "<group>"; };
-		2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
-		20779130283630EB00E3EA9D /* PEMFontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMFontHelper.swift; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* DemoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScene.swift; sourceTree = "<group>"; };
 		207D3DB02812AD5700FC4C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		207D3DB52812AD5700FC4C77 /* PEMTMXMapDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PEMTMXMapDemo.app; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -539,11 +516,30 @@
 		207D3DC62812AD5700FC4C77 /* PEMTmxMap Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEMTmxMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DC82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2091DE31283100D900F476C8 /* PEMTmxProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTmxProperty.swift; sourceTree = "<group>"; };
+		20B329C2283953180082CE8B /* PEMTmxGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxGroup.swift; sourceTree = "<group>"; };
+		20B329C3283953180082CE8B /* PEMTmxObjectData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxObjectData.swift; sourceTree = "<group>"; };
+		20B329C4283953180082CE8B /* PEMTmxProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxProperty.swift; sourceTree = "<group>"; };
+		20B329C5283953180082CE8B /* PEMTmxSpriteSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxSpriteSheet.swift; sourceTree = "<group>"; };
+		20B329C6283953180082CE8B /* PEMTmxTileAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileAnimation.swift; sourceTree = "<group>"; };
+		20B329C7283953180082CE8B /* PEMTmxTileAnimationFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileAnimationFrame.swift; sourceTree = "<group>"; };
+		20B329C8283953180082CE8B /* PEMTmxTileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileData.swift; sourceTree = "<group>"; };
+		20B329C9283953180082CE8B /* PEMTmxTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileSet.swift; sourceTree = "<group>"; };
+		20B329CA283953180082CE8B /* PEMTmxTileLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTileLayer.swift; sourceTree = "<group>"; };
+		20B329CB283953180082CE8B /* PEMTmxTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxTile.swift; sourceTree = "<group>"; };
+		20B329CC283953180082CE8B /* PEMTmxObjectGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxObjectGroup.swift; sourceTree = "<group>"; };
+		20B329CD283953180082CE8B /* PEMTmxImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxImageLayer.swift; sourceTree = "<group>"; };
+		20B329CE283953180082CE8B /* PEMTmxMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxMap.swift; sourceTree = "<group>"; };
+		20B329D0283953180082CE8B /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
+		20B329D1283953180082CE8B /* Data+Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
+		20B329D2283953180082CE8B /* Image+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
+		20B329D3283953180082CE8B /* PEMFontHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMFontHelper.swift; sourceTree = "<group>"; };
+		20B329D4283953180082CE8B /* PEMTmxHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxHelper.swift; sourceTree = "<group>"; };
+		20B329D5283953180082CE8B /* PEMTmxParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxParser.swift; sourceTree = "<group>"; };
+		20B329D6283953180082CE8B /* SKColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKColor+Extension.swift"; sourceTree = "<group>"; };
+		20B329D7283953180082CE8B /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		20CA139D2818168600797A7C /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		20CA158128181D8700797A7C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		20D0D3122828111B001E505D /* Data+Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
 		20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mylevel1_tiles.png; sourceTree = "<group>"; };
 		20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mylevel1.tmx; sourceTree = "<group>"; };
 		20DB79AA2837B73300F17FC7 /* Donate.url */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Donate.url; sourceTree = "<group>"; };
@@ -722,39 +718,11 @@
 			path = tvOS;
 			sourceTree = "<group>";
 		};
-		2045AEF62833CBAB00614F38 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2056B69E283239E300595F23 /* PEMTmxGroup.swift */,
-				2045AEF12833BFA300614F38 /* PEMTmxObjectData.swift */,
-				2091DE31283100D900F476C8 /* PEMTmxProperty.swift */,
-				2000FD33282BB49F00699DAF /* PEMTmxSpriteSheet.swift */,
-				2029D9C9283023C40019FAB4 /* PEMTmxTileAnimation.swift */,
-				2029D9CD283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift */,
-				2000FD37282BB4D500699DAF /* PEMTmxTileData.swift */,
-				20562E15282521C1005CE60A /* PEMTmxTileSet.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		206E238B282667560039C4FE /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				209AB9A72827C8510021A297 /* Helper */,
-				2045AEF62833CBAB00614F38 /* Model */,
-				2041C82B282EB49800F584AF /* PEMTmxImageLayer.swift */,
-				20562E13282521C1005CE60A /* PEMTmxMap.swift */,
-				2045AEED2833A4A600614F38 /* PEMTmxObjectGroup.swift */,
-				204097CD282A753300603024 /* PEMTmxTile.swift */,
-				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
 		206E238C282667640039C4FE /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				204662DF281BE8CF00F3635B /* Define.swift */,
+				20B32969283952810082CE8B /* Sources */,
 				20CA13A028181D5000797A7C /* Assets */,
 				20C9979428227A7D00EEBDE0 /* Scenes */,
 				20CA139C2818160800797A7C /* Controller */,
@@ -778,8 +746,6 @@
 		207D3DA72812AD5600FC4C77 = {
 			isa = PBXGroup;
 			children = (
-				2000FD43282BDB7400699DAF /* README.md */,
-				206E238B282667560039C4FE /* Source */,
 				206E238C282667640039C4FE /* Demo */,
 				207D3DB62812AD5700FC4C77 /* Products */,
 				2074E41F28181EDD002137A7 /* Frameworks */,
@@ -817,17 +783,46 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		209AB9A72827C8510021A297 /* Helper */ = {
+		20B32969283952810082CE8B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2077912C28362CAC00E3EA9D /* CGFloat+Extension.swift */,
-				20D0D3122828111B001E505D /* Data+Compression.swift */,
-				201D118128392E4C004BEABC /* Image+Extension.swift */,
-				20779130283630EB00E3EA9D /* PEMFontHelper.swift */,
-				2000FD3B282BB76D00699DAF /* PEMTmxHelper.swift */,
-				205BF67028266D4200077DB2 /* PEMTmxParser.swift */,
-				205BF699282687A800077DB2 /* SKColor+Extension.swift */,
-				2045AEF72833D0B500614F38 /* TimeInterval+Extension.swift */,
+				20B329CF283953180082CE8B /* Helper */,
+				20B329C1283953180082CE8B /* Model */,
+				20B329CD283953180082CE8B /* PEMTmxImageLayer.swift */,
+				20B329CE283953180082CE8B /* PEMTmxMap.swift */,
+				20B329CC283953180082CE8B /* PEMTmxObjectGroup.swift */,
+				20B329CB283953180082CE8B /* PEMTmxTile.swift */,
+				20B329CA283953180082CE8B /* PEMTmxTileLayer.swift */,
+			);
+			path = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		20B329C1283953180082CE8B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20B329C2283953180082CE8B /* PEMTmxGroup.swift */,
+				20B329C3283953180082CE8B /* PEMTmxObjectData.swift */,
+				20B329C4283953180082CE8B /* PEMTmxProperty.swift */,
+				20B329C5283953180082CE8B /* PEMTmxSpriteSheet.swift */,
+				20B329C6283953180082CE8B /* PEMTmxTileAnimation.swift */,
+				20B329C7283953180082CE8B /* PEMTmxTileAnimationFrame.swift */,
+				20B329C8283953180082CE8B /* PEMTmxTileData.swift */,
+				20B329C9283953180082CE8B /* PEMTmxTileSet.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		20B329CF283953180082CE8B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				20B329D0283953180082CE8B /* CGFloat+Extension.swift */,
+				20B329D1283953180082CE8B /* Data+Compression.swift */,
+				20B329D2283953180082CE8B /* Image+Extension.swift */,
+				20B329D3283953180082CE8B /* PEMFontHelper.swift */,
+				20B329D4283953180082CE8B /* PEMTmxHelper.swift */,
+				20B329D5283953180082CE8B /* PEMTmxParser.swift */,
+				20B329D6283953180082CE8B /* SKColor+Extension.swift */,
+				20B329D7283953180082CE8B /* TimeInterval+Extension.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1241,7 +1236,6 @@
 				20DB79CE2837B73300F17FC7 /* Sample2.png in Resources */,
 				20DB7D442837BABE00F17FC7 /* hero.png in Resources */,
 				20DB7D022837BABE00F17FC7 /* backgroundTree.png in Resources */,
-				2000FD46282BDB7400699DAF /* README.md in Resources */,
 				20DB7D4D2837BABE00F17FC7 /* keyYellowStroked.png in Resources */,
 				20DB7D592837BABE00F17FC7 /* platform3.png in Resources */,
 				20FAF0FA2837AC2600BEFA8E /* perspective_walls.tsx in Resources */,
@@ -1384,7 +1378,6 @@
 				20DB79CC2837B73300F17FC7 /* Sample2.png in Resources */,
 				20DB7D422837BABE00F17FC7 /* hero.png in Resources */,
 				20DB7D002837BABE00F17FC7 /* backgroundTree.png in Resources */,
-				2000FD44282BDB7400699DAF /* README.md in Resources */,
 				20DB7D4B2837BABE00F17FC7 /* keyYellowStroked.png in Resources */,
 				20DB7D572837BABE00F17FC7 /* platform3.png in Resources */,
 				20FAF0F82837AC2600BEFA8E /* perspective_walls.tsx in Resources */,
@@ -1500,7 +1493,6 @@
 				20DB7DC72837BABE00F17FC7 /* sprites.png in Resources */,
 				20DB7DB52837BABE00F17FC7 /* wallDecor3.png in Resources */,
 				20FAF0172837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
-				2000FD45282BDB7400699DAF /* README.md in Resources */,
 				20DB79A42837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */,
 				20DB7D9D2837BABE00F17FC7 /* swordStroked.png in Resources */,
 				20CA158328181D8700797A7C /* Colors.xcassets in Resources */,
@@ -1595,34 +1587,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20779133283630EB00E3EA9D /* PEMFontHelper.swift in Sources */,
 				2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */,
-				2045AEF02833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */,
-				2037A5F528258DB500E13452 /* PEMTmxMap.swift in Sources */,
+				20B329F8283953180082CE8B /* PEMTmxObjectGroup.swift in Sources */,
 				2037A5EE28258DA500E13452 /* DemoViewController.swift in Sources */,
-				204097D0282A753300603024 /* PEMTmxTile.swift in Sources */,
+				20B329DD283953180082CE8B /* PEMTmxObjectData.swift in Sources */,
+				20B32A07283953180082CE8B /* Image+Extension.swift in Sources */,
+				20B329F5283953180082CE8B /* PEMTmxTile.swift in Sources */,
+				20B32A0D283953180082CE8B /* PEMTmxHelper.swift in Sources */,
+				20B32A01283953180082CE8B /* CGFloat+Extension.swift in Sources */,
+				20B329E0283953180082CE8B /* PEMTmxProperty.swift in Sources */,
+				20B329EC283953180082CE8B /* PEMTmxTileData.swift in Sources */,
+				20B32A04283953180082CE8B /* Data+Compression.swift in Sources */,
+				20B32A13283953180082CE8B /* SKColor+Extension.swift in Sources */,
+				20B329FE283953180082CE8B /* PEMTmxMap.swift in Sources */,
+				20B329E9283953180082CE8B /* PEMTmxTileAnimationFrame.swift in Sources */,
+				20B329F2283953180082CE8B /* PEMTmxTileLayer.swift in Sources */,
 				2037A5DE28258C4900E13452 /* GameViewController.swift in Sources */,
+				20B329EF283953180082CE8B /* PEMTmxTileSet.swift in Sources */,
+				20B329E6283953180082CE8B /* PEMTmxTileAnimation.swift in Sources */,
 				2037A5EC28258DA000E13452 /* DemoScene.swift in Sources */,
-				2045AEF42833BFA300614F38 /* PEMTmxObjectData.swift in Sources */,
-				2000FD3A282BB4D500699DAF /* PEMTmxTileData.swift in Sources */,
-				2029D9CC283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */,
-				2091DE34283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
+				20B329DA283953180082CE8B /* PEMTmxGroup.swift in Sources */,
+				20B32A10283953180082CE8B /* PEMTmxParser.swift in Sources */,
+				20B329E3283953180082CE8B /* PEMTmxSpriteSheet.swift in Sources */,
+				20B329FB283953180082CE8B /* PEMTmxImageLayer.swift in Sources */,
 				2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */,
-				205BF69C282687A800077DB2 /* SKColor+Extension.swift in Sources */,
-				205BF6A72826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
-				2000FD36282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
-				20D0D3112827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
-				2041C82E282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
-				20D0D3152828111B001E505D /* Data+Compression.swift in Sources */,
-				201D118428392E4C004BEABC /* Image+Extension.swift in Sources */,
-				2029D9D0283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
-				2000FD3E282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
-				2077912F28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */,
-				205BF67328266D4200077DB2 /* PEMTmxParser.swift in Sources */,
-				2056B6A1283239E300595F23 /* PEMTmxGroup.swift in Sources */,
-				2045AEFA2833D0B500614F38 /* TimeInterval+Extension.swift in Sources */,
+				20B32A0A283953180082CE8B /* PEMFontHelper.swift in Sources */,
+				20B32A16283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1630,34 +1622,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20779131283630EB00E3EA9D /* PEMFontHelper.swift in Sources */,
 				2014E98728169C4500A12253 /* MathHelper.swift in Sources */,
-				2045AEEE2833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */,
+				20B329F6283953180082CE8B /* PEMTmxObjectGroup.swift in Sources */,
 				2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
-				2037A5C9282587AB00E13452 /* PEMTmxMap.swift in Sources */,
-				204097CE282A753300603024 /* PEMTmxTile.swift in Sources */,
+				20B329DB283953180082CE8B /* PEMTmxObjectData.swift in Sources */,
+				20B32A05283953180082CE8B /* Image+Extension.swift in Sources */,
+				20B329F3283953180082CE8B /* PEMTmxTile.swift in Sources */,
+				20B32A0B283953180082CE8B /* PEMTmxHelper.swift in Sources */,
+				20B329FF283953180082CE8B /* CGFloat+Extension.swift in Sources */,
+				20B329DE283953180082CE8B /* PEMTmxProperty.swift in Sources */,
+				20B329EA283953180082CE8B /* PEMTmxTileData.swift in Sources */,
+				20B32A02283953180082CE8B /* Data+Compression.swift in Sources */,
+				20B32A11283953180082CE8B /* SKColor+Extension.swift in Sources */,
+				20B329FC283953180082CE8B /* PEMTmxMap.swift in Sources */,
+				20B329E7283953180082CE8B /* PEMTmxTileAnimationFrame.swift in Sources */,
+				20B329F0283953180082CE8B /* PEMTmxTileLayer.swift in Sources */,
 				204662E0281BE8CF00F3635B /* Define.swift in Sources */,
-				2045AEF22833BFA300614F38 /* PEMTmxObjectData.swift in Sources */,
-				2000FD38282BB4D500699DAF /* PEMTmxTileData.swift in Sources */,
+				20B329ED283953180082CE8B /* PEMTmxTileSet.swift in Sources */,
+				20B329E4283953180082CE8B /* PEMTmxTileAnimation.swift in Sources */,
 				207D3DD42812AD5700FC4C77 /* DemoScene.swift in Sources */,
-				2029D9CA283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */,
-				2091DE32283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
+				20B329D8283953180082CE8B /* PEMTmxGroup.swift in Sources */,
+				20B32A0E283953180082CE8B /* PEMTmxParser.swift in Sources */,
+				20B329E1283953180082CE8B /* PEMTmxSpriteSheet.swift in Sources */,
+				20B329F9283953180082CE8B /* PEMTmxImageLayer.swift in Sources */,
 				207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */,
-				205BF69A282687A800077DB2 /* SKColor+Extension.swift in Sources */,
-				205BF6A52826A41300077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
-				2000FD34282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				20CA139E2818168600797A7C /* DemoViewController.swift in Sources */,
-				20D0D30F2827EA68001E505D /* PEMTmxTileLayer.swift in Sources */,
-				2041C82C282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
-				20D0D3132828111B001E505D /* Data+Compression.swift in Sources */,
-				201D118228392E4C004BEABC /* Image+Extension.swift in Sources */,
-				2029D9CE283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
-				2000FD3C282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
-				2077912D28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */,
-				205BF67128266D4200077DB2 /* PEMTmxParser.swift in Sources */,
-				2056B69F283239E300595F23 /* PEMTmxGroup.swift in Sources */,
-				2045AEF82833D0B500614F38 /* TimeInterval+Extension.swift in Sources */,
+				20B32A08283953180082CE8B /* PEMFontHelper.swift in Sources */,
+				20B32A14283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1665,34 +1657,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20779132283630EB00E3EA9D /* PEMFontHelper.swift in Sources */,
 				2014E98828169C4500A12253 /* MathHelper.swift in Sources */,
-				2045AEEF2833A4A600614F38 /* PEMTmxObjectGroup.swift in Sources */,
+				20B329F7283953180082CE8B /* PEMTmxObjectGroup.swift in Sources */,
 				2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
-				2037A5CE282587AC00E13452 /* PEMTmxMap.swift in Sources */,
-				204097CF282A753300603024 /* PEMTmxTile.swift in Sources */,
+				20B329DC283953180082CE8B /* PEMTmxObjectData.swift in Sources */,
+				20B32A06283953180082CE8B /* Image+Extension.swift in Sources */,
+				20B329F4283953180082CE8B /* PEMTmxTile.swift in Sources */,
+				20B32A0C283953180082CE8B /* PEMTmxHelper.swift in Sources */,
+				20B32A00283953180082CE8B /* CGFloat+Extension.swift in Sources */,
+				20B329DF283953180082CE8B /* PEMTmxProperty.swift in Sources */,
+				20B329EB283953180082CE8B /* PEMTmxTileData.swift in Sources */,
+				20B32A03283953180082CE8B /* Data+Compression.swift in Sources */,
+				20B32A12283953180082CE8B /* SKColor+Extension.swift in Sources */,
+				20B329FD283953180082CE8B /* PEMTmxMap.swift in Sources */,
+				20B329E8283953180082CE8B /* PEMTmxTileAnimationFrame.swift in Sources */,
+				20B329F1283953180082CE8B /* PEMTmxTileLayer.swift in Sources */,
 				204662E1281BE8CF00F3635B /* Define.swift in Sources */,
-				2045AEF32833BFA300614F38 /* PEMTmxObjectData.swift in Sources */,
-				2000FD39282BB4D500699DAF /* PEMTmxTileData.swift in Sources */,
+				20B329EE283953180082CE8B /* PEMTmxTileSet.swift in Sources */,
+				20B329E5283953180082CE8B /* PEMTmxTileAnimation.swift in Sources */,
 				207D3DD52812AD5700FC4C77 /* DemoScene.swift in Sources */,
-				2029D9CB283023C40019FAB4 /* PEMTmxTileAnimation.swift in Sources */,
-				2091DE33283100D900F476C8 /* PEMTmxProperty.swift in Sources */,
+				20B329D9283953180082CE8B /* PEMTmxGroup.swift in Sources */,
+				20B32A0F283953180082CE8B /* PEMTmxParser.swift in Sources */,
+				20B329E2283953180082CE8B /* PEMTmxSpriteSheet.swift in Sources */,
+				20B329FA283953180082CE8B /* PEMTmxImageLayer.swift in Sources */,
 				20CA139B281815DD00797A7C /* GameViewController.swift in Sources */,
-				205BF69B282687A800077DB2 /* SKColor+Extension.swift in Sources */,
-				205BF6A62826A41400077DB2 /* PEMTmxTileSet.swift in Sources */,
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
-				2000FD35282BB49F00699DAF /* PEMTmxSpriteSheet.swift in Sources */,
 				20CA139F2818168600797A7C /* DemoViewController.swift in Sources */,
-				20D0D3102827EA69001E505D /* PEMTmxTileLayer.swift in Sources */,
-				2041C82D282EB49800F584AF /* PEMTmxImageLayer.swift in Sources */,
-				20D0D3142828111B001E505D /* Data+Compression.swift in Sources */,
-				201D118328392E4C004BEABC /* Image+Extension.swift in Sources */,
-				2029D9CF283023E50019FAB4 /* PEMTmxTileAnimationFrame.swift in Sources */,
-				2000FD3D282BB76D00699DAF /* PEMTmxHelper.swift in Sources */,
-				2077912E28362CAC00E3EA9D /* CGFloat+Extension.swift in Sources */,
-				205BF67228266D4200077DB2 /* PEMTmxParser.swift in Sources */,
-				2056B6A0283239E300595F23 /* PEMTmxGroup.swift in Sources */,
-				2045AEF92833D0B500614F38 /* TimeInterval+Extension.swift in Sources */,
+				20B32A09283953180082CE8B /* PEMFontHelper.swift in Sources */,
+				20B32A15283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
