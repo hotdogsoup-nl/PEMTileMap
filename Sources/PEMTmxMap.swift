@@ -3,14 +3,14 @@ import SpriteKit
 import zlib
 import CoreGraphics
 
-enum CameraZoomMode {
+public enum CameraZoomMode {
     case none
     case center
     case aspectFit
     case aspectFill
 }
 
-enum CameraViewMode {
+public enum CameraViewMode {
     case none
     case center
     case left
@@ -53,7 +53,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     private (set) var backgroundColor: SKColor?
     private (set) var properties: Dictionary<String, Any>?
     private (set) var orientation: Orientation?
-    private (set) var cameraNode: SKCameraNode
+    public private (set) var cameraNode: SKCameraNode
 
     private var version: String?
     private var mapSource: String?
@@ -113,7 +113,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     ///     - zPositionLayerDelta : Delta for the zPosition of each layer node. Default is 20.
     ///     - textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
     /// - returns: A `PEMTmxMap` node if the TMX file could be parsed succesfully.
-    init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest, showObjectGroups: Bool = false) {
+    public init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest, showObjectGroups: Bool = false) {
         cameraNode = SKCameraNode()
 
         super.init()
@@ -294,7 +294,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     ///     - factor : Optional movement factor that limits the move. A value of 1.0 means full motion within the given `sceneSize`.
     ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
     ///     - completion : Optional completion block which is called when camera movement has finished.
-    func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
+    public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
         
         var newScale = cameraScale
         
