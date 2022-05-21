@@ -738,7 +738,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		206E238B282667560039C4FE /* Sources */ = {
+		206E238B282667560039C4FE /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				209AB9A72827C8510021A297 /* Helper */,
@@ -749,7 +749,7 @@
 				204097CD282A753300603024 /* PEMTmxTile.swift */,
 				20562E11282521C1005CE60A /* PEMTmxTileLayer.swift */,
 			);
-			path = Sources;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		206E238C282667640039C4FE /* Demo */ = {
@@ -782,7 +782,7 @@
 			isa = PBXGroup;
 			children = (
 				2000FD43282BDB7400699DAF /* README.md */,
-				206E238B282667560039C4FE /* Sources */,
+				206E238B282667560039C4FE /* Source */,
 				206E238C282667640039C4FE /* Demo */,
 				207D3DB62812AD5700FC4C77 /* Products */,
 				2074E41F28181EDD002137A7 /* Frameworks */,
