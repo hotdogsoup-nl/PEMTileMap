@@ -95,9 +95,7 @@ func convertProperties(_ newProperties: [PEMProperty]) -> Dictionary<String, Any
     var properties: Dictionary<String, Any>? = [:]
     for property in newProperties {
         if let value = property.value {
-
             switch property.type {
-            
             case .bool:
                 properties?[property.name] = Bool(value)
             case .color:

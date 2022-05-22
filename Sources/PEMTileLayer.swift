@@ -92,7 +92,6 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
 
     func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
-        
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
         
         for index in tileData.indices {

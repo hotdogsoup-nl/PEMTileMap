@@ -3,7 +3,7 @@
 import AppKit
 import SpriteKit
 
-// this should work on an SKTexture.cgImage but unfortunately it doesn't, so we use NSImage / UIImage
+// this should work on an SKTexture.cgImage but unfortunately it doesn't, so we use NSImage.cgImage / UIImage.cgImage
 
 extension NSImage {
     func remove(color: NSColor, tolerance: CGFloat = 4) -> NSImage {

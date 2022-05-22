@@ -1,6 +1,6 @@
 import Foundation
 
-extension TimeInterval{
+extension TimeInterval {
     func stringValue() -> String {
         let ms = Int((self.truncatingRemainder(dividingBy: 1)) * 1000)
         let s = Int(self) % 60
