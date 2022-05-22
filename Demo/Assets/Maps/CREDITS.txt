@@ -1,0 +1,16 @@
+• gameart2d 'Desert'
+by GameArt2D
+from http://www.gameart2d.com/free-desert-platformer-tileset.html
+
+• Magicland
+by Unknown
+from https://github.com/jamesbowman/tiled-maps
+
+• MyLevel1
+by mieki256
+from https://opengameart.org/content/cave-tile-map-image
+
+• Tiled Examples
+example maps from the Tiled Editor
+from https://github.com/mapeditor/tiled
+
