@@ -48,11 +48,14 @@ internal enum MapStaggerIndex: String {
 }
 
 public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
+    public weak var cameraNode: SKCameraNode?
+
     public private (set) var mapSizeInPoints = CGSize.zero
     public private (set) var backgroundColor: SKColor?
-    public private (set) var cameraNode: SKCameraNode
+    public private (set) var highestZPosition = CGFloat(0)
+    public private (set) var parseTime = TimeInterval(0)
+    public private (set) var renderTime = TimeInterval(0)
 
-    private (set) var currentZPosition = CGFloat(0)
     private (set) var properties: Dictionary<String, Any>?
     private (set) var orientation: Orientation?
 
@@ -79,7 +82,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     private var renderOrder = MapRenderOrder.rightDown
     private var textureFilteringMode = SKTextureFilteringMode.nearest
-    private var showObjectGroups = false
 
     private var baseZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
@@ -114,14 +116,10 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     ///     - zPositionLayerDelta : Delta for the zPosition of each layer node. Default is 20.
     ///     - textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
     /// - returns: A `PEMTileMap` node if the TMX file could be parsed succesfully.
-    public init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest, showObjectGroups: Bool = false) {
-        cameraNode = SKCameraNode()
-
+    public init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest) {
         super.init()
         
-        #if DEBUG
         let parseStartTime = Date()
-        #endif
 
         if let url = bundleURLForResource(mapName),
            let parser = PEMTmxParser(map: self, fileURL: url) {
@@ -139,28 +137,22 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         }
         
         parseExternalFiles()
-        
-        #if DEBUG
-        let parseTimeInterval = -parseStartTime.timeIntervalSinceNow
-        #endif
+        parseTime = -parseStartTime.timeIntervalSinceNow
 
         mapSource = mapName
         self.baseZPosition = baseZPosition
         self.zPositionLayerDelta = zPositionLayerDelta
         self.textureFilteringMode = textureFilteringMode
-        self.showObjectGroups = showObjectGroups
         
-        #if DEBUG
         let renderStartTime = Date()
-        #endif
         
         renderMap()
         
-        #if DEBUG
-        let renderTimeInterval = -renderStartTime.timeIntervalSinceNow
+        renderTime = -renderStartTime.timeIntervalSinceNow
         
-        print("Parsed files in:", parseTimeInterval.stringValue())
-        print("Rendered map in:", renderTimeInterval.stringValue())
+        #if DEBUG
+        print("Parsed files in:", parseTime.stringValue())
+        print("Rendered map in:", renderTime.stringValue())
         #endif
     }
     
@@ -296,6 +288,9 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
     ///     - completion : Optional completion block which is called when camera movement has finished.
     public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
+        if cameraNode == nil {
+            return
+        }
         
         var newScale = cameraScale
         
@@ -318,7 +313,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             newScale = 1.0 / contentScale / factor
             
             let zoomAction = SKAction.scale(to: newScale, duration: duration)
-            cameraNode.run(zoomAction)
+            cameraNode?.run(zoomAction)
             cameraScale = newScale
             cameraZoomMode = zoomMode
         }
@@ -328,31 +323,31 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             return
         }
         
-        var newPosition = cameraNode.position
-
-        if viewMode == .center {
-            newPosition = .zero
-        } else {
-            if viewMode == .left || viewMode == .topLeft || viewMode == .bottomLeft {
-                newPosition.x = sceneSize.width * 0.5 * factor * newScale + mapSizeInPoints.width * -0.5
-            } else if viewMode == .top || viewMode == .bottom {
-                newPosition.x = 0
-            } else if viewMode == .right || viewMode == .topRight || viewMode == .bottomRight {
-                newPosition.x = sceneSize.width * -0.5 * factor * newScale + mapSizeInPoints.width * 0.5
-            }
-            
-            if viewMode == .top || viewMode == .topLeft || viewMode == .topRight {
-                newPosition.y = sceneSize.height * -0.5 * factor * newScale + mapSizeInPoints.height * 0.5
-            } else if viewMode == .left || viewMode == .right {
-                newPosition.y = 0
-            } else if viewMode == .bottom || viewMode == .bottomLeft || viewMode == .bottomRight {
-                newPosition.y = sceneSize.height * 0.5 * factor * newScale + mapSizeInPoints.height * -0.5
-            }
-        }
+        if var newPosition = cameraNode?.position {
+            if viewMode == .center {
+                newPosition = .zero
+            } else {
+                if viewMode == .left || viewMode == .topLeft || viewMode == .bottomLeft {
+                    newPosition.x = sceneSize.width * 0.5 * factor * newScale + mapSizeInPoints.width * -0.5
+                } else if viewMode == .top || viewMode == .bottom {
+                    newPosition.x = 0
+                } else if viewMode == .right || viewMode == .topRight || viewMode == .bottomRight {
+                    newPosition.x = sceneSize.width * -0.5 * factor * newScale + mapSizeInPoints.width * 0.5
+                }
                 
-        let moveAction = SKAction.move(to: newPosition, duration: duration)
-        cameraNode.run(moveAction, completion: completion)
-        cameraViewMode = viewMode
+                if viewMode == .top || viewMode == .topLeft || viewMode == .topRight {
+                    newPosition.y = sceneSize.height * -0.5 * factor * newScale + mapSizeInPoints.height * 0.5
+                } else if viewMode == .left || viewMode == .right {
+                    newPosition.y = 0
+                } else if viewMode == .bottom || viewMode == .bottomLeft || viewMode == .bottomRight {
+                    newPosition.y = sceneSize.height * 0.5 * factor * newScale + mapSizeInPoints.height * -0.5
+                }
+            }
+                    
+            let moveAction = SKAction.move(to: newPosition, duration: duration)
+            cameraNode?.run(moveAction, completion: completion)
+            cameraViewMode = viewMode
+        }
     }
     
     // MARK: - Private
@@ -364,7 +359,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     private func renderMap() {
-        currentZPosition = baseZPosition
+        highestZPosition = baseZPosition
 
         #if DEBUG
         print (self)
@@ -385,18 +380,16 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         if mapSizeInPoints.height < mapSizeInPointsFromTileSize.height {
             mapSizeInPoints.height = mapSizeInPointsFromTileSize.height
         }
-        
-        cameraNode.zPosition = currentZPosition + zPositionLayerDelta
     }
     
     private func renderLayers() {
         for layer in layers {
             if let tileLayer = layer as? PEMTileLayer {
                 if tileLayer.visible {
-                    currentZPosition += zPositionLayerDelta
+                    highestZPosition += zPositionLayerDelta
 
                     tileLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, textureFilteringMode: textureFilteringMode)
-                    tileLayer.zPosition = currentZPosition
+                    tileLayer.zPosition = highestZPosition
                     
                     addChild(tileLayer)
                     #if DEBUG
@@ -409,10 +402,10 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
 
             if let imageLayer = layer as? PEMImageLayer {
                 if imageLayer.visible {
-                    currentZPosition += zPositionLayerDelta
+                    highestZPosition += zPositionLayerDelta
                     
                     imageLayer.render(mapSizeInPoints: mapSizeInPointsFromTileSize, textureFilteringMode:textureFilteringMode)
-                    imageLayer.zPosition = currentZPosition
+                    imageLayer.zPosition = highestZPosition
                     
                     addChild(imageLayer)
                     #if DEBUG
@@ -422,21 +415,19 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 continue
             }
 
-            if showObjectGroups {
-                if let objectLayer = layer as? PEMObjectGroup {
-                    if objectLayer.visible {
-                        currentZPosition += zPositionLayerDelta
-                        
-                        objectLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInPoints: mapSizeInPointsFromTileSize, textureFilteringMode:textureFilteringMode)
-                        objectLayer.zPosition = currentZPosition
-                        
-                        addChild(objectLayer)
-                        #if DEBUG
-                        print(layer)
-                        #endif
-                    }
-                    continue
+            if let objectLayer = layer as? PEMObjectGroup {
+                if objectLayer.visible {
+                    highestZPosition += zPositionLayerDelta
+                    
+                    objectLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInPoints: mapSizeInPointsFromTileSize, textureFilteringMode:textureFilteringMode)
+                    objectLayer.zPosition = highestZPosition
+                    
+                    addChild(objectLayer)
+                    #if DEBUG
+                    print(layer)
+                    #endif
                 }
+                continue
             }
         }
     }

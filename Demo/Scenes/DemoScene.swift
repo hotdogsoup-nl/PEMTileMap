@@ -17,6 +17,8 @@ class DemoScene: SKScene {
     private var buttonClicked = false
     private var currentMapNameLabel: SKLabelNode?
     private var currentMapIndex = Int(0)
+    private var renderTimeLabel: SKLabelNode?
+
     private var maps =
     
     // "TestMaps" folder
@@ -53,15 +55,12 @@ class DemoScene: SKScene {
     ]
 
     private var previousUpdateTime = TimeInterval(0)
-    private var doorOpened = false
-    
-    private var door: SKSpriteNode?
-    private var spawnLayer: PEMTileLayer?
-    private var terrainLayer: PEMTileLayer?
+    private var cameraNode: SKCameraNode
     
     // MARK: - Init
     
-    override init(size: CGSize) {        
+    override init(size: CGSize) {
+        cameraNode = SKCameraNode()
         super.init(size: size)
         
         startControl()
@@ -75,7 +74,10 @@ class DemoScene: SKScene {
 
     private func startControl() {
         backgroundColor = SKColor(named: "Game-background")!
-        
+        camera = cameraNode
+        addChild(cameraNode)
+
+        addHud()
         loadMap()
     }
     
@@ -104,12 +106,11 @@ class DemoScene: SKScene {
     }
     
     private func loadMap() {
-        removeHud()
         removeMap()
         
         let mapName = maps[currentMapIndex]
 
-        if let newMap = PEMTileMap(mapName: mapName, showObjectGroups: true) {
+        if let newMap = PEMTileMap(mapName: mapName) {
             map = newMap
 
             if newMap.backgroundColor != nil {
@@ -118,16 +119,14 @@ class DemoScene: SKScene {
                 backgroundColor = .clear
             }
 
-            camera = newMap.cameraNode
-            addChild(newMap.cameraNode)
+            cameraNode.zPosition = newMap.highestZPosition + 1
+            newMap.cameraNode = cameraNode
             
-            addHud()
             currentMapNameLabel?.text = mapName
+            renderTimeLabel?.text = String("parse time: \(newMap.parseTime.stringValue())\nrender time: \(newMap.renderTime.stringValue())")
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
             addChild(newMap)
-        } else {
-            addHud()
         }
     }
     
@@ -182,25 +181,35 @@ class DemoScene: SKScene {
         
         logoNode.size = logoNode.size.scaled(scale)
         logoNode.position = CGPoint(x: size.width * -0.5 + logoNode.size.width * 0.5 + margin, y: size.height * 0.5 - logoNode.size.height * 0.5 - margin)
-        map?.cameraNode.addChild(logoNode)
+        cameraNode.addChild(logoNode)
         
         var buttonSize = CGSize(width: size.width * 0.1, height: size.width * 0.025)
         var textSize = size.width * 0.015
 
         var newButton = button(name: "previousMapButton", size: buttonSize, text: "Previous", textSize: textSize, textColor: .white, fillColor: .red)
         newButton.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
-        map?.cameraNode.addChild(newButton)
+        cameraNode.addChild(newButton)
 
         newButton = button(name: "nextMapButton", size: buttonSize, text: "Next", textSize: textSize, textColor: .white, fillColor: .red)
         newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
-        map?.cameraNode.addChild(newButton)
+        cameraNode.addChild(newButton)
         
-        currentMapNameLabel = SKLabelNode(text: "...")
-        currentMapNameLabel!.fontSize = textSize
-        currentMapNameLabel!.fontName = "Courier-Bold"
-        currentMapNameLabel!.verticalAlignmentMode = .center
-        currentMapNameLabel!.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5 - margin)
-        map?.cameraNode.addChild(currentMapNameLabel!)
+        currentMapNameLabel = SKLabelNode(text: " ... ")
+        currentMapNameLabel?.fontSize = textSize
+        currentMapNameLabel?.fontName = "Courier-Bold"
+        currentMapNameLabel?.verticalAlignmentMode = .center
+        currentMapNameLabel?.horizontalAlignmentMode = .center
+        currentMapNameLabel?.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5 - margin)
+        cameraNode.addChild(currentMapNameLabel!)
+        
+        renderTimeLabel = SKLabelNode(text: " ...\n ...")
+        renderTimeLabel?.numberOfLines = 0
+        renderTimeLabel?.fontSize = textSize * 0.75
+        renderTimeLabel?.fontName = "Courier-Bold"
+        renderTimeLabel?.verticalAlignmentMode = .center
+        renderTimeLabel?.horizontalAlignmentMode = .center
+        renderTimeLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.position.y - currentMapNameLabel!.calculateAccumulatedFrame().size.height - renderTimeLabel!.calculateAccumulatedFrame().size.height * 0.5 - margin)
+        cameraNode.addChild(renderTimeLabel!)
                 
         var index = 0
         let buttonTitles = ["Zoom Fit", "Zoom Fill", "No Zoom", "TopLeft", "Top", "TopRight", "Left", "Center", "Right", "BottomLeft", "Bottom", "BottomRight"]
@@ -219,7 +228,7 @@ class DemoScene: SKScene {
                         
             newButton = button(name: "cameraButton-\(index)", size: buttonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor)
             newButton.position = CGPoint(x: size.width * 0.5 - buttonSize.width * 3 + buttonSize.width * CGFloat(index % 3) + margin * CGFloat(index % 3), y: size.height * 0.5 - margin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - margin * CGFloat(index / 3))
-            map?.cameraNode.addChild(newButton)
+            cameraNode.addChild(newButton)
 
             index += 1
         }
@@ -249,11 +258,7 @@ class DemoScene: SKScene {
         
         return button
     }
-    
-    private func removeHud() {
-        map?.cameraNode.removeAllChildren()
-    }
-    
+
     // MARK: - Input handling
 
     private func touchDownAtPoint(_ pos: CGPoint) {
