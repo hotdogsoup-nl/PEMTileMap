@@ -419,12 +419,19 @@ extension DemoScene {
     }
         
     override func scrollWheel(with event: NSEvent) {
-        guard event.scrollingDeltaY > 1 || event.scrollingDeltaY < -1 else { return }
+        if event.modifierFlags.contains(.shift) {
+            guard event.scrollingDeltaY > 1 || event.scrollingDeltaY < -1 else { return }
 
-        var newScale = cameraNode.xScale - event.scrollingDeltaY * 0.0125
-        newScale = max(0.1, min(newScale, 20))
-        cameraNode.xScale = newScale
-        cameraNode.yScale = newScale
+            var newScale = cameraNode.xScale + event.scrollingDeltaY * 0.0125
+            newScale = max(0.1, min(newScale, 20))
+            cameraNode.xScale = newScale
+            cameraNode.yScale = newScale
+
+            return
+        }
+        
+        let positionDelta = CGPoint(x: -event.scrollingDeltaX, y: event.scrollingDeltaY)
+        cameraNode.position = cameraNode.position.add(positionDelta)
     }
     
     // MARK: - View
