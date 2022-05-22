@@ -18,7 +18,7 @@
 		2037A5EA28258D9A00E13452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DB02812AD5700FC4C77 /* Assets.xcassets */; };
 		2037A5EB28258D9D00E13452 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		2037A5EC28258DA000E13452 /* DemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DAF2812AD5600FC4C77 /* DemoScene.swift */; };
-		2037A5EE28258DA500E13452 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoViewController.swift */; };
+		2037A5EE28258DA500E13452 /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
 		2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
 		2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
 		2037A5F828258E0700E13452 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
@@ -98,8 +98,8 @@
 		20B32A15283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
 		20B32A16283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
 		20CA139B281815DD00797A7C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139A281815DD00797A7C /* GameViewController.swift */; };
-		20CA139E2818168600797A7C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoViewController.swift */; };
-		20CA139F2818168600797A7C /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoViewController.swift */; };
+		20CA139E2818168600797A7C /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
+		20CA139F2818168600797A7C /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
 		20CA158228181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		20CA158328181D8700797A7C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		20DB79A32837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
@@ -538,7 +538,7 @@
 		20B329D6283953180082CE8B /* SKColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKColor+Extension.swift"; sourceTree = "<group>"; };
 		20B329D7283953180082CE8B /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		20CA139D2818168600797A7C /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		20CA139D2818168600797A7C /* DemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoController.swift; sourceTree = "<group>"; };
 		20CA158128181D8700797A7C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mylevel1_tiles.png; sourceTree = "<group>"; };
 		20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mylevel1.tmx; sourceTree = "<group>"; };
@@ -730,8 +730,8 @@
 				207D3DB02812AD5700FC4C77 /* Assets.xcassets */,
 				20CA158128181D8700797A7C /* Colors.xcassets */,
 				207D3DB72812AD5700FC4C77 /* iOS */,
-				207D3DC72812AD5700FC4C77 /* macOS */,
 				2037A5D428258C4900E13452 /* tvOS */,
+				207D3DC72812AD5700FC4C77 /* macOS */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -838,7 +838,7 @@
 		20CA139C2818160800797A7C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				20CA139D2818168600797A7C /* DemoViewController.swift */,
+				20CA139D2818168600797A7C /* DemoController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1589,7 +1589,7 @@
 			files = (
 				2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */,
 				20B329F8283953180082CE8B /* PEMObjectGroup.swift in Sources */,
-				2037A5EE28258DA500E13452 /* DemoViewController.swift in Sources */,
+				2037A5EE28258DA500E13452 /* DemoController.swift in Sources */,
 				20B329DD283953180082CE8B /* PEMObjectData.swift in Sources */,
 				20B32A07283953180082CE8B /* Image+Extension.swift in Sources */,
 				20B329F5283953180082CE8B /* PEMTile.swift in Sources */,
@@ -1647,7 +1647,7 @@
 				20B329F9283953180082CE8B /* PEMImageLayer.swift in Sources */,
 				207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */,
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
-				20CA139E2818168600797A7C /* DemoViewController.swift in Sources */,
+				20CA139E2818168600797A7C /* DemoController.swift in Sources */,
 				20B32A08283953180082CE8B /* PEMFontHelper.swift in Sources */,
 				20B32A14283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);
@@ -1682,7 +1682,7 @@
 				20B329FA283953180082CE8B /* PEMImageLayer.swift in Sources */,
 				20CA139B281815DD00797A7C /* GameViewController.swift in Sources */,
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
-				20CA139F2818168600797A7C /* DemoViewController.swift in Sources */,
+				20CA139F2818168600797A7C /* DemoController.swift in Sources */,
 				20B32A09283953180082CE8B /* PEMFontHelper.swift in Sources */,
 				20B32A15283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);

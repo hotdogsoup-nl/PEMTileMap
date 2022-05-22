@@ -328,6 +328,7 @@ extension DemoScene {
 #endif
 
 #if os(macOS)
+
 extension DemoScene {
     override func keyDown(with event: NSEvent) {
         switch event.keyCode {
@@ -362,5 +363,15 @@ extension DemoScene {
     override func mouseUp(with event: NSEvent) {
         touchUpAtPoint(event.location(in: self))
     }
+    
+    // MARK: - View
+        
+    #if os(macOS)
+    
+    public func didChangeSize() {
+    }
+    
+    #endif
 }
+
 #endif

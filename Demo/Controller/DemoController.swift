@@ -6,7 +6,7 @@ import Cocoa
 import UIKit
 #endif
 
-public class DemoViewController: NSObject {
+public class DemoController: NSObject {
     weak public var view: SKView?
     private var currentScene : DemoScene?
     
@@ -39,4 +39,14 @@ public class DemoViewController: NSObject {
             view!.presentScene(nextScene, transition: transition)
         }
     }
+    
+    // MARK: - View
+    
+    #if os(macOS)
+
+    public func windowDidResize() {
+        currentScene?.didChangeSize()
+    }
+
+    #endif
 }
