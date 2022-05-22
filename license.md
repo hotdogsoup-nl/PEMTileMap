@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) [2022] [Martin van Spanje - P-Edge media]
+Copyright (c) [2022] [Martin van Spanje - [P-Edge media](https://www.p-edge.nl)]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
