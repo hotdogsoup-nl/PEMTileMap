@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
             skView.showsPhysics = false
             #endif
             
-            gameController.view = skView
+            gameController.skView = skView
             gameController.startControl()
         }
     }

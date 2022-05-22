@@ -7,7 +7,7 @@ import UIKit
 #endif
 
 public class DemoController: NSObject {
-    weak public var view: SKView?
+    weak public var skView: SKView!
     private var currentScene : DemoScene?
     
     // MARK: - Life cycle
@@ -18,7 +18,7 @@ public class DemoController: NSObject {
 
     public init(view: SKView) {
         super.init()
-        self.view = view
+        skView = view
     }
     
     // MARK: - Control
@@ -30,13 +30,13 @@ public class DemoController: NSObject {
     private func loadGameScene() {
         DispatchQueue.main.async { [unowned self] in
             
-            let nextScene = DemoScene(size: view!.bounds.size)
+            let nextScene = DemoScene(view: skView, size: skView.bounds.size)
             nextScene.scaleMode = .aspectFill
             
             currentScene = nextScene
 
             let transition = SKTransition.fade(withDuration: 0.3)
-            view!.presentScene(nextScene, transition: transition)
+            skView.presentScene(nextScene, transition: transition)
         }
     }
     

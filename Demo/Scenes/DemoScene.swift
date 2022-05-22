@@ -14,21 +14,22 @@ class DemoScene: SKScene {
     }
     
     private var map: PEMTileMap?
-    private var buttonClicked = false
     private var currentMapNameLabel: SKLabelNode?
     private var currentMapIndex = Int(0)
     private var renderTimeLabel: SKLabelNode?
 
+    private var buttonTapped = false
+
     private var maps =
     
     // "TestMaps" folder
-//    [
-//        "level1.tmx",
-//        "level2.tmx",
-//        "level3.tmx",
-//        "level4.tmx",
-//        "level5.tmx",
-//    ]
+    [
+        "level1.tmx",
+        "level2.tmx",
+        "level3.tmx",
+        "level4.tmx",
+        "level5.tmx",
+    ]
     
     // "Maps" folder
 //    [
@@ -39,30 +40,41 @@ class DemoScene: SKScene {
 
     
     // "Tiled Examples" folder
-    [
-        "sewers.tmx",
-        "sandbox.tmx",
-        "sandbox2.tmx",
-        "island.tmx",
-        "forest.tmx",
-        "desert.tmx",
-        "orthogonal-outside.tmx",
-        "hexagonal-mini.tmx",
-        "isometric_grass_and_water.tmx",
-        "isometric_staggered_grass_and_water.tmx",
-        "perspective_walls.tmx",
-        "test_hexagonal_tile_60x60x30.tmx",
-    ]
+//    [
+//        "sewers.tmx",
+//        "sandbox.tmx",
+//        "sandbox2.tmx",
+//        "island.tmx",
+//        "forest.tmx",
+//        "desert.tmx",
+//        "orthogonal-outside.tmx",
+//        "hexagonal-mini.tmx",
+//        "isometric_grass_and_water.tmx",
+//        "isometric_staggered_grass_and_water.tmx",
+//        "perspective_walls.tmx",
+//        "test_hexagonal_tile_60x60x30.tmx",
+//    ]
 
     private var previousUpdateTime = TimeInterval(0)
-    private var cameraNode: SKCameraNode
+    private var cameraNode: SKCameraNode!
+    private var initalTouchLocation = CGPoint.zero
+    
+    #if os(iOS)
+    private var pinch: UIPinchGestureRecognizer!
+    #endif
     
     // MARK: - Init
     
-    override init(size: CGSize) {
-        cameraNode = SKCameraNode()
+    init(view: SKView, size: CGSize) {
         super.init(size: size)
         
+        cameraNode = SKCameraNode()
+        
+        #if os(iOS)
+        pinch = UIPinchGestureRecognizer(target: self, action: #selector(scenePinched(_:)))
+        view.addGestureRecognizer(pinch)
+        #endif
+
         startControl()
     }
     
@@ -76,6 +88,10 @@ class DemoScene: SKScene {
         backgroundColor = SKColor(named: "Game-background")!
         camera = cameraNode
         addChild(cameraNode)
+        
+        
+//        skView.addGestureRecognizer(cameraPinched)
+//        cameraPinched.isEnabled = allowGestures
 
         addHud()
         loadMap()
@@ -270,13 +286,13 @@ class DemoScene: SKScene {
             let nodeParentName = node.parent?.name ?? ""
             
             if nodeName == "previousMapButton" || nodeParentName == "previousMapButton" {
-                buttonClicked = true
+                buttonTapped = true
                 previousMap()
                 return
             }
 
             if nodeName == "nextMapButton" || nodeParentName == "nextMapButton" {
-                buttonClicked = true
+                buttonTapped = true
                 nextMap()
                 return
             }
@@ -293,18 +309,26 @@ class DemoScene: SKScene {
                 let fromIndex = nodeName.index(nodeName.startIndex, offsetBy: 13)
                 let number = String(nodeName[fromIndex...])
                 
-                buttonClicked = true
+                buttonTapped = true
                 adjustCamera(buttonIndex: Int(number)!)
             }
         }
+        
+        initalTouchLocation = pos
     }
 
     private func touchMovedToPoint(_ pos: CGPoint) {
+        if buttonTapped {
+            return
+        }
+
+        let delta = CGPointSubtract(initalTouchLocation, pos)
+        cameraNode.position = CGPointAdd(cameraNode.position, delta)
     }
 
     private func touchUpAtPoint(_ pos: CGPoint) {
-        if buttonClicked {
-            buttonClicked = false
+        if buttonTapped {
+            buttonTapped = false
             return
         }
     }
@@ -313,28 +337,47 @@ class DemoScene: SKScene {
 #if os(iOS) || os(tvOS)
 extension DemoScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
         for t in touches {
             touchDownAtPoint(t.location(in: self))
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        
         for t in touches {
             touchMovedToPoint(t.location(in: self))
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
         for t in touches {
             touchUpAtPoint(t.location(in: self))
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        
         for t in touches {
             touchUpAtPoint(t.location(in: self))
         }
     }
+    
+    #if os(iOS)
+
+    @objc public func scenePinched(_ recognizer: UIPinchGestureRecognizer) {
+        if recognizer.state == .changed {
+            cameraNode.xScale = 1 / recognizer.scale
+            cameraNode.yScale = 1 / recognizer.scale
+        }
+    }
+
+    #endif
 }
 #endif
 
@@ -373,6 +416,15 @@ extension DemoScene {
     
     override func mouseUp(with event: NSEvent) {
         touchUpAtPoint(event.location(in: self))
+    }
+        
+    override func scrollWheel(with event: NSEvent) {
+        guard event.scrollingDeltaY > 1 || event.scrollingDeltaY < -1 else { return }
+
+        var newScale = cameraNode.xScale - event.scrollingDeltaY * 0.0125
+        newScale = max(0.1, min(newScale, 20))
+        cameraNode.xScale = newScale
+        cameraNode.yScale = newScale
     }
     
     // MARK: - View

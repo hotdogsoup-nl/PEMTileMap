@@ -91,7 +91,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     private var cameraViewMode = CameraViewMode.none
     private var cameraZoomMode = CameraZoomMode.none
-    private var cameraScale = CGFloat(1.0)
 
     // MARK: - Init
         
@@ -292,7 +291,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             return
         }
         
-        var newScale = cameraScale
+        var newScale = cameraNode!.xScale
         
         if zoomMode != .none && mapSizeInPoints.width > 0 && mapSizeInPoints.height > 0 {
             let maxWidthScale = sceneSize.width / mapSizeInPoints.width
@@ -314,7 +313,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             
             let zoomAction = SKAction.scale(to: newScale, duration: duration)
             cameraNode?.run(zoomAction)
-            cameraScale = newScale
             cameraZoomMode = zoomMode
         }
         

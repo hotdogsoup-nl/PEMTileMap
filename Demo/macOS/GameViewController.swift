@@ -2,6 +2,7 @@ import SpriteKit
 
 class GameViewController: NSViewController, NSWindowDelegate {
     private var gameController = DemoController()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,7 +15,7 @@ class GameViewController: NSViewController, NSWindowDelegate {
             skView.showsPhysics = false
             #endif
             
-            gameController.view = skView
+            gameController.skView = skView
             gameController.startControl()
         }
     }
@@ -26,5 +27,11 @@ class GameViewController: NSViewController, NSWindowDelegate {
     
     func windowDidResize(_ notification: Notification) {
         gameController.windowDidResize()
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        if let skView = self.view as! SKView? {
+            skView.scene?.scrollWheel(with: event)
+        }
     }
 }
