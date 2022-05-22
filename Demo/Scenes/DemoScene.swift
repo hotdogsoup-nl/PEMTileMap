@@ -20,45 +20,37 @@ class DemoScene: SKScene {
     private var maps =
     
     // "TestMaps" folder
-    [
-        "level1.tmx",
-        "level2.tmx",
-        "level3.tmx",
-        "level4.tmx",
-        "level5.tmx",
-    ]
+//    [
+//        "level1.tmx",
+//        "level2.tmx",
+//        "level3.tmx",
+//        "level4.tmx",
+//        "level5.tmx",
+//    ]
     
-//    // "Maps" folder
+    // "Maps" folder
 //    [
 //        "mylevel1.tmx",
 //        "gameart2d-desert.tmx",
-//        "jb-32.tmx",
-//        "level25.tmx",
 //        "MagicLand.tmx",
 //    ]
-//
-    
-    // "Roguelike" folder
-//    [
-//    "sample_map.tmx",
-//    "sample_indoor.tmx",
-//    ]
+
     
     // "Tiled Examples" folder
-//    [
-//        "sewers.tmx",
-//        "sandbox.tmx",
-//        "sandbox2.tmx",
-//        "island.tmx",
-//        "forest.tmx",
-//        "desert.tmx",
-//        "orthogonal-outside.tmx",
-//        "hexagonal-mini.tmx",
-//        "isometric_grass_and_water.tmx",
-//        "isometric_staggered_grass_and_water.tmx",
-//        "perspective_walls.tmx",
-//        "test_hexagonal_tile_60x60x30.tmx",
-//    ]
+    [
+        "sewers.tmx",
+        "sandbox.tmx",
+        "sandbox2.tmx",
+        "island.tmx",
+        "forest.tmx",
+        "desert.tmx",
+        "orthogonal-outside.tmx",
+        "hexagonal-mini.tmx",
+        "isometric_grass_and_water.tmx",
+        "isometric_staggered_grass_and_water.tmx",
+        "perspective_walls.tmx",
+        "test_hexagonal_tile_60x60x30.tmx",
+    ]
 
     private var previousUpdateTime = TimeInterval(0)
     private var doorOpened = false
@@ -134,10 +126,13 @@ class DemoScene: SKScene {
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
             addChild(newMap)
+        } else {
+            addHud()
         }
     }
     
     func removeMap() {
+        currentMapNameLabel?.text = "..."
         map?.removeFromParent()
         map = nil
     }
@@ -181,27 +176,36 @@ class DemoScene: SKScene {
     // MARK: - HUD
     
     private func addHud() {
-        var buttonSize = CGSize(width: 100.0, height: 30.0)
+        let logoNode = SKSpriteNode(imageNamed: "logo")
+        let scale = size.width * 0.2 / logoNode.size.width
+        let margin = size.height * 0.01
+        
+        logoNode.size = logoNode.size.scaled(scale)
+        logoNode.position = CGPoint(x: size.width * -0.5 + logoNode.size.width * 0.5 + margin, y: size.height * 0.5 - logoNode.size.height * 0.5 - margin)
+        map?.cameraNode.addChild(logoNode)
+        
+        var buttonSize = CGSize(width: size.width * 0.1, height: size.width * 0.025)
+        var textSize = size.width * 0.015
 
-        var newButton = button(name: "previousMapButton", size: buttonSize, text: "Previous", textSize: 14, textColor: .white, fillColor: .red)
-        newButton.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
+        var newButton = button(name: "previousMapButton", size: buttonSize, text: "Previous", textSize: textSize, textColor: .white, fillColor: .red)
+        newButton.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
         map?.cameraNode.addChild(newButton)
 
-        newButton = button(name: "nextMapButton", size: buttonSize, text: "Next", textSize: 14, textColor: .white, fillColor: .red)
-        newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - 10)
+        newButton = button(name: "nextMapButton", size: buttonSize, text: "Next", textSize: textSize, textColor: .white, fillColor: .red)
+        newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
         map?.cameraNode.addChild(newButton)
         
         currentMapNameLabel = SKLabelNode(text: "...")
-        currentMapNameLabel!.fontSize = 16.0
+        currentMapNameLabel!.fontSize = textSize
         currentMapNameLabel!.fontName = "Courier-Bold"
         currentMapNameLabel!.verticalAlignmentMode = .center
-        currentMapNameLabel!.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5)
+        currentMapNameLabel!.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5 - margin)
         map?.cameraNode.addChild(currentMapNameLabel!)
                 
         var index = 0
         let buttonTitles = ["Zoom Fit", "Zoom Fill", "No Zoom", "TopLeft", "Top", "TopRight", "Left", "Center", "Right", "BottomLeft", "Bottom", "BottomRight"]
-        buttonSize = CGSize(width: 90, height: 20)
-
+        buttonSize = buttonSize.scaled(0.8)
+        textSize = textSize * 0.8
         for buttonTitle in buttonTitles {
             var fillColor = SKColor.gray
             
@@ -213,8 +217,8 @@ class DemoScene: SKScene {
                 fillColor = .systemBlue
             }
                         
-            newButton = button(name: "cameraButton-\(index)", size: buttonSize, text: buttonTitle, textSize: 12, textColor: .white, fillColor: fillColor)
-            newButton.position = CGPoint(x: size.width * 0.5 - buttonSize.width * 3 + buttonSize.width * CGFloat(index % 3) + 10 * CGFloat(index % 3), y: size.height * 0.5 - 10 - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - 10 * CGFloat(index / 3))
+            newButton = button(name: "cameraButton-\(index)", size: buttonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor)
+            newButton.position = CGPoint(x: size.width * 0.5 - buttonSize.width * 3 + buttonSize.width * CGFloat(index % 3) + margin * CGFloat(index % 3), y: size.height * 0.5 - margin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - margin * CGFloat(index / 3))
             map?.cameraNode.addChild(newButton)
 
             index += 1
@@ -284,7 +288,6 @@ class DemoScene: SKScene {
                 buttonClicked = true
                 adjustCamera(buttonIndex: Int(number)!)
             }
-            
         }
     }
 
