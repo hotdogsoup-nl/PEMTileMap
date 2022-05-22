@@ -287,9 +287,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
     ///     - completion : Optional completion block which is called when camera movement has finished.
     public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
-        if cameraNode == nil {
-            return
-        }
+        guard cameraNode != nil else { return }
         
         var newScale = cameraNode!.xScale
         

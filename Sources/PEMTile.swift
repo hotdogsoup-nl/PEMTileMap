@@ -77,14 +77,8 @@ class PEMTile: SKSpriteNode {
     // MARK: - Public
     
     func startAnimation(frameTiles: Dictionary<UInt32, SKTexture>) {
-        if animation == nil {
-            return
-        }
-        
-        if frameTiles.count == 0 {
-            return
-        }
-        
+        guard animation != nil, frameTiles.count > 0 else { return }
+                
         var actions : [SKAction] = []
                 
         for frame in animation!.frames {

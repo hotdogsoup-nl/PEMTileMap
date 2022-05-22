@@ -101,9 +101,7 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     func setObjectType(_ type : ObjectType, attributes: Dictionary<String, String> = [:]) {
         objectType = type
         
-        if attributes.count == 0 {
-            return
-        }
+        guard attributes.count > 0 else { return }
         
         if let value = attributes[ElementAttributes.fontFamily.rawValue] {
             fontFamily = value

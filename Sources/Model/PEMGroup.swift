@@ -61,9 +61,7 @@ class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
     // MARK: - Private
     
     private func applyParentGroupAttributes() {
-        if parentGroup == nil {
-            return
-        }
+        guard parentGroup != nil else { return }
         
         if let value = parentGroup?.opacity {
             opacity *= CGFloat(value)

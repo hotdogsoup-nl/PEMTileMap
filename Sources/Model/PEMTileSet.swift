@@ -154,9 +154,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     // MARK: - Public
     
     func parseExternalTileSet() {
-        if externalSource == nil {
-            return
-        }
+        guard externalSource != nil else { return }
         
         if let url = bundleURLForResource(externalSource!),
            let parser = PEMTmxParser(tileSet: self, fileURL: url) {
