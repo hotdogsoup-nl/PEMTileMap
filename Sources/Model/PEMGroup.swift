@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxGroup: NSObject, PEMTmxPropertiesProtocol {
+class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var properties: Dictionary<String, Any>?
     private (set) var opacity = CGFloat(1.0)
     private (set) var visible = true
@@ -10,9 +10,9 @@ class PEMTmxGroup: NSObject, PEMTmxPropertiesProtocol {
     private var id = UInt32(0)
     private var name: String?
 
-    private var parentGroup: PEMTmxGroup?
+    private var parentGroup: PEMGroup?
 
-    init?(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
+    init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
         guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }
         super.init()
 
@@ -52,9 +52,9 @@ class PEMTmxGroup: NSObject, PEMTmxPropertiesProtocol {
         #endif
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
@@ -86,7 +86,7 @@ class PEMTmxGroup: NSObject, PEMTmxPropertiesProtocol {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxGroup: \(id), (name: \(name ?? "-"), parent: \(String(describing: parentGroup)))"
+        return "PEMGroup: \(id), (name: \(name ?? "-"), parent: \(String(describing: parentGroup)))"
     }
     #endif
 }

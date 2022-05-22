@@ -91,7 +91,7 @@ func highResolutionLabel(text: String,
 
 // MARK: - Properties
 
-func convertProperties(_ newProperties: [PEMTmxProperty]) -> Dictionary<String, Any>? {
+func convertProperties(_ newProperties: [PEMProperty]) -> Dictionary<String, Any>? {
     var properties: Dictionary<String, Any>? = [:]
     for property in newProperties {
         if let value = property.value {

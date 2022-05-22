@@ -13,7 +13,7 @@ class DemoScene: SKScene {
         case toTheRight
     }
     
-    private var map: PEMTmxMap?
+    private var map: PEMTileMap?
     private var buttonClicked = false
     private var currentMapNameLabel: SKLabelNode?
     private var currentMapIndex = Int(0)
@@ -64,8 +64,8 @@ class DemoScene: SKScene {
     private var doorOpened = false
     
     private var door: SKSpriteNode?
-    private var spawnLayer: PEMTmxTileLayer?
-    private var terrainLayer: PEMTmxTileLayer?
+    private var spawnLayer: PEMTileLayer?
+    private var terrainLayer: PEMTileLayer?
     
     // MARK: - Init
     
@@ -117,7 +117,7 @@ class DemoScene: SKScene {
         
         let mapName = maps[currentMapIndex]
 
-        if let newMap = PEMTmxMap(mapName: mapName, showObjectGroups: true) {
+        if let newMap = PEMTileMap(mapName: mapName, showObjectGroups: true) {
             map = newMap
 
             if newMap.backgroundColor != nil {

@@ -21,6 +21,6 @@ class GameViewController: NSViewController {
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        view.window?.aspectRatio = CGSize(width: 1200, height: 800)
+//        view.window?.aspectRatio = CGSize(width: 1200, height: 800)
     }
 }

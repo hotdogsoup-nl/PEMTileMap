@@ -1,20 +1,20 @@
 import SpriteKit
 
-class PEMTmxTileData: NSObject, PEMTmxPropertiesProtocol {
+class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
     var texture: SKTexture?
 
     private (set) var id = UInt32(0)
     private (set) var type: String?
     private (set) var probability = CGFloat(0)
     private (set) var properties: Dictionary<String, Any>?
-    private (set) var animation: PEMTmxTileAnimation?
+    private (set) var animation: PEMTileAnimation?
 
     private var textureImageSource : String?
     private var tileSizeInPoints = CGSize.zero
 
     // MARK: - Init
     
-    /// Initialiser used when created from within a PEMTmxTileSet.
+    /// Initialiser used when created from within a PEMTileSet.
     init?(id: UInt32, attributes: Dictionary<String, String>) {
         super.init()
         
@@ -22,7 +22,7 @@ class PEMTmxTileData: NSObject, PEMTmxPropertiesProtocol {
         addAttributes(attributes)
     }
     
-    /// Initialiser used when created from within a PEMTmxSpriteSheet.
+    /// Initialiser used when created from within a PEMSpriteSheet.
     init?(id: UInt32, textureImageSource: String, tileSizeInPoints: CGSize) {
         super.init()
         
@@ -66,20 +66,20 @@ class PEMTmxTileData: NSObject, PEMTmxPropertiesProtocol {
             texture = SKTexture(imageNamed: path)
         } else {
             #if DEBUG
-            print("PEMTmxTileData: image file \(source) not found for tile with id: \(id)")
+            print("PEMTileData: image file \(source) not found for tile with id: \(id)")
             #endif
         }
     }
     
-    func addAnimation() -> PEMTmxTileAnimation? {
-        animation = PEMTmxTileAnimation()
+    func addAnimation() -> PEMTileAnimation? {
+        animation = PEMTileAnimation()
         
         return animation
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
@@ -87,7 +87,7 @@ class PEMTmxTileData: NSObject, PEMTmxPropertiesProtocol {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileData: \(id), (\(textureImageSource ?? "-"))"
+        return "PEMTileData: \(id), (\(textureImageSource ?? "-"))"
     }
     #endif
 }

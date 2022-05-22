@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
+class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     enum ObjectAlignment: String {
         case bottom = "bottom"
         case bottomLeft = "bottomleft"
@@ -15,7 +15,7 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
         case unspecified = "unspecified"
     }
     
-    enum PEMTmxTileSetType {
+    enum PEMTileSetType {
         case collectionOfImages
         case spriteSheet
     }
@@ -32,15 +32,15 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
     private var marginInPoints = UInt(0)
 
     private var externalSource: String?
-    private var spriteSheet: PEMTmxSpriteSheet?
-    private var tileSetType = PEMTmxTileSetType.collectionOfImages
+    private var spriteSheet: PEMSpriteSheet?
+    private var tileSetType = PEMTileSetType.collectionOfImages
     private var firstId = UInt32(0)
     private var lastId = UInt32(0)
     private var idRange: ClosedRange<UInt32> {
         return firstId...lastId
     }
         
-    private var tileData: [PEMTmxTileData] = []
+    private var tileData: [PEMTileData] = []
     
     // MARK: - Init
     
@@ -93,7 +93,7 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
                 objectAlignment = tileSetObjectAlignment
             } else {
                 #if DEBUG
-                print("PEMTmxTileSet: unsupported tileset object alignment: \(String(describing: value))")
+                print("PEMTileSet: unsupported tileset object alignment: \(String(describing: value))")
                 #endif
             }
         }
@@ -104,7 +104,7 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
         
         if !tileData.isEmpty {
             #if DEBUG
-            print("PEMTmxTileSet: attempt to set a spritesheet on a tileset that already contains <tile> objects: \(self)")
+            print("PEMTileSet: attempt to set a spritesheet on a tileset that already contains <tile> objects: \(self)")
             #endif
             return
         }
@@ -112,14 +112,14 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
         tileSetType = .spriteSheet
         
         if bundlePathForResource(source) != nil {
-            if let newSpriteSheet = PEMTmxSpriteSheet(tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
+            if let newSpriteSheet = PEMSpriteSheet(tileSizeInPoints: tileSizeInPoints, marginInPoints: marginInPoints, spacingInPoints: spacingInPoints, attributes: attributes) {
                 spriteSheet = newSpriteSheet
                 lastId = newSpriteSheet.lastId
             }
         }
     }
     
-    func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTmxTileData? {
+    func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTileData? {
         guard let tileIdValue = attributes[ElementAttributes.id.rawValue] else { return nil }
         let tileId = UInt32(tileIdValue)!
                 
@@ -128,7 +128,7 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
             return existingTile
         }
 
-        if let newTile = PEMTmxTileData(id: tileId, attributes: attributes) {
+        if let newTile = PEMTileData(id: tileId, attributes: attributes) {
             tileData.append(newTile)
             
             if tileSetType == .collectionOfImages {
@@ -162,40 +162,40 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
            let parser = PEMTmxParser(tileSet: self, fileURL: url) {
             if (!parser.parse()) {
                 #if DEBUG
-                print("PEMTmxTileSet: Error parsing external tileset: ", parser.parserError as Any)
+                print("PEMTileSet: Error parsing external tileset: ", parser.parserError as Any)
                 #endif
                 return
             }
         } else {
             #if DEBUG
-            print("PEMTmxTileSet: External tileset file not found: \(externalSource ?? "-")")
+            print("PEMTileSet: External tileset file not found: \(externalSource ?? "-")")
             #endif
             return
         }
     }
 
-    func tileFor(gid: UInt32) -> PEMTmxTile? {
+    func tileFor(gid: UInt32) -> PEMTile? {
         return tileFor(id: gid - firstGid)
     }
     
-    func tileFor(id: UInt32) -> PEMTmxTile? {
+    func tileFor(id: UInt32) -> PEMTile? {
         if let tileData = tileData.filter({ $0.id == id }).first {
             if tileSetType == .spriteSheet && tileData.texture == nil {
                 tileData.texture = spriteSheet?.generateTextureFor(tileData: tileData)
             }
             
-            return PEMTmxTile(tileData: tileData)
+            return PEMTile(tileData: tileData)
         }
         
         if let newTileData = spriteSheet?.createTileData(id: id) {
             newTileData.texture = spriteSheet?.generateTextureFor(tileData: newTileData)
             tileData.append(newTileData)
             
-            return PEMTmxTile(tileData: newTileData)
+            return PEMTile(tileData: newTileData)
         }
         
         #if DEBUG
-        print("PEMTmxTileSet: no tile found with id: \(id) in tileSet: \(self)")
+        print("PEMTileSet: no tile found with id: \(id) in tileSet: \(self)")
         #endif
         
         return nil
@@ -205,15 +205,15 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
         return idRange ~=  gid - firstGid
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
     // MARK: - Private
     
-    private func tileDataFor(id: UInt32) -> PEMTmxTileData? {
+    private func tileDataFor(id: UInt32) -> PEMTileData? {
         return tileData.filter({ $0.id == id }).first
     }
     
@@ -221,7 +221,7 @@ class PEMTmxTileSet: NSObject, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSet: \(name ?? "-"), (type: \(tileSetType), file: \(externalSource ?? "-"), firstGid: \(firstGid), firstId: \(firstId), lastId: \(lastId))"
+        return "PEMTileSet: \(name ?? "-"), (type: \(tileSetType), file: \(externalSource ?? "-"), firstGid: \(firstGid), firstId: \(firstId), lastId: \(lastId))"
     }
     #endif
 }

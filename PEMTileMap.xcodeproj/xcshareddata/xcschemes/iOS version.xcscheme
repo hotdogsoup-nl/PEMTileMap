@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "207D3DB42812AD5700FC4C77"
-               BuildableName = "PEMTmxMap Demo.app"
+               BuildableName = "PEMTileMap Demo.app"
                BlueprintName = "iOS version"
-               ReferencedContainer = "container:PEMTmxMap.xcodeproj">
+               ReferencedContainer = "container:PEMTileMap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "207D3DB42812AD5700FC4C77"
-            BuildableName = "PEMTmxMap Demo.app"
+            BuildableName = "PEMTileMap Demo.app"
             BlueprintName = "iOS version"
-            ReferencedContainer = "container:PEMTmxMap.xcodeproj">
+            ReferencedContainer = "container:PEMTileMap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "207D3DB42812AD5700FC4C77"
-            BuildableName = "PEMTmxMap Demo.app"
+            BuildableName = "PEMTileMap Demo.app"
             BlueprintName = "iOS version"
-            ReferencedContainer = "container:PEMTmxMap.xcodeproj">
+            ReferencedContainer = "container:PEMTileMap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -5,7 +5,7 @@ internal enum DrawOrder: String {
     case topDown = "topdown"
 }
 
-class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
+class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     private (set) var properties: Dictionary<String, Any>?
     private (set) var opacity = CGFloat(1.0)
     private (set) var visible = true
@@ -17,12 +17,12 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     private var groupName: String?
     private var drawOrder = DrawOrder.topDown
     
-    internal var objects: [PEMTmxObjectData] = []
-    private var parentGroup: PEMTmxGroup?
+    internal var objects: [PEMObjectData] = []
+    private var parentGroup: PEMGroup?
     
-    weak var map : PEMTmxMap?
+    weak var map : PEMTileMap?
 
-    init?(attributes: Dictionary<String, String>, map: PEMTmxMap?, group: PEMTmxGroup?) {
+    init?(attributes: Dictionary<String, String>, map: PEMTileMap?, group: PEMGroup?) {
         super.init()
 
         self.map = map
@@ -60,7 +60,7 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
                 drawOrder = groupRenderOrder
             } else {
                 #if DEBUG
-                print("PEMTmxObjectGroup: unsupported draw order: \(String(describing: value))")
+                print("PEMObjectGroup: unsupported draw order: \(String(describing: value))")
                 #endif
             }
         }
@@ -84,8 +84,8 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
     
     // MARK: - Setup
         
-    func addObjectData(attributes: Dictionary<String, String>) -> PEMTmxObjectData? {
-        if let objectData = PEMTmxObjectData(attributes: attributes) {
+    func addObjectData(attributes: Dictionary<String, String>) -> PEMObjectData? {
+        if let objectData = PEMObjectData(attributes: attributes) {
             objects.append(objectData)
             return objectData
         }
@@ -215,9 +215,9 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
         }
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
@@ -265,7 +265,7 @@ class PEMTmxObjectGroup: SKNode, PEMTmxPropertiesProtocol {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxObjectGroup: \(id), (name: \(groupName ?? "-"), parent: \(String(describing: parentGroup)), objects: \(objects.count))"
+        return "PEMObjectGroup: \(id), (name: \(groupName ?? "-"), parent: \(String(describing: parentGroup)), objects: \(objects.count))"
     }
     #endif
 }

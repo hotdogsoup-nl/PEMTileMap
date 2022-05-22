@@ -47,7 +47,7 @@ internal enum MapStaggerIndex: String {
     case odd = "odd"
 }
 
-public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
+public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     public private (set) var mapSizeInPoints = CGSize.zero
     public private (set) var backgroundColor: SKColor?
     public private (set) var cameraNode: SKCameraNode
@@ -84,7 +84,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     private var baseZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
     
-    internal var tileSets: [PEMTmxTileSet] = []
+    internal var tileSets: [PEMTileSet] = []
     internal var layers: [AnyObject] = []
     
     private var cameraViewMode = CameraViewMode.none
@@ -107,13 +107,13 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         #endif
     }
 
-    /// Load a **TMX** tilemap file and return a new `PEMTmxMap` node. Returns nil if the file could not be read or parsed.
+    /// Load a **TMX** tilemap file and return a new `PEMTileMap` node. Returns nil if the file could not be read or parsed.
     /// - Parameters:
     ///     - mapName : TMX file name.
     ///     - baseZPosition : Base zPosition for the node. Default is 0.
     ///     - zPositionLayerDelta : Delta for the zPosition of each layer node. Default is 20.
     ///     - textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
-    /// - returns: A `PEMTmxMap` node if the TMX file could be parsed succesfully.
+    /// - returns: A `PEMTileMap` node if the TMX file could be parsed succesfully.
     public init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest, showObjectGroups: Bool = false) {
         cameraNode = SKCameraNode()
 
@@ -127,13 +127,13 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
            let parser = PEMTmxParser(map: self, fileURL: url) {
             if (!parser.parse()) {
                 #if DEBUG
-                print("PEMTmxMap: Error parsing map: ", parser.parserError as Any)
+                print("PEMTileMap: Error parsing map: ", parser.parserError as Any)
                 #endif
                 return nil
             }
         } else {
             #if DEBUG
-            print("PEMTmxMap: Map file not found: \(mapName)")
+            print("PEMTileMap: Map file not found: \(mapName)")
             #endif
             return nil
         }
@@ -180,7 +180,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
             orientation = mapOrientation
         } else {
             #if DEBUG
-            print("PEMTmxMap: unsupported map orientation: \(String(describing: orientationValue))")
+            print("PEMTileMap: unsupported map orientation: \(String(describing: orientationValue))")
             #endif
         }
         
@@ -189,7 +189,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
                 renderOrder = mapRenderOrder
             } else {
                 #if DEBUG
-                print("PEMTmxMap: unsupported map render order: \(String(describing: value))")
+                print("PEMTileMap: unsupported map render order: \(String(describing: value))")
                 #endif
             }
         }
@@ -210,7 +210,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
                 staggerAxis = mapStaggerAxis
             } else {
                 #if DEBUG
-                print("PEMTmxMap: unsupported map stagger axis: \(String(describing: value))")
+                print("PEMTileMap: unsupported map stagger axis: \(String(describing: value))")
                 #endif
             }
         }
@@ -220,7 +220,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
                 staggerIndex = mapStaggerIndex
             } else {
                 #if DEBUG
-                print("PEMTmxMap: unsupported map stagger index: \(String(describing: value))")
+                print("PEMTileMap: unsupported map stagger index: \(String(describing: value))")
                 #endif
             }
         }
@@ -250,15 +250,15 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         }
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
     // MARK: - Map objects
         
-    func tileSetFor(gid: UInt32) -> PEMTmxTileSet? {
+    func tileSetFor(gid: UInt32) -> PEMTileSet? {
         let tileAttributes = tileAttributes(fromId: gid)
 
         for tileSet in tileSets {
@@ -268,7 +268,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
         }
         
         #if DEBUG
-        print("PEMTmxMap: no tileSet found for tile with gid: \(gid)")
+        print("PEMTileMap: no tileSet found for tile with gid: \(gid)")
         #endif
 
         return nil
@@ -387,7 +387,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     
     private func renderLayers() {
         for layer in layers {
-            if let tileLayer = layer as? PEMTmxTileLayer {
+            if let tileLayer = layer as? PEMTileLayer {
                 if tileLayer.visible {
                     currentZPosition += zPositionLayerDelta
 
@@ -403,7 +403,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
                 continue
             }
 
-            if let imageLayer = layer as? PEMTmxImageLayer {
+            if let imageLayer = layer as? PEMImageLayer {
                 if imageLayer.visible {
                     currentZPosition += zPositionLayerDelta
                     
@@ -419,7 +419,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
             }
 
             if showObjectGroups {
-                if let objectLayer = layer as? PEMTmxObjectGroup {
+                if let objectLayer = layer as? PEMObjectGroup {
                     if objectLayer.visible {
                         currentZPosition += zPositionLayerDelta
                         
@@ -441,7 +441,7 @@ public class PEMTmxMap: SKNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     public override var description: String {
-        return "PEMTmxMap: \(mapSource ?? "-") (layers: \(layers.count), tileSets: \(tileSets.count))"
+        return "PEMTileMap: \(mapSource ?? "-") (layers: \(layers.count), tileSets: \(tileSets.count))"
     }
     #endif
 }

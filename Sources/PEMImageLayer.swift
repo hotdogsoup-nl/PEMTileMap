@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxImageLayer: SKSpriteNode, PEMTmxPropertiesProtocol {
+class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
     private (set) var visible = true
     private (set) var properties: Dictionary<String, Any>?
 
@@ -17,11 +17,11 @@ class PEMTmxImageLayer: SKSpriteNode, PEMTmxPropertiesProtocol {
     private var repeatX = false
     private var repeatY = false
     
-    private var parentGroup: PEMTmxGroup?
+    private var parentGroup: PEMGroup?
 
     // MARK: - Init
 
-    init(attributes: Dictionary<String, String>, group: PEMTmxGroup?) {
+    init(attributes: Dictionary<String, String>, group: PEMGroup?) {
         super.init(texture: nil, color: .clear, size: .zero)
         
         parentGroup = group
@@ -153,9 +153,9 @@ class PEMTmxImageLayer: SKSpriteNode, PEMTmxPropertiesProtocol {
         textureImageSource = source
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
@@ -187,7 +187,7 @@ class PEMTmxImageLayer: SKSpriteNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxImageLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)))"
+        return "PEMImageLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)))"
     }
     #endif
 }

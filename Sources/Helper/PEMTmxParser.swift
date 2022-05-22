@@ -92,8 +92,8 @@ enum ElementAttributes: String {
     case y = "y"
 }
 
-protocol PEMTmxPropertiesProtocol {
-    func addProperties(_ newProperties: [PEMTmxProperty])
+protocol PEMTileMapPropertiesProtocol {
+    func addProperties(_ newProperties: [PEMProperty])
 }
 
 class PEMTmxParser: XMLParser, XMLParserDelegate {
@@ -114,11 +114,11 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case tsx
     }
     
-    private weak var currentMap: PEMTmxMap?
-    private weak var currentTileSet: PEMTmxTileSet?
+    private weak var currentMap: PEMTileMap?
+    private weak var currentTileSet: PEMTileSet?
 
     private var currentFileType: ParseFileType
-    private var currentProperties: [PEMTmxProperty]?
+    private var currentProperties: [PEMProperty]?
     private var currentParseString: String = ""
     private var elementPath: [AnyObject] = []
     private var dataEncoding: DataEncoding?
@@ -126,7 +126,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
     
     // MARK: - Init
     
-    init?(map: PEMTmxMap, fileURL: URL) {
+    init?(map: PEMTileMap, fileURL: URL) {
         currentFileType = .tmx
         currentMap = map
 
@@ -144,7 +144,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         shouldResolveExternalEntities = false        
     }
     
-    init?(tileSet: PEMTmxTileSet, fileURL: URL) {
+    init?(tileSet: PEMTileSet, fileURL: URL) {
         currentFileType = .tsx
         currentTileSet = tileSet
 
@@ -196,7 +196,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.tileSet.rawValue :
             switch currentFileType {
             case .tmx:
-                if let tileSet = PEMTmxTileSet(attributes: attributeDict) {
+                if let tileSet = PEMTileSet(attributes: attributeDict) {
                     currentMap?.tileSets.append(tileSet)
                     elementPath.append(tileSet)
                 }
@@ -205,29 +205,29 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
                 elementPath.append(currentTileSet!)
             }
         case Elements.layer.rawValue:
-            let currentGroup = elementPath.last as? PEMTmxGroup
-            if let tileLayer = PEMTmxTileLayer(attributes: attributeDict, map:currentMap, group:currentGroup) {
+            let currentGroup = elementPath.last as? PEMGroup
+            if let tileLayer = PEMTileLayer(attributes: attributeDict, map:currentMap, group:currentGroup) {
                 currentMap?.layers.append(tileLayer)
                 elementPath.append(tileLayer)
                 break
             }
             abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.objectGroup.rawValue:
-            let currentGroup = elementPath.last as? PEMTmxGroup
-            if let groupLayer = PEMTmxObjectGroup(attributes: attributeDict, map:currentMap, group:currentGroup) {
+            let currentGroup = elementPath.last as? PEMGroup
+            if let groupLayer = PEMObjectGroup(attributes: attributeDict, map:currentMap, group:currentGroup) {
                 currentMap?.layers.append(groupLayer)
                 elementPath.append(groupLayer)
                 break
             }
             abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.imageLayer.rawValue:
-            let currentGroup = elementPath.last as? PEMTmxGroup
-            let layer = PEMTmxImageLayer(attributes: attributeDict, group:currentGroup)
+            let currentGroup = elementPath.last as? PEMGroup
+            let layer = PEMImageLayer(attributes: attributeDict, group:currentGroup)
             currentMap?.layers.append(layer)
             elementPath.append(layer)
         case Elements.group.rawValue:
-            let currentGroup = elementPath.last as? PEMTmxGroup
-            if let group = PEMTmxGroup(attributes: attributeDict, group:currentGroup) {
+            let currentGroup = elementPath.last as? PEMGroup
+            if let group = PEMGroup(attributes: attributeDict, group:currentGroup) {
                 elementPath.append(group)
                 break
             }
@@ -239,23 +239,23 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
 
         // child elements
         case Elements.image.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxTileSet {
+            if let currentElement = elementPath.last as? PEMTileSet {
                 currentElement.setSpriteSheetImage(attributes: attributeDict)
                 break
             }
             
-            if let currentElement = elementPath.last as? PEMTmxTileData {
+            if let currentElement = elementPath.last as? PEMTileData {
                 currentElement.addTileImage(attributes: attributeDict)
                 break
             }
 
-            if let currentElement = elementPath.last as? PEMTmxImageLayer {
+            if let currentElement = elementPath.last as? PEMImageLayer {
                 currentElement.setImage(attributes: attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.tile.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxTileSet {
+            if let currentElement = elementPath.last as? PEMTileSet {
                 if let tileData = currentElement.addOrUpdateTileData(attributes: attributeDict) {
                     elementPath.append(tileData)
                 }
@@ -263,7 +263,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.animation.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxTileData {
+            if let currentElement = elementPath.last as? PEMTileData {
                 if let animation = currentElement.addAnimation() {
                     elementPath.append(animation)
                 }
@@ -271,7 +271,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.frame.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxTileAnimation {
+            if let currentElement = elementPath.last as? PEMTileAnimation {
                 currentElement.addAnimationFrame(attributes: attributeDict)
                 break
             }
@@ -299,18 +299,18 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
         case Elements.property.rawValue:
             currentParseString.removeAll()
-            if let property = PEMTmxProperty(attributes: attributeDict) {
+            if let property = PEMProperty(attributes: attributeDict) {
                 currentProperties?.append(property)
                 elementPath.append(property)
             }
         case Elements.tileOffset.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxTileSet {
+            if let currentElement = elementPath.last as? PEMTileSet {
                 currentElement.setTileOffset(attributes: attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.object.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxObjectGroup {
+            if let currentElement = elementPath.last as? PEMObjectGroup {
                 if let objectData = currentElement.addObjectData(attributes: attributeDict) {
                     elementPath.append(objectData)
                 }
@@ -318,25 +318,25 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.ellipse.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxObjectData {
+            if let currentElement = elementPath.last as? PEMObjectData {
                 currentElement.setObjectType(.ellipse)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.point.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxObjectData {
+            if let currentElement = elementPath.last as? PEMObjectData {
                 currentElement.setObjectType(.point)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.polygon.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxObjectData {
+            if let currentElement = elementPath.last as? PEMObjectData {
                 currentElement.setObjectType(.polygon, attributes: attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.polyline.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxObjectData {
+            if let currentElement = elementPath.last as? PEMObjectData {
                 currentElement.setObjectType(.polyline, attributes: attributeDict)
                 break
             }
@@ -344,7 +344,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.text.rawValue:
             currentParseString.removeAll()
 
-            if let currentElement = elementPath.last as? PEMTmxObjectData {
+            if let currentElement = elementPath.last as? PEMObjectData {
                 currentElement.setObjectType(.text, attributes: attributeDict)
                 break
             }
@@ -361,37 +361,37 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             
         // top level elements
         case Elements.map.rawValue:
-            if elementPath.last is PEMTmxMap {
+            if elementPath.last is PEMTileMap {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.tileSet.rawValue :
-            if elementPath.last is PEMTmxTileSet {
+            if elementPath.last is PEMTileSet {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.layer.rawValue:
-            if elementPath.last is PEMTmxTileLayer {
+            if elementPath.last is PEMTileLayer {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.objectGroup.rawValue:
-            if elementPath.last is PEMTmxObjectGroup {
+            if elementPath.last is PEMObjectGroup {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.imageLayer.rawValue:
-            if elementPath.last is PEMTmxImageLayer {
+            if elementPath.last is PEMImageLayer {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.group.rawValue:
-            if elementPath.last is PEMTmxGroup {
+            if elementPath.last is PEMGroup {
                 elementPath.removeLast()
                 break
             }
@@ -400,7 +400,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             if currentProperties == nil {
                 break
             }
-            if let currentElement = elementPath.last as? PEMTmxPropertiesProtocol {
+            if let currentElement = elementPath.last as? PEMTileMapPropertiesProtocol {
                 currentElement.addProperties(currentProperties!)
                 currentProperties = nil
                 break
@@ -416,13 +416,13 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.image.rawValue:
             break
         case Elements.tile.rawValue:
-            if elementPath.last is PEMTmxTileData {
+            if elementPath.last is PEMTileData {
                 elementPath.removeLast()
                 break
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.animation.rawValue:
-            if elementPath.last is PEMTmxTileAnimation {
+            if elementPath.last is PEMTileAnimation {
                 elementPath.removeLast()
                 break
             }
@@ -430,7 +430,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.frame.rawValue:
             break
         case Elements.data.rawValue:
-            guard let tileLayer = currentMap?.layers.last as? PEMTmxTileLayer else {
+            guard let tileLayer = currentMap?.layers.last as? PEMTileLayer else {
                 abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
                 break
             }
@@ -457,7 +457,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
                 parser.abortParsing()
             }
         case Elements.property.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxProperty {
+            if let currentElement = elementPath.last as? PEMProperty {
                 if currentParseString.count > 0 && currentElement.type == .string {
                     currentElement.setValue(currentParseString)
                 }
@@ -468,7 +468,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.tileOffset.rawValue:
             break
         case Elements.object.rawValue:
-            if elementPath.last is PEMTmxObjectData {
+            if elementPath.last is PEMObjectData {
                 elementPath.removeLast()
                 break
             }
@@ -482,7 +482,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.polyline.rawValue:
             break
         case Elements.text.rawValue:
-            if let currentElement = elementPath.last as? PEMTmxObjectData {
+            if let currentElement = elementPath.last as? PEMObjectData {
                 currentElement.setText(currentParseString)
                 break
             }

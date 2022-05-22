@@ -1,10 +1,10 @@
 import SpriteKit
 
-class PEMTmxTile: SKSpriteNode {
+class PEMTile: SKSpriteNode {
     var coords: CGPoint?
 
     private (set) var id = UInt32(0)
-    private (set) var animation: PEMTmxTileAnimation?
+    private (set) var animation: PEMTileAnimation?
     private (set) var properties: Dictionary<String, Any>?
 
     private var type: String?
@@ -12,7 +12,7 @@ class PEMTmxTile: SKSpriteNode {
 
     // MARK: - Init
     
-    init?(tileData: PEMTmxTileData) {
+    init?(tileData: PEMTileData) {
         if let texture = tileData.texture {
             super.init(texture: texture, color: .clear, size: texture.size())
             
@@ -101,7 +101,7 @@ class PEMTmxTile: SKSpriteNode {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTile: \(id), type: \(type ?? "-"), (\(Int(coords?.x ?? 0)), \(Int(coords?.y ?? 0)))"
+        return "PEMTile: \(id), type: \(type ?? "-"), (\(Int(coords?.x ?? 0)), \(Int(coords?.y ?? 0)))"
     }
     #endif
 }

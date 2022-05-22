@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTmxSpriteSheet: NSObject {
+class PEMSpriteSheet: NSObject {
     private (set) var firstId = UInt32(0)
     
     var lastId: UInt32 {
@@ -66,7 +66,7 @@ class PEMTmxSpriteSheet: NSObject {
             
             if textureImageSize!.width != CGFloat(Int(width)!) || textureImageSize!.height != CGFloat(Int(height)!) {
                 #if DEBUG
-                print("PEMTmxSpriteSheet: tileset <image> size mismatch: \(source)")
+                print("PEMSpriteSheet: tileset <image> size mismatch: \(source)")
                 #endif
             }
         }
@@ -84,17 +84,17 @@ class PEMTmxSpriteSheet: NSObject {
         
     // MARK: - Public
     
-    func createTileData(id: UInt32) -> PEMTmxTileData? {
+    func createTileData(id: UInt32) -> PEMTileData? {
         let tileAttributes = tileAttributes(fromId: id)
 
         if contains(id: tileAttributes.id) {
-            return PEMTmxTileData(id: id, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
+            return PEMTileData(id: id, textureImageSource: textureImageSource!, tileSizeInPoints: tileSizeInPoints)
         }
         
         return nil
     }
 
-    func generateTextureFor(tileData: PEMTmxTileData) -> SKTexture? {
+    func generateTextureFor(tileData: PEMTileData) -> SKTexture? {
         let tileAttributes = tileAttributes(fromId: tileData.id)
         
         let spriteSheetCoords = CGPoint(x: Int(rowFrom(id: tileAttributes.id)), y: Int(columnFrom(id: tileAttributes.id)))
@@ -126,7 +126,7 @@ class PEMTmxSpriteSheet: NSObject {
         
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileSetSpriteSheet: \(textureImageSource ?? "-"), (\(tilesPerColumn), \(tilesPerRow))"
+        return "PEMTileSetSpriteSheet: \(textureImageSource ?? "-"), (\(tilesPerColumn), \(tilesPerRow))"
     }
     #endif
 }

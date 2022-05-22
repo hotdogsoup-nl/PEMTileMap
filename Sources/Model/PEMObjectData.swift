@@ -25,7 +25,7 @@ enum TextVerticalAlignment: String {
     case top
 }
 
-class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
+class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var id = UInt32(0)
     private (set) var objectType = ObjectType.unknown
     private (set) var visible = true
@@ -147,7 +147,7 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
                 hAlign = alignment
             } else {
                 #if DEBUG
-                print("PEMTmxObjectData: unsupported horizontal alignment: \(String(describing: value))")
+                print("PEMObjectData: unsupported horizontal alignment: \(String(describing: value))")
                 #endif
             }
         }
@@ -157,7 +157,7 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
                 vAlign = alignment
             } else {
                 #if DEBUG
-                print("PEMTmxObjectData: unsupported vertical alignment: \(String(describing: value))")
+                print("PEMObjectData: unsupported vertical alignment: \(String(describing: value))")
                 #endif
             }
         }
@@ -178,9 +178,9 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
         self.text = text
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
@@ -188,7 +188,7 @@ class PEMTmxObjectData: NSObject, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxObjectData: \(id), (name: \(objectName ?? "-"), objectType: \(objectType))"
+        return "PEMObjectData: \(id), (name: \(objectName ?? "-"), objectType: \(objectType))"
     }
     #endif
 }

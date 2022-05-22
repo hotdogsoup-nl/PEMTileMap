@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
+class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     private (set) var visible = true
     private (set) var properties: Dictionary<String, Any>?
 
@@ -16,13 +16,13 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
     private var parallaxFactorY = CGFloat(1)
     
     internal var tileData: [UInt32] = []
-    private var parentGroup: PEMTmxGroup?
+    private var parentGroup: PEMGroup?
     
-    weak var map : PEMTmxMap?
+    weak var map : PEMTileMap?
     
     // MARK: - Init
 
-    init?(attributes: Dictionary<String, String>, map: PEMTmxMap?, group: PEMTmxGroup?) {
+    init?(attributes: Dictionary<String, String>, map: PEMTileMap?, group: PEMGroup?) {
         super.init()
         
         self.map = map
@@ -141,9 +141,9 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
         }
     }
     
-    // MARK: - PEMTmxPropertiesProtocol
+    // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMTmxProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
@@ -175,7 +175,7 @@ class PEMTmxTileLayer: SKNode, PEMTmxPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTmxTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles: \(children.count))"
+        return "PEMTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles: \(children.count))"
     }
     #endif
 }

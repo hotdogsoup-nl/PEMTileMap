@@ -10,7 +10,7 @@ enum PropertyType: String {
     case string = "string"
 }
 
-class PEMTmxProperty: NSObject {
+class PEMProperty: NSObject {
     private (set) var name: String
     private (set) var type = PropertyType.string
     private (set) var value: String?
@@ -27,7 +27,7 @@ class PEMTmxProperty: NSObject {
                 type = propertyType
             } else {
                 #if DEBUG
-                print("PEMTmxProperty: unsupported property type: \(String(describing: value))")
+                print("PEMProperty: unsupported property type: \(String(describing: value))")
                 #endif
             }
         }
@@ -53,7 +53,7 @@ class PEMTmxProperty: NSObject {
 
     #if DEBUG
     override var description: String {
-        return "PEMTmxProperty: name: \(name), (type: \(type), value: \(value ?? "-"))"
+        return "PEMProperty: name: \(name), (type: \(type), value: \(value ?? "-"))"
     }
     #endif
 }
