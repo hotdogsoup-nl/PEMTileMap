@@ -335,12 +335,16 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         } else {
             if viewMode == .left || viewMode == .topLeft || viewMode == .bottomLeft {
                 newPosition.x = sceneSize.width * 0.5 * factor * newScale + mapSizeInPoints.width * -0.5
+            } else if viewMode == .top || viewMode == .bottom {
+                newPosition.x = 0
             } else if viewMode == .right || viewMode == .topRight || viewMode == .bottomRight {
                 newPosition.x = sceneSize.width * -0.5 * factor * newScale + mapSizeInPoints.width * 0.5
             }
             
             if viewMode == .top || viewMode == .topLeft || viewMode == .topRight {
                 newPosition.y = sceneSize.height * -0.5 * factor * newScale + mapSizeInPoints.height * 0.5
+            } else if viewMode == .left || viewMode == .right {
+                newPosition.y = 0
             } else if viewMode == .bottom || viewMode == .bottomLeft || viewMode == .bottomRight {
                 newPosition.y = sceneSize.height * 0.5 * factor * newScale + mapSizeInPoints.height * -0.5
             }
