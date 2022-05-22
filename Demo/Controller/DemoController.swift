@@ -1,5 +1,6 @@
 import Foundation
 import SpriteKit
+
 #if os(macOS)
 import Cocoa
 #else
@@ -29,7 +30,6 @@ public class DemoController: NSObject {
     
     private func loadGameScene() {
         DispatchQueue.main.async { [unowned self] in
-            
             let nextScene = DemoScene(view: skView, size: skView.bounds.size)
             nextScene.scaleMode = .aspectFill
             
@@ -43,10 +43,8 @@ public class DemoController: NSObject {
     // MARK: - View
     
     #if os(macOS)
-
     public func windowDidResize() {
         currentScene?.didChangeSize()
     }
-
     #endif
 }
