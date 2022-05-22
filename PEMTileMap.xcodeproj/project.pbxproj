@@ -698,13 +698,15 @@
 			children = (
 				20584B49283A2A1C00B38F37 /* logo.png */,
 			);
-			path = Doc;
+			name = Doc;
+			path = Demo/Doc;
 			sourceTree = SOURCE_ROOT;
 		};
 		206E238C282667640039C4FE /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				204662DF281BE8CF00F3635B /* Define.swift */,
+				20584B48283A2A1C00B38F37 /* Doc */,
 				20B32969283952810082CE8B /* Sources */,
 				20CA13A028181D5000797A7C /* Assets */,
 				20C9979428227A7D00EEBDE0 /* Scenes */,
@@ -829,7 +831,6 @@
 		20CA13A028181D5000797A7C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				20584B48283A2A1C00B38F37 /* Doc */,
 				20FAF0042837A67500BEFA8E /* Maps */,
 			);
 			path = Assets;
