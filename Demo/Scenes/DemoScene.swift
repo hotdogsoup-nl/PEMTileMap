@@ -131,6 +131,9 @@ class DemoScene: SKScene {
     }
     
     func removeMap() {
+        cameraNode.position = .zero
+        cameraNode.xScale = 1
+        cameraNode.yScale = 1
         currentMapNameLabel?.text = "..."
         map?.removeFromParent()
         map = nil

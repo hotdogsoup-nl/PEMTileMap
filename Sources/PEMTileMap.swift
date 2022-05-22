@@ -310,7 +310,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 break
             }
             
-            newScale = round(1.0 / contentScale / factor)
+            newScale = (1.0 / contentScale / factor * 100).rounded() / 100
             
             let zoomAction = SKAction.scale(to: newScale, duration: duration)
             cameraNode?.run(zoomAction)
