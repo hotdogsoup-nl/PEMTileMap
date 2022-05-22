@@ -20,13 +20,13 @@ class DemoScene: SKScene {
     private var maps =
     
     // "TestMaps" folder
-//    [
-//        "level1.tmx",
-//        "level2.tmx",
-//        "level3.tmx",
-//        "level4.tmx",
-//        "level5.tmx",
-//    ]
+    [
+        "level1.tmx",
+        "level2.tmx",
+        "level3.tmx",
+        "level4.tmx",
+        "level5.tmx",
+    ]
     
 //    // "Maps" folder
 //    [
@@ -45,20 +45,20 @@ class DemoScene: SKScene {
 //    ]
     
     // "Tiled Examples" folder
-    [
-        "sewers.tmx",
-        "sandbox.tmx",
-        "sandbox2.tmx",
-        "island.tmx",
-        "forest.tmx",
-        "desert.tmx",
-        "orthogonal-outside.tmx",
-        "hexagonal-mini.tmx",
-        "isometric_grass_and_water.tmx",
-        "isometric_staggered_grass_and_water.tmx",
-        "perspective_walls.tmx",
-        "test_hexagonal_tile_60x60x30.tmx",
-    ]
+//    [
+//        "sewers.tmx",
+//        "sandbox.tmx",
+//        "sandbox2.tmx",
+//        "island.tmx",
+//        "forest.tmx",
+//        "desert.tmx",
+//        "orthogonal-outside.tmx",
+//        "hexagonal-mini.tmx",
+//        "isometric_grass_and_water.tmx",
+//        "isometric_staggered_grass_and_water.tmx",
+//        "perspective_walls.tmx",
+//        "test_hexagonal_tile_60x60x30.tmx",
+//    ]
 
     private var previousUpdateTime = TimeInterval(0)
     private var doorOpened = false
