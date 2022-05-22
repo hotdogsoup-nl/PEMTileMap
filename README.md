@@ -53,6 +53,9 @@ I also made a [modern Swift version of the SuperKoalio game][superkoalio-project
 - [ ] parallax scroll
 - [ ] anti-tearing (removing tear lines between tiles)
 - [ ] Touch, Mouse, Keyboard control
+  
+## License
+Licensed under the [MIT license](license.md).
 
 [tmx-map-url]:https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#
 [tiled-url]:http://www.mapeditor.org
