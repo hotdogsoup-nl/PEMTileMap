@@ -318,16 +318,14 @@ class DemoScene: SKScene {
     }
 
     private func touchMovedToPoint(_ pos: CGPoint) {
-        if buttonTapped {
-            return
-        }
+        guard !buttonTapped else { return }
 
-        let delta = CGPointSubtract(initalTouchLocation, pos)
-        cameraNode.position = CGPointAdd(cameraNode.position, delta)
+        let delta = initalTouchLocation.subtract(pos)
+        cameraNode.position = cameraNode.position.add(delta)
     }
 
     private func touchUpAtPoint(_ pos: CGPoint) {
-        if buttonTapped {
+        guard !buttonTapped else {
             buttonTapped = false
             return
         }
