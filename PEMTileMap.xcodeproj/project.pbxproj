@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2014E98728169C4500A12253 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
-		2014E98828169C4500A12253 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
-		2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
-		2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
 		2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5D528258C4900E13452 /* AppDelegate.swift */; };
 		2037A5DE28258C4900E13452 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5DD28258C4900E13452 /* GameViewController.swift */; };
 		2037A5E128258C4900E13452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5DF28258C4900E13452 /* Main.storyboard */; };
@@ -19,8 +15,6 @@
 		2037A5EB28258D9D00E13452 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		2037A5EC28258DA000E13452 /* DemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DAF2812AD5600FC4C77 /* DemoScene.swift */; };
 		2037A5EE28258DA500E13452 /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
-		2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98628169C4500A12253 /* MathHelper.swift */; };
-		2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */; };
 		2037A5F828258E0700E13452 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
@@ -459,8 +453,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2014E98628169C4500A12253 /* MathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
-		2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLayoutHelper.swift; sourceTree = "<group>"; };
 		2037A5D328258C4800E13452 /* PEMTileMap Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEMTileMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037A5D528258C4900E13452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -646,15 +638,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2014E98A28169C5300A12253 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				2014E98628169C4500A12253 /* MathHelper.swift */,
-				2014E98B2816B50800A12253 /* ScreenLayoutHelper.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		2037A5D428258C4900E13452 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,7 +694,6 @@
 				20CA13A028181D5000797A7C /* Assets */,
 				20C9979428227A7D00EEBDE0 /* Scenes */,
 				20CA139C2818160800797A7C /* Controller */,
-				2014E98A28169C5300A12253 /* Helper */,
 				207D3DB02812AD5700FC4C77 /* Assets.xcassets */,
 				20CA158128181D8700797A7C /* Colors.xcassets */,
 				207D3DB72812AD5700FC4C77 /* iOS */,
@@ -1500,7 +1482,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2037A5F028258DAA00E13452 /* ScreenLayoutHelper.swift in Sources */,
 				20B329F8283953180082CE8B /* PEMObjectGroup.swift in Sources */,
 				2037A5EE28258DA500E13452 /* DemoController.swift in Sources */,
 				20B329DD283953180082CE8B /* PEMObjectData.swift in Sources */,
@@ -1523,7 +1504,6 @@
 				20B32A10283953180082CE8B /* PEMTmxParser.swift in Sources */,
 				20B329E3283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329FB283953180082CE8B /* PEMImageLayer.swift in Sources */,
-				2037A5EF28258DA800E13452 /* MathHelper.swift in Sources */,
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
 				20B32A0A283953180082CE8B /* PEMFontHelper.swift in Sources */,
@@ -1535,9 +1515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2014E98728169C4500A12253 /* MathHelper.swift in Sources */,
 				20B329F6283953180082CE8B /* PEMObjectGroup.swift in Sources */,
-				2014E98C2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
 				20B329DB283953180082CE8B /* PEMObjectData.swift in Sources */,
 				20B32A05283953180082CE8B /* Image+Extension.swift in Sources */,
 				20B329F3283953180082CE8B /* PEMTile.swift in Sources */,
@@ -1570,9 +1548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2014E98828169C4500A12253 /* MathHelper.swift in Sources */,
 				20B329F7283953180082CE8B /* PEMObjectGroup.swift in Sources */,
-				2014E98D2816B50800A12253 /* ScreenLayoutHelper.swift in Sources */,
 				20B329DC283953180082CE8B /* PEMObjectData.swift in Sources */,
 				20B32A06283953180082CE8B /* Image+Extension.swift in Sources */,
 				20B329F4283953180082CE8B /* PEMTile.swift in Sources */,
