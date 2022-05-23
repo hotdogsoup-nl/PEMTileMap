@@ -88,10 +88,6 @@ class DemoScene: SKScene {
         backgroundColor = SKColor(named: "Game-background")!
         camera = cameraNode
         addChild(cameraNode)
-        
-        
-//        skView.addGestureRecognizer(cameraPinched)
-//        cameraPinched.isEnabled = allowGestures
 
         addHud()
         loadMap()
@@ -135,7 +131,7 @@ class DemoScene: SKScene {
                 backgroundColor = .clear
             }
 
-            cameraNode.zPosition = newMap.highestZPosition + 1
+            cameraNode.zPosition = newMap.highestZPosition + 20
             newMap.cameraNode = cameraNode
             
             currentMapNameLabel?.text = mapName
@@ -420,7 +416,7 @@ extension DemoScene {
         if event.modifierFlags.contains(.shift) {
             guard event.scrollingDeltaY > 1 || event.scrollingDeltaY < -1 else { return }
 
-            var newScale = cameraNode.xScale + event.scrollingDeltaY * 0.0125
+            var newScale = cameraNode.xScale + event.scrollingDeltaY * 0.00625
             newScale = max(0.1, min(newScale, 20))
             cameraNode.xScale = newScale
             cameraNode.yScale = newScale
