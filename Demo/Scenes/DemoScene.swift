@@ -14,9 +14,10 @@ class DemoScene: SKScene {
     }
     
     private var map: PEMTileMap?
+    private var currentMapIndex = Int(17)
     private var currentMapNameLabel: SKLabelNode?
-    private var currentMapIndex = Int(0)
     private var renderTimeLabel: SKLabelNode?
+    private var externalLinkButton: SKSpriteNode?
 
     private var buttonTapped = false
 
@@ -53,6 +54,10 @@ class DemoScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("deinit: \(self)")
+    }
+    
     // MARK: - Control
 
     private func startControl() {
@@ -64,10 +69,18 @@ class DemoScene: SKScene {
         loadMap()
     }
     
-    deinit {
-        print("deinit: \(self)")
+    private func openExternalMapLink() {
+        let mapInfo = maps[currentMapIndex]
+        let mapURL = mapInfo["url"]
+        if let URL = URL(string: mapURL!) {
+            #if os(macOS)
+            NSWorkspace.shared.open(URL)
+            #else
+            UIApplication.shared.open(URL)
+            #endif
+        }
     }
-    
+        
     // MARK: - Map
 
     private func previousMap() {
@@ -95,10 +108,9 @@ class DemoScene: SKScene {
         let mapName = mapInfo["filename"]
         let mapTitle = mapInfo["title"]
         let mapAuthor = mapInfo["author"]
-//        let mapURL = mapInfo["url"]
         
         let textSize = size.width * 0.015
-        currentMapNameLabel?.attributedText = attributedString(String(format: "%@\ntitle: %@\nauthor: %@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSize)
+        currentMapNameLabel?.attributedText = attributedString(String(format: "%@\n\"%@\"\n%@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSize)
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
 
         if let newMap = PEMTileMap(mapName: mapName!) {
@@ -203,7 +215,7 @@ class DemoScene: SKScene {
         newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
         cameraNode.addChild(newButton)
         
-        let roundedBox = roundedBox(size: CGSize(width: size.width * 0.275, height: size.height * 0.125), fillColor: SKColor(white: 0, alpha: 0.5))
+        let roundedBox = roundedBox(size: CGSize(width: size.width * 0.275, height: size.height * 0.13), fillColor: SKColor(white: 0, alpha: 0.5))
         roundedBox.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - roundedBox.calculateAccumulatedFrame().size.height * 0.5 - margin)
         cameraNode.addChild(roundedBox)
         
@@ -211,6 +223,12 @@ class DemoScene: SKScene {
         currentMapNameLabel?.numberOfLines = 0
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
         roundedBox.addChild(currentMapNameLabel!)
+        
+        externalLinkButton = SKSpriteNode(texture: SKTexture(imageNamed: "link-icon"))
+        externalLinkButton?.size = CGSize(width: textSize * 1.25, height: textSize * 1.25)
+        externalLinkButton?.name = "externalLinkButton"
+        externalLinkButton?.position = CGPoint(x: roundedBox.calculateAccumulatedFrame().size.width * 0.5 - externalLinkButton!.size.width, y:textSize * -1.25)
+        roundedBox.addChild(externalLinkButton!)
         
         renderTimeLabel = SKLabelNode(text: " ...\n ...")
         renderTimeLabel?.numberOfLines = 0
@@ -301,6 +319,12 @@ class DemoScene: SKScene {
             if nodeName == "nextMapButton" || nodeParentName == "nextMapButton" {
                 buttonTapped = true
                 nextMap()
+                return
+            }
+            
+            if nodeName == "externalLinkButton" {
+                buttonTapped = true
+                openExternalMapLink()
                 return
             }
 

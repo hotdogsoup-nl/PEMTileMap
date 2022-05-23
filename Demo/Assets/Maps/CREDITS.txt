@@ -3,38 +3,3 @@ Many thanks to everyone making these maps!
 The map credits are shown on screen and contained in the file 'maps.plist'.
 
 If you feel your rights are infringed upon, or when information is missing, incorrect or incomplete, please contact me using the contact form on https://www.p-edge.nl
-
-
-==============
-Tiled Examples
-==============
-selected example maps from the Tiled Editor
-from https://github.com/mapeditor/tiled
-
-• sandbox.tmx
-unknown
-
-• sandbox2.tmx
-unknown
-
-• island.tmx
-unknown
-
-• orthogonal-outside.tmx
-unknown
-
-• hexagonal-mini.tmx
-unknown
-
-• isometric_grass_and_water.tmx
-unknown
-
-• isometric_staggered_grass_and_water.tmx
-unknown
-
-• perspective_walls.tmx
-unknown
-
-• test_hexagonal_tile_60x60x30.tmx
-unknown
-
