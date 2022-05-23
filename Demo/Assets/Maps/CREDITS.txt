@@ -1,42 +1,9 @@
 Many thanks to everyone making these maps!
 
+The map credits are shown on screen and contained in the file 'maps.plist'.
+
 If you feel your rights are infringed upon, or when information is missing, incorrect or incomplete, please contact me using the contact form on https://www.p-edge.nl
 
-============
-Example maps
-============
-
-• mylevel1.tmx
-by mieki256
-from https://opengameart.org/content/cave-tile-map-image
-
-• gameart2d-desert.tmx
-by GameArt2D
-from http://www.gameart2d.com/free-desert-platformer-tileset.html
-
-• MagicLand.tmx
-by Codemasters
-from https://github.com/jamesbowman/tiled-maps
-
-================
-SKTiled Examples
-from https://github.com/mfessenden/SKTiled
-================
-
-• dungeon-16x16.tmx:
-http://opengameart.org/content/dungeon-tileset
-
-• hex-65x65.tmx:
-http://opengameart.org/content/hexagon-tiles-93x
-
-• isometric-130x66.tmx:
-http://opengameart.org/content/isometric-city
-
-• roguelike-16x16.tmx:
-http://opengameart.org/content/roguelikerpg-pack-1700-tiles
-
-• staggered-64-33.tmx:
-unknown
 
 ==============
 Tiled Examples

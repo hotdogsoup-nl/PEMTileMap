@@ -34,13 +34,93 @@
 	</dict>
 	<dict>
 		<key>filename</key>
-		<string>dungeon-16x16</string>
+		<string>sandbox.tmx</string>
 		<key>title</key>
-		<string>Dungeon</string>
+		<string>Sandbox 1</string>
 		<key>author</key>
-		<string>from SKTiled examples</string>
+		<string>from Tiled examples</string>
 		<key>url</key>
-		<string>http://opengameart.org/content/dungeon-tileset</string>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>sandbox2.tmx</string>
+		<key>title</key>
+		<string>Sandbox 2</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>island.tmx</string>
+		<key>title</key>
+		<string>Island</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>orthogonal-outside.tmx</string>
+		<key>title</key>
+		<string>Orthogonal</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>hexagonal-mini.tmx</string>
+		<key>title</key>
+		<string>Hexgonal Mini</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>isometric_grass_and_water.tmx</string>
+		<key>title</key>
+		<string>Isometric Grass &amp; Water</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>isometric_staggered_grass_and_water.tmx</string>
+		<key>title</key>
+		<string>Staggered Grass &amp; Water</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>perspective_walls.tmx</string>
+		<key>title</key>
+		<string>Perspective Walls</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>test_hexagonal_tile_60x60x30.tmx</string>
+		<key>title</key>
+		<string>Hexogonal Tile</string>
+		<key>author</key>
+		<string>from Tiled examples</string>
+		<key>url</key>
+		<string>https://github.com/mapeditor/tiled</string>
 	</dict>
 	<dict>
 		<key>filename</key>
@@ -50,7 +130,7 @@
 		<key>author</key>
 		<string>from SKTiled examples</string>
 		<key>url</key>
-		<string>http://opengameart.org/content/dungeon-tileset</string>
+		<string>https://github.com/mfessenden/SKTiled</string>
 	</dict>
 	<dict>
 		<key>filename</key>
@@ -60,7 +140,7 @@
 		<key>author</key>
 		<string>from SKTiled examples</string>
 		<key>url</key>
-		<string>http://opengameart.org/content/hexagon-tiles-93x</string>
+		<string>https://github.com/mfessenden/SKTiled</string>
 	</dict>
 	<dict>
 		<key>filename</key>
@@ -70,7 +150,7 @@
 		<key>author</key>
 		<string>from SKTiled examples</string>
 		<key>url</key>
-		<string>http://opengameart.org/content/isometric-city</string>
+		<string>https://github.com/mfessenden/SKTiled</string>
 	</dict>
 	<dict>
 		<key>filename</key>
@@ -80,7 +160,7 @@
 		<key>author</key>
 		<string>from SKTiled examples</string>
 		<key>url</key>
-		<string>http://opengameart.org/content/roguelikerpg-pack-1700-tiles</string>
+		<string>https://github.com/mfessenden/SKTiled</string>
 	</dict>
 	<dict>
 		<key>filename</key>
@@ -90,7 +170,37 @@
 		<key>author</key>
 		<string>from SKTiled examples</string>
 		<key>url</key>
-		<string></string>
+		<string>https://github.com/mfessenden/SKTiled</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>superkoalio.tmx</string>
+		<key>title</key>
+		<string>Superkoalio</string>
+		<key>author</key>
+		<string>Jake Gundersen</string>
+		<key>url</key>
+		<string>https://www.raywenderlich.com/2554-sprite-kit-tutorial-how-to-make-a-platform-game-like-super-mario-brothers-part-1</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>level3.tmx</string>
+		<key>title</key>
+		<string>Level 3</string>
+		<key>author</key>
+		<string>hotdogsoup.nl</string>
+		<key>url</key>
+		<string>https://www.hotdogsoup.nl</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>level5.tmx</string>
+		<key>title</key>
+		<string>Level 5</string>
+		<key>author</key>
+		<string>hotdogsoup.nl</string>
+		<key>url</key>
+		<string>https://www.hotdogsoup.nl</string>
 	</dict>
 </array>
 </plist>

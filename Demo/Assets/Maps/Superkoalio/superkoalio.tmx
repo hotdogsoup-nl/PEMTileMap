@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="212" height="20" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#81c6ec" nextlayerid="5" nextobjectid="1">
- <tileset firstgid="1" name="tileSet" tilewidth="16" tileheight="16" tilecount="256" columns="16">
-  <image source="Tiles/tileSet.png" trans="fe80fe" width="256" height="256"/>
- </tileset>
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="212" height="20" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#81c6ec" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" source="tileSet.tsx"/>
  <layer id="1" name="background" width="212" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
