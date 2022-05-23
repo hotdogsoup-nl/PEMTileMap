@@ -23,21 +23,20 @@ class DemoScene: SKScene {
     private var maps =
     
     // "TestMaps" folder
-    [
-        "level1.tmx",
-        "level2.tmx",
-        "level3.tmx",
-        "level4.tmx",
-        "level5.tmx",
-    ]
+//    [
+//        "level1.tmx",
+//        "level2.tmx",
+//        "level3.tmx",
+//        "level4.tmx",
+//        "level5.tmx",
+//    ]
     
     // "Maps" folder
-//    [
-//        "mylevel1.tmx",
-//        "gameart2d-desert.tmx",
-//        "MagicLand.tmx",
-//    ]
-
+    [
+        "mylevel1.tmx",
+        "gameart2d-desert.tmx",
+        "MagicLand.tmx",
+    ]
     
     // "Tiled Examples" folder
 //    [
@@ -227,7 +226,7 @@ class DemoScene: SKScene {
         cameraNode.addChild(renderTimeLabel!)
                 
         var index = 0
-        let buttonTitles = ["Zoom Fit", "Zoom Fill", "No Zoom", "TopLeft", "Top", "TopRight", "Left", "Center", "Right", "BottomLeft", "Bottom", "BottomRight"]
+        let buttonTitles = ["Zoom Fit", "Zoom Fill", "Zoom 1:1", "TopLeft", "Top", "TopRight", "Left", "Center", "Right", "BottomLeft", "Bottom", "BottomRight"]
         buttonSize = buttonSize.scaled(0.8)
         textSize = textSize * 0.8
         for buttonTitle in buttonTitles {

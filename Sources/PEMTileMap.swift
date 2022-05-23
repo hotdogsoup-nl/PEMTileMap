@@ -289,7 +289,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
         guard cameraNode != nil else { return }
         
-        var newScale = cameraNode!.xScale
         
         if zoomMode != .none && mapSizeInPoints.width > 0 && mapSizeInPoints.height > 0 {
             let maxWidthScale = sceneSize.width / mapSizeInPoints.width
@@ -307,7 +306,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 break
             }
             
-            newScale = (1.0 / contentScale / factor * 100).rounded() / 100
+            let newScale = (1.0 / contentScale / factor * 100).rounded() / 100
             
             let zoomAction = SKAction.scale(to: newScale, duration: duration)
             cameraNode?.run(zoomAction)
@@ -320,23 +319,25 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         }
         
         if var newPosition = cameraNode?.position {
+            let cameraScale = cameraNode!.xScale
+
             if viewMode == .center {
                 newPosition = .zero
             } else {
                 if viewMode == .left || viewMode == .topLeft || viewMode == .bottomLeft {
-                    newPosition.x = sceneSize.width * 0.5 * factor * newScale + mapSizeInPoints.width * -0.5
+                    newPosition.x = sceneSize.width * 0.5 * factor * cameraScale + mapSizeInPoints.width * -0.5
                 } else if viewMode == .top || viewMode == .bottom {
                     newPosition.x = 0
                 } else if viewMode == .right || viewMode == .topRight || viewMode == .bottomRight {
-                    newPosition.x = sceneSize.width * -0.5 * factor * newScale + mapSizeInPoints.width * 0.5
+                    newPosition.x = sceneSize.width * -0.5 * factor * cameraScale + mapSizeInPoints.width * 0.5
                 }
                 
                 if viewMode == .top || viewMode == .topLeft || viewMode == .topRight {
-                    newPosition.y = sceneSize.height * -0.5 * factor * newScale + mapSizeInPoints.height * 0.5
+                    newPosition.y = sceneSize.height * -0.5 * factor * cameraScale + mapSizeInPoints.height * 0.5
                 } else if viewMode == .left || viewMode == .right {
                     newPosition.y = 0
                 } else if viewMode == .bottom || viewMode == .bottomLeft || viewMode == .bottomRight {
-                    newPosition.y = sceneSize.height * 0.5 * factor * newScale + mapSizeInPoints.height * -0.5
+                    newPosition.y = sceneSize.height * 0.5 * factor * cameraScale + mapSizeInPoints.height * -0.5
                 }
             }
                     
