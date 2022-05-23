@@ -94,6 +94,60 @@
 		20B32A14283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
 		20B32A15283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
 		20B32A16283953180082CE8B /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D7283953180082CE8B /* TimeInterval+Extension.swift */; };
+		20C32222283B62C200316B48 /* dungeon-16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CB283B62C200316B48 /* dungeon-16x16.png */; };
+		20C32223283B62C200316B48 /* dungeon-16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CB283B62C200316B48 /* dungeon-16x16.png */; };
+		20C32224283B62C200316B48 /* dungeon-16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CB283B62C200316B48 /* dungeon-16x16.png */; };
+		20C32225283B62C200316B48 /* dungeon-16x16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CC283B62C200316B48 /* dungeon-16x16.tmx */; };
+		20C32226283B62C200316B48 /* dungeon-16x16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CC283B62C200316B48 /* dungeon-16x16.tmx */; };
+		20C32227283B62C200316B48 /* dungeon-16x16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CC283B62C200316B48 /* dungeon-16x16.tmx */; };
+		20C32228283B62C200316B48 /* dungeon-16x16.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CD283B62C200316B48 /* dungeon-16x16.tsx */; };
+		20C32229283B62C200316B48 /* dungeon-16x16.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CD283B62C200316B48 /* dungeon-16x16.tsx */; };
+		20C3222A283B62C200316B48 /* dungeon-16x16.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CD283B62C200316B48 /* dungeon-16x16.tsx */; };
+		20C3222B283B62C200316B48 /* dungeon-16x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CE283B62C200316B48 /* dungeon-16x32.png */; };
+		20C3222C283B62C200316B48 /* dungeon-16x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CE283B62C200316B48 /* dungeon-16x32.png */; };
+		20C3222D283B62C200316B48 /* dungeon-16x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CE283B62C200316B48 /* dungeon-16x32.png */; };
+		20C3222E283B62C200316B48 /* dungeon-16x32.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CF283B62C200316B48 /* dungeon-16x32.tsx */; };
+		20C3222F283B62C200316B48 /* dungeon-16x32.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CF283B62C200316B48 /* dungeon-16x32.tsx */; };
+		20C32230283B62C200316B48 /* dungeon-16x32.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321CF283B62C200316B48 /* dungeon-16x32.tsx */; };
+		20C32231283B62C200316B48 /* dungeon-32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D0283B62C200316B48 /* dungeon-32x32.png */; };
+		20C32232283B62C200316B48 /* dungeon-32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D0283B62C200316B48 /* dungeon-32x32.png */; };
+		20C32233283B62C200316B48 /* dungeon-32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D0283B62C200316B48 /* dungeon-32x32.png */; };
+		20C32234283B62C200316B48 /* dungeon-32x32.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D1283B62C200316B48 /* dungeon-32x32.tsx */; };
+		20C32235283B62C200316B48 /* dungeon-32x32.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D1283B62C200316B48 /* dungeon-32x32.tsx */; };
+		20C32236283B62C200316B48 /* dungeon-32x32.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D1283B62C200316B48 /* dungeon-32x32.tsx */; };
+		20C32237283B62C200316B48 /* hex-65x65-65x230.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D2283B62C200316B48 /* hex-65x65-65x230.png */; };
+		20C32238283B62C200316B48 /* hex-65x65-65x230.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D2283B62C200316B48 /* hex-65x65-65x230.png */; };
+		20C32239283B62C200316B48 /* hex-65x65-65x230.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D2283B62C200316B48 /* hex-65x65-65x230.png */; };
+		20C3223A283B62C200316B48 /* hex-65x65.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D3283B62C200316B48 /* hex-65x65.tmx */; };
+		20C3223B283B62C200316B48 /* hex-65x65.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D3283B62C200316B48 /* hex-65x65.tmx */; };
+		20C3223C283B62C200316B48 /* hex-65x65.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D3283B62C200316B48 /* hex-65x65.tmx */; };
+		20C3223D283B62C200316B48 /* isometric-130x230.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D4283B62C200316B48 /* isometric-130x230.png */; };
+		20C3223E283B62C200316B48 /* isometric-130x230.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D4283B62C200316B48 /* isometric-130x230.png */; };
+		20C3223F283B62C200316B48 /* isometric-130x230.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D4283B62C200316B48 /* isometric-130x230.png */; };
+		20C32240283B62C200316B48 /* isometric-130x66.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D5283B62C200316B48 /* isometric-130x66.tmx */; };
+		20C32241283B62C200316B48 /* isometric-130x66.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D5283B62C200316B48 /* isometric-130x66.tmx */; };
+		20C32242283B62C200316B48 /* isometric-130x66.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D5283B62C200316B48 /* isometric-130x66.tmx */; };
+		20C32243283B62C200316B48 /* roguelike-16x16-anim.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D6283B62C200316B48 /* roguelike-16x16-anim.png */; };
+		20C32244283B62C200316B48 /* roguelike-16x16-anim.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D6283B62C200316B48 /* roguelike-16x16-anim.png */; };
+		20C32245283B62C200316B48 /* roguelike-16x16-anim.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D6283B62C200316B48 /* roguelike-16x16-anim.png */; };
+		20C32246283B62C200316B48 /* roguelike-16x16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D7283B62C200316B48 /* roguelike-16x16.tmx */; };
+		20C32247283B62C200316B48 /* roguelike-16x16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D7283B62C200316B48 /* roguelike-16x16.tmx */; };
+		20C32248283B62C200316B48 /* roguelike-16x16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D7283B62C200316B48 /* roguelike-16x16.tmx */; };
+		20C32249283B62C200316B48 /* roguelike-16x16.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D8283B62C200316B48 /* roguelike-16x16.tsx */; };
+		20C3224A283B62C200316B48 /* roguelike-16x16.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D8283B62C200316B48 /* roguelike-16x16.tsx */; };
+		20C3224B283B62C200316B48 /* roguelike-16x16.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D8283B62C200316B48 /* roguelike-16x16.tsx */; };
+		20C3224C283B62C200316B48 /* staggered-64x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D9283B62C200316B48 /* staggered-64x192.png */; };
+		20C3224D283B62C200316B48 /* staggered-64x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D9283B62C200316B48 /* staggered-64x192.png */; };
+		20C3224E283B62C200316B48 /* staggered-64x192.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321D9283B62C200316B48 /* staggered-64x192.png */; };
+		20C3224F283B62C200316B48 /* staggered-64x33.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321DA283B62C200316B48 /* staggered-64x33.tmx */; };
+		20C32250283B62C200316B48 /* staggered-64x33.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321DA283B62C200316B48 /* staggered-64x33.tmx */; };
+		20C32251283B62C200316B48 /* staggered-64x33.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20C321DA283B62C200316B48 /* staggered-64x33.tmx */; };
+		20C32252283B62C200316B48 /* staggered-paths-64x33.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321DB283B62C200316B48 /* staggered-paths-64x33.png */; };
+		20C32253283B62C200316B48 /* staggered-paths-64x33.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321DB283B62C200316B48 /* staggered-paths-64x33.png */; };
+		20C32254283B62C200316B48 /* staggered-paths-64x33.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C321DB283B62C200316B48 /* staggered-paths-64x33.png */; };
+		20C3241E283B696F00316B48 /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C3241D283B696F00316B48 /* maps.plist */; };
+		20C3241F283B696F00316B48 /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C3241D283B696F00316B48 /* maps.plist */; };
+		20C32420283B696F00316B48 /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C3241D283B696F00316B48 /* maps.plist */; };
 		20CA139B281815DD00797A7C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139A281815DD00797A7C /* GameViewController.swift */; };
 		20CA139E2818168600797A7C /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
 		20CA139F2818168600797A7C /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
@@ -105,18 +159,6 @@
 		20DB79A62837B4AD00F17FC7 /* mylevel1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */; };
 		20DB79A72837B4AD00F17FC7 /* mylevel1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */; };
 		20DB79A82837B4AD00F17FC7 /* mylevel1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */; };
-		20DB7C4F2837B97E00F17FC7 /* forest.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4B2837B97E00F17FC7 /* forest.tmx */; };
-		20DB7C502837B97E00F17FC7 /* forest.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4B2837B97E00F17FC7 /* forest.tmx */; };
-		20DB7C512837B97E00F17FC7 /* forest.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4B2837B97E00F17FC7 /* forest.tmx */; };
-		20DB7C522837B97E00F17FC7 /* forest.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4C2837B97E00F17FC7 /* forest.tsx */; };
-		20DB7C532837B97E00F17FC7 /* forest.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4C2837B97E00F17FC7 /* forest.tsx */; };
-		20DB7C542837B97E00F17FC7 /* forest.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4C2837B97E00F17FC7 /* forest.tsx */; };
-		20DB7C552837B97E00F17FC7 /* squirrel.license in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4D2837B97E00F17FC7 /* squirrel.license */; };
-		20DB7C562837B97E00F17FC7 /* squirrel.license in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4D2837B97E00F17FC7 /* squirrel.license */; };
-		20DB7C572837B97E00F17FC7 /* squirrel.license in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4D2837B97E00F17FC7 /* squirrel.license */; };
-		20DB7C582837B97E00F17FC7 /* squirrel.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4E2837B97E00F17FC7 /* squirrel.png */; };
-		20DB7C592837B97E00F17FC7 /* squirrel.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4E2837B97E00F17FC7 /* squirrel.png */; };
-		20DB7C5A2837B97E00F17FC7 /* squirrel.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C4E2837B97E00F17FC7 /* squirrel.png */; };
 		20DB7C602837B9ED00F17FC7 /* beach_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C5C2837B9ED00F17FC7 /* beach_tileset.png */; };
 		20DB7C612837B9ED00F17FC7 /* beach_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C5C2837B9ED00F17FC7 /* beach_tileset.png */; };
 		20DB7C622837B9ED00F17FC7 /* beach_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7C5C2837B9ED00F17FC7 /* beach_tileset.png */; };
@@ -396,12 +438,6 @@
 		20FAF0C52837AC2600BEFA8E /* buch-outdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0442837AC2600BEFA8E /* buch-outdoor.png */; };
 		20FAF0C62837AC2600BEFA8E /* buch-outdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0442837AC2600BEFA8E /* buch-outdoor.png */; };
 		20FAF0C72837AC2600BEFA8E /* buch-outdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0442837AC2600BEFA8E /* buch-outdoor.png */; };
-		20FAF0C82837AC2600BEFA8E /* desert.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0452837AC2600BEFA8E /* desert.tmx */; };
-		20FAF0C92837AC2600BEFA8E /* desert.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0452837AC2600BEFA8E /* desert.tmx */; };
-		20FAF0CA2837AC2600BEFA8E /* desert.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0452837AC2600BEFA8E /* desert.tmx */; };
-		20FAF0CB2837AC2600BEFA8E /* desert.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0462837AC2600BEFA8E /* desert.tsx */; };
-		20FAF0CC2837AC2600BEFA8E /* desert.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0462837AC2600BEFA8E /* desert.tsx */; };
-		20FAF0CD2837AC2600BEFA8E /* desert.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0462837AC2600BEFA8E /* desert.tsx */; };
 		20FAF0CE2837AC2600BEFA8E /* examples.tiled-project in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0472837AC2600BEFA8E /* examples.tiled-project */; };
 		20FAF0CF2837AC2600BEFA8E /* examples.tiled-project in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0472837AC2600BEFA8E /* examples.tiled-project */; };
 		20FAF0D02837AC2600BEFA8E /* examples.tiled-project in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0472837AC2600BEFA8E /* examples.tiled-project */; };
@@ -435,21 +471,12 @@
 		20FAF0F82837AC2600BEFA8E /* perspective_walls.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0562837AC2600BEFA8E /* perspective_walls.tsx */; };
 		20FAF0F92837AC2600BEFA8E /* perspective_walls.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0562837AC2600BEFA8E /* perspective_walls.tsx */; };
 		20FAF0FA2837AC2600BEFA8E /* perspective_walls.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0562837AC2600BEFA8E /* perspective_walls.tsx */; };
-		20FAF12B2837AC2600BEFA8E /* sewer_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0692837AC2600BEFA8E /* sewer_tileset.png */; };
-		20FAF12C2837AC2600BEFA8E /* sewer_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0692837AC2600BEFA8E /* sewer_tileset.png */; };
-		20FAF12D2837AC2600BEFA8E /* sewer_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0692837AC2600BEFA8E /* sewer_tileset.png */; };
-		20FAF12E2837AC2600BEFA8E /* sewers.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF06A2837AC2600BEFA8E /* sewers.tmx */; };
-		20FAF12F2837AC2600BEFA8E /* sewers.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF06A2837AC2600BEFA8E /* sewers.tmx */; };
-		20FAF1302837AC2600BEFA8E /* sewers.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF06A2837AC2600BEFA8E /* sewers.tmx */; };
 		20FAF22A2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C22837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.png */; };
 		20FAF22B2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C22837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.png */; };
 		20FAF22C2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C22837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.png */; };
 		20FAF22D2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */; };
 		20FAF22E2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */; };
 		20FAF22F2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */; };
-		20FAF2302837AC2700BEFA8E /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C42837AC2600BEFA8E /* tmw_desert_spacing.png */; };
-		20FAF2312837AC2700BEFA8E /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C42837AC2600BEFA8E /* tmw_desert_spacing.png */; };
-		20FAF2322837AC2700BEFA8E /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C42837AC2600BEFA8E /* tmw_desert_spacing.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -491,15 +518,29 @@
 		20B329D5283953180082CE8B /* PEMTmxParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxParser.swift; sourceTree = "<group>"; };
 		20B329D6283953180082CE8B /* SKColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKColor+Extension.swift"; sourceTree = "<group>"; };
 		20B329D7283953180082CE8B /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		20C321CB283B62C200316B48 /* dungeon-16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dungeon-16x16.png"; sourceTree = "<group>"; };
+		20C321CC283B62C200316B48 /* dungeon-16x16.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "dungeon-16x16.tmx"; sourceTree = "<group>"; };
+		20C321CD283B62C200316B48 /* dungeon-16x16.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "dungeon-16x16.tsx"; sourceTree = "<group>"; };
+		20C321CE283B62C200316B48 /* dungeon-16x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dungeon-16x32.png"; sourceTree = "<group>"; };
+		20C321CF283B62C200316B48 /* dungeon-16x32.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "dungeon-16x32.tsx"; sourceTree = "<group>"; };
+		20C321D0283B62C200316B48 /* dungeon-32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dungeon-32x32.png"; sourceTree = "<group>"; };
+		20C321D1283B62C200316B48 /* dungeon-32x32.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "dungeon-32x32.tsx"; sourceTree = "<group>"; };
+		20C321D2283B62C200316B48 /* hex-65x65-65x230.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hex-65x65-65x230.png"; sourceTree = "<group>"; };
+		20C321D3283B62C200316B48 /* hex-65x65.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "hex-65x65.tmx"; sourceTree = "<group>"; };
+		20C321D4283B62C200316B48 /* isometric-130x230.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "isometric-130x230.png"; sourceTree = "<group>"; };
+		20C321D5283B62C200316B48 /* isometric-130x66.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "isometric-130x66.tmx"; sourceTree = "<group>"; };
+		20C321D6283B62C200316B48 /* roguelike-16x16-anim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roguelike-16x16-anim.png"; sourceTree = "<group>"; };
+		20C321D7283B62C200316B48 /* roguelike-16x16.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "roguelike-16x16.tmx"; sourceTree = "<group>"; };
+		20C321D8283B62C200316B48 /* roguelike-16x16.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "roguelike-16x16.tsx"; sourceTree = "<group>"; };
+		20C321D9283B62C200316B48 /* staggered-64x192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "staggered-64x192.png"; sourceTree = "<group>"; };
+		20C321DA283B62C200316B48 /* staggered-64x33.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "staggered-64x33.tmx"; sourceTree = "<group>"; };
+		20C321DB283B62C200316B48 /* staggered-paths-64x33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "staggered-paths-64x33.png"; sourceTree = "<group>"; };
+		20C3241D283B696F00316B48 /* maps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = maps.plist; sourceTree = "<group>"; };
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		20CA139D2818168600797A7C /* DemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoController.swift; sourceTree = "<group>"; };
 		20CA158128181D8700797A7C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mylevel1_tiles.png; sourceTree = "<group>"; };
 		20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mylevel1.tmx; sourceTree = "<group>"; };
-		20DB7C4B2837B97E00F17FC7 /* forest.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = forest.tmx; sourceTree = "<group>"; };
-		20DB7C4C2837B97E00F17FC7 /* forest.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = forest.tsx; sourceTree = "<group>"; };
-		20DB7C4D2837B97E00F17FC7 /* squirrel.license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = squirrel.license; sourceTree = "<group>"; };
-		20DB7C4E2837B97E00F17FC7 /* squirrel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squirrel.png; sourceTree = "<group>"; };
 		20DB7C5C2837B9ED00F17FC7 /* beach_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beach_tileset.png; sourceTree = "<group>"; };
 		20DB7C5D2837B9ED00F17FC7 /* beach_tileset.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = beach_tileset.tsx; sourceTree = "<group>"; };
 		20DB7C5E2837B9ED00F17FC7 /* island.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = island.tmx; sourceTree = "<group>"; };
@@ -593,8 +634,6 @@
 		20FAF00D2837A67500BEFA8E /* CREDITS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CREDITS.txt; sourceTree = "<group>"; };
 		20FAF03A2837A68900BEFA8E /* Tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tiles; sourceTree = "<group>"; };
 		20FAF0442837AC2600BEFA8E /* buch-outdoor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buch-outdoor.png"; sourceTree = "<group>"; };
-		20FAF0452837AC2600BEFA8E /* desert.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = desert.tmx; sourceTree = "<group>"; };
-		20FAF0462837AC2600BEFA8E /* desert.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = desert.tsx; sourceTree = "<group>"; };
 		20FAF0472837AC2600BEFA8E /* examples.tiled-project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "examples.tiled-project"; sourceTree = "<group>"; };
 		20FAF04D2837AC2600BEFA8E /* hexagonal-mini.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "hexagonal-mini.tmx"; sourceTree = "<group>"; };
 		20FAF04E2837AC2600BEFA8E /* hexmini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hexmini.png; sourceTree = "<group>"; };
@@ -606,11 +645,8 @@
 		20FAF0542837AC2600BEFA8E /* perspective_walls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = perspective_walls.png; sourceTree = "<group>"; };
 		20FAF0552837AC2600BEFA8E /* perspective_walls.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = perspective_walls.tmx; sourceTree = "<group>"; };
 		20FAF0562837AC2600BEFA8E /* perspective_walls.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = perspective_walls.tsx; sourceTree = "<group>"; };
-		20FAF0692837AC2600BEFA8E /* sewer_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sewer_tileset.png; sourceTree = "<group>"; };
-		20FAF06A2837AC2600BEFA8E /* sewers.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sewers.tmx; sourceTree = "<group>"; };
 		20FAF0C22837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_hexagonal_tile_60x60x30.png; sourceTree = "<group>"; };
 		20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test_hexagonal_tile_60x60x30.tmx; sourceTree = "<group>"; };
-		20FAF0C42837AC2600BEFA8E /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -794,6 +830,30 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		20C321C9283B62C200316B48 /* SKTiled Examples */ = {
+			isa = PBXGroup;
+			children = (
+				20C321CB283B62C200316B48 /* dungeon-16x16.png */,
+				20C321CC283B62C200316B48 /* dungeon-16x16.tmx */,
+				20C321CD283B62C200316B48 /* dungeon-16x16.tsx */,
+				20C321CE283B62C200316B48 /* dungeon-16x32.png */,
+				20C321CF283B62C200316B48 /* dungeon-16x32.tsx */,
+				20C321D0283B62C200316B48 /* dungeon-32x32.png */,
+				20C321D1283B62C200316B48 /* dungeon-32x32.tsx */,
+				20C321D2283B62C200316B48 /* hex-65x65-65x230.png */,
+				20C321D3283B62C200316B48 /* hex-65x65.tmx */,
+				20C321D5283B62C200316B48 /* isometric-130x66.tmx */,
+				20C321D4283B62C200316B48 /* isometric-130x230.png */,
+				20C321D6283B62C200316B48 /* roguelike-16x16-anim.png */,
+				20C321D7283B62C200316B48 /* roguelike-16x16.tmx */,
+				20C321D8283B62C200316B48 /* roguelike-16x16.tsx */,
+				20C321DA283B62C200316B48 /* staggered-64x33.tmx */,
+				20C321D9283B62C200316B48 /* staggered-64x192.png */,
+				20C321DB283B62C200316B48 /* staggered-paths-64x33.png */,
+			);
+			path = "SKTiled Examples";
+			sourceTree = "<group>";
+		};
 		20C9979428227A7D00EEBDE0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,20 +873,10 @@
 		20CA13A028181D5000797A7C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				20FAEFC62837A66C00BEFA8E /* TestMaps */,
 				20FAF0042837A67500BEFA8E /* Maps */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		20DB7C4A2837B97E00F17FC7 /* forest */ = {
-			isa = PBXGroup;
-			children = (
-				20DB7C4B2837B97E00F17FC7 /* forest.tmx */,
-				20DB7C4C2837B97E00F17FC7 /* forest.tsx */,
-				20DB7C4D2837B97E00F17FC7 /* squirrel.license */,
-				20DB7C4E2837B97E00F17FC7 /* squirrel.png */,
-			);
-			path = forest;
 			sourceTree = "<group>";
 		};
 		20DB7C5B2837B9ED00F17FC7 /* rpg */ = {
@@ -948,11 +998,12 @@
 		20FAF0042837A67500BEFA8E /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				20C3241D283B696F00316B48 /* maps.plist */,
 				20FAF00D2837A67500BEFA8E /* CREDITS.txt */,
 				20584B45283A277100B38F37 /* GameArt2d */,
 				20584B46283A284A00B38F37 /* MagicLand */,
 				20584B47283A288D00B38F37 /* MyLevel1 */,
-				20FAEFC62837A66C00BEFA8E /* TestMaps */,
+				20C321C9283B62C200316B48 /* SKTiled Examples */,
 				20FAF0432837AC2600BEFA8E /* Tiled Examples */,
 			);
 			path = Maps;
@@ -962,10 +1013,7 @@
 			isa = PBXGroup;
 			children = (
 				20FAF0442837AC2600BEFA8E /* buch-outdoor.png */,
-				20FAF0452837AC2600BEFA8E /* desert.tmx */,
-				20FAF0462837AC2600BEFA8E /* desert.tsx */,
 				20FAF0472837AC2600BEFA8E /* examples.tiled-project */,
-				20DB7C4A2837B97E00F17FC7 /* forest */,
 				20FAF04D2837AC2600BEFA8E /* hexagonal-mini.tmx */,
 				20FAF04E2837AC2600BEFA8E /* hexmini.png */,
 				20FAF04F2837AC2600BEFA8E /* isometric_grass_and_water.png */,
@@ -977,12 +1025,9 @@
 				20FAF0552837AC2600BEFA8E /* perspective_walls.tmx */,
 				20FAF0562837AC2600BEFA8E /* perspective_walls.tsx */,
 				20DB7C5B2837B9ED00F17FC7 /* rpg */,
-				20FAF0692837AC2600BEFA8E /* sewer_tileset.png */,
-				20FAF06A2837AC2600BEFA8E /* sewers.tmx */,
 				20DB7C9D2837BABE00F17FC7 /* sticker-knight */,
 				20FAF0C22837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.png */,
 				20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */,
-				20FAF0C42837AC2600BEFA8E /* tmw_desert_spacing.png */,
 			);
 			path = "Tiled Examples";
 			sourceTree = "<group>";
@@ -1097,26 +1142,27 @@
 				20DB7D7A2837BABE00F17FC7 /* platformConnector2.png in Resources */,
 				20584B4C283A2A1C00B38F37 /* logo.png in Resources */,
 				20DB7D7D2837BABE00F17FC7 /* platformConnector3.png in Resources */,
-				20DB7C542837B97E00F17FC7 /* forest.tsx in Resources */,
-				20DB7C572837B97E00F17FC7 /* squirrel.license in Resources */,
 				20DB7DBF2837BABE00F17FC7 /* window3.png in Resources */,
 				20DB7CFF2837BABE00F17FC7 /* backgroundTower.png in Resources */,
 				20FAEFD92837A66C00BEFA8E /* Animated kanga.tsx in Resources */,
+				20C3222A283B62C200316B48 /* dungeon-16x16.tsx in Resources */,
 				20DB7D5C2837BABE00F17FC7 /* platform4.png in Resources */,
 				2037A5E128258C4900E13452 /* Main.storyboard in Resources */,
-				20FAF0CD2837AC2600BEFA8E /* desert.tsx in Resources */,
 				20DB7D742837BABE00F17FC7 /* platformBlock4.png in Resources */,
+				20C3224E283B62C200316B48 /* staggered-64x192.png in Resources */,
 				20FAEFDC2837A66C00BEFA8E /* animated1.png in Resources */,
-				20FAF12D2837AC2600BEFA8E /* sewer_tileset.png in Resources */,
 				20DB7D3B2837BABE00F17FC7 /* grassLarge.png in Resources */,
+				20C32236283B62C200316B48 /* dungeon-32x32.tsx in Resources */,
 				20DB7D532837BABE00F17FC7 /* platform1.png in Resources */,
 				20DB7D2C2837BABE00F17FC7 /* earthWall2.png in Resources */,
 				20FAF0F12837AC2600BEFA8E /* orthogonal-outside.tmx in Resources */,
 				2037A5EB28258D9D00E13452 /* Colors.xcassets in Resources */,
 				20DB7DBC2837BABE00F17FC7 /* window2.png in Resources */,
 				2037A5EA28258D9A00E13452 /* Assets.xcassets in Resources */,
+				20C32251283B62C200316B48 /* staggered-64x33.tmx in Resources */,
 				20DB79A52837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */,
 				20DB7DC82837BABE00F17FC7 /* sprites.png in Resources */,
+				20C32248283B62C200316B48 /* roguelike-16x16.tmx in Resources */,
 				20DB7C6B2837B9ED00F17FC7 /* readme.txt in Resources */,
 				20FAF0D02837AC2600BEFA8E /* examples.tiled-project in Resources */,
 				20DB7D472837BABE00F17FC7 /* keyGreenStroked.png in Resources */,
@@ -1139,21 +1185,20 @@
 				20FAEFF12837A66C00BEFA8E /* level4.tmx in Resources */,
 				20DB7DB32837BABE00F17FC7 /* wallDecor2.png in Resources */,
 				20DB7D952837BABE00F17FC7 /* shieldStroked.png in Resources */,
+				20C3222D283B62C200316B48 /* dungeon-16x32.png in Resources */,
 				20DB7D4A2837BABE00F17FC7 /* keyRedStroked.png in Resources */,
 				20FAF22C2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.png in Resources */,
 				20FAF0182837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
 				20DB7D9E2837BABE00F17FC7 /* swordStroked.png in Resources */,
 				20DB7D8C2837BABE00F17FC7 /* sandbox.tmx in Resources */,
 				20FAF0E22837AC2600BEFA8E /* hexmini.png in Resources */,
-				20DB7C512837B97E00F17FC7 /* forest.tmx in Resources */,
 				20FAF0EE2837AC2600BEFA8E /* objecttypes.xml in Resources */,
-				20FAF1302837AC2600BEFA8E /* sewers.tmx in Resources */,
 				20DB7DB62837BABE00F17FC7 /* wallDecor3.png in Resources */,
 				20DB7D622837BABE00F17FC7 /* platformBase2.png in Resources */,
-				20FAF0CA2837AC2600BEFA8E /* desert.tmx in Resources */,
 				20DB7D112837BABE00F17FC7 /* castleWall.png in Resources */,
 				20DB7C652837B9ED00F17FC7 /* beach_tileset.tsx in Resources */,
 				20DB7DC22837BABE00F17FC7 /* preview.png in Resources */,
+				20C3223F283B62C200316B48 /* isometric-130x230.png in Resources */,
 				20DB7D0B2837BABE00F17FC7 /* blue.png in Resources */,
 				20FAF0E52837AC2600BEFA8E /* isometric_grass_and_water.png in Resources */,
 				20FAF0272837A67500BEFA8E /* MagicLand.tmx in Resources */,
@@ -1165,14 +1210,16 @@
 				20DB7D592837BABE00F17FC7 /* platform3.png in Resources */,
 				20FAF0FA2837AC2600BEFA8E /* perspective_walls.tsx in Resources */,
 				20DB7D682837BABE00F17FC7 /* platformBase4.png in Resources */,
+				20C32233283B62C200316B48 /* dungeon-32x32.png in Resources */,
 				20DB7D202837BABE00F17FC7 /* doorGreenStroke.png in Resources */,
 				20FAF0152837A67500BEFA8E /* gameart2d-desert.png in Resources */,
 				20DB7D412837BABE00F17FC7 /* grey.png in Resources */,
 				20DB7DF02837BB4400F17FC7 /* templates in Resources */,
 				20DB7DB02837BABE00F17FC7 /* wallDecor1.png in Resources */,
 				20DB7CF92837BABE00F17FC7 /* backgroundArch.png in Resources */,
+				20C32254283B62C200316B48 /* staggered-paths-64x33.png in Resources */,
+				20C32224283B62C200316B48 /* dungeon-16x16.png in Resources */,
 				20FAEFE22837A66C00BEFA8E /* Collection.tsx in Resources */,
-				20FAF2322837AC2700BEFA8E /* tmw_desert_spacing.png in Resources */,
 				20DB7D382837BABE00F17FC7 /* gemRedStroked.png in Resources */,
 				20DB7D502837BABE00F17FC7 /* objs.tsx in Resources */,
 				20FAF0F72837AC2600BEFA8E /* perspective_walls.tmx in Resources */,
@@ -1183,15 +1230,20 @@
 				20DB7D6E2837BABE00F17FC7 /* platformBlock2.png in Resources */,
 				20DB7D562837BABE00F17FC7 /* platform2.png in Resources */,
 				20DB7D5F2837BABE00F17FC7 /* platformBase1.png in Resources */,
+				20C3224B283B62C200316B48 /* roguelike-16x16.tsx in Resources */,
 				20DB7DCB2837BABE00F17FC7 /* sticker-knight.world in Resources */,
 				20DB79A82837B4AD00F17FC7 /* mylevel1.tmx in Resources */,
 				20DB7D9B2837BABE00F17FC7 /* skeleton.png in Resources */,
+				20C3223C283B62C200316B48 /* hex-65x65.tmx in Resources */,
+				20C32420283B696F00316B48 /* maps.plist in Resources */,
 				20DB7D2F2837BABE00F17FC7 /* exit.png in Resources */,
+				20C32239283B62C200316B48 /* hex-65x65-65x230.png in Resources */,
 				20FAEFF72837A66D00BEFA8E /* objecttemplate.tx in Resources */,
-				20DB7C5A2837B97E00F17FC7 /* squirrel.png in Resources */,
 				20DB7C682837B9ED00F17FC7 /* island.tmx in Resources */,
 				20FAF0F42837AC2600BEFA8E /* perspective_walls.png in Resources */,
 				20DB7D802837BABE00F17FC7 /* platformConnector4.png in Resources */,
+				20C32245283B62C200316B48 /* roguelike-16x16-anim.png in Resources */,
+				20C32242283B62C200316B48 /* isometric-130x66.tmx in Resources */,
 				20FAF02A2837A67500BEFA8E /* magiclanddizzy_tiles.gif in Resources */,
 				20DB7D712837BABE00F17FC7 /* platformBlock3.png in Resources */,
 				20DB7D142837BABE00F17FC7 /* cloud.png in Resources */,
@@ -1199,6 +1251,7 @@
 				20DB7D862837BABE00F17FC7 /* pushBlock2.png in Resources */,
 				20DB7D082837BABE00F17FC7 /* blobGreen.png in Resources */,
 				20FAF02D2837A67500BEFA8E /* CREDITS.txt in Resources */,
+				20C32227283B62C200316B48 /* dungeon-16x16.tmx in Resources */,
 				20DB7DAD2837BABE00F17FC7 /* trap.png in Resources */,
 				20DB7DF42837BBD600F17FC7 /* ui in Resources */,
 				20FAF0DF2837AC2600BEFA8E /* hexagonal-mini.tmx in Resources */,
@@ -1207,6 +1260,7 @@
 				20DB7DB92837BABE00F17FC7 /* window1.png in Resources */,
 				20DB7CFC2837BABE00F17FC7 /* backgroundMountain.png in Resources */,
 				20DB7D3E2837BABE00F17FC7 /* grassSmall.png in Resources */,
+				20C32230283B62C200316B48 /* dungeon-16x32.tsx in Resources */,
 				20DB7D8F2837BABE00F17FC7 /* sandbox2.tmx in Resources */,
 				20DB7D652837BABE00F17FC7 /* platformBase3.png in Resources */,
 				20DB7D1A2837BABE00F17FC7 /* column2.png in Resources */,
@@ -1226,26 +1280,27 @@
 				20DB7D782837BABE00F17FC7 /* platformConnector2.png in Resources */,
 				20584B4A283A2A1C00B38F37 /* logo.png in Resources */,
 				20DB7D7B2837BABE00F17FC7 /* platformConnector3.png in Resources */,
-				20DB7C522837B97E00F17FC7 /* forest.tsx in Resources */,
-				20DB7C552837B97E00F17FC7 /* squirrel.license in Resources */,
 				20DB7DBD2837BABE00F17FC7 /* window3.png in Resources */,
 				20DB7CFD2837BABE00F17FC7 /* backgroundTower.png in Resources */,
 				20FAEFD72837A66C00BEFA8E /* Animated kanga.tsx in Resources */,
+				20C32228283B62C200316B48 /* dungeon-16x16.tsx in Resources */,
 				20DB7D5A2837BABE00F17FC7 /* platform4.png in Resources */,
 				207D3DBE2812AD5700FC4C77 /* Main.storyboard in Resources */,
-				20FAF0CB2837AC2600BEFA8E /* desert.tsx in Resources */,
 				20DB7D722837BABE00F17FC7 /* platformBlock4.png in Resources */,
+				20C3224C283B62C200316B48 /* staggered-64x192.png in Resources */,
 				20FAEFDA2837A66C00BEFA8E /* animated1.png in Resources */,
-				20FAF12B2837AC2600BEFA8E /* sewer_tileset.png in Resources */,
 				20DB7D392837BABE00F17FC7 /* grassLarge.png in Resources */,
+				20C32234283B62C200316B48 /* dungeon-32x32.tsx in Resources */,
 				20DB7D512837BABE00F17FC7 /* platform1.png in Resources */,
 				20DB7D2A2837BABE00F17FC7 /* earthWall2.png in Resources */,
 				20FAF0EF2837AC2600BEFA8E /* orthogonal-outside.tmx in Resources */,
 				207D3DC12812AD5700FC4C77 /* LaunchScreen.storyboard in Resources */,
 				20DB7DBA2837BABE00F17FC7 /* window2.png in Resources */,
 				207D3DD62812AD5700FC4C77 /* Assets.xcassets in Resources */,
+				20C3224F283B62C200316B48 /* staggered-64x33.tmx in Resources */,
 				20DB79A32837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */,
 				20DB7DC62837BABE00F17FC7 /* sprites.png in Resources */,
+				20C32246283B62C200316B48 /* roguelike-16x16.tmx in Resources */,
 				20DB7C692837B9ED00F17FC7 /* readme.txt in Resources */,
 				20FAF0CE2837AC2600BEFA8E /* examples.tiled-project in Resources */,
 				20DB7D452837BABE00F17FC7 /* keyGreenStroked.png in Resources */,
@@ -1268,21 +1323,20 @@
 				20FAEFEF2837A66C00BEFA8E /* level4.tmx in Resources */,
 				20DB7DB12837BABE00F17FC7 /* wallDecor2.png in Resources */,
 				20DB7D932837BABE00F17FC7 /* shieldStroked.png in Resources */,
+				20C3222B283B62C200316B48 /* dungeon-16x32.png in Resources */,
 				20DB7D482837BABE00F17FC7 /* keyRedStroked.png in Resources */,
 				20FAF22A2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.png in Resources */,
 				20FAF0162837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
 				20DB7D9C2837BABE00F17FC7 /* swordStroked.png in Resources */,
 				20DB7D8A2837BABE00F17FC7 /* sandbox.tmx in Resources */,
 				20FAF0E02837AC2600BEFA8E /* hexmini.png in Resources */,
-				20DB7C4F2837B97E00F17FC7 /* forest.tmx in Resources */,
 				20FAF0EC2837AC2600BEFA8E /* objecttypes.xml in Resources */,
-				20FAF12E2837AC2600BEFA8E /* sewers.tmx in Resources */,
 				20DB7DB42837BABE00F17FC7 /* wallDecor3.png in Resources */,
 				20DB7D602837BABE00F17FC7 /* platformBase2.png in Resources */,
-				20FAF0C82837AC2600BEFA8E /* desert.tmx in Resources */,
 				20DB7D0F2837BABE00F17FC7 /* castleWall.png in Resources */,
 				20DB7C632837B9ED00F17FC7 /* beach_tileset.tsx in Resources */,
 				20DB7DC02837BABE00F17FC7 /* preview.png in Resources */,
+				20C3223D283B62C200316B48 /* isometric-130x230.png in Resources */,
 				20DB7D092837BABE00F17FC7 /* blue.png in Resources */,
 				20FAF0E32837AC2600BEFA8E /* isometric_grass_and_water.png in Resources */,
 				20FAF0252837A67500BEFA8E /* MagicLand.tmx in Resources */,
@@ -1294,14 +1348,16 @@
 				20DB7D572837BABE00F17FC7 /* platform3.png in Resources */,
 				20FAF0F82837AC2600BEFA8E /* perspective_walls.tsx in Resources */,
 				20DB7D662837BABE00F17FC7 /* platformBase4.png in Resources */,
+				20C32231283B62C200316B48 /* dungeon-32x32.png in Resources */,
 				20DB7D1E2837BABE00F17FC7 /* doorGreenStroke.png in Resources */,
 				20FAF0132837A67500BEFA8E /* gameart2d-desert.png in Resources */,
 				20DB7D3F2837BABE00F17FC7 /* grey.png in Resources */,
 				20DB7DEE2837BB4400F17FC7 /* templates in Resources */,
 				20DB7DAE2837BABE00F17FC7 /* wallDecor1.png in Resources */,
 				20DB7CF72837BABE00F17FC7 /* backgroundArch.png in Resources */,
+				20C32252283B62C200316B48 /* staggered-paths-64x33.png in Resources */,
+				20C32222283B62C200316B48 /* dungeon-16x16.png in Resources */,
 				20FAEFE02837A66C00BEFA8E /* Collection.tsx in Resources */,
-				20FAF2302837AC2700BEFA8E /* tmw_desert_spacing.png in Resources */,
 				20DB7D362837BABE00F17FC7 /* gemRedStroked.png in Resources */,
 				20DB7D4E2837BABE00F17FC7 /* objs.tsx in Resources */,
 				20FAF0F52837AC2600BEFA8E /* perspective_walls.tmx in Resources */,
@@ -1312,15 +1368,20 @@
 				20DB7D6C2837BABE00F17FC7 /* platformBlock2.png in Resources */,
 				20DB7D542837BABE00F17FC7 /* platform2.png in Resources */,
 				20DB7D5D2837BABE00F17FC7 /* platformBase1.png in Resources */,
+				20C32249283B62C200316B48 /* roguelike-16x16.tsx in Resources */,
 				20DB7DC92837BABE00F17FC7 /* sticker-knight.world in Resources */,
 				20DB79A62837B4AD00F17FC7 /* mylevel1.tmx in Resources */,
 				20DB7D992837BABE00F17FC7 /* skeleton.png in Resources */,
+				20C3223A283B62C200316B48 /* hex-65x65.tmx in Resources */,
+				20C3241E283B696F00316B48 /* maps.plist in Resources */,
 				20DB7D2D2837BABE00F17FC7 /* exit.png in Resources */,
+				20C32237283B62C200316B48 /* hex-65x65-65x230.png in Resources */,
 				20FAEFF52837A66C00BEFA8E /* objecttemplate.tx in Resources */,
-				20DB7C582837B97E00F17FC7 /* squirrel.png in Resources */,
 				20DB7C662837B9ED00F17FC7 /* island.tmx in Resources */,
 				20FAF0F22837AC2600BEFA8E /* perspective_walls.png in Resources */,
 				20DB7D7E2837BABE00F17FC7 /* platformConnector4.png in Resources */,
+				20C32243283B62C200316B48 /* roguelike-16x16-anim.png in Resources */,
+				20C32240283B62C200316B48 /* isometric-130x66.tmx in Resources */,
 				20FAF0282837A67500BEFA8E /* magiclanddizzy_tiles.gif in Resources */,
 				20DB7D6F2837BABE00F17FC7 /* platformBlock3.png in Resources */,
 				20DB7D122837BABE00F17FC7 /* cloud.png in Resources */,
@@ -1328,6 +1389,7 @@
 				20DB7D842837BABE00F17FC7 /* pushBlock2.png in Resources */,
 				20DB7D062837BABE00F17FC7 /* blobGreen.png in Resources */,
 				20FAF02B2837A67500BEFA8E /* CREDITS.txt in Resources */,
+				20C32225283B62C200316B48 /* dungeon-16x16.tmx in Resources */,
 				20DB7DAB2837BABE00F17FC7 /* trap.png in Resources */,
 				20DB7DF22837BBD600F17FC7 /* ui in Resources */,
 				20FAF0DD2837AC2600BEFA8E /* hexagonal-mini.tmx in Resources */,
@@ -1336,6 +1398,7 @@
 				20DB7DB72837BABE00F17FC7 /* window1.png in Resources */,
 				20DB7CFA2837BABE00F17FC7 /* backgroundMountain.png in Resources */,
 				20DB7D3C2837BABE00F17FC7 /* grassSmall.png in Resources */,
+				20C3222E283B62C200316B48 /* dungeon-16x32.tsx in Resources */,
 				20DB7D8D2837BABE00F17FC7 /* sandbox2.tmx in Resources */,
 				20DB7D632837BABE00F17FC7 /* platformBase3.png in Resources */,
 				20DB7D182837BABE00F17FC7 /* column2.png in Resources */,
@@ -1353,8 +1416,8 @@
 			files = (
 				20DB7D222837BABE00F17FC7 /* doorRedStroked.png in Resources */,
 				20FAEFE72837A66C00BEFA8E /* level1.tmx in Resources */,
+				20C3223B283B62C200316B48 /* hex-65x65.tmx in Resources */,
 				20DB7DAC2837BABE00F17FC7 /* trap.png in Resources */,
-				20FAF2312837AC2700BEFA8E /* tmw_desert_spacing.png in Resources */,
 				20DB7D432837BABE00F17FC7 /* hero.png in Resources */,
 				20DB7D672837BABE00F17FC7 /* platformBase4.png in Resources */,
 				20FAEFEA2837A66C00BEFA8E /* level2.tmx in Resources */,
@@ -1363,24 +1426,24 @@
 				20FAEFD82837A66C00BEFA8E /* Animated kanga.tsx in Resources */,
 				20DB7DF32837BBD600F17FC7 /* ui in Resources */,
 				20DB7D882837BABE00F17FC7 /* pushBlock3.png in Resources */,
+				20C32232283B62C200316B48 /* dungeon-32x32.png in Resources */,
 				20FAEFDE2837A66C00BEFA8E /* animated2.png in Resources */,
 				20DB7DAF2837BABE00F17FC7 /* wallDecor1.png in Resources */,
-				20FAF0C92837AC2600BEFA8E /* desert.tmx in Resources */,
+				20C3222C283B62C200316B48 /* dungeon-16x32.png in Resources */,
 				20FAEFED2837A66C00BEFA8E /* level3.tmx in Resources */,
 				20DB7D252837BABE00F17FC7 /* doorStroked.png in Resources */,
 				20DB7D042837BABE00F17FC7 /* blobBlue.png in Resources */,
 				20DB7D162837BABE00F17FC7 /* column1.png in Resources */,
-				20DB7C532837B97E00F17FC7 /* forest.tsx in Resources */,
 				20DB7DEF2837BB4400F17FC7 /* templates in Resources */,
 				20DB7D7C2837BABE00F17FC7 /* platformConnector3.png in Resources */,
 				20FAF0292837A67500BEFA8E /* magiclanddizzy_tiles.gif in Resources */,
 				20DB7D0A2837BABE00F17FC7 /* blue.png in Resources */,
 				20DB7D012837BABE00F17FC7 /* backgroundTree.png in Resources */,
 				20DB7D582837BABE00F17FC7 /* platform3.png in Resources */,
+				20C32250283B62C200316B48 /* staggered-64x33.tmx in Resources */,
 				20DB7D3D2837BABE00F17FC7 /* grassSmall.png in Resources */,
 				20DB7D5E2837BABE00F17FC7 /* platformBase1.png in Resources */,
 				20DB7CF82837BABE00F17FC7 /* backgroundArch.png in Resources */,
-				20FAF0CC2837AC2600BEFA8E /* desert.tsx in Resources */,
 				20DB7DBE2837BABE00F17FC7 /* window3.png in Resources */,
 				207D3DCE2812AD5700FC4C77 /* Main.storyboard in Resources */,
 				20DB7D8B2837BABE00F17FC7 /* sandbox.tmx in Resources */,
@@ -1389,13 +1452,12 @@
 				20FAEFF32837A66C00BEFA8E /* level5.tmx in Resources */,
 				20DB7DB82837BABE00F17FC7 /* window1.png in Resources */,
 				20DB7D4F2837BABE00F17FC7 /* objs.tsx in Resources */,
-				20DB7C562837B97E00F17FC7 /* squirrel.license in Resources */,
 				20DB7C612837B9ED00F17FC7 /* beach_tileset.png in Resources */,
-				20DB7C592837B97E00F17FC7 /* squirrel.png in Resources */,
 				20DB7D852837BABE00F17FC7 /* pushBlock2.png in Resources */,
 				20DB7DC72837BABE00F17FC7 /* sprites.png in Resources */,
 				20DB7DB52837BABE00F17FC7 /* wallDecor3.png in Resources */,
 				20FAF0172837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
+				20C32226283B62C200316B48 /* dungeon-16x16.tmx in Resources */,
 				20DB79A42837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */,
 				20DB7D9D2837BABE00F17FC7 /* swordStroked.png in Resources */,
 				20CA158328181D8700797A7C /* Colors.xcassets in Resources */,
@@ -1404,23 +1466,28 @@
 				20FAF02C2837A67500BEFA8E /* CREDITS.txt in Resources */,
 				20DB7D1C2837BABE00F17FC7 /* doorBlueStroked.png in Resources */,
 				20FAEFE42837A66C00BEFA8E /* hotdogsoup-icon-full.png in Resources */,
+				20C32241283B62C200316B48 /* isometric-130x66.tmx in Resources */,
 				20DB7D972837BABE00F17FC7 /* sign.png in Resources */,
 				20DB7D642837BABE00F17FC7 /* platformBase3.png in Resources */,
 				20FAF0C62837AC2600BEFA8E /* buch-outdoor.png in Resources */,
 				20FAEFDB2837A66C00BEFA8E /* animated1.png in Resources */,
 				20DB7DCA2837BABE00F17FC7 /* sticker-knight.world in Resources */,
+				20C3223E283B62C200316B48 /* isometric-130x230.png in Resources */,
 				20DB7DC42837BABE00F17FC7 /* README-.md in Resources */,
 				20FAF03C2837A68900BEFA8E /* Tiles in Resources */,
 				20FAF0142837A67500BEFA8E /* gameart2d-desert.png in Resources */,
-				20FAF12C2837AC2600BEFA8E /* sewer_tileset.png in Resources */,
 				20FAF0F02837AC2600BEFA8E /* orthogonal-outside.tmx in Resources */,
 				20DB7D102837BABE00F17FC7 /* castleWall.png in Resources */,
 				20DB7DC12837BABE00F17FC7 /* preview.png in Resources */,
+				20C32247283B62C200316B48 /* roguelike-16x16.tmx in Resources */,
+				20C32235283B62C200316B48 /* dungeon-32x32.tsx in Resources */,
 				20DB7CFE2837BABE00F17FC7 /* backgroundTower.png in Resources */,
 				20FAEFF62837A66D00BEFA8E /* objecttemplate.tx in Resources */,
+				20C32253283B62C200316B48 /* staggered-paths-64x33.png in Resources */,
 				20DB7D912837BABE00F17FC7 /* shadow.png in Resources */,
 				20DB7D7F2837BABE00F17FC7 /* platformConnector4.png in Resources */,
 				20DB7D5B2837BABE00F17FC7 /* platform4.png in Resources */,
+				20C32238283B62C200316B48 /* hex-65x65-65x230.png in Resources */,
 				20FAF0EA2837AC2600BEFA8E /* isometric_staggered_grass_and_water.tmx in Resources */,
 				20DB7D522837BABE00F17FC7 /* platform1.png in Resources */,
 				20DB7D1F2837BABE00F17FC7 /* doorGreenStroke.png in Resources */,
@@ -1436,8 +1503,10 @@
 				207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */,
 				20DB7DBB2837BABE00F17FC7 /* window2.png in Resources */,
 				20DB7D0D2837BABE00F17FC7 /* bombStroked.png in Resources */,
+				20C32223283B62C200316B48 /* dungeon-16x16.png in Resources */,
 				20DB7CFB2837BABE00F17FC7 /* backgroundMountain.png in Resources */,
 				20FAF0CF2837AC2600BEFA8E /* examples.tiled-project in Resources */,
+				20C32244283B62C200316B48 /* roguelike-16x16-anim.png in Resources */,
 				20DB7D4C2837BABE00F17FC7 /* keyYellowStroked.png in Resources */,
 				20FAF22E2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.tmx in Resources */,
 				20DB7D282837BABE00F17FC7 /* earthWall.png in Resources */,
@@ -1446,17 +1515,19 @@
 				20DB7DA92837BABE00F17FC7 /* torch.png in Resources */,
 				20FAF0E42837AC2600BEFA8E /* isometric_grass_and_water.png in Resources */,
 				20DB7D3A2837BABE00F17FC7 /* grassLarge.png in Resources */,
-				20FAF12F2837AC2600BEFA8E /* sewers.tmx in Resources */,
 				20FAEFE12837A66C00BEFA8E /* Collection.tsx in Resources */,
+				20C3222F283B62C200316B48 /* dungeon-16x32.tsx in Resources */,
 				20DB7D732837BABE00F17FC7 /* platformBlock4.png in Resources */,
+				20C32229283B62C200316B48 /* dungeon-16x16.tsx in Resources */,
+				20C3224D283B62C200316B48 /* staggered-64x192.png in Resources */,
 				20DB7D792837BABE00F17FC7 /* platformConnector2.png in Resources */,
 				20FAEFF02837A66C00BEFA8E /* level4.tmx in Resources */,
 				20DB7D132837BABE00F17FC7 /* cloud.png in Resources */,
 				20DB7D6D2837BABE00F17FC7 /* platformBlock2.png in Resources */,
+				20C3224A283B62C200316B48 /* roguelike-16x16.tsx in Resources */,
 				20DB7D942837BABE00F17FC7 /* shieldStroked.png in Resources */,
 				20DB7D552837BABE00F17FC7 /* platform2.png in Resources */,
 				20DB7D9A2837BABE00F17FC7 /* skeleton.png in Resources */,
-				20DB7C502837B97E00F17FC7 /* forest.tmx in Resources */,
 				20DB7D492837BABE00F17FC7 /* keyRedStroked.png in Resources */,
 				20FAF0F32837AC2600BEFA8E /* perspective_walls.png in Resources */,
 				20DB7D8E2837BABE00F17FC7 /* sandbox2.tmx in Resources */,
@@ -1472,6 +1543,7 @@
 				20FAF0DE2837AC2600BEFA8E /* hexagonal-mini.tmx in Resources */,
 				20DB7C672837B9ED00F17FC7 /* island.tmx in Resources */,
 				20FAF0E72837AC2600BEFA8E /* isometric_grass_and_water.tmx in Resources */,
+				20C3241F283B696F00316B48 /* maps.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,15 +1,73 @@
-• gameart2d 'Desert'
-by GameArt2D
-from http://www.gameart2d.com/free-desert-platformer-tileset.html
+Many thanks to everyone making these maps!
 
-• Magicland
-by Unknown
-from https://github.com/jamesbowman/tiled-maps
+If you feel your rights are infringed upon, or when information is missing, incorrect or incomplete, please contact me using the contact form on https://www.p-edge.nl
 
-• MyLevel1
+============
+Example maps
+============
+
+• mylevel1.tmx
 by mieki256
 from https://opengameart.org/content/cave-tile-map-image
 
-• Tiled Examples
-example maps from the Tiled Editor
+• gameart2d-desert.tmx
+by GameArt2D
+from http://www.gameart2d.com/free-desert-platformer-tileset.html
+
+• MagicLand.tmx
+by Codemasters
+from https://github.com/jamesbowman/tiled-maps
+
+================
+SKTiled Examples
+from https://github.com/mfessenden/SKTiled
+================
+
+• dungeon-16x16.tmx:
+http://opengameart.org/content/dungeon-tileset
+
+• hex-65x65.tmx:
+http://opengameart.org/content/hexagon-tiles-93x
+
+• isometric-130x66.tmx:
+http://opengameart.org/content/isometric-city
+
+• roguelike-16x16.tmx:
+http://opengameart.org/content/roguelikerpg-pack-1700-tiles
+
+• staggered-64-33.tmx:
+unknown
+
+==============
+Tiled Examples
+==============
+selected example maps from the Tiled Editor
 from https://github.com/mapeditor/tiled
+
+• sandbox.tmx
+unknown
+
+• sandbox2.tmx
+unknown
+
+• island.tmx
+unknown
+
+• orthogonal-outside.tmx
+unknown
+
+• hexagonal-mini.tmx
+unknown
+
+• isometric_grass_and_water.tmx
+unknown
+
+• isometric_staggered_grass_and_water.tmx
+unknown
+
+• perspective_walls.tmx
+unknown
+
+• test_hexagonal_tile_60x60x30.tmx
+unknown
+

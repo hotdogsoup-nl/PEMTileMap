@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>filename</key>
+		<string>mylevel1.tmx</string>
+		<key>title</key>
+		<string>MyLevel1</string>
+		<key>author</key>
+		<string>mieki256</string>
+		<key>url</key>
+		<string>https://opengameart.org/content/cave-tile-map-image</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>gameart2d-desert.tmx</string>
+		<key>title</key>
+		<string>GameArt2D</string>
+		<key>author</key>
+		<string>GameArt2D</string>
+		<key>url</key>
+		<string>http://www.gameart2d.com/free-desert-platformer-tileset.html</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>MagicLand.tmx</string>
+		<key>title</key>
+		<string>Magicland Dizzy</string>
+		<key>author</key>
+		<string>Codemasters</string>
+		<key>url</key>
+		<string>https://github.com/jamesbowman/tiled-maps</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>dungeon-16x16</string>
+		<key>title</key>
+		<string>Dungeon</string>
+		<key>author</key>
+		<string>from SKTiled examples</string>
+		<key>url</key>
+		<string>http://opengameart.org/content/dungeon-tileset</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>dungeon-16x16.tmx</string>
+		<key>title</key>
+		<string>Dungeon</string>
+		<key>author</key>
+		<string>from SKTiled examples</string>
+		<key>url</key>
+		<string>http://opengameart.org/content/dungeon-tileset</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>hex-65x65.tmx</string>
+		<key>title</key>
+		<string>Hex</string>
+		<key>author</key>
+		<string>from SKTiled examples</string>
+		<key>url</key>
+		<string>http://opengameart.org/content/hexagon-tiles-93x</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>isometric-130x66.tmx</string>
+		<key>title</key>
+		<string>Isometric</string>
+		<key>author</key>
+		<string>from SKTiled examples</string>
+		<key>url</key>
+		<string>http://opengameart.org/content/isometric-city</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>roguelike-16x16.tmx</string>
+		<key>title</key>
+		<string>Roguelike</string>
+		<key>author</key>
+		<string>from SKTiled examples</string>
+		<key>url</key>
+		<string>http://opengameart.org/content/roguelikerpg-pack-1700-tiles</string>
+	</dict>
+	<dict>
+		<key>filename</key>
+		<string>staggered-64x33.tmx</string>
+		<key>title</key>
+		<string>Staggered</string>
+		<key>author</key>
+		<string>from SKTiled examples</string>
+		<key>url</key>
+		<string></string>
+	</dict>
+</array>
+</plist>
