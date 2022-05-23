@@ -20,40 +20,8 @@ class DemoScene: SKScene {
 
     private var buttonTapped = false
 
-    private var maps =
+    private var maps: Array<Dictionary<String, String>> = []
     
-    // "TestMaps" folder
-//    [
-//        "level1.tmx",
-//        "level2.tmx",
-//        "level3.tmx",
-//        "level4.tmx",
-//        "level5.tmx",
-//    ]
-    
-    // "Maps" folder
-    [
-        "mylevel1.tmx",
-        "gameart2d-desert.tmx",
-        "MagicLand.tmx",
-    ]
-    
-    // "Tiled Examples" folder
-//    [
-//        "sewers.tmx",
-//        "sandbox.tmx",
-//        "sandbox2.tmx",
-//        "island.tmx",
-//        "forest.tmx",
-//        "desert.tmx",
-//        "orthogonal-outside.tmx",
-//        "hexagonal-mini.tmx",
-//        "isometric_grass_and_water.tmx",
-//        "isometric_staggered_grass_and_water.tmx",
-//        "perspective_walls.tmx",
-//        "test_hexagonal_tile_60x60x30.tmx",
-//    ]
-
     private var previousUpdateTime = TimeInterval(0)
     private var cameraNode: SKCameraNode!
     private var initalTouchLocation = CGPoint.zero
@@ -68,6 +36,10 @@ class DemoScene: SKScene {
         super.init(size: size)
         
         cameraNode = SKCameraNode()
+        
+        if let url = bundleURLForResource("maps.plist") {
+            maps = NSArray(contentsOf: url) as! [Dictionary<String, String>]
+        }
         
         #if os(iOS)
         pinch = UIPinchGestureRecognizer(target: self, action: #selector(scenePinched(_:)))
@@ -119,9 +91,17 @@ class DemoScene: SKScene {
     private func loadMap() {
         removeMap()
         
-        let mapName = maps[currentMapIndex]
+        let mapInfo = maps[currentMapIndex]
+        let mapName = mapInfo["filename"]
+        let mapTitle = mapInfo["title"]
+        let mapAuthor = mapInfo["author"]
+//        let mapURL = mapInfo["url"]
+        
+        let textSize = size.width * 0.015
+        currentMapNameLabel?.attributedText = attributedString(String(format: "%@\ntitle: %@\nauthor: %@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSize)
+        currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
 
-        if let newMap = PEMTileMap(mapName: mapName) {
+        if let newMap = PEMTileMap(mapName: mapName!) {
             map = newMap
 
             if newMap.backgroundColor != nil {
@@ -132,8 +112,7 @@ class DemoScene: SKScene {
 
             cameraNode.zPosition = newMap.highestZPosition + 20
             newMap.cameraNode = cameraNode
-            
-            currentMapNameLabel?.text = mapName
+
             renderTimeLabel?.text = String("parse time: \(newMap.parseTime.stringValue())\nrender time: \(newMap.renderTime.stringValue())")
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
@@ -186,6 +165,22 @@ class DemoScene: SKScene {
         map?.moveCamera(sceneSize: size, zoomMode: zoomMode, viewMode: viewMode, factor: 1, duration: 0.5)
     }
     
+    private func attributedString(_ string: String, fontName:String, textSize: CGFloat ) -> NSAttributedString {
+        let attrString = NSMutableAttributedString(string: string)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let range = NSRange(location: 0, length: string.count)
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: range)
+        
+        #if os(macOS)
+        attrString.addAttributes([NSAttributedString.Key.foregroundColor: NSColor.white, NSAttributedString.Key.font: NSFont(name: fontName, size: textSize) as Any], range: range)
+        #else
+        attrString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: fontName, size: textSize) as Any], range: range)
+        #endif
+        
+        return attrString
+    }
+    
     // MARK: - HUD
     
     private func addHud() {
@@ -208,21 +203,22 @@ class DemoScene: SKScene {
         newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
         cameraNode.addChild(newButton)
         
-        currentMapNameLabel = SKLabelNode(text: " ... ")
-        currentMapNameLabel?.fontSize = textSize
-        currentMapNameLabel?.fontName = "Courier-Bold"
-        currentMapNameLabel?.verticalAlignmentMode = .center
-        currentMapNameLabel?.horizontalAlignmentMode = .center
-        currentMapNameLabel?.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - currentMapNameLabel!.calculateAccumulatedFrame().size.height * 0.5 - margin)
-        cameraNode.addChild(currentMapNameLabel!)
+        let roundedBox = roundedBox(size: CGSize(width: size.width * 0.275, height: size.height * 0.125), fillColor: SKColor(white: 0, alpha: 0.5))
+        roundedBox.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - roundedBox.calculateAccumulatedFrame().size.height * 0.5 - margin)
+        cameraNode.addChild(roundedBox)
+        
+        currentMapNameLabel = SKLabelNode(attributedText: attributedString(" ... ", fontName: "Courier-Bold", textSize: textSize))
+        currentMapNameLabel?.numberOfLines = 0
+        currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
+        roundedBox.addChild(currentMapNameLabel!)
         
         renderTimeLabel = SKLabelNode(text: " ...\n ...")
         renderTimeLabel?.numberOfLines = 0
-        renderTimeLabel?.fontSize = textSize * 0.75
-        renderTimeLabel?.fontName = "Courier-Bold"
+        renderTimeLabel?.fontSize = textSize
+        renderTimeLabel?.fontName = "Courier"
         renderTimeLabel?.verticalAlignmentMode = .center
-        renderTimeLabel?.horizontalAlignmentMode = .center
-        renderTimeLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.position.y - currentMapNameLabel!.calculateAccumulatedFrame().size.height - renderTimeLabel!.calculateAccumulatedFrame().size.height * 0.5 - margin)
+        renderTimeLabel?.horizontalAlignmentMode = .left
+        renderTimeLabel?.position = CGPoint(x: size.width * -0.5 + margin * 2, y: roundedBox.position.y)
         cameraNode.addChild(renderTimeLabel!)
                 
         var index = 0
@@ -271,6 +267,22 @@ class DemoScene: SKScene {
         button.addChild(buttonLabel)
         
         return button
+    }
+    
+    private func roundedBox(size: CGSize, fillColor: SKColor = .black) -> SKShapeNode {
+        #if os(iOS)
+        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: size.width * -0.5, y: size.height * -0.5), size:size), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: size.height * 0.1, height: size.height * 0.1)).cgPath
+        #else
+        let path = CGPath.init(roundedRect: CGRect(origin:CGPoint(x: size.width * -0.5, y: size.height * -0.5), size:size), cornerWidth: size.height * 0.1, cornerHeight: size.height * 0.1, transform: nil)
+        #endif
+        
+        let box = SKShapeNode.init(path: path)
+        box.name = name
+        box.fillColor = fillColor
+        box.lineWidth = 1
+        box.strokeColor = SKColor.white
+        
+        return box
     }
 
     // MARK: - Input handling
