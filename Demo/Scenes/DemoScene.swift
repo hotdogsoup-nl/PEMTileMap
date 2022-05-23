@@ -110,7 +110,7 @@ class DemoScene: SKScene {
         let mapAuthor = mapInfo["author"]
         
         let textSize = size.width * 0.015
-        currentMapNameLabel?.attributedText = attributedString(String(format: "%@\n\"%@\"\n%@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSize)
+        currentMapNameLabel?.attributedText = attributedString(String(format: "%@ - \"%@\" - %@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSize)
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
 
         if let newMap = PEMTileMap(mapName: mapName!) {
@@ -125,7 +125,7 @@ class DemoScene: SKScene {
             cameraNode.zPosition = newMap.highestZPosition + 20
             newMap.cameraNode = cameraNode
 
-            renderTimeLabel?.text = String("parse time: \(newMap.parseTime.stringValue())\nrender time: \(newMap.renderTime.stringValue())")
+            renderTimeLabel?.attributedText = attributedString(String("parse time: \(newMap.parseTime.stringValue())\nrender time: \(newMap.renderTime.stringValue())"), fontName: "Courier", textSize: textSize)
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
             addChild(newMap)
@@ -197,26 +197,32 @@ class DemoScene: SKScene {
     
     private func addHud() {
         let logoNode = SKSpriteNode(imageNamed: "logo")
-        let scale = size.width * 0.2 / logoNode.size.width
-        let margin = size.height * 0.01
-        
+        let scale = size.width * 0.15 / logoNode.size.width
+        var verticalMargin = size.height * 0.03
+        var horizontalMargin = size.width * 0.02
+
+        var buttonSize = CGSize(width: size.width * 0.1, height: size.width * 0.03)
+        var textSize = size.width * 0.0175
+
         logoNode.size = logoNode.size.scaled(scale)
-        logoNode.position = CGPoint(x: size.width * -0.5 + logoNode.size.width * 0.5 + margin, y: size.height * 0.5 - logoNode.size.height * 0.5 - margin)
+        logoNode.position = CGPoint(x: size.width * -0.5 + logoNode.size.width * 0.5 + horizontalMargin, y: size.height * 0.5 - buttonSize.height * 0.5 - verticalMargin)
         cameraNode.addChild(logoNode)
         
-        var buttonSize = CGSize(width: size.width * 0.1, height: size.width * 0.025)
-        var textSize = size.width * 0.015
-
-        var newButton = button(name: "previousMapButton", size: buttonSize, text: "Previous", textSize: textSize, textColor: .white, fillColor: .red)
-        newButton.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
+        var newButton = button(name: "previousMapButton", buttonSize: buttonSize, text: "Previous", textSize: textSize, textColor: .white, fillColor: .red)
+        newButton.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - verticalMargin)
         cameraNode.addChild(newButton)
 
-        newButton = button(name: "nextMapButton", size: buttonSize, text: "Next", textSize: textSize, textColor: .white, fillColor: .red)
-        newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - margin)
+        newButton = button(name: "nextMapButton", buttonSize: buttonSize, text: "Next", textSize: textSize, textColor: .white, fillColor: .red)
+        newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - verticalMargin)
         cameraNode.addChild(newButton)
         
-        let roundedBox = roundedBox(size: CGSize(width: size.width * 0.275, height: size.height * 0.13), fillColor: SKColor(white: 0, alpha: 0.5))
-        roundedBox.position = CGPoint(x: 0, y: newButton.position.y - buttonSize.height - roundedBox.calculateAccumulatedFrame().size.height * 0.5 - margin)
+        renderTimeLabel = SKLabelNode(attributedText: attributedString(" ... ", fontName: "Courier", textSize: textSize))
+        renderTimeLabel?.numberOfLines = 0
+        renderTimeLabel?.position = CGPoint(x: 0, y: newButton.position.y - newButton.calculateAccumulatedFrame().size.height * 1.4 - verticalMargin)
+        cameraNode.addChild(renderTimeLabel!)
+        
+        let roundedBox = roundedBox(size: CGSize(width: size.width * 0.8, height: textSize * 2.0), fillColor: SKColor(white: 0, alpha: 0.5))
+        roundedBox.position = CGPoint(x: 0, y: size.height * -0.5 + roundedBox.calculateAccumulatedFrame().size.height + verticalMargin)
         cameraNode.addChild(roundedBox)
         
         currentMapNameLabel = SKLabelNode(attributedText: attributedString(" ... ", fontName: "Courier-Bold", textSize: textSize))
@@ -227,53 +233,59 @@ class DemoScene: SKScene {
         externalLinkButton = SKSpriteNode(texture: SKTexture(imageNamed: "link-icon"))
         externalLinkButton?.size = CGSize(width: textSize * 1.25, height: textSize * 1.25)
         externalLinkButton?.name = "externalLinkButton"
-        externalLinkButton?.position = CGPoint(x: roundedBox.calculateAccumulatedFrame().size.width * 0.5 - externalLinkButton!.size.width, y:textSize * -1.25)
+        externalLinkButton?.position = CGPoint(x: roundedBox.calculateAccumulatedFrame().size.width * 0.5 - externalLinkButton!.size.width, y:0)
         roundedBox.addChild(externalLinkButton!)
-        
-        renderTimeLabel = SKLabelNode(text: " ...\n ...")
-        renderTimeLabel?.numberOfLines = 0
-        renderTimeLabel?.fontSize = textSize
-        renderTimeLabel?.fontName = "Courier"
-        renderTimeLabel?.verticalAlignmentMode = .center
-        renderTimeLabel?.horizontalAlignmentMode = .left
-        renderTimeLabel?.position = CGPoint(x: size.width * -0.5 + margin * 2, y: roundedBox.position.y)
-        cameraNode.addChild(renderTimeLabel!)
-                
+                                
         var index = 0
-        let buttonTitles = ["Zoom Fit", "Zoom Fill", "Zoom 1:1", "TopLeft", "Top", "TopRight", "Left", "Center", "Right", "BottomLeft", "Bottom", "BottomRight"]
-        buttonSize = buttonSize.scaled(0.8)
-        textSize = textSize * 0.8
+        var buttonTitles = ["Fit", "Fill", "1:1"]
+        buttonSize = CGSize(width: size.width * 0.05, height: size.width * 0.03)
+        verticalMargin = size.height * 0.025
+        horizontalMargin = size.width * 0.01
+
         for buttonTitle in buttonTitles {
-            var fillColor = SKColor.gray
-            
-            if index >= 0 && index <= 2 {
-                fillColor = .blue
-            }
-            
+            var fillColor = SKColor.blue
+            let strokeColor = SKColor.white
+
             if index == 2 {
                 fillColor = .systemBlue
             }
-                        
-            newButton = button(name: "cameraButton-\(index)", size: buttonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor)
-            newButton.position = CGPoint(x: size.width * 0.5 - buttonSize.width * 3 + buttonSize.width * CGFloat(index % 3) + margin * CGFloat(index % 3), y: size.height * 0.5 - margin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - margin * CGFloat(index / 3))
+
+            newButton = button(name: "cameraButton-\(index)", buttonSize: buttonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
+            newButton.position = CGPoint(x: size.width * 0.5 - (buttonSize.width + horizontalMargin) * 3 + buttonSize.width * CGFloat(index % 3) + horizontalMargin * CGFloat(index % 3), y: size.height * 0.5 - verticalMargin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - verticalMargin * CGFloat(index / 3))
+            cameraNode.addChild(newButton)
+
+            index += 1
+        }
+
+        buttonTitles = ["↖️", "⬆️", "↗️", "⬅️", "⏺", "➡️", "↙️", "⬇️", "↘️"]
+
+        for buttonTitle in buttonTitles {
+            let fillColor = SKColor.clear
+            let strokeColor = SKColor.clear
+
+            textSize = size.width * 0.03
+            let smallButtonSize = CGSize(width: textSize, height: textSize)
+
+            newButton = button(name: "cameraButton-\(index)", buttonSize: smallButtonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
+            newButton.position = CGPoint(x: size.width * 0.5 - (buttonSize.width + horizontalMargin) * 3 + buttonSize.width * CGFloat(index % 3) + horizontalMargin * CGFloat(index % 3), y: size.height * 0.5 - verticalMargin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - verticalMargin * CGFloat(index / 3))
             cameraNode.addChild(newButton)
 
             index += 1
         }
     }
     
-    private func button(name: String?, size: CGSize, text: String, textSize: CGFloat, textColor: SKColor = .white, fillColor: SKColor = .black, strokeColor: SKColor = .white) -> SKShapeNode {
+    private func button(name: String?, buttonSize: CGSize, text: String, textSize: CGFloat, textColor: SKColor = .white, fillColor: SKColor = .black, strokeColor: SKColor = .white) -> SKShapeNode {
         #if os(iOS)
-        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: size.width * -0.5, y: size.height * -0.5), size:size), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: size.height * 0.2, height: size.height * 0.2)).cgPath
+        let path = UIBezierPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: buttonSize.height * 0.2, height: buttonSize.height * 0.2)).cgPath
         #else
-        let path = CGPath.init(roundedRect: CGRect(origin:CGPoint(x: size.width * -0.5, y: size.height * -0.5), size:size), cornerWidth: size.height * 0.2, cornerHeight: size.height * 0.2, transform: nil)
+        let path = CGPath.init(roundedRect: CGRect(origin:CGPoint(x: buttonSize.width * -0.5, y: buttonSize.height * -0.5), size:buttonSize), cornerWidth: buttonSize.height * 0.2, cornerHeight: buttonSize.height * 0.2, transform: nil)
         #endif
         
         let button = SKShapeNode.init(path: path)
         button.name = name
         button.fillColor = fillColor
-        button.lineWidth = size.height * 0.05
-        button.strokeColor = SKColor.white
+        button.lineWidth = buttonSize.height * 0.05
+        button.strokeColor = strokeColor
 
         let buttonLabel = SKLabelNode(text: text)
         buttonLabel.name = name
@@ -297,8 +309,8 @@ class DemoScene: SKScene {
         let box = SKShapeNode.init(path: path)
         box.name = name
         box.fillColor = fillColor
-        box.lineWidth = 1
-        box.strokeColor = SKColor.white
+        box.lineWidth = 0
+        box.strokeColor = .clear
         
         return box
     }
