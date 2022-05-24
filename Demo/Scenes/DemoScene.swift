@@ -434,8 +434,6 @@ extension DemoScene: UIGestureRecognizerDelegate {
     #if os(iOS)
 
     @objc public func scenePinched(_ recognizer: UIPinchGestureRecognizer) {
-        print("pins")
-
         if recognizer.state == .began {
            previousCameraScale = cameraNode.xScale
          }
@@ -446,8 +444,6 @@ extension DemoScene: UIGestureRecognizerDelegate {
     }
     
     @objc public func scenePanned(_ recognizer: UIPanGestureRecognizer) {
-        print("pans")
-        
         let pos = recognizer.translation(in: self.view)
 
         if recognizer.state == .began {
