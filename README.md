@@ -32,7 +32,7 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [X] external TSX tile sets
 - [ ] terraintypes and wangsets
 - [X] object groups
-- [ ] object template files
+- [X] object template files
 - [X] image layers
 - [X] layer groups
 - [X] layer tinting
