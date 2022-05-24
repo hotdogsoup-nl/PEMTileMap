@@ -52,7 +52,6 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [X] camera tilt and zoom
 - [ ] parallax scroll
 - [ ] anti-tearing (removing tear lines between tiles)
-- [ ] Touch, Mouse, Keyboard control
   
 ## License
 Licensed under the [MIT license](license.md).
