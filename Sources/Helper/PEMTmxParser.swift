@@ -73,6 +73,7 @@ enum ElementAttributes: String {
     case staggerAxis = "staggeraxis"
     case staggerIndex = "staggerindex"
     case strikeout = "strikeout"
+    case template = "template"
     case tileCount = "tilecount"
     case tileId = "tileid"
     case tiledVersion = "tiledversion"
@@ -112,10 +113,12 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
     enum ParseFileType {
         case tmx
         case tsx
+        case tx
     }
     
     private weak var currentMap: PEMTileMap?
     private weak var currentTileSet: PEMTileSet?
+    private weak var currentObjectData: PEMObjectData?
 
     private var currentFileType: ParseFileType
     private var currentProperties: [PEMProperty]?
@@ -147,6 +150,24 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
     init?(tileSet: PEMTileSet, fileURL: URL) {
         currentFileType = .tsx
         currentTileSet = tileSet
+
+        do {
+            let data = try Data(contentsOf:fileURL)
+            super.init(data: data)
+        }
+        catch {
+            return nil
+        }
+
+        delegate = self
+        shouldProcessNamespaces = false
+        shouldReportNamespacePrefixes = false
+        shouldResolveExternalEntities = false
+    }
+    
+    init?(objectData: PEMObjectData, fileURL: URL) {
+        currentFileType = .tx
+        currentObjectData = objectData
 
         do {
             let data = try Data(contentsOf:fileURL)
@@ -203,10 +224,12 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             case .tsx:
                 currentTileSet?.addAttributes(attributeDict)
                 elementPath.append(currentTileSet!)
+            case .tx:
+                break
             }
         case Elements.layer.rawValue:
             let currentGroup = elementPath.last as? PEMGroup
-            if let tileLayer = PEMTileLayer(attributes: attributeDict, map:currentMap, group:currentGroup) {
+            if let tileLayer = PEMTileLayer(attributes: attributeDict, map:currentMap!, group:currentGroup) {
                 currentMap?.layers.append(tileLayer)
                 elementPath.append(tileLayer)
                 break
@@ -214,7 +237,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.objectGroup.rawValue:
             let currentGroup = elementPath.last as? PEMGroup
-            if let groupLayer = PEMObjectGroup(attributes: attributeDict, map:currentMap, group:currentGroup) {
+            if let groupLayer = PEMObjectGroup(attributes: attributeDict, map:currentMap!, group:currentGroup) {
                 currentMap?.layers.append(groupLayer)
                 elementPath.append(groupLayer)
                 break
@@ -310,13 +333,22 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.object.rawValue:
-            if let currentElement = elementPath.last as? PEMObjectGroup {
-                if let objectData = currentElement.addObjectData(attributes: attributeDict) {
-                    elementPath.append(objectData)
+            switch currentFileType {
+            case .tmx:
+                if let currentElement = elementPath.last as? PEMObjectGroup {
+                    if let objectData = currentElement.addObjectData(attributes: attributeDict) {
+                        elementPath.append(objectData)
+                    }
+                    break
                 }
+                abortWithUnexpected(elementName: elementName, inside: elementPath.last)
+            case .tsx:
+                break
+            case .tx:
+                currentObjectData!.addAttributes(attributeDict)
+                elementPath.append(currentObjectData!)
                 break
             }
-            abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.ellipse.rawValue:
             if let currentElement = elementPath.last as? PEMObjectData {
                 currentElement.setObjectType(.ellipse)
@@ -468,11 +500,22 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.tileOffset.rawValue:
             break
         case Elements.object.rawValue:
-            if elementPath.last is PEMObjectData {
-                elementPath.removeLast()
+            switch currentFileType {
+            case .tmx:
+                if elementPath.last is PEMObjectData {
+                    elementPath.removeLast()
+                    break
+                }
+                abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
+            case .tsx:
                 break
+            case .tx:
+                if elementPath.last is PEMObjectData {
+                    elementPath.removeLast()
+                    break
+                }
+                abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
             }
-            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.ellipse.rawValue:
             break
         case Elements.point.rawValue:

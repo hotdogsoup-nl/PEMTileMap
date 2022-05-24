@@ -51,6 +51,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     public weak var cameraNode: SKCameraNode?
 
     public private (set) var mapSizeInPoints = CGSize.zero
+    public private (set) var tileSizeInPoints = CGSize.zero
     public private (set) var backgroundColor: SKColor?
     public private (set) var highestZPosition = CGFloat(0)
     public private (set) var parseTime = TimeInterval(0)
@@ -64,7 +65,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private var tiledversion: String?
 
     private var mapSizeInTiles = CGSize.zero
-    private var tileSizeInPoints = CGSize.zero
     var mapSizeInPointsFromTileSize: CGSize {
         return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
     }
@@ -367,6 +367,12 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private func parseExternalFiles() {
         for tileSet in tileSets {
             tileSet.parseExternalTileSet()
+        }
+        
+        for layer in layers {
+            if let objectLayer = layer as? PEMObjectGroup {
+                objectLayer.parseExternalTemplates()
+            }
         }
     }
     

@@ -22,7 +22,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Init
 
-    init?(attributes: Dictionary<String, String>, map: PEMTileMap?, group: PEMGroup?) {
+    init?(attributes: Dictionary<String, String>, map: PEMTileMap, group: PEMGroup?) {
         super.init()
         
         self.map = map

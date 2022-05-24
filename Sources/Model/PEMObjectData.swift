@@ -47,10 +47,11 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var vAlign = TextVerticalAlignment.top
     private (set) var wrap = false
 
-    private var type: String?
-
     private (set) var properties : Dictionary<String, Any>?
     private (set) var polygonPoints: [CGPoint] = []
+    
+    private var type: String?
+    private var externalSource: String?
 
     init?(attributes: Dictionary<String, String>) {
         super.init()
@@ -59,41 +60,8 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
             id = UInt32(value)!
         }
 
-        objectName = attributes[ElementAttributes.name.rawValue]
-        type = attributes[ElementAttributes.typeAttribute.rawValue]
-        objectType = .rectangle
-
-        if let x = attributes[ElementAttributes.x.rawValue],
-           let y = attributes[ElementAttributes.y.rawValue] {
-            
-            let xString : NSString = x as NSString
-            let yString : NSString = y as NSString
-
-            coordsInPoints = CGPoint(x: CGFloat(xString.doubleValue), y: CGFloat(yString.doubleValue))
-        }
-        
-        if let width = attributes[ElementAttributes.width.rawValue],
-           let height = attributes[ElementAttributes.height.rawValue] {
-            
-            let widthString : NSString = width as NSString
-            let heightString : NSString = height as NSString
-
-            sizeInPoints = CGSize(width: CGFloat(widthString.doubleValue), height: CGFloat(heightString.doubleValue))
-        }
-        
-        if let value = attributes[ElementAttributes.rotation.rawValue] {
-            let valueString : NSString = value as NSString
-            rotation = CGFloat(360.0 - valueString.doubleValue)
-        }
-        
-        if let value = attributes[ElementAttributes.gid.rawValue] {
-            tileGid = UInt32(value)!
-            objectType = .tile
-        }
-        
-        if let value = attributes[ElementAttributes.visible.rawValue] {
-            visible = value == "1"
-        }
+        externalSource = attributes[ElementAttributes.template.rawValue]
+        addAttributes(attributes)
     }
     
     // MARK: - Setup
@@ -174,6 +142,69 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     
     func setText(_ text: String) {
         self.text = text
+    }
+    
+    // MARK: - Setup
+    
+    func parseExternalTemplate() {
+        guard externalSource != nil else { return }
+                
+        if let url = bundleURLForResource(externalSource!),
+           let parser = PEMTmxParser(objectData: self, fileURL: url) {
+            if (!parser.parse()) {
+                #if DEBUG
+                print("PEMObjectData: Error parsing external template: ", parser.parserError as Any)
+                #endif
+                return
+            }
+        } else {
+            #if DEBUG
+            print("PEMObjectData: External template file not found: \(externalSource ?? "-")")
+            #endif
+            return
+        }
+    }
+    
+    func addAttributes(_ attributes: Dictionary<String, String>) {
+        if let value = attributes[ElementAttributes.name.rawValue] {
+            objectName = value
+        }
+        
+        if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
+            type = value
+        }
+
+        if let x = attributes[ElementAttributes.x.rawValue],
+           let y = attributes[ElementAttributes.y.rawValue] {
+            
+            let xString : NSString = x as NSString
+            let yString : NSString = y as NSString
+
+            coordsInPoints = CGPoint(x: CGFloat(xString.doubleValue), y: CGFloat(yString.doubleValue))
+        }
+        
+        if let value = attributes[ElementAttributes.gid.rawValue] {
+            tileGid = UInt32(value)!
+            objectType = .tile
+        }
+        
+        if let width = attributes[ElementAttributes.width.rawValue],
+           let height = attributes[ElementAttributes.height.rawValue] {
+            
+            let widthString : NSString = width as NSString
+            let heightString : NSString = height as NSString
+
+            sizeInPoints = CGSize(width: CGFloat(widthString.doubleValue), height: CGFloat(heightString.doubleValue))
+        }
+        
+        if let value = attributes[ElementAttributes.rotation.rawValue] {
+            let valueString : NSString = value as NSString
+            rotation = CGFloat(360.0 - valueString.doubleValue)
+        }
+        
+        if let value = attributes[ElementAttributes.visible.rawValue] {
+            visible = value == "1"
+        }
     }
     
     // MARK: - PEMTileMapPropertiesProtocol

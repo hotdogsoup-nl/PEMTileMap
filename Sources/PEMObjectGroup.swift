@@ -16,18 +16,20 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     private var id = UInt32(0)
     private var groupName: String?
     private var drawOrder = DrawOrder.topDown
+    private var tileSizeInPoints = CGSize.zero
     
     internal var objects: [PEMObjectData] = []
     private var parentGroup: PEMGroup?
     
     weak var map : PEMTileMap?
 
-    init?(attributes: Dictionary<String, String>, map: PEMTileMap?, group: PEMGroup?) {
+    init?(attributes: Dictionary<String, String>, map: PEMTileMap, group: PEMGroup?) {
         super.init()
 
         self.map = map
         parentGroup = group
         groupName = attributes[ElementAttributes.name.rawValue]
+        tileSizeInPoints = map.tileSizeInPoints
         
         if let value = attributes[ElementAttributes.id.rawValue] {
             id = UInt32(value)!
@@ -94,6 +96,12 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     // MARK: - Public
+    
+    func parseExternalTemplates() {
+        for object in objects {
+            object.parseExternalTemplate()
+        }
+    }
 
     func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
@@ -103,6 +111,11 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             var node : SKNode?
             
             var objectSize = object.sizeInPoints
+            
+            if object.objectType == .unknown && object.sizeInPoints == .zero {
+                objectSize = tileSizeInPoints
+            }
+            
             var position = CGPoint(x: object.coordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - object.coordsInPoints.y - tileSizeInPoints.height * 0.5)
 
             switch object.objectType {
@@ -116,7 +129,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                 var points = object.polygonPoints
                 node = SKShapeNode(points: &points, count: points.count)
                 objectSize = node!.calculateAccumulatedFrame().size
-            case .rectangle:
+            case .rectangle, .unknown:
                 node = SKShapeNode(rect: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
             case .text:
                 let text = highResolutionLabel(text: object.text,
@@ -147,6 +160,8 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                             tile.colorBlendFactor = 1.0
                         }
                         
+                        tile.size = object.sizeInPoints
+                        
                         let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
                         
                         tile.position = CGPoint(x: tileSizeInPoints.width * 0.5 + sizeDeviation.width * 0.5, y: tileSizeInPoints.height * 0.5 + sizeDeviation.height * 0.5)
@@ -168,9 +183,6 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                         }
                     }
                 }
-
-            case .unknown:
-                break
             }
             
             if node == nil {
