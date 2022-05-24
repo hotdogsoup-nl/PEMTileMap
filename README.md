@@ -45,7 +45,6 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [X] Swift 5
 - [ ] Objective-C compatibility
 - [X] iOS (>13.6), macOS (>10.15), tvOS (>13.4)
-- [ ] watchOS support
 - [X] generates the TMX map as an `SKNode` with child elements as `SKNode` subclasses (eg. a tile as a `SKSpriteNode` etc.)
 - [X] supports both nearest neighbor and linear texture antialiasing
 - [ ] access layers, tiles, objects
