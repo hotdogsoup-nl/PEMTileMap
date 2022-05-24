@@ -31,6 +31,9 @@
 		207D3DD52812AD5700FC4C77 /* DemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DAF2812AD5600FC4C77 /* DemoScene.swift */; };
 		207D3DD62812AD5700FC4C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DB02812AD5700FC4C77 /* Assets.xcassets */; };
 		207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DB02812AD5700FC4C77 /* Assets.xcassets */; };
+		20AC1FFC283CFDE900BE83F0 /* superkoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AC1FFB283CFDE900BE83F0 /* superkoalio.png */; };
+		20AC1FFD283CFDE900BE83F0 /* superkoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AC1FFB283CFDE900BE83F0 /* superkoalio.png */; };
+		20AC1FFE283CFDE900BE83F0 /* superkoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AC1FFB283CFDE900BE83F0 /* superkoalio.png */; };
 		20B329D8283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
 		20B329D9283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
 		20B329DA283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
@@ -148,9 +151,6 @@
 		20C3241E283B696F00316B48 /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C3241D283B696F00316B48 /* maps.plist */; };
 		20C3241F283B696F00316B48 /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C3241D283B696F00316B48 /* maps.plist */; };
 		20C32420283B696F00316B48 /* maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C3241D283B696F00316B48 /* maps.plist */; };
-		20C32427283B7B4B00316B48 /* tileSet.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C32422283B79FD00316B48 /* tileSet.png */; };
-		20C32428283B7B4B00316B48 /* tileSet.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C32422283B79FD00316B48 /* tileSet.png */; };
-		20C32429283B7B4C00316B48 /* tileSet.png in Resources */ = {isa = PBXBuildFile; fileRef = 20C32422283B79FD00316B48 /* tileSet.png */; };
 		20C3242B283B7B7B00316B48 /* tileSet.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C3242A283B7B7B00316B48 /* tileSet.tsx */; };
 		20C3242C283B7B7B00316B48 /* tileSet.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C3242A283B7B7B00316B48 /* tileSet.tsx */; };
 		20C3242D283B7B7B00316B48 /* tileSet.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20C3242A283B7B7B00316B48 /* tileSet.tsx */; };
@@ -501,6 +501,7 @@
 		207D3DC62812AD5700FC4C77 /* PEMTileMap Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEMTileMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		207D3DC82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		20AC1FFB283CFDE900BE83F0 /* superkoalio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = superkoalio.png; sourceTree = "<group>"; };
 		20B329C2283953180082CE8B /* PEMGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMGroup.swift; sourceTree = "<group>"; };
 		20B329C3283953180082CE8B /* PEMObjectData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectData.swift; sourceTree = "<group>"; };
 		20B329C4283953180082CE8B /* PEMProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMProperty.swift; sourceTree = "<group>"; };
@@ -540,7 +541,6 @@
 		20C321DA283B62C200316B48 /* staggered-64x33.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "staggered-64x33.tmx"; sourceTree = "<group>"; };
 		20C321DB283B62C200316B48 /* staggered-paths-64x33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "staggered-paths-64x33.png"; sourceTree = "<group>"; };
 		20C3241D283B696F00316B48 /* maps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = maps.plist; sourceTree = "<group>"; };
-		20C32422283B79FD00316B48 /* tileSet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileSet.png; sourceTree = "<group>"; };
 		20C3242A283B7B7B00316B48 /* tileSet.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = tileSet.tsx; sourceTree = "<group>"; };
 		20C3242E283B7F6A00316B48 /* link-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "link-icon.png"; sourceTree = "<group>"; };
 		20CA139A281815DD00797A7C /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -863,8 +863,8 @@
 		20C32421283B79E900316B48 /* Superkoalio */ = {
 			isa = PBXGroup;
 			children = (
+				20AC1FFB283CFDE900BE83F0 /* superkoalio.png */,
 				20FAEFCC2837A66C00BEFA8E /* superkoalio.tmx */,
-				20C32422283B79FD00316B48 /* tileSet.png */,
 				20C3242A283B7B7B00316B48 /* tileSet.tsx */,
 			);
 			path = Superkoalio;
@@ -1195,7 +1195,6 @@
 				20FAEFEE2837A66C00BEFA8E /* level3.tmx in Resources */,
 				20FAEFE52837A66C00BEFA8E /* hotdogsoup-icon-full.png in Resources */,
 				20DB7D052837BABE00F17FC7 /* blobBlue.png in Resources */,
-				20C32429283B7B4C00316B48 /* tileSet.png in Resources */,
 				20DB7D262837BABE00F17FC7 /* doorStroked.png in Resources */,
 				20DB7D322837BABE00F17FC7 /* flare.png in Resources */,
 				20DB7DC52837BABE00F17FC7 /* README-.md in Resources */,
@@ -1270,6 +1269,7 @@
 				20FAF02D2837A67500BEFA8E /* CREDITS.txt in Resources */,
 				20C32227283B62C200316B48 /* dungeon-16x16.tmx in Resources */,
 				20DB7DAD2837BABE00F17FC7 /* trap.png in Resources */,
+				20AC1FFE283CFDE900BE83F0 /* superkoalio.png in Resources */,
 				20DB7DF42837BBD600F17FC7 /* ui in Resources */,
 				20FAF0DF2837AC2600BEFA8E /* hexagonal-mini.tmx in Resources */,
 				20DB7D922837BABE00F17FC7 /* shadow.png in Resources */,
@@ -1334,7 +1334,6 @@
 				20FAEFEC2837A66C00BEFA8E /* level3.tmx in Resources */,
 				20FAEFE32837A66C00BEFA8E /* hotdogsoup-icon-full.png in Resources */,
 				20DB7D032837BABE00F17FC7 /* blobBlue.png in Resources */,
-				20C32427283B7B4B00316B48 /* tileSet.png in Resources */,
 				20DB7D242837BABE00F17FC7 /* doorStroked.png in Resources */,
 				20DB7D302837BABE00F17FC7 /* flare.png in Resources */,
 				20DB7DC32837BABE00F17FC7 /* README-.md in Resources */,
@@ -1409,6 +1408,7 @@
 				20FAF02B2837A67500BEFA8E /* CREDITS.txt in Resources */,
 				20C32225283B62C200316B48 /* dungeon-16x16.tmx in Resources */,
 				20DB7DAB2837BABE00F17FC7 /* trap.png in Resources */,
+				20AC1FFC283CFDE900BE83F0 /* superkoalio.png in Resources */,
 				20DB7DF22837BBD600F17FC7 /* ui in Resources */,
 				20FAF0DD2837AC2600BEFA8E /* hexagonal-mini.tmx in Resources */,
 				20DB7D902837BABE00F17FC7 /* shadow.png in Resources */,
@@ -1437,7 +1437,6 @@
 				20DB7DAC2837BABE00F17FC7 /* trap.png in Resources */,
 				20DB7D432837BABE00F17FC7 /* hero.png in Resources */,
 				20DB7D672837BABE00F17FC7 /* platformBase4.png in Resources */,
-				20C32428283B7B4B00316B48 /* tileSet.png in Resources */,
 				20FAF0ED2837AC2600BEFA8E /* objecttypes.xml in Resources */,
 				20DB7D2E2837BABE00F17FC7 /* exit.png in Resources */,
 				20FAEFD82837A66C00BEFA8E /* Animated kanga.tsx in Resources */,
@@ -1445,6 +1444,7 @@
 				20DB7D882837BABE00F17FC7 /* pushBlock3.png in Resources */,
 				20C32232283B62C200316B48 /* dungeon-32x32.png in Resources */,
 				20FAEFDE2837A66C00BEFA8E /* animated2.png in Resources */,
+				20AC1FFD283CFDE900BE83F0 /* superkoalio.png in Resources */,
 				20DB7DAF2837BABE00F17FC7 /* wallDecor1.png in Resources */,
 				20C3222C283B62C200316B48 /* dungeon-16x32.png in Resources */,
 				20FAEFED2837A66C00BEFA8E /* level3.tmx in Resources */,
