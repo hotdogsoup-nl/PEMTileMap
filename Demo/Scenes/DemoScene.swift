@@ -25,10 +25,12 @@ class DemoScene: SKScene {
     
     private var previousUpdateTime = TimeInterval(0)
     private var cameraNode: SKCameraNode!
+    private var previousCameraScale = CGFloat(1.0)
     private var initalTouchLocation = CGPoint.zero
     
     #if os(iOS)
     private var pinch: UIPinchGestureRecognizer!
+    private var pan: UIPanGestureRecognizer!
     #endif
     
     // MARK: - Init
@@ -44,7 +46,11 @@ class DemoScene: SKScene {
         
         #if os(iOS)
         pinch = UIPinchGestureRecognizer(target: self, action: #selector(scenePinched(_:)))
+        pinch.delegate = self
+        pan = UIPanGestureRecognizer(target: self, action: #selector(scenePanned(_:)))
+        pan.delegate = self
         view.addGestureRecognizer(pinch)
+        view.addGestureRecognizer(pan)
         #endif
 
         startControl()
@@ -174,7 +180,7 @@ class DemoScene: SKScene {
             break
         }
         
-        map?.moveCamera(sceneSize: size, zoomMode: zoomMode, viewMode: viewMode, factor: 1, duration: 0.5)
+        map?.moveCamera(sceneSize: size, zoomMode: zoomMode, viewMode: viewMode, factor: 1, duration: 0.5, timingMode: .easeInEaseOut)
     }
     
     private func attributedString(_ string: String, fontName:String, textSize: CGFloat ) -> NSAttributedString {
@@ -357,14 +363,18 @@ class DemoScene: SKScene {
             }
         }
         
+        #if os(macOS)
         initalTouchLocation = pos
+        #endif
     }
 
     private func touchMovedToPoint(_ pos: CGPoint) {
         guard !buttonTapped else { return }
 
+        #if os(macOS)
         let delta = initalTouchLocation.subtract(pos)
         cameraNode.position = cameraNode.position.add(delta)
+        #endif
     }
 
     private func touchUpAtPoint(_ pos: CGPoint) {
@@ -376,7 +386,12 @@ class DemoScene: SKScene {
 }
 
 #if os(iOS) || os(tvOS)
-extension DemoScene {
+
+extension DemoScene: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
+        return true
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
@@ -412,14 +427,39 @@ extension DemoScene {
     #if os(iOS)
 
     @objc public func scenePinched(_ recognizer: UIPinchGestureRecognizer) {
+        print("pins")
+
+        if recognizer.state == .began {
+           previousCameraScale = cameraNode.xScale
+         }
+        
         if recognizer.state == .changed {
-            cameraNode.xScale = 1 / recognizer.scale
-            cameraNode.yScale = 1 / recognizer.scale
+            cameraNode.setScale(previousCameraScale * 1 / recognizer.scale)
+        }
+    }
+    
+    @objc public func scenePanned(_ recognizer: UIPanGestureRecognizer) {
+        print("pans")
+        
+        let pos = recognizer.translation(in: self.view)
+
+        if recognizer.state == .began {
+            initalTouchLocation = pos
+        }
+        
+        if recognizer.state == .changed {
+            let translation = pos
+            let newPosition = CGPoint(
+              x: initalTouchLocation.x + translation.x * -1,
+              y: initalTouchLocation.y + translation.y
+            )
+            cameraNode.position = newPosition
         }
     }
 
     #endif
 }
+
 #endif
 
 #if os(macOS)
