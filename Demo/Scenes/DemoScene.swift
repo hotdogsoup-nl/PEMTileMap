@@ -247,11 +247,11 @@ class DemoScene: SKScene {
         buttonSize = CGSize(width: size.width * 0.05, height: size.width * 0.03)
         verticalMargin = size.height * 0.025
         horizontalMargin = size.width * 0.01
-
+                
         for buttonTitle in buttonTitles {
             var fillColor = SKColor.blue
             let strokeColor = SKColor.white
-
+            
             if index == 2 {
                 fillColor = .systemBlue
             }
@@ -259,6 +259,13 @@ class DemoScene: SKScene {
             newButton = button(name: "cameraButton-\(index)", buttonSize: buttonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
             newButton.position = CGPoint(x: size.width * 0.5 - (buttonSize.width + horizontalMargin) * 3 + buttonSize.width * CGFloat(index % 3) + horizontalMargin * CGFloat(index % 3), y: size.height * 0.5 - verticalMargin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - verticalMargin * CGFloat(index / 3))
             cameraNode.addChild(newButton)
+            
+            if index == 1 {
+                let cameraLabel = SKLabelNode(attributedText: attributedString("Camera Alignment", fontName: "Courier", textSize: textSize * 0.8))
+                cameraLabel.numberOfLines = 0
+                cameraLabel.position = CGPoint(x: newButton.position.x, y: newButton.position.y - buttonSize.height - cameraLabel.calculateAccumulatedFrame().size.height * 0.5)
+                cameraNode.addChild(cameraLabel)
+            }
 
             index += 1
         }
@@ -273,7 +280,7 @@ class DemoScene: SKScene {
             let smallButtonSize = CGSize(width: textSize, height: textSize)
 
             newButton = button(name: "cameraButton-\(index)", buttonSize: smallButtonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
-            newButton.position = CGPoint(x: size.width * 0.5 - (buttonSize.width + horizontalMargin) * 3 + buttonSize.width * CGFloat(index % 3) + horizontalMargin * CGFloat(index % 3), y: size.height * 0.5 - verticalMargin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - verticalMargin * CGFloat(index / 3))
+            newButton.position = CGPoint(x: size.width * 0.5 - (buttonSize.width + horizontalMargin) * 3 + buttonSize.width * CGFloat(index % 3) + horizontalMargin * CGFloat(index % 3), y: size.height * 0.5 - verticalMargin - buttonSize.height * 1.25 - buttonSize.height * CGFloat(index / 3) - verticalMargin * CGFloat(index / 3))
             cameraNode.addChild(newButton)
 
             index += 1
