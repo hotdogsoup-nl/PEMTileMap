@@ -285,8 +285,9 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     ///     - viewMode : Used to determine how the camera position is aligned within the given `sceneSize`.
     ///     - factor : Optional movement factor that limits the move. A value of 1.0 means full motion within the given `sceneSize`.
     ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
+    ///     - timingMode: Optional SKActionTimingMode for the animation. Defaults to .linear.
     ///     - completion : Optional completion block which is called when camera movement has finished.
-    public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, completion:@escaping ()->Void = {}) {
+    public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, timingMode: SKActionTimingMode = .linear, completion:@escaping ()->Void = {}) {
         guard cameraNode != nil else { return }
         
         
@@ -308,8 +309,15 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             
             let newScale = (1.0 / contentScale / factor * 100).rounded() / 100
             
-            let zoomAction = SKAction.scale(to: newScale, duration: duration)
-            cameraNode?.run(zoomAction)
+            if duration > 0 {
+                let zoomAction = SKAction.scale(to: newScale, duration: duration)
+                zoomAction.timingMode = timingMode
+                cameraNode?.run(zoomAction)
+            } else {
+                cameraNode?.xScale = newScale
+                cameraNode?.yScale = newScale
+            }
+            
             cameraZoomMode = zoomMode
         }
         
@@ -341,8 +349,15 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 }
             }
                     
-            let moveAction = SKAction.move(to: newPosition, duration: duration)
-            cameraNode?.run(moveAction, completion: completion)
+            if duration > 0 {
+                let moveAction = SKAction.move(to: newPosition, duration: duration)
+                moveAction.timingMode = timingMode
+                cameraNode?.run(moveAction, completion: completion)
+            } else {
+                cameraNode?.position = newPosition
+                completion()
+            }
+            
             cameraViewMode = viewMode
         }
     }
