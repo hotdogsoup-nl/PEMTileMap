@@ -16,6 +16,12 @@
 		2037A5EC28258DA000E13452 /* DemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DAF2812AD5600FC4C77 /* DemoScene.swift */; };
 		2037A5EE28258DA500E13452 /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
 		2037A5F828258E0700E13452 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
+		20426D60283D20EC00514ABE /* Spaced with margin.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D5F283D20EC00514ABE /* Spaced with margin.tsx */; };
+		20426D61283D20EC00514ABE /* Spaced with margin.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D5F283D20EC00514ABE /* Spaced with margin.tsx */; };
+		20426D62283D20EC00514ABE /* Spaced with margin.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D5F283D20EC00514ABE /* Spaced with margin.tsx */; };
+		20426D64283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
+		20426D65283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
+		20426D66283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
 		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		20584B4A283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
@@ -488,6 +494,8 @@
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		2037A5E028258C4900E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2037A5E528258C4A00E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		20426D5F283D20EC00514ABE /* Spaced with margin.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Spaced with margin.tsx"; sourceTree = "<group>"; };
+		20426D63283D212A00514ABE /* Snail.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Snail.tx; sourceTree = "<group>"; };
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		20584B49283A2A1C00B38F37 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		205F766F283BC452003B775E /* macOS version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "macOS version.entitlements"; sourceTree = "<group>"; };
@@ -1003,6 +1011,8 @@
 				20FAEFCB2837A66C00BEFA8E /* hotdogsoup-icon-full.png */,
 				20FAEFCE2837A66C00BEFA8E /* level3.tmx */,
 				20FAEFD02837A66C00BEFA8E /* level5.tmx */,
+				20426D63283D212A00514ABE /* Snail.tx */,
+				20426D5F283D20EC00514ABE /* Spaced with margin.tsx */,
 				20FAF03A2837A68900BEFA8E /* Tiles */,
 			);
 			path = hotdogsoup.nl;
@@ -1222,6 +1232,7 @@
 				20FAEFE82837A66C00BEFA8E /* superkoalio.tmx in Resources */,
 				20FAEFDF2837A66C00BEFA8E /* animated2.png in Resources */,
 				20DB7D442837BABE00F17FC7 /* hero.png in Resources */,
+				20426D66283D212A00514ABE /* Snail.tx in Resources */,
 				20DB7D022837BABE00F17FC7 /* backgroundTree.png in Resources */,
 				20DB7D4D2837BABE00F17FC7 /* keyYellowStroked.png in Resources */,
 				20DB7D592837BABE00F17FC7 /* platform3.png in Resources */,
@@ -1235,6 +1246,7 @@
 				20DB7DB02837BABE00F17FC7 /* wallDecor1.png in Resources */,
 				20DB7CF92837BABE00F17FC7 /* backgroundArch.png in Resources */,
 				20C32254283B62C200316B48 /* staggered-paths-64x33.png in Resources */,
+				20426D62283D20EC00514ABE /* Spaced with margin.tsx in Resources */,
 				20C32224283B62C200316B48 /* dungeon-16x16.png in Resources */,
 				20FAEFE22837A66C00BEFA8E /* Collection.tsx in Resources */,
 				20DB7D382837BABE00F17FC7 /* gemRedStroked.png in Resources */,
@@ -1361,6 +1373,7 @@
 				20FAEFE62837A66C00BEFA8E /* superkoalio.tmx in Resources */,
 				20FAEFDD2837A66C00BEFA8E /* animated2.png in Resources */,
 				20DB7D422837BABE00F17FC7 /* hero.png in Resources */,
+				20426D64283D212A00514ABE /* Snail.tx in Resources */,
 				20DB7D002837BABE00F17FC7 /* backgroundTree.png in Resources */,
 				20DB7D4B2837BABE00F17FC7 /* keyYellowStroked.png in Resources */,
 				20DB7D572837BABE00F17FC7 /* platform3.png in Resources */,
@@ -1374,6 +1387,7 @@
 				20DB7DAE2837BABE00F17FC7 /* wallDecor1.png in Resources */,
 				20DB7CF72837BABE00F17FC7 /* backgroundArch.png in Resources */,
 				20C32252283B62C200316B48 /* staggered-paths-64x33.png in Resources */,
+				20426D60283D20EC00514ABE /* Spaced with margin.tsx in Resources */,
 				20C32222283B62C200316B48 /* dungeon-16x16.png in Resources */,
 				20FAEFE02837A66C00BEFA8E /* Collection.tsx in Resources */,
 				20DB7D362837BABE00F17FC7 /* gemRedStroked.png in Resources */,
@@ -1487,6 +1501,7 @@
 				20DB7D1C2837BABE00F17FC7 /* doorBlueStroked.png in Resources */,
 				20FAEFE42837A66C00BEFA8E /* hotdogsoup-icon-full.png in Resources */,
 				20C32241283B62C200316B48 /* isometric-130x66.tmx in Resources */,
+				20426D65283D212A00514ABE /* Snail.tx in Resources */,
 				20DB7D972837BABE00F17FC7 /* sign.png in Resources */,
 				20DB7D642837BABE00F17FC7 /* platformBase3.png in Resources */,
 				20FAF0C62837AC2600BEFA8E /* buch-outdoor.png in Resources */,
@@ -1560,6 +1575,7 @@
 				20FAF0E12837AC2600BEFA8E /* hexmini.png in Resources */,
 				20FAF0DE2837AC2600BEFA8E /* hexagonal-mini.tmx in Resources */,
 				20DB7C672837B9ED00F17FC7 /* island.tmx in Resources */,
+				20426D61283D20EC00514ABE /* Spaced with margin.tsx in Resources */,
 				20FAF0E72837AC2600BEFA8E /* isometric_grass_and_water.tmx in Resources */,
 				20C3241F283B696F00316B48 /* maps.plist in Resources */,
 			);
