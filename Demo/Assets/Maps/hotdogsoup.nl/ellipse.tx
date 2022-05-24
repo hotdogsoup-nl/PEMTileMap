@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="Circle / ellipse" type="Ellipseskslsk" width="84" height="42" rotation="346.503">
+  <ellipse/>
+ </object>
+</template>

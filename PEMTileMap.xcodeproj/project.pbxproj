@@ -34,6 +34,9 @@
 		20AC1FFC283CFDE900BE83F0 /* superkoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AC1FFB283CFDE900BE83F0 /* superkoalio.png */; };
 		20AC1FFD283CFDE900BE83F0 /* superkoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AC1FFB283CFDE900BE83F0 /* superkoalio.png */; };
 		20AC1FFE283CFDE900BE83F0 /* superkoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AC1FFB283CFDE900BE83F0 /* superkoalio.png */; };
+		20AC200C283D026900BE83F0 /* ellipse.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20AC200B283D026900BE83F0 /* ellipse.tx */; };
+		20AC200D283D026900BE83F0 /* ellipse.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20AC200B283D026900BE83F0 /* ellipse.tx */; };
+		20AC200E283D026900BE83F0 /* ellipse.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20AC200B283D026900BE83F0 /* ellipse.tx */; };
 		20B329D8283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
 		20B329D9283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
 		20B329DA283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
@@ -417,9 +420,6 @@
 		20FAEFF22837A66C00BEFA8E /* level5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFD02837A66C00BEFA8E /* level5.tmx */; };
 		20FAEFF32837A66C00BEFA8E /* level5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFD02837A66C00BEFA8E /* level5.tmx */; };
 		20FAEFF42837A66C00BEFA8E /* level5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFD02837A66C00BEFA8E /* level5.tmx */; };
-		20FAEFF52837A66C00BEFA8E /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFD12837A66C00BEFA8E /* objecttemplate.tx */; };
-		20FAEFF62837A66D00BEFA8E /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFD12837A66C00BEFA8E /* objecttemplate.tx */; };
-		20FAEFF72837A66D00BEFA8E /* objecttemplate.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFD12837A66C00BEFA8E /* objecttemplate.tx */; };
 		20FAF0132837A67500BEFA8E /* gameart2d-desert.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0052837A67500BEFA8E /* gameart2d-desert.png */; };
 		20FAF0142837A67500BEFA8E /* gameart2d-desert.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0052837A67500BEFA8E /* gameart2d-desert.png */; };
 		20FAF0152837A67500BEFA8E /* gameart2d-desert.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0052837A67500BEFA8E /* gameart2d-desert.png */; };
@@ -502,6 +502,7 @@
 		207D3DC82812AD5700FC4C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		20AC1FFB283CFDE900BE83F0 /* superkoalio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = superkoalio.png; sourceTree = "<group>"; };
+		20AC200B283D026900BE83F0 /* ellipse.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ellipse.tx; sourceTree = "<group>"; };
 		20B329C2283953180082CE8B /* PEMGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMGroup.swift; sourceTree = "<group>"; };
 		20B329C3283953180082CE8B /* PEMObjectData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectData.swift; sourceTree = "<group>"; };
 		20B329C4283953180082CE8B /* PEMProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMProperty.swift; sourceTree = "<group>"; };
@@ -631,7 +632,6 @@
 		20FAEFCC2837A66C00BEFA8E /* superkoalio.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = superkoalio.tmx; sourceTree = "<group>"; };
 		20FAEFCE2837A66C00BEFA8E /* level3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level3.tmx; sourceTree = "<group>"; };
 		20FAEFD02837A66C00BEFA8E /* level5.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level5.tmx; sourceTree = "<group>"; };
-		20FAEFD12837A66C00BEFA8E /* objecttemplate.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = objecttemplate.tx; sourceTree = "<group>"; };
 		20FAF0052837A67500BEFA8E /* gameart2d-desert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameart2d-desert.png"; sourceTree = "<group>"; };
 		20FAF0062837A67500BEFA8E /* gameart2d-desert.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "gameart2d-desert.tmx"; sourceTree = "<group>"; };
 		20FAF00B2837A67500BEFA8E /* MagicLand.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MagicLand.tmx; sourceTree = "<group>"; };
@@ -798,10 +798,10 @@
 				20B329CF283953180082CE8B /* Helper */,
 				20B329C1283953180082CE8B /* Model */,
 				20B329CD283953180082CE8B /* PEMImageLayer.swift */,
-				20B329CE283953180082CE8B /* PEMTileMap.swift */,
 				20B329CC283953180082CE8B /* PEMObjectGroup.swift */,
 				20B329CB283953180082CE8B /* PEMTile.swift */,
 				20B329CA283953180082CE8B /* PEMTileLayer.swift */,
+				20B329CE283953180082CE8B /* PEMTileMap.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -999,10 +999,10 @@
 				20FAEFC82837A66C00BEFA8E /* animated1.png */,
 				20FAEFC92837A66C00BEFA8E /* animated2.png */,
 				20FAEFCA2837A66C00BEFA8E /* Collection.tsx */,
+				20AC200B283D026900BE83F0 /* ellipse.tx */,
 				20FAEFCB2837A66C00BEFA8E /* hotdogsoup-icon-full.png */,
 				20FAEFCE2837A66C00BEFA8E /* level3.tmx */,
 				20FAEFD02837A66C00BEFA8E /* level5.tmx */,
-				20FAEFD12837A66C00BEFA8E /* objecttemplate.tx */,
 				20FAF03A2837A68900BEFA8E /* Tiles */,
 			);
 			path = hotdogsoup.nl;
@@ -1203,6 +1203,7 @@
 				20DB7D952837BABE00F17FC7 /* shieldStroked.png in Resources */,
 				20C3222D283B62C200316B48 /* dungeon-16x32.png in Resources */,
 				20DB7D4A2837BABE00F17FC7 /* keyRedStroked.png in Resources */,
+				20AC200E283D026900BE83F0 /* ellipse.tx in Resources */,
 				20FAF22C2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.png in Resources */,
 				20FAF0182837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
 				20DB7D9E2837BABE00F17FC7 /* swordStroked.png in Resources */,
@@ -1254,7 +1255,6 @@
 				20C32420283B696F00316B48 /* maps.plist in Resources */,
 				20DB7D2F2837BABE00F17FC7 /* exit.png in Resources */,
 				20C32239283B62C200316B48 /* hex-65x65-65x230.png in Resources */,
-				20FAEFF72837A66D00BEFA8E /* objecttemplate.tx in Resources */,
 				20DB7C682837B9ED00F17FC7 /* island.tmx in Resources */,
 				20FAF0F42837AC2600BEFA8E /* perspective_walls.png in Resources */,
 				20DB7D802837BABE00F17FC7 /* platformConnector4.png in Resources */,
@@ -1342,6 +1342,7 @@
 				20DB7D932837BABE00F17FC7 /* shieldStroked.png in Resources */,
 				20C3222B283B62C200316B48 /* dungeon-16x32.png in Resources */,
 				20DB7D482837BABE00F17FC7 /* keyRedStroked.png in Resources */,
+				20AC200C283D026900BE83F0 /* ellipse.tx in Resources */,
 				20FAF22A2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.png in Resources */,
 				20FAF0162837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
 				20DB7D9C2837BABE00F17FC7 /* swordStroked.png in Resources */,
@@ -1393,7 +1394,6 @@
 				20C3241E283B696F00316B48 /* maps.plist in Resources */,
 				20DB7D2D2837BABE00F17FC7 /* exit.png in Resources */,
 				20C32237283B62C200316B48 /* hex-65x65-65x230.png in Resources */,
-				20FAEFF52837A66C00BEFA8E /* objecttemplate.tx in Resources */,
 				20DB7C662837B9ED00F17FC7 /* island.tmx in Resources */,
 				20FAF0F22837AC2600BEFA8E /* perspective_walls.png in Resources */,
 				20DB7D7E2837BABE00F17FC7 /* platformConnector4.png in Resources */,
@@ -1441,6 +1441,7 @@
 				20DB7D2E2837BABE00F17FC7 /* exit.png in Resources */,
 				20FAEFD82837A66C00BEFA8E /* Animated kanga.tsx in Resources */,
 				20DB7DF32837BBD600F17FC7 /* ui in Resources */,
+				20AC200D283D026900BE83F0 /* ellipse.tx in Resources */,
 				20DB7D882837BABE00F17FC7 /* pushBlock3.png in Resources */,
 				20C32232283B62C200316B48 /* dungeon-32x32.png in Resources */,
 				20FAEFDE2837A66C00BEFA8E /* animated2.png in Resources */,
@@ -1501,7 +1502,6 @@
 				20C32247283B62C200316B48 /* roguelike-16x16.tmx in Resources */,
 				20C32235283B62C200316B48 /* dungeon-32x32.tsx in Resources */,
 				20DB7CFE2837BABE00F17FC7 /* backgroundTower.png in Resources */,
-				20FAEFF62837A66D00BEFA8E /* objecttemplate.tx in Resources */,
 				20C32253283B62C200316B48 /* staggered-paths-64x33.png in Resources */,
 				20DB7D912837BABE00F17FC7 /* shadow.png in Resources */,
 				20DB7D7F2837BABE00F17FC7 /* platformConnector4.png in Resources */,
