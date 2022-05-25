@@ -97,10 +97,37 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Public
     
-    func parseExternalTemplates() {
+    func parseExternalTemplates(objectTemplates: Dictionary<String, PEMObjectData>) -> Dictionary<String, PEMObjectData>? {
+        var result: Dictionary<String, PEMObjectData> = [:]
+        
         for object in objects {
-            object.parseExternalTemplate()
+            if let externalSource = object.externalSource {
+                if let templateObjectData = objectTemplates[externalSource] {
+                    object.applyTemplate(templateObjectData)
+                } else {
+                    if let url = bundleURLForResource(object.externalSource!) {
+                        if let templateObjectData = PEMObjectData(attributes: [:]) {
+                            if let parser = PEMTmxParser(objectData: templateObjectData, fileURL: url) {
+                                if (parser.parse()) {
+                                    result[externalSource] = templateObjectData
+                                    object.applyTemplate(templateObjectData)
+                                } else {
+                                    #if DEBUG
+                                    print("PEMObjectData: Error parsing external template: ", parser.parserError as Any)
+                                    #endif
+                                }
+                            }
+                        }
+                    } else {
+                        #if DEBUG
+                        print("PEMObjectData: External template file not found: \(object.externalSource ?? "-")")
+                        #endif
+                    }
+                }
+            }
         }
+        
+        return (result.count > 0) ? result : nil
     }
 
     func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
@@ -111,19 +138,10 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         for object in objects {
             var node : SKNode?
             var sizeInPoints: CGSize!
-
-            if object.objectType == .unknown {
-                sizeInPoints = tileSizeInPoints
-            } else {
-                sizeInPoints = object.sizeInPoints != nil ? object.sizeInPoints : tileSizeInPoints
-            }
-            
-            if object.objectType == .unknown {
-                sizeInPoints = tileSizeInPoints
-            }
+            sizeInPoints = (object.sizeInPoints != nil) ? object.sizeInPoints : tileSizeInPoints
             
             var objectCoordsInPoints: CGPoint!
-            objectCoordsInPoints = object.coordsInPoints != nil ? object.coordsInPoints : .zero
+            objectCoordsInPoints = (object.coordsInPoints != nil) ? object.coordsInPoints : .zero
 
             var position = CGPoint(x: objectCoordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - objectCoordsInPoints.y - tileSizeInPoints.height * 0.5)
 
@@ -135,29 +153,66 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                 node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
                 position = CGPoint(x: position.x - sizeInPoints.width * 0.5, y: position.y + sizeInPoints.height * 0.5)
             case .polygon, .polyline:
-                var points = object.polygonPoints
-                node = SKShapeNode(points: &points, count: points.count)
-                sizeInPoints = node!.calculateAccumulatedFrame().size
-            case .rectangle, .unknown:
+                if var points = object.polygonPoints {
+                    node = SKShapeNode(points: &points, count: points.count)
+                    sizeInPoints = node!.calculateAccumulatedFrame().size
+                }
+            case .rectangle:
                 node = SKShapeNode(rect: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
             case .text:
-                let text = highResolutionLabel(text: object.text,
-                                           fontName: object.fontFamily,
-                                           fontSize: object.pixelSize,
-                                           fontColor: object.textColor,
-                                           bold: object.bold,
-                                           italic: object.italic,
-                                           underline: object.underline,
-                                           strikeOut: object.strikeOut,
-                                           kerning: object.kerning,
-                                           wordWrapWidth: object.wrap ? sizeInPoints.width : 0,
-                                           hAlign: object.hAlign,
-                                           vAlign: object.vAlign)
-                text.anchorPoint = CGPoint(x: 0.0, y: 1.0)
-                node = text
+                var text: String!
+                text = (object.text != nil) ? object.text : ""
+
+                var fontFamily: String!
+                fontFamily = (object.fontFamily != nil) ? object.fontFamily : "Arial"
+
+                var pixelSize: CGFloat!
+                pixelSize = (object.pixelSize != nil) ? object.pixelSize : 16
+
+                var textColor: SKColor!
+                textColor = (object.textColor != nil) ? object.textColor : .white
+
+                var bold: Bool!
+                bold = (object.bold != nil) ? object.bold : false
+
+                var italic: Bool!
+                italic = (object.italic != nil) ? object.italic : false
+
+                var underline: Bool!
+                underline = (object.underline != nil) ? object.underline : false
+
+                var strikeOut: Bool!
+                strikeOut = (object.strikeOut != nil) ? object.strikeOut : false
+
+                var kerning: Bool!
+                kerning = (object.kerning != nil) ? object.kerning : false
+
+                var wrap: Bool!
+                wrap = (object.wrap != nil) ? object.wrap : false
+
+                var hAlign: TextHorizontalAlignment!
+                hAlign = (object.hAlign != nil) ? object.hAlign : .left
+                
+                var vAlign: TextVerticalAlignment!
+                vAlign = (object.vAlign != nil) ? object.vAlign : .top
+
+                let textLabel = highResolutionLabel(text: text,
+                                                    fontName: fontFamily,
+                                                    fontSize: pixelSize,
+                                                    fontColor: textColor,
+                                                    bold: bold,
+                                                    italic: italic,
+                                                    underline: underline,
+                                                    strikeOut: strikeOut,
+                                                    kerning: kerning,
+                                                    wordWrapWidth: (wrap) ? sizeInPoints.width : 0,
+                                                    hAlign: hAlign,
+                                                    vAlign: vAlign)
+                textLabel.anchorPoint = CGPoint(x: 0.0, y: 1.0)
+                node = textLabel
             case .tile:
                 var tileGid: UInt32!
-                tileGid = object.tileGid != nil ? object.tileGid : 0
+                tileGid = (object.tileGid != nil) ? object.tileGid : 0
 
                 let tileGidAttributes = tileAttributes(fromId: tileGid)
                 
@@ -194,6 +249,8 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                         }
                     }
                 }
+            case .none:
+                break
             }
             
             if node == nil {
@@ -216,7 +273,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             node?.position = position
             
             var rotation: CGFloat!
-            rotation = object.rotation != nil ? object.rotation : 0
+            rotation = (object.rotation != nil) ? object.rotation : 0
             node?.zRotation = rotation.radians()
             
             if object.objectName != nil {

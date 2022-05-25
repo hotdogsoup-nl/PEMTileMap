@@ -87,6 +87,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private var zPositionLayerDelta = CGFloat(20)
     
     internal var tileSets: Array<PEMTileSet> = []
+    internal var objectTemplates: Dictionary<String, PEMObjectData> = [:]
     internal var layers: Array<AnyObject> = []
     
     private var cameraViewMode = CameraViewMode.none
@@ -371,7 +372,9 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         
         for layer in layers {
             if let objectLayer = layer as? PEMObjectGroup {
-                objectLayer.parseExternalTemplates()
+                if let newObjectTemplates = objectLayer.parseExternalTemplates(objectTemplates: objectTemplates) {
+                    objectTemplates.merge(newObjectTemplates) { (current, _) in current }
+                }
             }
         }
     }

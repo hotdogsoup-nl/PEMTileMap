@@ -9,7 +9,6 @@ enum ObjectType {
     case rectangle
     case text
     case tile
-    case unknown
 }
 
 enum TextHorizontalAlignment: String {
@@ -27,31 +26,30 @@ enum TextVerticalAlignment: String {
 
 class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var id = UInt32(0)
-    private (set) var objectType = ObjectType.unknown
+    private (set) var objectType: ObjectType?
     private (set) var visible: Bool?
     private (set) var coordsInPoints: CGPoint?
     private (set) var sizeInPoints: CGSize?
     private (set) var rotation: CGFloat?
     private (set) var objectName: String?
     private (set) var tileGid: UInt32?
-    private (set) var text = ""
-    private (set) var textColor = SKColor.white
-    private (set) var fontFamily = "Arial"
-    private (set) var bold = false
-    private (set) var italic = false
-    private (set) var pixelSize = CGFloat(16)
-    private (set) var underline = false
-    private (set) var strikeOut = false
-    private (set) var kerning = true
-    private (set) var hAlign = TextHorizontalAlignment.left
-    private (set) var vAlign = TextVerticalAlignment.top
-    private (set) var wrap = false
-
-    private (set) var properties: Dictionary<String, Any>?
-    private (set) var polygonPoints: [CGPoint] = []
+    private (set) var text: String?
+    private (set) var textColor: SKColor?
+    private (set) var fontFamily: String?
+    private (set) var bold: Bool?
+    private (set) var italic: Bool?
+    private (set) var pixelSize: CGFloat?
+    private (set) var underline: Bool?
+    private (set) var strikeOut: Bool?
+    private (set) var kerning: Bool?
+    private (set) var hAlign: TextHorizontalAlignment?
+    private (set) var vAlign: TextVerticalAlignment?
+    private (set) var wrap: Bool?
+    private (set) var type: String?
+    private (set) var externalSource: String?
     
-    private var type: String?
-    private var externalSource: String?
+    private (set) var properties: Dictionary<String, Any>?
+    private (set) var polygonPoints: Array<CGPoint>?
 
     init?(attributes: Dictionary<String, String>) {
         super.init()
@@ -173,7 +171,10 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
                 let coordsArray = point.components(separatedBy: ",")
                 if let x = Int(coordsArray.first!),
                    let y = Int(coordsArray.last!) {
-                    polygonPoints.append(CGPoint(x: x, y: -y))
+                    if polygonPoints == nil {
+                        polygonPoints = []
+                    }
+                    polygonPoints!.append(CGPoint(x: x, y: -y))
                 }
             }
         }
@@ -184,25 +185,6 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     }
     
     // MARK: - Setup
-    
-    func parseExternalTemplate() {
-        guard externalSource != nil else { return }
-                
-        if let url = bundleURLForResource(externalSource!),
-           let parser = PEMTmxParser(objectData: self, fileURL: url) {
-            if (!parser.parse()) {
-                #if DEBUG
-                print("PEMObjectData: Error parsing external template: ", parser.parserError as Any)
-                #endif
-                return
-            }
-        } else {
-            #if DEBUG
-            print("PEMObjectData: External template file not found: \(externalSource ?? "-")")
-            #endif
-            return
-        }
-    }
         
     func addTemplateAttributes(_ attributes: Dictionary<String, String>) {
         if let value = attributes[ElementAttributes.name.rawValue],
@@ -252,6 +234,104 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
+    func applyTemplate(_ template: PEMObjectData) {
+        if objectType == nil {
+            objectType = template.objectType
+        }
+        
+        if visible == nil {
+            visible = template.visible
+        }
+        
+        if coordsInPoints == nil {
+            coordsInPoints = template.coordsInPoints
+        }
+
+        if sizeInPoints == nil {
+            sizeInPoints = template.sizeInPoints
+        }
+
+        if rotation == nil {
+            rotation = template.rotation
+        }
+
+        if objectName == nil {
+            objectName = template.objectName
+        }
+
+        if tileGid == nil {
+            tileGid = template.tileGid
+        }
+
+        if text == nil {
+            text = template.text
+        }
+
+        if textColor == nil {
+            textColor = template.textColor
+        }
+
+        if fontFamily == nil {
+            fontFamily = template.fontFamily
+        }
+
+        if bold == nil {
+            bold = template.bold
+        }
+
+        if italic == nil {
+            italic = template.italic
+        }
+
+        if italic == nil {
+            italic = template.italic
+        }
+
+        if pixelSize == nil {
+            pixelSize = template.pixelSize
+        }
+
+        if underline == nil {
+            underline = template.underline
+        }
+        
+        if strikeOut == nil {
+            strikeOut = template.strikeOut
+        }
+        
+        if kerning == nil {
+            kerning = template.kerning
+        }
+
+        if hAlign == nil {
+            hAlign = template.hAlign
+        }
+
+        if vAlign == nil {
+            vAlign = template.vAlign
+        }
+
+        if wrap == nil {
+            wrap = template.wrap
+        }
+
+        if type == nil {
+            type = template.type
+        }
+
+        if externalSource == nil {
+            externalSource = template.externalSource
+        }
+
+        if properties == nil {
+            properties = template.properties
+        }
+
+        if polygonPoints == nil {
+            polygonPoints = template.polygonPoints
+        }
+    }
+    
     // MARK: - PEMTileMapPropertiesProtocol
     
     func addProperties(_ newProperties: [PEMProperty]) {
@@ -262,7 +342,7 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMObjectData: \(id), (name: \(objectName ?? "-"), objectType: \(objectType))"
+        return "PEMObjectData: \(id), (name: \(objectName ?? "-"), objectType: \(String(describing: objectType)))"
     }
     #endif
 }
