@@ -86,7 +86,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Setup
         
-    func addObjectData(attributes: Dictionary<String, String>) -> PEMObjectData? {
+    internal func addObjectData(attributes: Dictionary<String, String>) -> PEMObjectData? {
         if let objectData = PEMObjectData(attributes: attributes) {
             objects.append(objectData)
             return objectData
@@ -95,22 +95,24 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         return nil
     }
     
-    // MARK: - Public
+    // MARK: - Internal
     
-    func parseExternalTemplates(objectTemplates: Dictionary<String, PEMObjectData>) -> Dictionary<String, PEMObjectData>? {
+    internal func parseExternalTemplates(objectTemplates: Dictionary<String, PEMObjectData>) -> Dictionary<String, PEMObjectData>? {
         var result: Dictionary<String, PEMObjectData> = [:]
         
         for object in objects {
             if let externalSource = object.externalSource {
                 if let templateObjectData = objectTemplates[externalSource] {
-                    object.applyTemplate(templateObjectData)
+                    object.setObjectType(templateObjectData.objectType)
+                    object.addAttributes(templateObjectData.attributes)
                 } else {
                     if let url = bundleURLForResource(object.externalSource!) {
-                        if let templateObjectData = PEMObjectData(attributes: [:]) {
+                        if let templateObjectData = PEMObjectData(attributes: nil) {
                             if let parser = PEMTmxParser(objectData: templateObjectData, fileURL: url) {
                                 if (parser.parse()) {
                                     result[externalSource] = templateObjectData
-                                    object.applyTemplate(templateObjectData)
+                                    object.setObjectType(templateObjectData.objectType)
+                                    object.addAttributes(templateObjectData.attributes)
                                 } else {
                                     #if DEBUG
                                     print("PEMObjectData: Error parsing external template: ", parser.parserError as Any)
@@ -130,12 +132,14 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         return (result.count > 0) ? result : nil
     }
 
-    func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
+    internal func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
         
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
                 
         for object in objects {
+            object.parseAttributes()
+
             var node : SKNode?
             var sizeInPoints: CGSize!
             sizeInPoints = (object.sizeInPoints != nil) ? object.sizeInPoints : tileSizeInPoints
@@ -249,8 +253,6 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                         }
                     }
                 }
-            case .none:
-                break
             }
             
             if node == nil {
@@ -300,7 +302,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMProperty]) {
+    internal func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     

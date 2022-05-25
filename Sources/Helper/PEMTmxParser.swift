@@ -345,7 +345,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             case .tsx:
                 break
             case .tx:
-                currentObjectData!.addTemplateAttributes(attributeDict)
+                currentObjectData!.addAttributes(attributeDict)
                 elementPath.append(currentObjectData!)
                 break
             }
@@ -363,13 +363,15 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.polygon.rawValue:
             if let currentElement = elementPath.last as? PEMObjectData {
-                currentElement.setObjectType(.polygon, attributes: attributeDict)
+                currentElement.setObjectType(.polygon)
+                currentElement.addAttributes(attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
         case Elements.polyline.rawValue:
             if let currentElement = elementPath.last as? PEMObjectData {
-                currentElement.setObjectType(.polyline, attributes: attributeDict)
+                currentElement.setObjectType(.polyline)
+                currentElement.addAttributes(attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
@@ -377,7 +379,8 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             currentParseString.removeAll()
 
             if let currentElement = elementPath.last as? PEMObjectData {
-                currentElement.setObjectType(.text, attributes: attributeDict)
+                currentElement.setObjectType(.text)
+                currentElement.addAttributes(attributeDict)
                 break
             }
             abortWithUnexpected(elementName: elementName, inside: elementPath.last)
@@ -500,22 +503,11 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.tileOffset.rawValue:
             break
         case Elements.object.rawValue:
-            switch currentFileType {
-            case .tmx:
-                if elementPath.last is PEMObjectData {
-                    elementPath.removeLast()
-                    break
-                }
-                abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
-            case .tsx:
+            if elementPath.last is PEMObjectData {
+                elementPath.removeLast()
                 break
-            case .tx:
-                if elementPath.last is PEMObjectData {
-                    elementPath.removeLast()
-                    break
-                }
-                abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
             }
+            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.ellipse.rawValue:
             break
         case Elements.point.rawValue:
