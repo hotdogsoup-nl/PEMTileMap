@@ -27,6 +27,12 @@
 		20584B4A283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
 		20584B4B283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
 		20584B4C283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
+		20794333283E173C0012BB88 /* point.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20794332283E173C0012BB88 /* point.tx */; };
+		20794334283E173C0012BB88 /* point.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20794332283E173C0012BB88 /* point.tx */; };
+		20794335283E173C0012BB88 /* point.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20794332283E173C0012BB88 /* point.tx */; };
+		2079433B283E35480012BB88 /* polyline.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2079433A283E35480012BB88 /* polyline.tx */; };
+		2079433C283E35480012BB88 /* polyline.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2079433A283E35480012BB88 /* polyline.tx */; };
+		2079433D283E35480012BB88 /* polyline.tx in Resources */ = {isa = PBXBuildFile; fileRef = 2079433A283E35480012BB88 /* polyline.tx */; };
 		207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DB82812AD5700FC4C77 /* AppDelegate.swift */; };
 		207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DBA2812AD5700FC4C77 /* GameViewController.swift */; };
 		207D3DBE2812AD5700FC4C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207D3DBC2812AD5700FC4C77 /* Main.storyboard */; };
@@ -499,6 +505,8 @@
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		20584B49283A2A1C00B38F37 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		205F766F283BC452003B775E /* macOS version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "macOS version.entitlements"; sourceTree = "<group>"; };
+		20794332283E173C0012BB88 /* point.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = point.tx; sourceTree = "<group>"; };
+		2079433A283E35480012BB88 /* polyline.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = polyline.tx; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* DemoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScene.swift; sourceTree = "<group>"; };
 		207D3DB02812AD5700FC4C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		207D3DB52812AD5700FC4C77 /* PEMTileMap Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEMTileMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1011,6 +1019,8 @@
 				20FAEFCB2837A66C00BEFA8E /* hotdogsoup-icon-full.png */,
 				20FAEFCE2837A66C00BEFA8E /* level3.tmx */,
 				20FAEFD02837A66C00BEFA8E /* level5.tmx */,
+				20794332283E173C0012BB88 /* point.tx */,
+				2079433A283E35480012BB88 /* polyline.tx */,
 				20426D63283D212A00514ABE /* Snail.tx */,
 				20426D5F283D20EC00514ABE /* Spaced with margin.tsx */,
 				20FAF03A2837A68900BEFA8E /* Tiles */,
@@ -1228,6 +1238,7 @@
 				20C3223F283B62C200316B48 /* isometric-130x230.png in Resources */,
 				20DB7D0B2837BABE00F17FC7 /* blue.png in Resources */,
 				20FAF0E52837AC2600BEFA8E /* isometric_grass_and_water.png in Resources */,
+				2079433D283E35480012BB88 /* polyline.tx in Resources */,
 				20FAF0272837A67500BEFA8E /* MagicLand.tmx in Resources */,
 				20FAEFE82837A66C00BEFA8E /* superkoalio.tmx in Resources */,
 				20FAEFDF2837A66C00BEFA8E /* animated2.png in Resources */,
@@ -1269,6 +1280,7 @@
 				20C32239283B62C200316B48 /* hex-65x65-65x230.png in Resources */,
 				20DB7C682837B9ED00F17FC7 /* island.tmx in Resources */,
 				20FAF0F42837AC2600BEFA8E /* perspective_walls.png in Resources */,
+				20794335283E173C0012BB88 /* point.tx in Resources */,
 				20DB7D802837BABE00F17FC7 /* platformConnector4.png in Resources */,
 				20C32245283B62C200316B48 /* roguelike-16x16-anim.png in Resources */,
 				20C32242283B62C200316B48 /* isometric-130x66.tmx in Resources */,
@@ -1369,6 +1381,7 @@
 				20C3223D283B62C200316B48 /* isometric-130x230.png in Resources */,
 				20DB7D092837BABE00F17FC7 /* blue.png in Resources */,
 				20FAF0E32837AC2600BEFA8E /* isometric_grass_and_water.png in Resources */,
+				2079433B283E35480012BB88 /* polyline.tx in Resources */,
 				20FAF0252837A67500BEFA8E /* MagicLand.tmx in Resources */,
 				20FAEFE62837A66C00BEFA8E /* superkoalio.tmx in Resources */,
 				20FAEFDD2837A66C00BEFA8E /* animated2.png in Resources */,
@@ -1410,6 +1423,7 @@
 				20C32237283B62C200316B48 /* hex-65x65-65x230.png in Resources */,
 				20DB7C662837B9ED00F17FC7 /* island.tmx in Resources */,
 				20FAF0F22837AC2600BEFA8E /* perspective_walls.png in Resources */,
+				20794333283E173C0012BB88 /* point.tx in Resources */,
 				20DB7D7E2837BABE00F17FC7 /* platformConnector4.png in Resources */,
 				20C32243283B62C200316B48 /* roguelike-16x16-anim.png in Resources */,
 				20C32240283B62C200316B48 /* isometric-130x66.tmx in Resources */,
@@ -1497,6 +1511,7 @@
 				20CA158328181D8700797A7C /* Colors.xcassets in Resources */,
 				20DB7D312837BABE00F17FC7 /* flare.png in Resources */,
 				20DB7D192837BABE00F17FC7 /* column2.png in Resources */,
+				20794334283E173C0012BB88 /* point.tx in Resources */,
 				20FAF02C2837A67500BEFA8E /* CREDITS.txt in Resources */,
 				20DB7D1C2837BABE00F17FC7 /* doorBlueStroked.png in Resources */,
 				20FAEFE42837A66C00BEFA8E /* hotdogsoup-icon-full.png in Resources */,
@@ -1512,6 +1527,7 @@
 				20FAF03C2837A68900BEFA8E /* Tiles in Resources */,
 				20FAF0142837A67500BEFA8E /* gameart2d-desert.png in Resources */,
 				20FAF0F02837AC2600BEFA8E /* orthogonal-outside.tmx in Resources */,
+				2079433C283E35480012BB88 /* polyline.tx in Resources */,
 				20DB7D102837BABE00F17FC7 /* castleWall.png in Resources */,
 				20DB7DC12837BABE00F17FC7 /* preview.png in Resources */,
 				20C32247283B62C200316B48 /* roguelike-16x16.tmx in Resources */,
