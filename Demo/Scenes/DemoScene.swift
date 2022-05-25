@@ -447,15 +447,16 @@ extension DemoScene: UIGestureRecognizerDelegate {
         let pos = recognizer.translation(in: self.view)
 
         if recognizer.state == .began {
-            initalTouchLocation = pos
+            initalTouchLocation = cameraNode.position
         }
         
         if recognizer.state == .changed {
             let translation = pos
             let newPosition = CGPoint(
-              x: initalTouchLocation.x + translation.x * -1,
-              y: initalTouchLocation.y + translation.y
+                x: initalTouchLocation.x + translation.x * -1 * cameraNode.xScale,
+                y: initalTouchLocation.y + translation.y * cameraNode.yScale
             )
+            
             cameraNode.position = newPosition
         }
     }
