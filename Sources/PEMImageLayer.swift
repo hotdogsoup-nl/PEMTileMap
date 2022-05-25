@@ -85,9 +85,9 @@ class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
         #endif
     }
     
-    // MARK: - Public
+    // MARK: - Internal
     
-    func render(mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
+    internal func render(mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
         if textureImageSource == nil {
             return
         }
@@ -144,7 +144,7 @@ class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
         }
     }
     
-    func setImage(attributes: Dictionary<String, String>) {
+    internal func setImage(attributes: Dictionary<String, String>) {
         guard let source = attributes[ElementAttributes.source.rawValue] else { return }
         guard let width = attributes[ElementAttributes.width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.height.rawValue] else { return }
@@ -155,7 +155,7 @@ class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMProperty]) {
+    internal func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     

@@ -90,7 +90,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Public
 
-    func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, textureFilteringMode: SKTextureFilteringMode) {
+    internal func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, textureFilteringMode: SKTextureFilteringMode) {
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
         
@@ -142,7 +142,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMProperty]) {
+    internal func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     

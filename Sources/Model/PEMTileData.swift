@@ -43,7 +43,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
 
     // MARK: - Setup
     
-    func addAttributes(_ attributes: Dictionary<String, String>) {
+    internal func addAttributes(_ attributes: Dictionary<String, String>) {
         if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
             type = value
         }
@@ -54,7 +54,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    func addTileImage(attributes: Dictionary<String, String>) {
+    internal func addTileImage(attributes: Dictionary<String, String>) {
         guard let source = attributes[ElementAttributes.source.rawValue] else { return }
         guard let width = attributes[ElementAttributes.width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.height.rawValue] else { return }
@@ -71,7 +71,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    func addAnimation() -> PEMTileAnimation? {
+    internal func addAnimation() -> PEMTileAnimation? {
         animation = PEMTileAnimation()
         
         return animation
@@ -79,7 +79,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMProperty]) {
+    internal func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     

@@ -45,7 +45,7 @@ class PEMProperty: NSObject {
     
     // MARK: - Setup
     
-    func setValue(_ text: String) {
+    internal func setValue(_ text: String) {
         value = text
     }
     

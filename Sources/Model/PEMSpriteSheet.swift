@@ -82,9 +82,9 @@ class PEMSpriteSheet: NSObject {
         #endif
     }
         
-    // MARK: - Public
+    // MARK: - Internal
     
-    func createTileData(id: UInt32) -> PEMTileData? {
+    internal func createTileData(id: UInt32) -> PEMTileData? {
         let tileAttributes = tileAttributes(fromId: id)
 
         if contains(id: tileAttributes.id) {
@@ -94,7 +94,7 @@ class PEMSpriteSheet: NSObject {
         return nil
     }
 
-    func generateTextureFor(tileData: PEMTileData) -> SKTexture? {
+    internal func generateTextureFor(tileData: PEMTileData) -> SKTexture? {
         let tileAttributes = tileAttributes(fromId: tileData.id)
         
         let spriteSheetCoords = CGPoint(x: Int(rowFrom(id: tileAttributes.id)), y: Int(columnFrom(id: tileAttributes.id)))

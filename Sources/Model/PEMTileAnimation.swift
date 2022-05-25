@@ -15,7 +15,7 @@ class PEMTileAnimation: NSObject {
     
     // MARK: - Setup
     
-    func addAnimationFrame(attributes: Dictionary<String, String>) {
+    internal func addAnimationFrame(attributes: Dictionary<String, String>) {
         if let animationFrame = PEMTileAnimationFrame(attributes: attributes) {
             frames.append(animationFrame)
         }

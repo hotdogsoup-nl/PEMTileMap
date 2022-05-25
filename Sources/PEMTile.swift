@@ -44,7 +44,7 @@ class PEMTile: SKSpriteNode {
     
     // MARK: - Setup
     
-    func applyTileFlipping(horizontally: Bool, vertically: Bool, diagonally: Bool) {
+    internal func applyTileFlipping(horizontally: Bool, vertically: Bool, diagonally: Bool) {
         if diagonally {
             if (horizontally && !vertically) {
                 zRotation = CGFloat(-Double.pi / 2)
@@ -76,7 +76,7 @@ class PEMTile: SKSpriteNode {
     
     // MARK: - Public
     
-    func startAnimation(frameTiles: Dictionary<UInt32, SKTexture>) {
+    internal func startAnimation(frameTiles: Dictionary<UInt32, SKTexture>) {
         guard animation != nil, frameTiles.count > 0 else { return }
                 
         var actions : Array<SKAction> = []

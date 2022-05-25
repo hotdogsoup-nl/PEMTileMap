@@ -158,7 +158,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Setup
     
-    func addAttributes(_ attributes: Dictionary<String, String>) {
+    internal func addAttributes(_ attributes: Dictionary<String, String>) {
         guard let width = attributes[ElementAttributes.width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.height.rawValue] else { return }
         guard let tilewidth = attributes[ElementAttributes.tileWidth.rawValue] else { return }
@@ -244,13 +244,13 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMProperty]) {
+    internal func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
     // MARK: - Map objects
         
-    func tileSetFor(gid: UInt32) -> PEMTileSet? {
+    internal func tileSetFor(gid: UInt32) -> PEMTileSet? {
         let tileAttributes = tileAttributes(fromId: gid)
 
         for tileSet in tileSets {

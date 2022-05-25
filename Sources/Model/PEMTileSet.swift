@@ -68,7 +68,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - Setup
     
-    func addAttributes(_ attributes: Dictionary<String, String>) {
+    internal func addAttributes(_ attributes: Dictionary<String, String>) {
         name = attributes[ElementAttributes.name.rawValue]
 
         if let tilewidth = attributes[ElementAttributes.tileWidth.rawValue],
@@ -99,7 +99,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    func setSpriteSheetImage(attributes: Dictionary<String, String>) {
+    internal func setSpriteSheetImage(attributes: Dictionary<String, String>) {
         guard let source = attributes[ElementAttributes.source.rawValue] else { return }
         
         if !tileData.isEmpty {
@@ -119,7 +119,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTileData? {
+    internal func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTileData? {
         guard let tileIdValue = attributes[ElementAttributes.id.rawValue] else { return nil }
         let tileId = UInt32(tileIdValue)!
                 
@@ -144,16 +144,16 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         return nil
     }
     
-    func setTileOffset(attributes: Dictionary<String, String>) {
+    internal func setTileOffset(attributes: Dictionary<String, String>) {
         if let dx = attributes[ElementAttributes.x.rawValue],
            let dy = attributes[ElementAttributes.y.rawValue] {
             tileOffSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
         }
     }
     
-    // MARK: - Public
-    
-    func parseExternalTileSet() {
+    // MARK: - Internal
+
+    internal func parseExternalTileSet() {
         guard externalSource != nil else { return }
         
         if let url = bundleURLForResource(externalSource!),
@@ -172,11 +172,11 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
 
-    func tileFor(gid: UInt32) -> PEMTile? {
+    internal func tileFor(gid: UInt32) -> PEMTile? {
         return tileFor(id: gid - firstGid)
     }
     
-    func tileFor(id: UInt32) -> PEMTile? {
+    internal func tileFor(id: UInt32) -> PEMTile? {
         if let tileData = tileData.filter({ $0.id == id }).first {
             if tileSetType == .spriteSheet && tileData.texture == nil {
                 tileData.texture = spriteSheet?.generateTextureFor(tileData: tileData)
@@ -199,13 +199,13 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         return nil
     }
     
-    func containsTileWith(gid: UInt32) -> Bool {
+    internal func containsTileWith(gid: UInt32) -> Bool {
         return idRange ~=  gid - firstGid
     }
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    func addProperties(_ newProperties: [PEMProperty]) {
+    internal func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
