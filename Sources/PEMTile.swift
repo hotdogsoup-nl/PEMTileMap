@@ -79,7 +79,7 @@ class PEMTile: SKSpriteNode {
     func startAnimation(frameTiles: Dictionary<UInt32, SKTexture>) {
         guard animation != nil, frameTiles.count > 0 else { return }
                 
-        var actions : [SKAction] = []
+        var actions : Array<SKAction> = []
                 
         for frame in animation!.frames {
             if let texture = frameTiles[frame.tileId] {

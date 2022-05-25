@@ -121,9 +121,9 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
     private weak var currentObjectData: PEMObjectData?
 
     private var currentFileType: ParseFileType
-    private var currentProperties: [PEMProperty]?
+    private var currentProperties: Array<PEMProperty>?
     private var currentParseString: String = ""
-    private var elementPath: [AnyObject] = []
+    private var elementPath: Array<AnyObject> = []
     private var dataEncoding: DataEncoding?
     private var dataCompression = DataCompression.none
     
@@ -200,7 +200,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         currentParseString.removeAll()
     }
     
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: Dictionary<String, String> = [:]) {
         switch elementName {
             
         // top level elements
@@ -555,7 +555,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         currentParseString.removeAll()
     }
     
-    private func abortWithFailedCreation(elementName: String, attributes attributeDict: [String : String] = [:], inside element: AnyObject?) {
+    private func abortWithFailedCreation(elementName: String, attributes attributeDict: Dictionary<String, String> = [:], inside element: AnyObject?) {
         #if DEBUG
         print("PEMTmxParser: could not create: <\(elementName)> with attributes: <\(attributeDict)>, current element: \(String(describing: element)).")
         #endif

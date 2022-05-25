@@ -86,8 +86,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private var baseZPosition = CGFloat(0)
     private var zPositionLayerDelta = CGFloat(20)
     
-    internal var tileSets: [PEMTileSet] = []
-    internal var layers: [AnyObject] = []
+    internal var tileSets: Array<PEMTileSet> = []
+    internal var layers: Array<AnyObject> = []
     
     private var cameraViewMode = CameraViewMode.none
     private var cameraZoomMode = CameraZoomMode.none

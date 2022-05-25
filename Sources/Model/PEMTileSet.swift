@@ -40,7 +40,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         return firstId...lastId
     }
         
-    private var tileData: [PEMTileData] = []
+    private var tileData: Array<PEMTileData> = []
     
     // MARK: - Init
     

@@ -18,7 +18,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     private var drawOrder = DrawOrder.topDown
     private var tileSizeInPoints = CGSize.zero
     
-    internal var objects: [PEMObjectData] = []
+    internal var objects: Array<PEMObjectData> = []
     private var parentGroup: PEMGroup?
     
     weak var map : PEMTileMap?

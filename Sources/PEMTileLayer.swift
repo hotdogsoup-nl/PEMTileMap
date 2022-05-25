@@ -15,7 +15,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     private var parallaxFactorX = CGFloat(1)
     private var parallaxFactorY = CGFloat(1)
     
-    internal var tileData: [UInt32] = []
+    internal var tileData: Array<UInt32> = []
     private var parentGroup: PEMGroup?
     
     weak var map : PEMTileMap?
