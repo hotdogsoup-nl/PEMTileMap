@@ -345,7 +345,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             case .tsx:
                 break
             case .tx:
-                currentObjectData!.addAttributes(attributeDict)
+                currentObjectData!.addTemplateAttributes(attributeDict)
                 elementPath.append(currentObjectData!)
                 break
             }

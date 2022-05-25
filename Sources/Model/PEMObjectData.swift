@@ -28,12 +28,12 @@ enum TextVerticalAlignment: String {
 class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var id = UInt32(0)
     private (set) var objectType = ObjectType.unknown
-    private (set) var visible = true
-    private (set) var coordsInPoints = CGPoint.zero
-    private (set) var sizeInPoints = CGSize.zero
-    private (set) var rotation = CGFloat(0)
+    private (set) var visible: Bool?
+    private (set) var coordsInPoints: CGPoint?
+    private (set) var sizeInPoints: CGSize?
+    private (set) var rotation: CGFloat?
     private (set) var objectName: String?
-    private (set) var tileGid = UInt32(0)
+    private (set) var tileGid: UInt32?
     private (set) var text = ""
     private (set) var textColor = SKColor.white
     private (set) var fontFamily = "Arial"
@@ -47,7 +47,7 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var vAlign = TextVerticalAlignment.top
     private (set) var wrap = false
 
-    private (set) var properties : Dictionary<String, Any>?
+    private (set) var properties: Dictionary<String, Any>?
     private (set) var polygonPoints: [CGPoint] = []
     
     private var type: String?
@@ -61,7 +61,46 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
         }
 
         externalSource = attributes[ElementAttributes.template.rawValue]
-        addAttributes(attributes)
+        
+        if let value = attributes[ElementAttributes.name.rawValue] {
+            objectName = value
+        }
+        
+        if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
+            type = value
+        }
+
+        if let x = attributes[ElementAttributes.x.rawValue],
+           let y = attributes[ElementAttributes.y.rawValue] {
+            
+            let xString : NSString = x as NSString
+            let yString : NSString = y as NSString
+
+            coordsInPoints = CGPoint(x: CGFloat(xString.doubleValue), y: CGFloat(yString.doubleValue))
+        }
+        
+        if let value = attributes[ElementAttributes.gid.rawValue] {
+            tileGid = UInt32(value)!
+            objectType = .tile
+        }
+        
+        if let width = attributes[ElementAttributes.width.rawValue],
+           let height = attributes[ElementAttributes.height.rawValue] {
+            
+            let widthString : NSString = width as NSString
+            let heightString : NSString = height as NSString
+
+            sizeInPoints = CGSize(width: CGFloat(widthString.doubleValue), height: CGFloat(heightString.doubleValue))
+        }
+        
+        if let value = attributes[ElementAttributes.rotation.rawValue] {
+            let valueString : NSString = value as NSString
+            rotation = CGFloat(360.0 - valueString.doubleValue)
+        }
+        
+        if let value = attributes[ElementAttributes.visible.rawValue] {
+            visible = value == "1"
+        }
     }
     
     // MARK: - Setup
@@ -164,32 +203,36 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
             return
         }
     }
-    
-    func addAttributes(_ attributes: Dictionary<String, String>) {
-        if let value = attributes[ElementAttributes.name.rawValue] {
+        
+    func addTemplateAttributes(_ attributes: Dictionary<String, String>) {
+        if let value = attributes[ElementAttributes.name.rawValue],
+           objectName == nil {
             objectName = value
         }
         
-        if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
+        if let value = attributes[ElementAttributes.typeAttribute.rawValue],
+            type == nil {
             type = value
         }
 
         if let x = attributes[ElementAttributes.x.rawValue],
-           let y = attributes[ElementAttributes.y.rawValue] {
-            
+           let y = attributes[ElementAttributes.y.rawValue],
+           coordsInPoints == nil {
             let xString : NSString = x as NSString
             let yString : NSString = y as NSString
 
             coordsInPoints = CGPoint(x: CGFloat(xString.doubleValue), y: CGFloat(yString.doubleValue))
         }
         
-        if let value = attributes[ElementAttributes.gid.rawValue] {
+        if let value = attributes[ElementAttributes.gid.rawValue],
+           tileGid == nil {
             tileGid = UInt32(value)!
             objectType = .tile
         }
         
         if let width = attributes[ElementAttributes.width.rawValue],
-           let height = attributes[ElementAttributes.height.rawValue] {
+           let height = attributes[ElementAttributes.height.rawValue],
+           sizeInPoints == nil {
             
             let widthString : NSString = width as NSString
             let heightString : NSString = height as NSString
@@ -197,12 +240,14 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
             sizeInPoints = CGSize(width: CGFloat(widthString.doubleValue), height: CGFloat(heightString.doubleValue))
         }
         
-        if let value = attributes[ElementAttributes.rotation.rawValue] {
+        if let value = attributes[ElementAttributes.rotation.rawValue],
+           rotation == nil {
             let valueString : NSString = value as NSString
             rotation = CGFloat(360.0 - valueString.doubleValue)
         }
         
-        if let value = attributes[ElementAttributes.visible.rawValue] {
+        if let value = attributes[ElementAttributes.visible.rawValue],
+           visible == nil {
             visible = value == "1"
         }
     }

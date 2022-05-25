@@ -104,33 +104,42 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     }
 
     func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
+        
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
                 
         for object in objects {
             var node : SKNode?
-            
-            var objectSize = object.sizeInPoints
-            
-            if object.objectType == .unknown && object.sizeInPoints == .zero {
-                objectSize = tileSizeInPoints
+            var sizeInPoints: CGSize!
+
+            if object.objectType == .unknown {
+                sizeInPoints = tileSizeInPoints
+            } else {
+                sizeInPoints = object.sizeInPoints != nil ? object.sizeInPoints : tileSizeInPoints
             }
             
-            var position = CGPoint(x: object.coordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - object.coordsInPoints.y - tileSizeInPoints.height * 0.5)
+            if object.objectType == .unknown {
+                sizeInPoints = tileSizeInPoints
+            }
+            
+            var objectCoordsInPoints: CGPoint!
+            objectCoordsInPoints = object.coordsInPoints != nil ? object.coordsInPoints : .zero
+
+            var position = CGPoint(x: objectCoordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - objectCoordsInPoints.y - tileSizeInPoints.height * 0.5)
 
             switch object.objectType {
             case .ellipse:
-                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
+                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
             case .point:
-                objectSize = CGSize(width: tileSizeInPoints.width * 0.25, height: tileSizeInPoints.height * 0.25)
-                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
-                position = CGPoint(x: position.x - objectSize.width * 0.5, y: position.y + objectSize.height * 0.5)
+                sizeInPoints = CGSize(width: tileSizeInPoints.width * 0.25, height: tileSizeInPoints.height * 0.25)
+                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
+                position = CGPoint(x: position.x - sizeInPoints.width * 0.5, y: position.y + sizeInPoints.height * 0.5)
             case .polygon, .polyline:
                 var points = object.polygonPoints
                 node = SKShapeNode(points: &points, count: points.count)
-                objectSize = node!.calculateAccumulatedFrame().size
+                sizeInPoints = node!.calculateAccumulatedFrame().size
             case .rectangle, .unknown:
-                node = SKShapeNode(rect: CGRect(x: 0, y: -objectSize.height, width: objectSize.width, height: objectSize.height))
+                node = SKShapeNode(rect: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
             case .text:
                 let text = highResolutionLabel(text: object.text,
                                            fontName: object.fontFamily,
@@ -141,13 +150,15 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                                            underline: object.underline,
                                            strikeOut: object.strikeOut,
                                            kerning: object.kerning,
-                                           wordWrapWidth: object.wrap ? objectSize.width : 0,
+                                           wordWrapWidth: object.wrap ? sizeInPoints.width : 0,
                                            hAlign: object.hAlign,
                                            vAlign: object.vAlign)
                 text.anchorPoint = CGPoint(x: 0.0, y: 1.0)
                 node = text
             case .tile:
-                let tileGid = object.tileGid
+                var tileGid: UInt32!
+                tileGid = object.tileGid != nil ? object.tileGid : 0
+
                 let tileGidAttributes = tileAttributes(fromId: tileGid)
                 
                 if let tileSet = map?.tileSetFor(gid: tileGidAttributes.id) {
@@ -160,7 +171,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                             tile.colorBlendFactor = 1.0
                         }
                         
-                        tile.size = object.sizeInPoints
+                        tile.size = sizeInPoints
                         
                         let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
                         
@@ -203,18 +214,21 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             }
             
             node?.position = position
-            node?.zRotation = object.rotation.radians()
+            
+            var rotation: CGFloat!
+            rotation = object.rotation != nil ? object.rotation : 0
+            node?.zRotation = rotation.radians()
             
             if object.objectName != nil {
                 let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.25, color:color)
                 let labelSize = label.calculateAccumulatedFrame().size
                 
                 if object.objectType == .tile {
-                    label.position = CGPoint(x: objectSize.width * 0.5, y: objectSize.height +  labelSize.height * 0.7)
+                    label.position = CGPoint(x: sizeInPoints.width * 0.5, y: sizeInPoints.height +  labelSize.height * 0.7)
                 } else if object.objectType == .polygon || object.objectType == .polyline {
-                    label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + objectSize.height * 0.5 + labelSize.height * 0.7)
+                    label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + sizeInPoints.height * 0.5 + labelSize.height * 0.7)
                 } else {
-                    label.position = CGPoint(x: objectSize.width * 0.5, y: labelSize.height * 0.7)
+                    label.position = CGPoint(x: sizeInPoints.width * 0.5, y: labelSize.height * 0.7)
                 }
                 
                 label.zRotation = -node!.zRotation
