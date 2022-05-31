@@ -23,6 +23,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var firstGid = UInt32(0)
     private (set) var properties: Dictionary<String, Any>?
     private (set) var tileOffSetInPoints = CGPoint.zero
+    private (set) var externalSource: String?
 
     private var name: String?
     private var tileSizeInPoints = CGSize.zero
@@ -31,7 +32,6 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     private var spacingInPoints = UInt(0)
     private var marginInPoints = UInt(0)
 
-    private var externalSource: String?
     private var spriteSheet: PEMSpriteSheet?
     private var tileSetType = PEMTileSetType.collectionOfImages
     private var firstId = UInt32(0)

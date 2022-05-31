@@ -103,7 +103,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
             
             let tileGidAttributes = tileAttributes(fromId: tileGid)
         
-            if let tileSet = map?.tileSetFor(gid: tileGidAttributes.id) {       
+            if let tileSet = map?.tileSetContaining(gid: tileGidAttributes.id) {       
                 if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)

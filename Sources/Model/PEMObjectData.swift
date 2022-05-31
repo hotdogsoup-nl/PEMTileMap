@@ -54,6 +54,8 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var attributes: Dictionary<String, String>?
     private var attributesParsed = false
 
+    private var tileSetSource: String? // as yet unused because a tile object's gid is used to find the corresponding tileSet.
+
     init?(attributes: Dictionary<String, String>?) {
         super.init()
         
@@ -200,6 +202,14 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     
     internal func setObjectType(_ objectType : ObjectType) {
         self.objectType = objectType
+    }
+    
+    internal func setTileSet(_ attributes: Dictionary<String, String>?) {
+        if let currentAttributes = attributes {
+            if let value = currentAttributes[ElementAttributes.source.rawValue] {
+                tileSetSource = value
+            }
+        }
     }
     
     internal func setText(_ text: String) {

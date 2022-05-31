@@ -225,6 +225,7 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
                 currentTileSet?.addAttributes(attributeDict)
                 elementPath.append(currentTileSet!)
             case .tx:
+                currentObjectData?.setTileSet(attributeDict)
                 break
             }
         case Elements.layer.rawValue:
@@ -402,11 +403,16 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.tileSet.rawValue :
-            if elementPath.last is PEMTileSet {
-                elementPath.removeLast()
+            switch currentFileType {
+            case .tmx, .tsx:
+                if elementPath.last is PEMTileSet {
+                    elementPath.removeLast()
+                    break
+                }
+                abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
+            case .tx:
                 break
             }
-            abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.layer.rawValue:
             if elementPath.last is PEMTileLayer {
                 elementPath.removeLast()

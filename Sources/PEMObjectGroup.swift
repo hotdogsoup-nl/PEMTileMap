@@ -219,7 +219,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
 
                 let tileGidAttributes = tileAttributes(fromId: tileGid)
                 
-                if let tileSet = map?.tileSetFor(gid: tileGidAttributes.id) {
+                if let tileSet = map?.tileSetContaining(gid: tileGidAttributes.id) {
                     if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
                         tile.applyTileFlipping(horizontally: tileGidAttributes.flippedHorizontally, vertically: tileGidAttributes.flippedVertically, diagonally: tileGidAttributes.flippedDiagonally)
                         tile.texture?.filteringMode = textureFilteringMode
