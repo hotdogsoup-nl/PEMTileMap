@@ -108,8 +108,18 @@ class DemoScene: SKScene {
     }
     
     private func loadMap() {
-        removeMap()
+        let removeMapAction = SKAction.run {
+            self.removeMap()
+        }
         
+        let renderMapAction = SKAction.run {
+            self.renderMap()
+        }
+        
+        run(SKAction.sequence([removeMapAction, renderMapAction]))
+    }
+    
+    private func renderMap() {
         let mapInfo = maps[currentMapIndex]
         let mapName = mapInfo["filename"]
         let mapTitle = mapInfo["title"]
@@ -139,10 +149,16 @@ class DemoScene: SKScene {
     }
     
     func removeMap() {
+        let textSize = size.width * 0.015
+
         cameraNode.position = .zero
         cameraNode.xScale = 1
         cameraNode.yScale = 1
-        currentMapNameLabel?.text = "..."
+        
+        currentMapNameLabel?.attributedText = attributedString(" ... ", fontName: "Courier-Bold", textSize: textSize)
+        currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
+        renderTimeLabel?.attributedText = attributedString(" Rendering... ", fontName: "Courier", textSize: textSize)
+
         map?.removeFromParent()
         map = nil
     }
