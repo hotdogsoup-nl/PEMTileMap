@@ -202,5 +202,15 @@
 		<key>url</key>
 		<string>https://www.hotdogsoup.nl</string>
 	</dict>
+	<dict>
+		<key>filename</key>
+		<string>Isometric1.tmx</string>
+		<key>title</key>
+		<string>Isometric</string>
+		<key>author</key>
+		<string>hotdogsoup.nl</string>
+		<key>url</key>
+		<string>https://www.hotdogsoup.nl</string>
+	</dict>
 </array>
 </plist>

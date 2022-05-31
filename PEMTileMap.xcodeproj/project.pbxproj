@@ -27,6 +27,9 @@
 		20584B4A283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
 		20584B4B283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
 		20584B4C283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
+		205E0F192846244500AA7BB6 /* Isometric1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205E0F182846244500AA7BB6 /* Isometric1.tmx */; };
+		205E0F1A2846244500AA7BB6 /* Isometric1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205E0F182846244500AA7BB6 /* Isometric1.tmx */; };
+		205E0F1B2846244500AA7BB6 /* Isometric1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205E0F182846244500AA7BB6 /* Isometric1.tmx */; };
 		20794333283E173C0012BB88 /* point.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20794332283E173C0012BB88 /* point.tx */; };
 		20794334283E173C0012BB88 /* point.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20794332283E173C0012BB88 /* point.tx */; };
 		20794335283E173C0012BB88 /* point.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20794332283E173C0012BB88 /* point.tx */; };
@@ -504,6 +507,7 @@
 		20426D63283D212A00514ABE /* Snail.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Snail.tx; sourceTree = "<group>"; };
 		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		20584B49283A2A1C00B38F37 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		205E0F182846244500AA7BB6 /* Isometric1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Isometric1.tmx; sourceTree = "<group>"; };
 		205F766F283BC452003B775E /* macOS version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "macOS version.entitlements"; sourceTree = "<group>"; };
 		20794332283E173C0012BB88 /* point.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = point.tx; sourceTree = "<group>"; };
 		2079433A283E35480012BB88 /* polyline.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = polyline.tx; sourceTree = "<group>"; };
@@ -1017,6 +1021,7 @@
 				20FAEFCA2837A66C00BEFA8E /* Collection.tsx */,
 				20AC200B283D026900BE83F0 /* ellipse.tx */,
 				20FAEFCB2837A66C00BEFA8E /* hotdogsoup-icon-full.png */,
+				205E0F182846244500AA7BB6 /* Isometric1.tmx */,
 				20FAEFCE2837A66C00BEFA8E /* level3.tmx */,
 				20FAEFD02837A66C00BEFA8E /* level5.tmx */,
 				20794332283E173C0012BB88 /* point.tx */,
@@ -1239,6 +1244,7 @@
 				20DB7D0B2837BABE00F17FC7 /* blue.png in Resources */,
 				20FAF0E52837AC2600BEFA8E /* isometric_grass_and_water.png in Resources */,
 				2079433D283E35480012BB88 /* polyline.tx in Resources */,
+				205E0F1B2846244500AA7BB6 /* Isometric1.tmx in Resources */,
 				20FAF0272837A67500BEFA8E /* MagicLand.tmx in Resources */,
 				20FAEFE82837A66C00BEFA8E /* superkoalio.tmx in Resources */,
 				20FAEFDF2837A66C00BEFA8E /* animated2.png in Resources */,
@@ -1382,6 +1388,7 @@
 				20DB7D092837BABE00F17FC7 /* blue.png in Resources */,
 				20FAF0E32837AC2600BEFA8E /* isometric_grass_and_water.png in Resources */,
 				2079433B283E35480012BB88 /* polyline.tx in Resources */,
+				205E0F192846244500AA7BB6 /* Isometric1.tmx in Resources */,
 				20FAF0252837A67500BEFA8E /* MagicLand.tmx in Resources */,
 				20FAEFE62837A66C00BEFA8E /* superkoalio.tmx in Resources */,
 				20FAEFDD2837A66C00BEFA8E /* animated2.png in Resources */,
@@ -1568,6 +1575,7 @@
 				20FAEFE12837A66C00BEFA8E /* Collection.tsx in Resources */,
 				20C3222F283B62C200316B48 /* dungeon-16x32.tsx in Resources */,
 				20DB7D732837BABE00F17FC7 /* platformBlock4.png in Resources */,
+				205E0F1A2846244500AA7BB6 /* Isometric1.tmx in Resources */,
 				20C32229283B62C200316B48 /* dungeon-16x16.tsx in Resources */,
 				20C3224D283B62C200316B48 /* staggered-64x192.png in Resources */,
 				20DB7D792837BABE00F17FC7 /* platformConnector2.png in Resources */,
