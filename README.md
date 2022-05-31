@@ -30,7 +30,7 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [X] tilesets based on a collection of images
 - [X] tilesets using a specific color for transparency
 - [X] external TSX tile sets
-- [ ] terraintypes and wangsets
+- [ ] terraintypes, wangsets, transformations
 - [X] object groups
 - [X] object template files
 - [X] image layers
