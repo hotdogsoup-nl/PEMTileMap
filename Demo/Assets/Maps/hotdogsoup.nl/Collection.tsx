@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="Collection" tilewidth="64" tileheight="64" tilecount="5" columns="0">
+<tileset version="1.8" tiledversion="1.8.5" name="Collection" tilewidth="64" tileheight="64" tilecount="5" columns="0">
  <grid orientation="orthogonal" width="16" height="16"/>
  <tile id="10" type="its a type">
-  <properties>
-   <property name="eenprop" value="klopt"/>
-  </properties>
   <image width="16" height="16" source="Tiles/disk_01.png"/>
  </tile>
  <tile id="11">
