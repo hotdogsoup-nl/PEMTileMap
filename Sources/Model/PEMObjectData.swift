@@ -27,7 +27,7 @@ enum TextVerticalAlignment: String {
 class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var id = UInt32(0)
     private (set) var objectType = ObjectType.rectangle
-    private (set) var visible: Bool?
+    private (set) var visible = true
     private (set) var coordsInPoints: CGPoint?
     private (set) var sizeInPoints: CGSize?
     private (set) var rotation: CGFloat?

@@ -138,6 +138,10 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                 
         for object in objects {
             object.parseAttributes()
+            
+            if !object.visible {
+                continue
+            }
 
             var node : SKNode?
             var sizeInPoints: CGSize!
