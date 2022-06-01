@@ -28,6 +28,8 @@ class DemoScene: SKScene {
     private var previousCameraScale = CGFloat(1.0)
     private var initalTouchLocation = CGPoint.zero
     
+    private var rendering = false
+    
     #if os(iOS)
     private var pinch: UIPinchGestureRecognizer!
     private var pan: UIPanGestureRecognizer!
@@ -90,6 +92,10 @@ class DemoScene: SKScene {
     // MARK: - Map
 
     private func previousMap() {
+        if rendering {
+            return
+        }
+            
         currentMapIndex = currentMapIndex - 1
         if currentMapIndex < 0 {
             currentMapIndex = maps.count - 1
@@ -99,6 +105,10 @@ class DemoScene: SKScene {
     }
 
     private func nextMap() {
+        if rendering {
+            return
+        }
+
         currentMapIndex = currentMapIndex + 1
         if currentMapIndex >= maps.count {
             currentMapIndex = 0
@@ -108,6 +118,8 @@ class DemoScene: SKScene {
     }
     
     private func loadMap() {
+        rendering = true
+        
         let removeMapAction = SKAction.run {
             self.removeMap()
         }
@@ -145,6 +157,7 @@ class DemoScene: SKScene {
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
             addChild(newMap)
+            rendering = false
         }
     }
     
