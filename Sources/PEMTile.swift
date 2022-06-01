@@ -21,7 +21,6 @@ class PEMTile: SKSpriteNode {
             probability = tileData.probability
             animation = tileData.animation
             properties = tileData.properties
-            
             return
         }
         
