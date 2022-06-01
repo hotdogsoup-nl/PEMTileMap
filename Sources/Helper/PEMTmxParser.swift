@@ -206,13 +206,6 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         // top level elements
         case Elements.map.rawValue:
             currentMap?.addAttributes(attributeDict)
-            if currentMap?.orientation != .orthogonal {
-                #if DEBUG
-                print("PEMTmxParser: unsupported map orientation: \(currentMap!.orientation!.rawValue)")
-                #endif
-                parser.abortParsing()
-                break
-            }
             elementPath.append(currentMap!)
         case Elements.tileSet.rawValue :
             switch currentFileType {
