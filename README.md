@@ -16,21 +16,14 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 
 - [X] read and parse TMX map files
 - [X] CSV, Base64 layer formats with gzip, zlib or no compression
-- [ ] Zstandard compression 
-- [ ] world files
 - [X] fixed size maps
-- [ ] infinite maps
 - [X] orthogonal map types
-- [ ] isometric map types
-- [ ] isometric staggerd map types
-- [ ] hexagonal staggered map types
 - [X] map background color
 - [X] embedded tile sets
 - [X] tilesets based on a tileset image
 - [X] tilesets based on a collection of images
 - [X] tilesets using a specific color for transparency
 - [X] external TSX tile sets
-- [ ] terraintypes and wangsets
 - [X] object groups
 - [X] object template files
 - [X] image layers
@@ -39,6 +32,15 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [X] flipped tiles
 - [X] animated tiles
 - [X] properties
+  
+## Not yet supported
+- [ ] Zstandard compression 
+- [ ] world files
+- [ ] infinite maps
+- [ ] isometric map types
+- [ ] isometric staggerd map types
+- [ ] hexagonal staggered map types
+- [ ] terraintypes, wangsets, transformations
 
 ## PEMTileMap Features
 
