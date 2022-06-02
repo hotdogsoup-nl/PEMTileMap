@@ -25,17 +25,12 @@ class PEMObjectPoint: SKShapeNode {
             fillColor = color.withAlphaComponent(0.5)
             isAntialiased = true
             
-            var rotation: CGFloat!
-            rotation = (objectData.rotation != nil) ? objectData.rotation : 0
-            zRotation = rotation.radians()
-            
             id = objectData.id
             type = objectData.type
             properties = objectData.properties
             coordsInPoints = objectData.coordsInPoints
             sizeInPoints = objectData.sizeInPoints
             return
-            
         }
         
         return nil
