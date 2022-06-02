@@ -142,13 +142,6 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             guard object.coordsInPoints != nil else { continue }
 
             var node : SKNode?
-            
-            // TO BE DELETED
-            var sizeInPoints: CGSize!
-            sizeInPoints = (object.sizeInPoints != nil) ? object.sizeInPoints : tileSizeInPoints
-            // -----
-            
-            let position = objectPosition(coordsInPoints: object.coordsInPoints!)
 
             switch object.objectType {
             case .ellipse:
@@ -164,27 +157,19 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             case .tile:
                 var tileGid: UInt32!
                 tileGid = (object.tileGid != nil) ? object.tileGid : 0
-
-                let tileGidAttributes = tileAttributes(fromId: tileGid)
                 
-                if let tileSet = map.tileSetContaining(gid: tileGidAttributes.id) {
-                    if let tile = tileSet.tileFor(id: tileGidAttributes.id, flippedHorizontally: tileGidAttributes.flippedHorizontally, flippedVertically: tileGidAttributes.flippedVertically, flippedDiagonally: tileGidAttributes.flippedDiagonally) {
+                if let tileSet = map.tileSetContaining(gid: tileGid) {
+                    if let tile = tileSet.tileFor(gid: tileGid) {
+                        let sizeInPoints = (object.sizeInPoints != nil) ? object.sizeInPoints : tileSizeInPoints
+
                         tile.texture?.filteringMode = textureFilteringMode
-                        
+                        tile.size = sizeInPoints!
+
                         if tintColor != nil {
                             tile.color = tintColor!
                             tile.colorBlendFactor = 1.0
                         }
-                        
-                        tile.size = sizeInPoints
-                        
-                        let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
-                        
-                        tile.position = CGPoint(x: tileSizeInPoints.width * 0.5 + sizeDeviation.width * 0.5, y: tileSizeInPoints.height * 0.5 + sizeDeviation.height * 0.5)
-                        
-                        node = SKNode()
-                        node?.addChild(tile)
-                        
+                                                
                         if tile.animation != nil {
                             var frameTiles: Dictionary<UInt32, SKTexture> = [:]
                             
@@ -197,41 +182,26 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                             
                             tile.startAnimation(frameTiles: frameTiles)
                         }
-                    }
-                }
-            }
-            
-            if node == nil {
-                continue
-            }
-            
-            var nodeCenter = CGPoint.zero
-            
-            if let objectNode = node as? SKShapeNode {
-                nodeCenter = CGPoint(x: objectNode.frame.midX, y: objectNode.frame.midY)
-            }
-            
-            node?.position = position
                         
-            if object.objectName != nil {
-                if let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.5, color:color) {
-                    let labelSize = label.calculateAccumulatedFrame().size
-
-                    if object.objectType == .tile {
-                        label.position = CGPoint(x: sizeInPoints.width * 0.5, y: sizeInPoints.height +  labelSize.height * 0.7)
-                    } else if object.objectType == .polygon || object.objectType == .polyline {
-                        label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + sizeInPoints.height * 0.5 + labelSize.height * 0.7)
-                    } else {
-                        label.position = CGPoint(x: sizeInPoints.width * 0.5, y: labelSize.height * 0.7)
+                        node = SKNode() // we add the tile to an extra node so we can rotate it around the lop left corner without changing the anchorpoint
+                        var rotation: CGFloat!
+                        rotation = (object.rotation != nil) ? object.rotation : 0
+                        node?.zRotation = rotation.radians()
+                        
+                        let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
+                        tile.position = CGPoint(x: tileSizeInPoints.width * 0.5 + sizeDeviation.width * 0.5, y: tileSizeInPoints.height * 0.5 + sizeDeviation.height * 0.5).with(tileSizeDeviation: sizeDeviation)
+                        node?.addChild(tile)
                     }
-
-                    label.zRotation = -node!.zRotation
-                    label.zPosition = node!.zPosition + 1
-                    node?.addChild(label)
                 }
             }
             
+            guard node != nil else { continue }
+           
+            node?.name = object.objectName
+            node?.position = objectPosition(coordsInPoints: object.coordsInPoints!)
             addChild(node!)
+            
+            addObjectLabel(node!, fontSize: tileSizeInPoints.height * 0.25)
         }
     }
         
@@ -242,6 +212,20 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     // MARK: - Private
+    
+    private func addObjectLabel(_ node: SKNode, fontSize: CGFloat) {
+        guard node.name != nil else { return }
+        
+        let nodeRect = node.calculateAccumulatedFrame()
+        let nodeCenter = CGPoint(x: nodeRect.midX, y: nodeRect.midY)
+        
+        if let label = objectLabel(text: node.name!, fontSize: fontSize, color:color) {
+            let labelSize = label.calculateAccumulatedFrame().size
+            label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + nodeRect.size.height * 0.5 + labelSize.height * 0.6)
+            label.zPosition = node.zPosition + 1
+            addChild(label)
+        }
+    }
     
     private func objectPosition(coordsInPoints: CGPoint, sizeDeviation: CGSize = .zero) -> CGPoint {
         return map.position(coordsInPoints: coordsInPoints).with(tileSizeDeviation: sizeDeviation)
