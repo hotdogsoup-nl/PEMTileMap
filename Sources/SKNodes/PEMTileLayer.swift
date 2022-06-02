@@ -6,7 +6,6 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     private (set) var properties: Dictionary<String, Any>?
 
     private var id = UInt32(0)
-    private var layerName: String?
     private var coordsInTiles = CGPoint.zero // not supported
     private var sizeInTiles = CGSize.zero
     private var opacity = CGFloat(1)
@@ -27,7 +26,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
         
         self.map = map
         parentGroup = group
-        layerName = attributes[ElementAttributes.name.rawValue]
+        name = attributes[ElementAttributes.name.rawValue]
 
         if let value = attributes[ElementAttributes.id.rawValue] {
             id = UInt32(value)!
@@ -175,7 +174,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     #if DEBUG
     override var description: String {
-        return "PEMTileLayer: \(id), (name: \(layerName ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles: \(children.count))"
+        return "PEMTileLayer: \(id), (name: \(name ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles: \(children.count))"
     }
     #endif
 }
