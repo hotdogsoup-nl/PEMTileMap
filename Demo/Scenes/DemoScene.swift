@@ -143,6 +143,7 @@ class DemoScene: SKScene {
 
         if let newMap = PEMTileMap(mapName: mapName!) {
             map = newMap
+            map?.showCanvas = true
 
             if newMap.backgroundColor != nil {
                 backgroundColor = newMap.backgroundColor!

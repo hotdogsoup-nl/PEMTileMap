@@ -49,6 +49,15 @@ internal enum MapStaggerIndex: String {
 }
 
 public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
+    public var showCanvas: Bool {
+        set {
+            _showCanvas = newValue
+            updateCanvas()
+        }
+        get {
+            return _showCanvas
+        }
+    }
     public weak var cameraNode: SKCameraNode?
 
     public private (set) var mapSizeInPoints = CGSize.zero
@@ -65,6 +74,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private var version: String?
     private var mapSource: String?
     private var tiledversion: String?
+    private var _showCanvas: Bool = false
 
     private var mapSizeInPointsFromTileSize: CGSize {
         var size = CGSize.zero
@@ -448,22 +458,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             
         highestZPosition = baseZPosition
         mapSizeInPoints = mapSizeInPointsFromTileSize
-
-        #if DEBUG
-        print (self)
-        
-        for tileSet in tileSets {
-            print(tileSet)
-        }
-        #endif
         
         renderLayers()
-
-        
-        let bg = SKSpriteNode(color: .red, size: mapSizeInPoints)
-        bg.anchorPoint = CGPoint(x: 0, y: 0)
-        bg.zPosition = -9999
-        addChild(bg)
     }
     
     private func renderLayers() {
@@ -513,6 +509,18 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 }
                 continue
             }
+        }
+    }
+    
+    private func updateCanvas() {
+        childNode(withName: "PEMTileMapCanvas")?.removeFromParent()
+        
+        if _showCanvas {
+            let canvas = SKSpriteNode(color: .red, size: mapSizeInPoints)
+            canvas.name = "PEMTileMapCanvas"
+            canvas.anchorPoint = CGPoint(x: 0, y: 0)
+            canvas.zPosition = -9999
+            addChild(canvas)
         }
     }
     
