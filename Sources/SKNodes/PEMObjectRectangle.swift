@@ -34,7 +34,6 @@ class PEMObjectRectangle: SKShapeNode {
             coordsInPoints = objectData.coordsInPoints
             sizeInPoints = objectData.sizeInPoints
             return
-            
         }
         
         return nil
