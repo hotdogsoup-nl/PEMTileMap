@@ -419,10 +419,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     // MARK: - Private
     
     internal func tileSetContaining(gid: UInt32) -> PEMTileSet? {
-        let tileAttributes = tileAttributes(fromId: gid)
-
         for tileSet in tileSets {
-            if tileSet.containsTileWith(gid: tileAttributes.id) {
+            if tileSet.containsTileWith(gid: gid) {
                 return tileSet
             }
         }

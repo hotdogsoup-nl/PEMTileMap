@@ -6,13 +6,13 @@ class PEMTile: SKSpriteNode {
     private (set) var id = UInt32(0)
     private (set) var animation: PEMTileAnimation?
     private (set) var properties: Dictionary<String, Any>?
-
-    private var type: String?
+    private (set) var type: String?
+    
     private var probability = CGFloat(0)
 
     // MARK: - Init
     
-    init?(tileData: PEMTileData) {
+    init?(tileData: PEMTileData, flippedHorizontally: Bool = false, flippedVertically: Bool = false, flippedDiagonally: Bool = false) {
         if let texture = tileData.texture {
             super.init(texture: texture, color: .clear, size: texture.size())
             
@@ -21,6 +21,8 @@ class PEMTile: SKSpriteNode {
             probability = tileData.probability
             animation = tileData.animation
             properties = tileData.properties
+            
+            applyTileFlipping(horizontally: flippedHorizontally, vertically: flippedVertically, diagonally: flippedDiagonally)
             return
         }
         
@@ -43,7 +45,7 @@ class PEMTile: SKSpriteNode {
     
     // MARK: - Setup
     
-    internal func applyTileFlipping(horizontally: Bool, vertically: Bool, diagonally: Bool) {
+    private func applyTileFlipping(horizontally: Bool, vertically: Bool, diagonally: Bool) {
         if diagonally {
             if (horizontally && !vertically) {
                 zRotation = CGFloat(-Double.pi / 2)

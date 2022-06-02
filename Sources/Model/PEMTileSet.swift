@@ -163,23 +163,24 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     }
 
     internal func tileFor(gid: UInt32) -> PEMTile? {
-        return tileFor(id: gid - firstGid)
+        let tileGidAttributes = tileAttributes(fromId: gid)
+        return tileFor(id: tileGidAttributes.id - firstGid, flippedHorizontally: tileGidAttributes.flippedHorizontally, flippedVertically: tileGidAttributes.flippedVertically, flippedDiagonally: tileGidAttributes.flippedDiagonally)
     }
     
-    internal func tileFor(id: UInt32) -> PEMTile? {
+    internal func tileFor(id: UInt32, flippedHorizontally: Bool = false, flippedVertically: Bool = false, flippedDiagonally: Bool = false) -> PEMTile? {
         if let tileData = tileData.filter({ $0.id == id }).first {
             if tileSetType == .spriteSheet && tileData.texture == nil {
                 tileData.texture = spriteSheet?.generateTextureFor(tileData: tileData)
             }
             
-            return PEMTile(tileData: tileData)
+            return PEMTile(tileData: tileData, flippedHorizontally: flippedHorizontally, flippedVertically: flippedVertically, flippedDiagonally: flippedDiagonally)
         }
         
         if let newTileData = spriteSheet?.createTileData(id: id) {
             newTileData.texture = spriteSheet?.generateTextureFor(tileData: newTileData)
             tileData.append(newTileData)
             
-            return PEMTile(tileData: newTileData)
+            return PEMTile(tileData: newTileData, flippedHorizontally: flippedHorizontally, flippedVertically: flippedVertically, flippedDiagonally: flippedDiagonally)
         }
         
         #if DEBUG
@@ -190,7 +191,8 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     }
     
     internal func containsTileWith(gid: UInt32) -> Bool {
-        return idRange ~=  gid - firstGid
+        let tileAttributes = tileAttributes(fromId: gid)
+        return idRange ~=  tileAttributes.id - firstGid
     }
     
     // MARK: - PEMTileMapPropertiesProtocol

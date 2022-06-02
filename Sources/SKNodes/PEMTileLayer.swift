@@ -103,16 +103,13 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
             if (tileGid == 0) {
                 continue
             }
-            
-            let tileGidAttributes = tileAttributes(fromId: tileGid)
-        
-            if let tileSet = map.tileSetContaining(gid: tileGidAttributes.id) {
-                if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
+                    
+            if let tileSet = map.tileSetContaining(gid: tileGid) {
+                if let tile = tileSet.tileFor(gid: tileGid) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
                     
                     tile.coords = CGPoint(x: CGFloat(x), y: CGFloat(y))
-                    tile.applyTileFlipping(horizontally: tileGidAttributes.flippedHorizontally, vertically: tileGidAttributes.flippedVertically, diagonally: tileGidAttributes.flippedDiagonally)
                     tile.texture?.filteringMode = textureFilteringMode
                     
                     if tintColor != nil {
