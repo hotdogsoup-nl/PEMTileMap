@@ -30,16 +30,6 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
         self.tileSizeInPoints = tileSizeInPoints
         self.textureImageSource = textureImageSource
     }
-    
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(Swift.type(of: self))")
-        #endif
-        #endif
-    }
 
     // MARK: - Setup
     

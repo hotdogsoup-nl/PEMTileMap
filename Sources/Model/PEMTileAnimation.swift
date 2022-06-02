@@ -3,16 +3,6 @@ import SpriteKit
 class PEMTileAnimation: NSObject {
     private (set) var frames: Array<PEMTileAnimationFrame> = []
     
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-    
     // MARK: - Setup
     
     internal func addAnimationFrame(attributes: Dictionary<String, String>) {
