@@ -24,6 +24,7 @@ public enum CameraViewMode {
 }
 
 internal enum Orientation: String {
+    case unknown
     case hexagonal = "hexagonal"
     case isometric = "isometric"
     case orthogonal = "orthogonal"
@@ -52,21 +53,34 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
 
     public private (set) var mapSizeInPoints = CGSize.zero
     public private (set) var tileSizeInPoints = CGSize.zero
+    public private (set) var mapSizeInTiles = CGSize.zero
     public private (set) var backgroundColor: SKColor?
     public private (set) var highestZPosition = CGFloat(0)
     public private (set) var parseTime = TimeInterval(0)
     public private (set) var renderTime = TimeInterval(0)
 
     private (set) var properties: Dictionary<String, Any>?
-    private (set) var orientation: Orientation?
+    private (set) var orientation: Orientation = .unknown
 
     private var version: String?
     private var mapSource: String?
     private var tiledversion: String?
 
-    private var mapSizeInTiles = CGSize.zero
-    var mapSizeInPointsFromTileSize: CGSize {
-        return CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
+    private var mapSizeInPointsFromTileSize: CGSize {
+        var size = CGSize.zero
+        
+        switch orientation {
+        case .unknown, .orthogonal:
+            size = CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
+        case .hexagonal:
+            break
+        case .isometric:
+            let sideLength = mapSizeInTiles.width + mapSizeInTiles.height
+            size = CGSize(width: sideLength * tileSizeInPoints.width * 0.5, height: sideLength * tileSizeInPoints.height * 0.5)
+        case .staggered:
+            break
+        }
+        return size
     }
     
     private var hexSideLengthInPoints = Int(0)
@@ -149,11 +163,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         renderMap()
         
         renderTime = -renderStartTime.timeIntervalSinceNow
-        
-        #if DEBUG
-        print("Parsed files in:", parseTime.stringValue())
-        print("Rendered map in:", renderTime.stringValue())
-        #endif
     }
     
     // MARK: - Setup
@@ -248,22 +257,56 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         properties = convertProperties(newProperties)
     }
     
-    // MARK: - Map objects
+    // MARK: - Coordinates
+    
+    /// Converts the tile coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
+    /// - Parameter coords: TMX tile coordinates.
+    /// - Returns: Position as a `CGPoint`.
+    public func position(tileCoords: CGPoint) -> CGPoint {
+        var x: CGFloat = 0
+        var y: CGFloat = 0
         
-    internal func tileSetContaining(gid: UInt32) -> PEMTileSet? {
-        let tileAttributes = tileAttributes(fromId: gid)
-
-        for tileSet in tileSets {
-            if tileSet.containsTileWith(gid: tileAttributes.id) {
-                return tileSet
-            }
+        switch orientation {
+        case .unknown:
+            break
+        case .hexagonal:
+            break
+        case .isometric:
+            x = (tileCoords.x - tileCoords.y) * tileSizeInPoints.width * 0.5 + (mapSizeInTiles.height - 1) * tileSizeInPoints.width * 0.5
+            y = mapSizeInPoints.height - (tileCoords.x + tileCoords.y) * tileSizeInPoints.height * 0.5 - tileSizeInPoints.height
+        case .orthogonal:
+            x = (tileCoords.x * tileSizeInPoints.width)
+            y = mapSizeInPoints.height - ((tileCoords.y + 1) * tileSizeInPoints.height)
+        case .staggered:
+            break
         }
-        
-        #if DEBUG
-        print("PEMTileMap: no tileSet found for tile with gid: \(gid)")
-        #endif
 
-        return nil
+        return CGPoint(x: x, y: y)
+    }
+    
+    /// Converts the pixel coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
+    /// - Parameter coordsInPoints: TMX pixel coordinates.
+    /// - Returns: Position as a `CGPoint`.
+    func position(coordsInPoints: CGPoint) -> CGPoint {
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        
+        switch orientation {
+        case .unknown:
+            break
+        case .hexagonal:
+            break
+        case .isometric:
+            x = (coordsInPoints.x - coordsInPoints.y) + (mapSizeInTiles.height - 1) * tileSizeInPoints.width * 0.5
+            y = mapSizeInPoints.height - (coordsInPoints.x + coordsInPoints.y) * 0.5 - tileSizeInPoints.height * 0.5
+        case .orthogonal:
+            x = coordsInPoints.x - tileSizeInPoints.width * 0.5
+            y = mapSizeInPoints.height - coordsInPoints.y - tileSizeInPoints.height * 0.5
+        case .staggered:
+            break
+        }
+
+        return CGPoint(x: x, y: y)
     }
     
     // MARK: - Camera
@@ -365,6 +408,22 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Private
     
+    internal func tileSetContaining(gid: UInt32) -> PEMTileSet? {
+        let tileAttributes = tileAttributes(fromId: gid)
+
+        for tileSet in tileSets {
+            if tileSet.containsTileWith(gid: tileAttributes.id) {
+                return tileSet
+            }
+        }
+        
+        #if DEBUG
+        print("PEMTileMap: no tileSet found for tile with gid: \(gid)")
+        #endif
+
+        return nil
+    }
+    
     private func parseExternalFiles() {
         for tileSet in tileSets {
             tileSet.parseExternalTileSet()
@@ -380,7 +439,15 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     private func renderMap() {
+        guard orientation != .unknown else {
+            #if DEBUG
+            print("PEMTileMap: map orientation is unknown")
+            #endif
+            return
+        }
+            
         highestZPosition = baseZPosition
+        mapSizeInPoints = mapSizeInPointsFromTileSize
 
         #if DEBUG
         print (self)
@@ -392,15 +459,11 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         
         renderLayers()
 
-        mapSizeInPoints = calculateAccumulatedFrame().size
         
-        if mapSizeInPoints.width < mapSizeInPointsFromTileSize.width {
-            mapSizeInPoints.width = mapSizeInPointsFromTileSize.width
-        }
-
-        if mapSizeInPoints.height < mapSizeInPointsFromTileSize.height {
-            mapSizeInPoints.height = mapSizeInPointsFromTileSize.height
-        }
+        let bg = SKSpriteNode(color: .red, size: mapSizeInPoints)
+        bg.anchorPoint = CGPoint(x: 0, y: 0)
+        bg.zPosition = -9999
+        addChild(bg)
     }
     
     private func renderLayers() {
@@ -409,7 +472,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 if tileLayer.visible {
                     highestZPosition += zPositionLayerDelta
 
-                    tileLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInTiles: mapSizeInTiles, textureFilteringMode: textureFilteringMode)
+                    tileLayer.render(textureFilteringMode)
                     tileLayer.zPosition = highestZPosition
                     
                     addChild(tileLayer)
@@ -440,7 +503,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 if objectLayer.visible {
                     highestZPosition += zPositionLayerDelta
                     
-                    objectLayer.render(tileSizeInPoints: tileSizeInPoints, mapSizeInPoints: mapSizeInPointsFromTileSize, textureFilteringMode:textureFilteringMode)
+                    objectLayer.render(textureFilteringMode:textureFilteringMode)
                     objectLayer.zPosition = highestZPosition
                     
                     addChild(objectLayer)

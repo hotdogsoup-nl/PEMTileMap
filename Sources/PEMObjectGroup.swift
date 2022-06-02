@@ -16,12 +16,11 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     private var id = UInt32(0)
     private var groupName: String?
     private var drawOrder = DrawOrder.topDown
-    private var tileSizeInPoints = CGSize.zero
     
     internal var objects: Array<PEMObjectData> = []
     private var parentGroup: PEMGroup?
     
-    weak var map : PEMTileMap?
+    weak var map : PEMTileMap!
 
     init?(attributes: Dictionary<String, String>, map: PEMTileMap, group: PEMGroup?) {
         super.init()
@@ -29,7 +28,6 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         self.map = map
         parentGroup = group
         groupName = attributes[ElementAttributes.name.rawValue]
-        tileSizeInPoints = map.tileSizeInPoints
         
         if let value = attributes[ElementAttributes.id.rawValue] {
             id = UInt32(value)!
@@ -132,7 +130,9 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         return (result.count > 0) ? result : nil
     }
 
-    internal func render(tileSizeInPoints: CGSize, mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {
+    internal func render(textureFilteringMode: SKTextureFilteringMode) {
+        let tileSizeInPoints = map.tileSizeInPoints
+
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
                 
@@ -147,10 +147,15 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             var sizeInPoints: CGSize!
             sizeInPoints = (object.sizeInPoints != nil) ? object.sizeInPoints : tileSizeInPoints
             
-            var objectCoordsInPoints: CGPoint!
-            objectCoordsInPoints = (object.coordsInPoints != nil) ? object.coordsInPoints : .zero
-
-            var position = CGPoint(x: objectCoordsInPoints.x - tileSizeInPoints.width * 0.5, y: mapSizeInPoints.height - objectCoordsInPoints.y - tileSizeInPoints.height * 0.5)
+            var objectCoordsInPoints = CGPoint.zero
+            
+            if let coords = object.coordsInPoints {
+                objectCoordsInPoints = coords
+            } else {
+                objectCoordsInPoints = .zero
+            }
+            
+            var position = objectPosition(coordsInPoints: objectCoordsInPoints)
 
             switch object.objectType {
             case .ellipse:
@@ -223,7 +228,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
 
                 let tileGidAttributes = tileAttributes(fromId: tileGid)
                 
-                if let tileSet = map?.tileSetContaining(gid: tileGidAttributes.id) {
+                if let tileSet = map.tileSetContaining(gid: tileGidAttributes.id) {
                     if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
                         tile.applyTileFlipping(horizontally: tileGidAttributes.flippedHorizontally, vertically: tileGidAttributes.flippedVertically, diagonally: tileGidAttributes.flippedDiagonally)
                         tile.texture?.filteringMode = textureFilteringMode
@@ -302,7 +307,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
 
         }
     }
-    
+        
     // MARK: - PEMTileMapPropertiesProtocol
     
     internal func addProperties(_ newProperties: [PEMProperty]) {
@@ -310,6 +315,10 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     // MARK: - Private
+    
+    private func objectPosition(coordsInPoints: CGPoint, sizeDeviation: CGSize = .zero) -> CGPoint {
+        return map.position(coordsInPoints: coordsInPoints).with(tileSizeDeviation: sizeDeviation)
+    }
     
     private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode {
         let spriteLabel = highResolutionLabel(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5)

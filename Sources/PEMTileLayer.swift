@@ -18,7 +18,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     internal var tileData: Array<UInt32> = []
     private var parentGroup: PEMGroup?
     
-    weak var map : PEMTileMap?
+    weak var map : PEMTileMap!
     
     // MARK: - Init
 
@@ -90,7 +90,10 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Public
 
-    internal func render(tileSizeInPoints: CGSize, mapSizeInTiles: CGSize, textureFilteringMode: SKTextureFilteringMode) {
+    internal func render(_ textureFilteringMode: SKTextureFilteringMode) {
+        let tileSizeInPoints = map.tileSizeInPoints
+        let mapSizeInTiles = map.mapSizeInTiles
+        
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
         
@@ -103,7 +106,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
             
             let tileGidAttributes = tileAttributes(fromId: tileGid)
         
-            if let tileSet = map?.tileSetContaining(gid: tileGidAttributes.id) {       
+            if let tileSet = map.tileSetContaining(gid: tileGidAttributes.id) {
                 if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
                     let x: Int = index % Int(mapSizeInTiles.width)
                     let y: Int = index / Int(mapSizeInTiles.width)
@@ -117,9 +120,8 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
                         tile.colorBlendFactor = 1.0
                     }
                     
-                    let mapHeightInPoints = sizeInTiles.height * tileSizeInPoints.height
                     let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
-                    tile.position = CGPoint(x: (tile.coords!.x * tileSizeInPoints.width) + sizeDeviation.width * 0.5 + tileSet.tileOffSetInPoints.x, y: mapHeightInPoints - ((tile.coords!.y + 1) * tileSizeInPoints.height) + sizeDeviation.height * 0.5 - tileSet.tileOffSetInPoints.y)
+                    tile.position = tilePosition(coords: tile.coords!, sizeDeviation: sizeDeviation, offset: tileSet.tileOffSetInPoints)
                                         
                     addChild(tile)
                     
@@ -147,6 +149,10 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     // MARK: - Private
+    
+    private func tilePosition(coords: CGPoint, sizeDeviation: CGSize = .zero, offset: CGPoint = .zero) -> CGPoint {
+        return map.position(tileCoords: coords).with(tileSizeDeviation: sizeDeviation, offset: offset)
+    }
     
     private func applyParentGroupAttributes() {
         guard parentGroup != nil else { return }
