@@ -313,7 +313,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     /// Changes the map camera scale using the specified `CameraZoomMode` and its position using the specified `CameraViewMode` with optional animation.
     ///
-    /// Makes it possible to zoom, pan and tilt the camera to any position on the map.
+    /// Makes it possible to zoom, pan and tilt the camera to positions on the map.
     ///
     /// For example in a "Mario" style platform game, when starting a level, the camera will move to the bottom left of the map and zoom in so it fills the screen vertically, leaving the rest of the map outside of the screen to the right.
     ///
