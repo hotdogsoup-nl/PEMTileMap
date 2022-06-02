@@ -183,16 +183,6 @@ class PEMTmxParser: XMLParser, XMLParserDelegate {
         shouldResolveExternalEntities = false
     }
     
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-    
     // MARK: - XMLParserDelegate
     
     func parserDidStartDocument(_ parser: XMLParser) {
