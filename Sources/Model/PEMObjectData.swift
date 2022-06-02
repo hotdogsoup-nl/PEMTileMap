@@ -72,7 +72,7 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - Setup
     
-    internal func parseAttributes() {
+    internal func parseAttributes(defaultSize: CGSize) {
         guard !attributesParsed else { return }
         attributesParsed = true
         
@@ -106,6 +106,8 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
                 let heightString : NSString = height as NSString
 
                 sizeInPoints = CGSize(width: CGFloat(widthString.doubleValue), height: CGFloat(heightString.doubleValue))
+            } else {
+                sizeInPoints = defaultSize
             }
             
             if let value = currentAttributes[ElementAttributes.rotation.rawValue] {

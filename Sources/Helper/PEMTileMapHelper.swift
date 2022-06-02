@@ -2,23 +2,23 @@ import SpriteKit
 
 // MARK: - Sprites
 
-func highResolutionLabel(text: String,
-                         fontName: String,
-                         fontSize: CGFloat,
-                         fontColor: SKColor,
-                         bold: Bool = false,
-                         italic: Bool = false,
-                         underline: Bool = false,
-                         strikeOut: Bool = false,
-                         kerning: Bool = false,
-                         wordWrapWidth: CGFloat = 0,
-                         hAlign: TextHorizontalAlignment = .left,
-                         vAlign: TextVerticalAlignment = .center,
-                         shadowColor: SKColor = .clear,
-                         shadowOffset: CGSize = .zero,
-                         shadowBlurRadius: CGFloat = 0) -> SKSpriteNode {
+func highResolutionLabelTexture(text: String,
+                                fontName: String,
+                                fontSize: CGFloat,
+                                fontColor: SKColor,
+                                bold: Bool = false,
+                                italic: Bool = false,
+                                underline: Bool = false,
+                                strikeOut: Bool = false,
+                                kerning: Bool = false,
+                                wordWrapWidth: CGFloat = 0,
+                                hAlign: TextHorizontalAlignment = .left,
+                                vAlign: TextVerticalAlignment = .center,
+                                shadowColor: SKColor = .clear,
+                                shadowOffset: CGSize = .zero,
+                                shadowBlurRadius: CGFloat = 0) -> SKTexture? {
     
-    let scaleFactor = 5.0
+    let scaleFactor = 15.0
     
     var font = Font(name: fontName, size: fontSize * scaleFactor)
     if font == nil {
@@ -83,10 +83,7 @@ func highResolutionLabel(text: String,
     }
     label.verticalAlignmentMode = alignmentVertical
 
-    let size = label.calculateAccumulatedFrame().size
-    let spriteText = SKSpriteNode(texture: SKView().texture(from: label))
-    spriteText.size = CGSize(width: size.width / scaleFactor, height: size.height / scaleFactor)
-    return spriteText
+    return SKView().texture(from: label)
 }
 
 // MARK: - Properties

@@ -14,7 +14,6 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     private (set) var color = SKColor.lightGray
 
     private var id = UInt32(0)
-    private var groupName: String?
     private var drawOrder = DrawOrder.topDown
     
     internal var objects: Array<PEMObjectData> = []
@@ -27,7 +26,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
 
         self.map = map
         parentGroup = group
-        groupName = attributes[ElementAttributes.name.rawValue]
+        name = attributes[ElementAttributes.name.rawValue]
         
         if let value = attributes[ElementAttributes.id.rawValue] {
             id = UInt32(value)!
@@ -137,91 +136,31 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
                 
         for object in objects {
-            object.parseAttributes()
+            object.parseAttributes(defaultSize: tileSizeInPoints)
             
-            if !object.visible {
-                continue
-            }
+            guard object.visible else { continue }
+            guard object.coordsInPoints != nil else { continue }
 
             var node : SKNode?
+            
+            // TO BE DELETED
             var sizeInPoints: CGSize!
             sizeInPoints = (object.sizeInPoints != nil) ? object.sizeInPoints : tileSizeInPoints
+            // -----
             
-            var objectCoordsInPoints = CGPoint.zero
-            
-            if let coords = object.coordsInPoints {
-                objectCoordsInPoints = coords
-            } else {
-                objectCoordsInPoints = .zero
-            }
-            
-            var position = objectPosition(coordsInPoints: objectCoordsInPoints)
+            let position = objectPosition(coordsInPoints: object.coordsInPoints!)
 
             switch object.objectType {
             case .ellipse:
-                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
-            case .point:
-                sizeInPoints = CGSize(width: tileSizeInPoints.width * 0.25, height: tileSizeInPoints.height * 0.25)
-                node = SKShapeNode(ellipseIn: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
-                position = CGPoint(x: position.x - sizeInPoints.width * 0.5, y: position.y + sizeInPoints.height * 0.5)
-            case .polygon, .polyline:
-                if var points = object.polygonPoints {
-                    node = SKShapeNode(points: &points, count: points.count)
-                    sizeInPoints = node!.calculateAccumulatedFrame().size
-                }
+                node = PEMObjectEllipse(objectData: object, color: color)
             case .rectangle:
-                node = SKShapeNode(rect: CGRect(x: 0, y: -sizeInPoints.height, width: sizeInPoints.width, height: sizeInPoints.height))
+                node = PEMObjectRectangle(objectData: object, color: color)
+            case .point:
+                node = PEMObjectPoint(objectData: object, color: color)
+            case .polygon, .polyline:
+                node = PEMObjectPoly(objectData: object, color: color, isPolygon: (object.objectType == .polygon))
             case .text:
-                var text: String!
-                text = (object.text != nil) ? object.text : ""
-
-                var fontFamily: String!
-                fontFamily = (object.fontFamily != nil) ? object.fontFamily : "Arial"
-
-                var pixelSize: CGFloat!
-                pixelSize = (object.pixelSize != nil) ? object.pixelSize : 16
-
-                var textColor: SKColor!
-                textColor = (object.textColor != nil) ? object.textColor : .white
-
-                var bold: Bool!
-                bold = (object.bold != nil) ? object.bold : false
-
-                var italic: Bool!
-                italic = (object.italic != nil) ? object.italic : false
-
-                var underline: Bool!
-                underline = (object.underline != nil) ? object.underline : false
-
-                var strikeOut: Bool!
-                strikeOut = (object.strikeOut != nil) ? object.strikeOut : false
-
-                var kerning: Bool!
-                kerning = (object.kerning != nil) ? object.kerning : false
-
-                var wrap: Bool!
-                wrap = (object.wrap != nil) ? object.wrap : false
-
-                var hAlign: TextHorizontalAlignment!
-                hAlign = (object.hAlign != nil) ? object.hAlign : .left
-                
-                var vAlign: TextVerticalAlignment!
-                vAlign = (object.vAlign != nil) ? object.vAlign : .top
-
-                let textLabel = highResolutionLabel(text: text,
-                                                    fontName: fontFamily,
-                                                    fontSize: pixelSize,
-                                                    fontColor: textColor,
-                                                    bold: bold,
-                                                    italic: italic,
-                                                    underline: underline,
-                                                    strikeOut: strikeOut,
-                                                    kerning: kerning,
-                                                    wordWrapWidth: (wrap) ? sizeInPoints.width : 0,
-                                                    hAlign: hAlign,
-                                                    vAlign: vAlign)
-                textLabel.anchorPoint = CGPoint(x: 0.0, y: 1.0)
-                node = textLabel
+                node = PEMObjectText(objectData: object)
             case .tile:
                 var tileGid: UInt32!
                 tileGid = (object.tileGid != nil) ? object.tileGid : 0
@@ -229,8 +168,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                 let tileGidAttributes = tileAttributes(fromId: tileGid)
                 
                 if let tileSet = map.tileSetContaining(gid: tileGidAttributes.id) {
-                    if let tile = tileSet.tileFor(gid: tileGidAttributes.id) {
-                        tile.applyTileFlipping(horizontally: tileGidAttributes.flippedHorizontally, vertically: tileGidAttributes.flippedVertically, diagonally: tileGidAttributes.flippedDiagonally)
+                    if let tile = tileSet.tileFor(id: tileGidAttributes.id, flippedHorizontally: tileGidAttributes.flippedHorizontally, flippedVertically: tileGidAttributes.flippedVertically, flippedDiagonally: tileGidAttributes.flippedDiagonally) {
                         tile.texture?.filteringMode = textureFilteringMode
                         
                         if tintColor != nil {
@@ -270,41 +208,30 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             var nodeCenter = CGPoint.zero
             
             if let objectNode = node as? SKShapeNode {
-                objectNode.lineWidth = 0.25
-                objectNode.strokeColor = color
-                if object.objectType != .polyline {
-                    objectNode.fillColor = color.withAlphaComponent(0.5)
-                }
-                objectNode.isAntialiased = true
-                
                 nodeCenter = CGPoint(x: objectNode.frame.midX, y: objectNode.frame.midY)
             }
             
             node?.position = position
-            
-            var rotation: CGFloat!
-            rotation = (object.rotation != nil) ? object.rotation : 0
-            node?.zRotation = rotation.radians()
-            
+                        
             if object.objectName != nil {
-                let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.25, color:color)
-                let labelSize = label.calculateAccumulatedFrame().size
-                
-                if object.objectType == .tile {
-                    label.position = CGPoint(x: sizeInPoints.width * 0.5, y: sizeInPoints.height +  labelSize.height * 0.7)
-                } else if object.objectType == .polygon || object.objectType == .polyline {
-                    label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + sizeInPoints.height * 0.5 + labelSize.height * 0.7)
-                } else {
-                    label.position = CGPoint(x: sizeInPoints.width * 0.5, y: labelSize.height * 0.7)
+                if let label = objectLabel(text: object.objectName ?? "-", fontSize: tileSizeInPoints.height * 0.5, color:color) {
+                    let labelSize = label.calculateAccumulatedFrame().size
+
+                    if object.objectType == .tile {
+                        label.position = CGPoint(x: sizeInPoints.width * 0.5, y: sizeInPoints.height +  labelSize.height * 0.7)
+                    } else if object.objectType == .polygon || object.objectType == .polyline {
+                        label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + sizeInPoints.height * 0.5 + labelSize.height * 0.7)
+                    } else {
+                        label.position = CGPoint(x: sizeInPoints.width * 0.5, y: labelSize.height * 0.7)
+                    }
+
+                    label.zRotation = -node!.zRotation
+                    label.zPosition = node!.zPosition + 1
+                    node?.addChild(label)
                 }
-                
-                label.zRotation = -node!.zRotation
-                label.zPosition = node!.zPosition + 1
-                node?.addChild(label)
             }
             
             addChild(node!)
-
         }
     }
         
@@ -320,16 +247,23 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         return map.position(coordsInPoints: coordsInPoints).with(tileSizeDeviation: sizeDeviation)
     }
     
-    private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode {
-        let spriteLabel = highResolutionLabel(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5)
-        var size = spriteLabel.calculateAccumulatedFrame().size
-        size = CGSize(width: size.width * 1.1, height: size.height * 1.5)
-        let shape = SKShapeNode(rectOf: size, cornerRadius: size.height * 0.2)
-        shape.fillColor = color
-        shape.strokeColor = color
+    private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode? {
+        if let texture = highResolutionLabelTexture(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5) {
+            
+            let scale = fontSize / texture.size().height
+            var size = texture.size().scaled(scale)
+            let spriteLabel = SKSpriteNode(texture: texture, size: size)
+            
+            size = CGSize(width: size.width * 1.1, height: size.height * 1.5)
+            let shape = SKShapeNode(rectOf: size, cornerRadius: size.height * 0.2)
+            shape.fillColor = color
+            shape.strokeColor = color
+            
+            shape.addChild(spriteLabel)
+            return shape
+        }
         
-        shape.addChild(spriteLabel)
-        return shape
+        return nil
     }
     
     private func applyParentGroupAttributes() {
@@ -360,7 +294,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
 
     #if DEBUG
     override var description: String {
-        return "PEMObjectGroup: \(id), (name: \(groupName ?? "-"), parent: \(String(describing: parentGroup)), objects: \(objects.count))"
+        return "PEMObjectGroup: \(id), (name: \(name ?? "-"), parent: \(String(describing: parentGroup)), objects: \(objects.count))"
     }
     #endif
 }

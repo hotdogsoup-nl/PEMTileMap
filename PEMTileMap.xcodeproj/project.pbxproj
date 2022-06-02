@@ -411,6 +411,21 @@
 		20DB7DF22837BBD600F17FC7 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7DF12837BBD600F17FC7 /* ui */; };
 		20DB7DF32837BBD600F17FC7 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7DF12837BBD600F17FC7 /* ui */; };
 		20DB7DF42837BBD600F17FC7 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7DF12837BBD600F17FC7 /* ui */; };
+		20DD973B2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */; };
+		20DD973C2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */; };
+		20DD973D2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */; };
+		20DD973F2848B1580076FCAC /* PEMObjectRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */; };
+		20DD97402848B1580076FCAC /* PEMObjectRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */; };
+		20DD97412848B1580076FCAC /* PEMObjectRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */; };
+		20DD97432848B5520076FCAC /* PEMObjectPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD97422848B5520076FCAC /* PEMObjectPoint.swift */; };
+		20DD97442848B5520076FCAC /* PEMObjectPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD97422848B5520076FCAC /* PEMObjectPoint.swift */; };
+		20DD97452848B5520076FCAC /* PEMObjectPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD97422848B5520076FCAC /* PEMObjectPoint.swift */; };
+		20DD97472848B75B0076FCAC /* PEMObjectPoly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD97462848B75B0076FCAC /* PEMObjectPoly.swift */; };
+		20DD97482848B75B0076FCAC /* PEMObjectPoly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD97462848B75B0076FCAC /* PEMObjectPoly.swift */; };
+		20DD97492848B75B0076FCAC /* PEMObjectPoly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD97462848B75B0076FCAC /* PEMObjectPoly.swift */; };
+		20DD974F2848C9870076FCAC /* PEMObjectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD974E2848C9870076FCAC /* PEMObjectText.swift */; };
+		20DD97502848C9870076FCAC /* PEMObjectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD974E2848C9870076FCAC /* PEMObjectText.swift */; };
+		20DD97512848C9870076FCAC /* PEMObjectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD974E2848C9870076FCAC /* PEMObjectText.swift */; };
 		20FAEFD72837A66C00BEFA8E /* Animated kanga.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFC72837A66C00BEFA8E /* Animated kanga.tsx */; };
 		20FAEFD82837A66C00BEFA8E /* Animated kanga.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFC72837A66C00BEFA8E /* Animated kanga.tsx */; };
 		20FAEFD92837A66C00BEFA8E /* Animated kanga.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAEFC72837A66C00BEFA8E /* Animated kanga.tsx */; };
@@ -644,6 +659,11 @@
 		20DB7CE72837BABE00F17FC7 /* sticker-knight.world */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sticker-knight.world"; sourceTree = "<group>"; };
 		20DB7DED2837BB4400F17FC7 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 		20DB7DF12837BBD600F17FC7 /* ui */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ui; sourceTree = "<group>"; };
+		20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMObjectEllipse.swift; sourceTree = "<group>"; };
+		20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectRectangle.swift; sourceTree = "<group>"; };
+		20DD97422848B5520076FCAC /* PEMObjectPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectPoint.swift; sourceTree = "<group>"; };
+		20DD97462848B75B0076FCAC /* PEMObjectPoly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectPoly.swift; sourceTree = "<group>"; };
+		20DD974E2848C9870076FCAC /* PEMObjectText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectText.swift; sourceTree = "<group>"; };
 		20FAEFC72837A66C00BEFA8E /* Animated kanga.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Animated kanga.tsx"; sourceTree = "<group>"; };
 		20FAEFC82837A66C00BEFA8E /* animated1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animated1.png; sourceTree = "<group>"; };
 		20FAEFC92837A66C00BEFA8E /* animated2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animated2.png; sourceTree = "<group>"; };
@@ -1012,7 +1032,12 @@
 			isa = PBXGroup;
 			children = (
 				20B329CD283953180082CE8B /* PEMImageLayer.swift */,
+				20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */,
 				20B329CC283953180082CE8B /* PEMObjectGroup.swift */,
+				20DD97422848B5520076FCAC /* PEMObjectPoint.swift */,
+				20DD97462848B75B0076FCAC /* PEMObjectPoly.swift */,
+				20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */,
+				20DD974E2848C9870076FCAC /* PEMObjectText.swift */,
 				20B329CB283953180082CE8B /* PEMTile.swift */,
 				20B329CA283953180082CE8B /* PEMTileLayer.swift */,
 				20B329CE283953180082CE8B /* PEMTileMap.swift */,
@@ -1628,12 +1653,17 @@
 				20B32A0D283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
 				20B32A01283953180082CE8B /* CG+Extensions.swift in Sources */,
 				20B329E0283953180082CE8B /* PEMProperty.swift in Sources */,
+				20DD97452848B5520076FCAC /* PEMObjectPoint.swift in Sources */,
 				20B329EC283953180082CE8B /* PEMTileData.swift in Sources */,
 				20B32A04283953180082CE8B /* Data+Compression.swift in Sources */,
 				20B32A13283953180082CE8B /* SKColor+Extension.swift in Sources */,
+				20DD973D2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */,
 				20B329FE283953180082CE8B /* PEMTileMap.swift in Sources */,
 				20B329E9283953180082CE8B /* PEMTileAnimationFrame.swift in Sources */,
 				20B329F2283953180082CE8B /* PEMTileLayer.swift in Sources */,
+				20DD97492848B75B0076FCAC /* PEMObjectPoly.swift in Sources */,
+				20DD97412848B1580076FCAC /* PEMObjectRectangle.swift in Sources */,
+				20DD97512848C9870076FCAC /* PEMObjectText.swift in Sources */,
 				2037A5DE28258C4900E13452 /* GameViewController.swift in Sources */,
 				20B329EF283953180082CE8B /* PEMTileSet.swift in Sources */,
 				20B329E6283953180082CE8B /* PEMTileAnimation.swift in Sources */,
@@ -1661,12 +1691,17 @@
 				20B329FF283953180082CE8B /* CG+Extensions.swift in Sources */,
 				20B329DE283953180082CE8B /* PEMProperty.swift in Sources */,
 				20B329EA283953180082CE8B /* PEMTileData.swift in Sources */,
+				20DD97432848B5520076FCAC /* PEMObjectPoint.swift in Sources */,
 				20B32A02283953180082CE8B /* Data+Compression.swift in Sources */,
 				20B32A11283953180082CE8B /* SKColor+Extension.swift in Sources */,
 				20B329FC283953180082CE8B /* PEMTileMap.swift in Sources */,
+				20DD973B2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */,
 				20B329E7283953180082CE8B /* PEMTileAnimationFrame.swift in Sources */,
 				20B329F0283953180082CE8B /* PEMTileLayer.swift in Sources */,
 				204662E0281BE8CF00F3635B /* Define.swift in Sources */,
+				20DD97472848B75B0076FCAC /* PEMObjectPoly.swift in Sources */,
+				20DD973F2848B1580076FCAC /* PEMObjectRectangle.swift in Sources */,
+				20DD974F2848C9870076FCAC /* PEMObjectText.swift in Sources */,
 				20B329ED283953180082CE8B /* PEMTileSet.swift in Sources */,
 				20B329E4283953180082CE8B /* PEMTileAnimation.swift in Sources */,
 				207D3DD42812AD5700FC4C77 /* DemoScene.swift in Sources */,
@@ -1694,12 +1729,17 @@
 				20B32A00283953180082CE8B /* CG+Extensions.swift in Sources */,
 				20B329DF283953180082CE8B /* PEMProperty.swift in Sources */,
 				20B329EB283953180082CE8B /* PEMTileData.swift in Sources */,
+				20DD97442848B5520076FCAC /* PEMObjectPoint.swift in Sources */,
 				20B32A03283953180082CE8B /* Data+Compression.swift in Sources */,
 				20B32A12283953180082CE8B /* SKColor+Extension.swift in Sources */,
 				20B329FD283953180082CE8B /* PEMTileMap.swift in Sources */,
+				20DD973C2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */,
 				20B329E8283953180082CE8B /* PEMTileAnimationFrame.swift in Sources */,
 				20B329F1283953180082CE8B /* PEMTileLayer.swift in Sources */,
 				204662E1281BE8CF00F3635B /* Define.swift in Sources */,
+				20DD97482848B75B0076FCAC /* PEMObjectPoly.swift in Sources */,
+				20DD97402848B1580076FCAC /* PEMObjectRectangle.swift in Sources */,
+				20DD97502848C9870076FCAC /* PEMObjectText.swift in Sources */,
 				20B329EE283953180082CE8B /* PEMTileSet.swift in Sources */,
 				20B329E5283953180082CE8B /* PEMTileAnimation.swift in Sources */,
 				207D3DD52812AD5700FC4C77 /* DemoScene.swift in Sources */,
