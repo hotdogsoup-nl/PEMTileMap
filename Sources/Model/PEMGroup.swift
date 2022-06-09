@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
+internal class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var properties: Dictionary<String, Any>?
     private (set) var opacity = CGFloat(1.0)
     private (set) var visible = true
@@ -44,7 +44,7 @@ class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    internal func addProperties(_ newProperties: [PEMProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     

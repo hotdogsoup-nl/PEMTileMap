@@ -2,7 +2,7 @@ import SpriteKit
 
 // MARK: - Properties
 
-func convertProperties(_ newProperties: [PEMProperty]) -> Dictionary<String, Any>? {
+internal func convertProperties(_ newProperties: [PEMProperty]) -> Dictionary<String, Any>? {
     var properties: Dictionary<String, Any>? = [:]
     for property in newProperties {
         if let value = property.value {
@@ -35,7 +35,7 @@ func convertProperties(_ newProperties: [PEMProperty]) -> Dictionary<String, Any
 
 // MARK: - Flipping attributes
 
-func tileAttributes(fromId id: UInt32) -> (id: UInt32, flippedHorizontally: Bool, flippedVertically: Bool, flippedDiagonally: Bool) {
+internal func tileAttributes(fromId id: UInt32) -> (id: UInt32, flippedHorizontally: Bool, flippedVertically: Bool, flippedDiagonally: Bool) {
     let flippedDiagonalFlag: UInt32   = 0x20000000
     let flippedVerticalFlag: UInt32   = 0x40000000
     let flippedHorizontalFlag: UInt32 = 0x80000000
@@ -53,7 +53,7 @@ func tileAttributes(fromId id: UInt32) -> (id: UInt32, flippedHorizontally: Bool
 
 // MARK: - Files
 
-func bundlePathForResource(_ resource: String) -> String? {
+internal func bundlePathForResource(_ resource: String) -> String? {
     var fileName = resource
     var fileExtension: String?
 
@@ -65,7 +65,7 @@ func bundlePathForResource(_ resource: String) -> String? {
     return Bundle.main.path(forResource: fileName, ofType: fileExtension)
 }
 
-func bundleURLForResource(_ resource: String) -> URL? {
+internal func bundleURLForResource(_ resource: String) -> URL? {
     var fileName = resource
     var fileExtension: String?
 

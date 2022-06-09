@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
+internal class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     enum ObjectAlignment: String {
         case bottom = "bottom"
         case bottomLeft = "bottomleft"
@@ -58,7 +58,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - Setup
     
-    internal func addAttributes(_ attributes: Dictionary<String, String>) {
+    func addAttributes(_ attributes: Dictionary<String, String>) {
         name = attributes[ElementAttributes.name.rawValue]
 
         if let tilewidth = attributes[ElementAttributes.tileWidth.rawValue],
@@ -89,7 +89,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    internal func setSpriteSheetImage(attributes: Dictionary<String, String>) {
+    func setSpriteSheetImage(attributes: Dictionary<String, String>) {
         guard let source = attributes[ElementAttributes.source.rawValue] else { return }
         
         if !tileData.isEmpty {
@@ -109,7 +109,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    internal func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTileData? {
+    func addOrUpdateTileData(attributes: Dictionary<String, String>) -> PEMTileData? {
         guard let tileIdValue = attributes[ElementAttributes.id.rawValue] else { return nil }
         let tileId = UInt32(tileIdValue)!
                 
@@ -134,7 +134,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         return nil
     }
     
-    internal func setTileOffset(attributes: Dictionary<String, String>) {
+    func setTileOffset(attributes: Dictionary<String, String>) {
         if let dx = attributes[ElementAttributes.x.rawValue],
            let dy = attributes[ElementAttributes.y.rawValue] {
             tileOffSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
@@ -143,7 +143,7 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - Internal
 
-    internal func parseExternalTileSet() {
+    func parseExternalTileSet() {
         guard externalSource != nil else { return }
         
         if let url = bundleURLForResource(externalSource!),
@@ -162,12 +162,12 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
 
-    internal func tileFor(gid: UInt32) -> PEMTile? {
+    func tileFor(gid: UInt32) -> PEMTile? {
         let tileGidAttributes = tileAttributes(fromId: gid)
         return tileFor(id: tileGidAttributes.id - firstGid, flippedHorizontally: tileGidAttributes.flippedHorizontally, flippedVertically: tileGidAttributes.flippedVertically, flippedDiagonally: tileGidAttributes.flippedDiagonally)
     }
     
-    internal func tileFor(id: UInt32, flippedHorizontally: Bool = false, flippedVertically: Bool = false, flippedDiagonally: Bool = false) -> PEMTile? {
+    func tileFor(id: UInt32, flippedHorizontally: Bool = false, flippedVertically: Bool = false, flippedDiagonally: Bool = false) -> PEMTile? {
         if let tileData = tileData.filter({ $0.id == id }).first {
             if tileSetType == .spriteSheet && tileData.texture == nil {
                 tileData.texture = spriteSheet?.generateTextureFor(tileData: tileData)
@@ -190,20 +190,20 @@ class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
         return nil
     }
     
-    internal func containsTileWith(gid: UInt32) -> Bool {
+    func containsTileWith(gid: UInt32) -> Bool {
         let tileAttributes = tileAttributes(fromId: gid)
         return idRange ~=  tileAttributes.id - firstGid
     }
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    internal func addProperties(_ newProperties: [PEMProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     
     // MARK: - Private
     
-    private func tileDataFor(id: UInt32) -> PEMTileData? {
+    func tileDataFor(id: UInt32) -> PEMTileData? {
         return tileData.filter({ $0.id == id }).first
     }
     

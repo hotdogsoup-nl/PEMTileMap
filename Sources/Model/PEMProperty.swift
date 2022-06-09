@@ -1,6 +1,6 @@
 import Foundation
 
-enum PropertyType: String {
+internal enum PropertyType: String {
     case bool = "bool"
     case color = "color"
     case int = "int"
@@ -10,7 +10,7 @@ enum PropertyType: String {
     case string = "string"
 }
 
-class PEMProperty: NSObject {
+internal class PEMProperty: NSObject {
     private (set) var name: String
     private (set) var type = PropertyType.string
     private (set) var value: String?
@@ -35,7 +35,7 @@ class PEMProperty: NSObject {
 
     // MARK: - Setup
     
-    internal func setValue(_ text: String) {
+    func setValue(_ text: String) {
         value = text
     }
     

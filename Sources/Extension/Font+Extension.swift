@@ -2,21 +2,21 @@
 
 import AppKit
 
-typealias Font = NSFont
-typealias FontDescriptor = NSFontDescriptor
-typealias Color = NSColor
+internal typealias Font = NSFont
+internal typealias FontDescriptor = NSFontDescriptor
+internal typealias Color = NSColor
 
 #else
 
 import UIKit
 
-typealias Font = UIFont
-typealias FontDescriptor = UIFontDescriptor
-typealias Color = UIColor
+internal typealias Font = UIFont
+internal typealias FontDescriptor = UIFontDescriptor
+internal typealias Color = UIColor
 
 #endif
 
-extension Font {
+internal extension Font {
     func addTraits(traits:FontDescriptor.SymbolicTraits) -> Font? {
         let existingTraitsWithNewTrait = FontDescriptor.SymbolicTraits(rawValue: fontDescriptor.symbolicTraits.rawValue | traits.rawValue)
         

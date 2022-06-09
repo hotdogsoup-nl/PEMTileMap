@@ -1,6 +1,6 @@
 import SpriteKit
 
-extension SKColor {
+internal extension SKColor {
     convenience init(hexString: String) {
         func standardiseHexString(_ hexString: String) -> String {
             let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

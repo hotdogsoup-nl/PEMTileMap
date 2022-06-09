@@ -1,11 +1,10 @@
 #if os(macOS)
 
 import AppKit
-import SpriteKit
 
 // this should work on an SKTexture.cgImage but unfortunately it doesn't, so we use NSImage.cgImage / UIImage.cgImage
 
-extension NSImage {
+internal extension NSImage {
     func remove(color: NSColor, tolerance: CGFloat = 4) -> NSImage {
         if let ciColor = CIColor(color: color) {
             let maskComponents: [CGFloat] = [ciColor.red, ciColor.green, ciColor.blue].flatMap { value in
@@ -24,7 +23,7 @@ extension NSImage {
 
 import UIKit
 
-extension UIImage {
+internal extension UIImage {
     func remove(color: UIColor, tolerance: CGFloat = 4) -> UIImage {
         let ciColor = CIColor(color: color)
         let maskComponents: [CGFloat] = [ciColor.red, ciColor.green, ciColor.blue].flatMap { value in

@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-enum ObjectType {
+internal enum ObjectType {
     case ellipse
     case point
     case polygon
@@ -11,20 +11,20 @@ enum ObjectType {
     case tile
 }
 
-enum TextHorizontalAlignment: String {
+internal enum TextHorizontalAlignment: String {
     case center
     case justify
     case left
     case right
 }
 
-enum TextVerticalAlignment: String {
+internal enum TextVerticalAlignment: String {
     case bottom
     case center
     case top
 }
 
-class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
+internal class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var id = UInt32(0)
     private (set) var objectType = ObjectType.rectangle
     private (set) var visible = true
@@ -72,7 +72,7 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - Setup
     
-    internal func parseAttributes(defaultSize: CGSize) {
+    func parseAttributes(defaultSize: CGSize) {
         guard !attributesParsed else { return }
         attributesParsed = true
         
@@ -192,11 +192,11 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    internal func setObjectType(_ objectType : ObjectType) {
+    func setObjectType(_ objectType : ObjectType) {
         self.objectType = objectType
     }
     
-    internal func setTileSet(_ attributes: Dictionary<String, String>?) {
+    func setTileSet(_ attributes: Dictionary<String, String>?) {
         if let currentAttributes = attributes {
             if let value = currentAttributes[ElementAttributes.source.rawValue] {
                 tileSetSource = value
@@ -204,11 +204,11 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    internal func setText(_ text: String) {
+    func setText(_ text: String) {
         self.text = text
     }
             
-    internal func addAttributes(_ attributes: Dictionary<String, String>?) {
+    func addAttributes(_ attributes: Dictionary<String, String>?) {
         if self.attributes == nil {
             self.attributes = attributes
             return
@@ -221,7 +221,7 @@ class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    internal func addProperties(_ newProperties: [PEMProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     

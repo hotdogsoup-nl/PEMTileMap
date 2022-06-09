@@ -1,6 +1,6 @@
 import Foundation
 
-enum Elements: String {
+internal enum Elements: String {
     case none
     case animation = "animation"
     case data = "data"
@@ -25,7 +25,7 @@ enum Elements: String {
     case tileSet = "tileset"
 }
 
-enum ElementAttributes: String {
+internal enum ElementAttributes: String {
     case backgroundColor = "backgroundcolor"
     case bold = "bold"
     case columns = "columns"
@@ -93,11 +93,11 @@ enum ElementAttributes: String {
     case y = "y"
 }
 
-protocol PEMTileMapPropertiesProtocol {
+internal protocol PEMTileMapPropertiesProtocol {
     func addProperties(_ newProperties: [PEMProperty])
 }
 
-class PEMTmxParser: XMLParser, XMLParserDelegate {
+internal class PEMTmxParser: XMLParser, XMLParserDelegate {
     enum DataEncoding: String {
         case base64 = "base64"
         case csv = "csv"

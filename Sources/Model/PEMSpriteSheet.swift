@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMSpriteSheet: NSObject {
+internal class PEMSpriteSheet: NSObject {
     private (set) var firstId = UInt32(0)
     
     var lastId: UInt32 {
@@ -74,7 +74,7 @@ class PEMSpriteSheet: NSObject {
         
     // MARK: - Internal
     
-    internal func createTileData(id: UInt32) -> PEMTileData? {
+    func createTileData(id: UInt32) -> PEMTileData? {
         let tileAttributes = tileAttributes(fromId: id)
 
         if contains(id: tileAttributes.id) {
@@ -84,7 +84,7 @@ class PEMSpriteSheet: NSObject {
         return nil
     }
 
-    internal func generateTextureFor(tileData: PEMTileData) -> SKTexture? {
+    func generateTextureFor(tileData: PEMTileData) -> SKTexture? {
         let tileAttributes = tileAttributes(fromId: tileData.id)
         
         let spriteSheetCoords = CGPoint(x: Int(rowFrom(id: tileAttributes.id)), y: Int(columnFrom(id: tileAttributes.id)))

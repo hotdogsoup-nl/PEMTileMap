@@ -1,6 +1,6 @@
 import SpriteKit
 
-extension SKTexture {
+internal extension SKTexture {
     convenience init?(text: String,
                       fontName: String,
                       fontSize: CGFloat,

@@ -23,7 +23,7 @@ public enum CameraViewMode {
     case bottomRight
 }
 
-internal enum MapOrientation: String {
+public enum MapOrientation: String {
     case unknown
     case hexagonal = "hexagonal"
     case isometric = "isometric"

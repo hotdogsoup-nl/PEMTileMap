@@ -17,7 +17,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     internal var tileData: Array<UInt32> = []
     private var parentGroup: PEMGroup?
     
-    weak var map : PEMTileMap!
+    private weak var map : PEMTileMap!
     
     // MARK: - Init
 
@@ -90,8 +90,8 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     // MARK: - Public
 
     internal func render(_ textureFilteringMode: SKTextureFilteringMode) {
-        let tileSizeInPoints = map.tileSizeInPoints
-        let mapSizeInTiles = map.mapSizeInTiles
+        let tileSizeInPoints = map.tileSizeInPoints()
+        let mapSizeInTiles = map.mapSizeInTiles()
         
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)

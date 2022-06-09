@@ -1,6 +1,6 @@
 import Foundation
 
-extension TimeInterval {
+internal extension TimeInterval {
     func minSecMsRepresentation() -> String {
         let ms = Int((self.truncatingRemainder(dividingBy: 1)) * 1000)
         let s = Int(self) % 60

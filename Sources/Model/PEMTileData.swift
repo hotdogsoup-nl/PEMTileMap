@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
+internal class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
     var texture: SKTexture?
 
     private (set) var id = UInt32(0)
@@ -33,7 +33,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
 
     // MARK: - Setup
     
-    internal func addAttributes(_ attributes: Dictionary<String, String>) {
+    func addAttributes(_ attributes: Dictionary<String, String>) {
         if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
             type = value
         }
@@ -44,7 +44,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    internal func addTileImage(attributes: Dictionary<String, String>) {
+    func addTileImage(attributes: Dictionary<String, String>) {
         guard let source = attributes[ElementAttributes.source.rawValue] else { return }
         guard let width = attributes[ElementAttributes.width.rawValue] else { return }
         guard let height = attributes[ElementAttributes.height.rawValue] else { return }
@@ -61,7 +61,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
         }
     }
     
-    internal func addAnimation() -> PEMTileAnimation? {
+    func addAnimation() -> PEMTileAnimation? {
         animation = PEMTileAnimation()
         
         return animation
@@ -69,7 +69,7 @@ class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
     
     // MARK: - PEMTileMapPropertiesProtocol
     
-    internal func addProperties(_ newProperties: [PEMProperty]) {
+    func addProperties(_ newProperties: [PEMProperty]) {
         properties = convertProperties(newProperties)
     }
     

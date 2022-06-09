@@ -4,7 +4,7 @@ import AppKit
 import UIKit
 #endif
 
-extension NSAttributedString {
+internal extension NSAttributedString {
     convenience init(string: String,
                               font: Font,
                               fontColor: Color = .white,

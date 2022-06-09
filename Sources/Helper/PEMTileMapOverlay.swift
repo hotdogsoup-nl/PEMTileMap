@@ -1,13 +1,13 @@
 import SpriteKit
 
-func mapCanvas(size: CGSize, name: String? = nil) -> SKSpriteNode {
+internal func mapCanvas(size: CGSize, name: String? = nil) -> SKSpriteNode {
     let canvas = SKSpriteNode(color: .red, size: size)
     canvas.anchorPoint = CGPoint(x: 0, y: 0)
     canvas.name = name
     return canvas
 }
 
-func mapGrid(sizeInTiles: CGSize, tileSizeInPoints: CGSize, name: String? = nil) -> SKShapeNode {
+internal func mapGrid(sizeInTiles: CGSize, tileSizeInPoints: CGSize, name: String? = nil) -> SKShapeNode {
     let grid = SKShapeNode.init()
     grid.lineWidth = 1.0
     grid.strokeColor = .white
