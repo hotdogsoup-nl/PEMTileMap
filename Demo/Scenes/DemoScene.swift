@@ -17,9 +17,6 @@ class DemoScene: SKScene {
     private var currentMapIndex = Int(19)
     private var currentMapNameLabel: SKLabelNode?
     private var renderTimeLabel: SKLabelNode?
-    private var externalLinkButton: SKSpriteNode?
-
-    private var buttonTapped = false
 
     private var maps: Array<Dictionary<String, String>> = []
     
@@ -28,8 +25,11 @@ class DemoScene: SKScene {
     private var previousCameraScale = CGFloat(1.0)
     private var initalTouchLocation = CGPoint.zero
     
+    private var buttonTapped = false
     private var rendering = false
-    
+    private var showCanvas = false
+    private var showGrid = false
+
     #if os(iOS)
     private var pinch: UIPinchGestureRecognizer!
     private var pan: UIPanGestureRecognizer!
@@ -143,7 +143,11 @@ class DemoScene: SKScene {
 
         if let newMap = PEMTileMap(mapName: mapName!) {
             map = newMap
-            map?.showCanvas = true
+            map?.showCanvas = showCanvas
+            map?.showGrid = showGrid
+            
+            canvasButton(showCanvas)
+            gridButton(showGrid)
 
             if newMap.backgroundColor != nil {
                 backgroundColor = newMap.backgroundColor!
@@ -175,6 +179,24 @@ class DemoScene: SKScene {
 
         map?.removeFromParent()
         map = nil
+    }
+    
+    func canvasButton(_ enabled: Bool) {
+        showCanvas = enabled
+        map?.showCanvas = showCanvas
+        if let canvasButton = cameraNode.childNode(withName: "canvasButton"),
+           let label = canvasButton.childNode(withName: canvasButton.name!) as? SKLabelNode {
+            label.text = (enabled ? "Canvas ✓" : "Canvas")
+        }
+    }
+    
+    func gridButton(_ enabled: Bool) {
+        showGrid = enabled
+        map?.showGrid = showGrid
+        if let canvasButton = cameraNode.childNode(withName: "gridButton"),
+           let label = canvasButton.childNode(withName: canvasButton.name!) as? SKLabelNode {
+            label.text = (enabled ? "Grid ✓" : "Grid")
+        }
     }
     
     func adjustCamera(buttonIndex: Int) {
@@ -257,6 +279,14 @@ class DemoScene: SKScene {
         renderTimeLabel?.position = CGPoint(x: 0, y: newButton.position.y - newButton.calculateAccumulatedFrame().size.height * 1.4 - verticalMargin)
         cameraNode.addChild(renderTimeLabel!)
         
+        newButton = button(name: "canvasButton", buttonSize: buttonSize, text: "Canvas", textSize: textSize, textColor: .white, fillColor: .blue)
+        newButton.position = CGPoint(x: size.width * -0.5 + newButton.calculateAccumulatedFrame().size.width * 0.5 + horizontalMargin, y: logoNode.position.y - buttonSize.height * 1.25 - verticalMargin)
+        cameraNode.addChild(newButton)
+        
+        newButton = button(name: "gridButton", buttonSize: buttonSize, text: "Grid", textSize: textSize, textColor: .white, fillColor: .blue)
+        newButton.position = CGPoint(x: size.width * -0.5 + newButton.calculateAccumulatedFrame().size.width * 0.5 + horizontalMargin, y: logoNode.position.y - buttonSize.height * 2 - verticalMargin * 2)
+        cameraNode.addChild(newButton)
+        
         let roundedBox = roundedBox(size: CGSize(width: size.width * 0.8, height: textSize * 2.0), fillColor: SKColor(white: 0, alpha: 0.5))
         roundedBox.position = CGPoint(x: 0, y: size.height * -0.5 + roundedBox.calculateAccumulatedFrame().size.height + verticalMargin)
         cameraNode.addChild(roundedBox)
@@ -266,11 +296,11 @@ class DemoScene: SKScene {
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
         roundedBox.addChild(currentMapNameLabel!)
         
-        externalLinkButton = SKSpriteNode(texture: SKTexture(imageNamed: "link-icon"))
-        externalLinkButton?.size = CGSize(width: textSize * 1.25, height: textSize * 1.25)
-        externalLinkButton?.name = "externalLinkButton"
-        externalLinkButton?.position = CGPoint(x: roundedBox.calculateAccumulatedFrame().size.width * 0.5 - externalLinkButton!.size.width, y:0)
-        roundedBox.addChild(externalLinkButton!)
+        let externalLinkButton = SKSpriteNode(texture: SKTexture(imageNamed: "link-icon"))
+        externalLinkButton.size = CGSize(width: textSize * 1.25, height: textSize * 1.25)
+        externalLinkButton.name = "externalLinkButton"
+        externalLinkButton.position = CGPoint(x: roundedBox.calculateAccumulatedFrame().size.width * 0.5 - externalLinkButton.size.width, y:0)
+        roundedBox.addChild(externalLinkButton)
                                 
         var index = 0
         var buttonTitles = ["Fit", "Fill", "1:1"]
@@ -382,7 +412,18 @@ class DemoScene: SKScene {
                 openExternalMapLink()
                 return
             }
+            
+            if nodeName == "canvasButton" {
+                buttonTapped = true
+                canvasButton(!showCanvas)
+                return
+            }
 
+            if nodeName == "gridButton" {
+                buttonTapped = true
+                gridButton(!showGrid)
+                return
+            }
             var touchedNodeName: String?
 
             if nodeName.hasPrefix("cameraButton-") {

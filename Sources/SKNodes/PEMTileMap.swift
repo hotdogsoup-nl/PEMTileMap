@@ -58,6 +58,15 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             return _showCanvas
         }
     }
+    public var showGrid: Bool {
+        set {
+            _showGrid = newValue
+            updateGrid()
+        }
+        get {
+            return _showGrid
+        }
+    }
     public weak var cameraNode: SKCameraNode?
 
     public private (set) var mapSizeInPoints = CGSize.zero
@@ -74,7 +83,9 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private var version: String?
     private var mapSource: String?
     private var tiledversion: String?
+
     private var _showCanvas: Bool = false
+    private var _showGrid: Bool = false
 
     private var mapSizeInPointsFromTileSize: CGSize {
         var size = CGSize.zero
@@ -511,14 +522,25 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     private func updateCanvas() {
-        childNode(withName: "PEMTileMapCanvas")?.removeFromParent()
+        let MapCanvasName = "PEMTileMapCanvas"
+        childNode(withName: MapCanvasName)?.removeFromParent()
         
         if _showCanvas {
-            let canvas = SKSpriteNode(color: .red, size: mapSizeInPoints)
-            canvas.name = "PEMTileMapCanvas"
-            canvas.anchorPoint = CGPoint(x: 0, y: 0)
-            canvas.zPosition = -9999
+            let canvas = mapCanvas(size: mapSizeInPoints, name: MapCanvasName)
+            canvas.zPosition = CGFloat.leastNonzeroMagnitude
             addChild(canvas)
+        }
+    }
+    
+    private func updateGrid() {
+        let MapGridName = "PEMTileMapGrid"
+        childNode(withName: MapGridName)?.removeFromParent()
+        
+        if _showGrid {
+            let grid = mapGrid(sizeInTiles: mapSizeInTiles, tileSizeInPoints: tileSizeInPoints, name: MapGridName)
+            grid.zPosition = highestZPosition + 1
+            grid.alpha = 0.5
+            addChild(grid)
         }
     }
     
