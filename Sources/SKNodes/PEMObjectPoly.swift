@@ -27,7 +27,7 @@ class PEMObjectPoly: SKShapeNode {
                 }
                 
                 if (isPolygon) {
-                    path.addLine(to: startPoint)
+                    path.closeSubpath()
                 }
                 
                 self.path = path
