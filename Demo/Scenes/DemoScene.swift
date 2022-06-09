@@ -160,7 +160,7 @@ class DemoScene: SKScene {
 
             renderTimeLabel?.attributedText = attributedString(String("parse time: \(newMap.parseTime.minSecMsRepresentation())\nrender time: \(newMap.renderTime.minSecMsRepresentation())"), fontName: "Courier", textSize: textSize)
 
-            newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
+            newMap.position = CGPoint(x: newMap.mapSizeInPoints().width * -0.5, y: newMap.mapSizeInPoints().height * -0.5)
             addChild(newMap)
             rendering = false
         }

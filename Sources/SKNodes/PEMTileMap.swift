@@ -74,9 +74,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// To use camera functions, this variable must be set to the `SKScene` camera.
     public weak var cameraNode: SKCameraNode?
 
-    public private (set) var mapSizeInPoints = CGSize.zero
-    public private (set) var tileSizeInPoints = CGSize.zero
-    public private (set) var mapSizeInTiles = CGSize.zero
     /// Background color of the map.
     public private (set) var backgroundColor: SKColor?
     
@@ -101,24 +98,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
 
     private var _showCanvas: Bool = false
     private var _showGrid: Bool = false
-
-    private var mapSizeInPointsFromTileSize: CGSize {
-        var size = CGSize.zero
-        
-        switch orientation {
-        case .unknown, .orthogonal:
-            size = CGSize(width: mapSizeInTiles.width * tileSizeInPoints.width, height: mapSizeInTiles.height * tileSizeInPoints.height)
-        case .hexagonal:
-            break
-        case .isometric:
-            let sideLength = mapSizeInTiles.width + mapSizeInTiles.height
-            size = CGSize(width: sideLength * tileSizeInPoints.width * 0.5, height: sideLength * tileSizeInPoints.height * 0.5)
-        case .staggered:
-            break
-        }
-        return size
-    }
     
+    private var coordinateHelper: PEMCoordinateHelper?
     private var hexSideLengthInPoints = Int(0)
     private var parallaxOriginInPoints = CGPoint.zero
     private var infinite = false
@@ -145,20 +126,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
 
     // MARK: - Init
         
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-
     /// Load a **TMX** tilemap file and return a new `PEMTileMap` node. Returns nil if the file could not be read or parsed.
     /// - Parameters:
     ///     - mapName : TMX file name.
@@ -201,6 +168,155 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         renderTime = -renderStartTime.timeIntervalSinceNow
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        #if DEBUG
+        #if os(macOS)
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(type(of: self))")
+        #endif
+        #endif
+    }
+    
+    // MARK: - Coordinates
+    
+    /// Get the map canvas size (in points) based on the TMX map width and height multiplied by the tile size.
+    ///
+    /// Note that objects can be placed outside of the map canvas. This function does not include those tiles. To get the map size including any objects outside of the canvas, use `calculateAccumulatedFrame()`.
+    /// - Returns: Map size as a `CGSize`.
+    public func mapSizeInPoints() -> CGSize {
+        guard coordinateHelper != nil else { return .zero }
+        return coordinateHelper!.mapSizeInPoints
+    }
+    
+    /// Get the map size (in tiles) based on the TMX map width and height.
+    /// - Returns: Map size as a `CGSize`.
+    public func mapSizeInTiles() -> CGSize {
+        guard coordinateHelper != nil else { return .zero }
+        return coordinateHelper!.mapSizeInTiles
+    }
+    
+    /// Get the tile size (in points) based on the TMX map tile width and height.
+    /// - Returns: Tile size as a `CGSize`.
+    public func tileSizeInPoints() -> CGSize {
+        guard coordinateHelper != nil else { return .zero }
+        return coordinateHelper!.tileSizeInPoints
+    }
+    
+    /// Converts the tile coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
+    /// - Parameter coords: TMX tile coordinates.
+    /// - Returns: Position as a `CGPoint`.
+    public func position(tileCoords: CGPoint) -> CGPoint {
+        return coordinateHelper!.position(tileCoords: tileCoords)
+    }
+    
+    /// Converts the pixel coordinates of a  TMX Map object to `SpriteKit` coordinates (in points).
+    /// - Parameter coordsInPoints: TMX pixel coordinates.
+    /// - Returns: Position as a `CGPoint`.
+    public func position(coordsInPoints: CGPoint) -> CGPoint {
+        return coordinateHelper!.position(coordsInPoints: coordsInPoints)
+    }
+        
+    // MARK: - Camera
+    
+    /// Changes the map camera scale using the specified `CameraZoomMode` and its position using the specified `CameraViewMode` with optional animation.
+    ///
+    /// Makes it possible to zoom, pan and tilt the camera to positions on the map.
+    ///
+    /// For example in a "Mario" style platform game, when starting a level, the camera will move to the bottom left of the map and zoom in so it fills the screen vertically, leaving the rest of the map outside of the screen to the right.
+    ///
+    /// This can be achieved by calling **moveCamera** with
+    /// * `zoomMode` = **.aspectFill**
+    /// * `viewMode` =  **.bottomLeft**
+    ///
+    /// Both `zoomMode` and `viewMode` can be disabled by using a value of **.none**. This way a camera move can be made without zooming, or vice versa.  (Setting both to **.none** will do nothing.)
+    ///
+    /// - Parameters:
+    ///     - sceneSize : Size of the `SKScene` the map is a child of and in which the camera move is made.
+    ///     - zoomMode : Used to determine the camera zoom scale within the given `sceneSize`.
+    ///     - viewMode : Used to determine how the camera position is aligned within the given `sceneSize`.
+    ///     - factor : Optional movement factor that limits the move. A value of 1.0 means full motion within the given `sceneSize`.
+    ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
+    ///     - timingMode: Optional SKActionTimingMode for the animation. Defaults to .linear.
+    ///     - completion : Optional completion block which is called when camera movement has finished.
+    public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, timingMode: SKActionTimingMode = .linear, completion:@escaping ()->Void = {}) {
+        guard cameraNode != nil else { return }
+        
+        if zoomMode != .none && mapSizeInPoints().width > 0 && mapSizeInPoints().height > 0 {
+            let maxWidthScale = sceneSize.width / mapSizeInPoints().width
+            let maxHeightScale = sceneSize.height / mapSizeInPoints().height
+            var contentScale : CGFloat = 1.0
+            
+            switch zoomMode {
+            case .aspectFit:
+                contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
+            case .aspectFill:
+                contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
+            case .center:
+                break
+            case .none:
+                break
+            }
+            
+            let newScale = (1.0 / contentScale / factor * 100).rounded() / 100
+            
+            if duration > 0 {
+                let zoomAction = SKAction.scale(to: newScale, duration: duration)
+                zoomAction.timingMode = timingMode
+                cameraNode?.run(zoomAction)
+            } else {
+                cameraNode?.xScale = newScale
+                cameraNode?.yScale = newScale
+            }
+            
+            cameraZoomMode = zoomMode
+        }
+        
+        if viewMode == .none {
+            completion()
+            return
+        }
+        
+        if var newPosition = cameraNode?.position {
+            let cameraScale = cameraNode!.xScale
+
+            if viewMode == .center {
+                newPosition = .zero
+            } else {
+                if viewMode == .left || viewMode == .topLeft || viewMode == .bottomLeft {
+                    newPosition.x = sceneSize.width * 0.5 * factor * cameraScale + mapSizeInPoints().width * -0.5
+                } else if viewMode == .top || viewMode == .bottom {
+                    newPosition.x = 0
+                } else if viewMode == .right || viewMode == .topRight || viewMode == .bottomRight {
+                    newPosition.x = sceneSize.width * -0.5 * factor * cameraScale + mapSizeInPoints().width * 0.5
+                }
+                
+                if viewMode == .top || viewMode == .topLeft || viewMode == .topRight {
+                    newPosition.y = sceneSize.height * -0.5 * factor * cameraScale + mapSizeInPoints().height * 0.5
+                } else if viewMode == .left || viewMode == .right {
+                    newPosition.y = 0
+                } else if viewMode == .bottom || viewMode == .bottomLeft || viewMode == .bottomRight {
+                    newPosition.y = sceneSize.height * 0.5 * factor * cameraScale + mapSizeInPoints().height * -0.5
+                }
+            }
+                    
+            if duration > 0 {
+                let moveAction = SKAction.move(to: newPosition, duration: duration)
+                moveAction.timingMode = timingMode
+                cameraNode?.run(moveAction, completion: completion)
+            } else {
+                cameraNode?.position = newPosition
+                completion()
+            }
+            
+            cameraViewMode = viewMode
+        }
+    }
+    
     // MARK: - Setup
     
     internal func addAttributes(_ attributes: Dictionary<String, String>) {
@@ -221,6 +337,11 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             #endif
         }
         
+        let mapSizeInTiles = CGSize(width: Int(width)!, height: Int(height)!)
+        let tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
+        
+        coordinateHelper = PEMCoordinateHelper(orientation: orientation, mapSizeInTiles: mapSizeInTiles, tileSizeInPoints: tileSizeInPoints)
+        
         if let value = attributes[ElementAttributes.renderOrder.rawValue] {
             if let mapRenderOrder = MapRenderOrder(rawValue: value) {
                 renderOrder = mapRenderOrder
@@ -234,10 +355,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         if let value = attributes[ElementAttributes.compressionLevel.rawValue] {
             compressionLevel = Int(value)!
         }
-        
-        mapSizeInTiles = CGSize(width: Int(width)!, height: Int(height)!)
-        tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)
-        
+                
         if let value = attributes[ElementAttributes.hexSideLength.rawValue] {
             hexSideLengthInPoints = Int(value) ?? 0
         }
@@ -293,155 +411,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         properties = convertProperties(newProperties)
     }
     
-    // MARK: - Coordinates
-    
-    /// Converts the tile coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
-    /// - Parameter coords: TMX tile coordinates.
-    /// - Returns: Position as a `CGPoint`.
-    public func position(tileCoords: CGPoint) -> CGPoint {
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        
-        switch orientation {
-        case .unknown:
-            break
-        case .hexagonal:
-            break
-        case .isometric:
-            x = (tileCoords.x - tileCoords.y) * tileSizeInPoints.width * 0.5 + (mapSizeInTiles.height - 1) * tileSizeInPoints.width * 0.5
-            y = mapSizeInPoints.height - (tileCoords.x + tileCoords.y) * tileSizeInPoints.height * 0.5 - tileSizeInPoints.height
-        case .orthogonal:
-            x = (tileCoords.x * tileSizeInPoints.width)
-            y = mapSizeInPoints.height - ((tileCoords.y + 1) * tileSizeInPoints.height)
-        case .staggered:
-            break
-        }
-
-        return CGPoint(x: x, y: y)
-    }
-    
-    /// Converts the pixel coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
-    /// - Parameter coordsInPoints: TMX pixel coordinates.
-    /// - Returns: Position as a `CGPoint`.
-    func position(coordsInPoints: CGPoint) -> CGPoint {
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        
-        switch orientation {
-        case .unknown:
-            break
-        case .hexagonal:
-            break
-        case .isometric:
-            x = (coordsInPoints.x - coordsInPoints.y) + (mapSizeInTiles.height - 1) * tileSizeInPoints.width * 0.5
-            y = mapSizeInPoints.height - (coordsInPoints.x + coordsInPoints.y) * 0.5 - tileSizeInPoints.height * 0.5
-        case .orthogonal:
-            x = coordsInPoints.x - tileSizeInPoints.width * 0.5
-            y = mapSizeInPoints.height - coordsInPoints.y - tileSizeInPoints.height * 0.5
-        case .staggered:
-            break
-        }
-
-        return CGPoint(x: x, y: y)
-    }
-    
-    // MARK: - Camera
-    
-    /// Changes the map camera scale using the specified `CameraZoomMode` and its position using the specified `CameraViewMode` with optional animation.
-    ///
-    /// Makes it possible to zoom, pan and tilt the camera to positions on the map.
-    ///
-    /// For example in a "Mario" style platform game, when starting a level, the camera will move to the bottom left of the map and zoom in so it fills the screen vertically, leaving the rest of the map outside of the screen to the right.
-    ///
-    /// This can be achieved by calling **moveCamera** with
-    /// * `zoomMode` = **.aspectFill**
-    /// * `viewMode` =  **.bottomLeft**
-    ///
-    /// Both `zoomMode` and `viewMode` can be disabled by using a value of **.none**. This way a camera move can be made without zooming, or vice versa.  (Setting both to **.none** will do nothing.)
-    ///
-    /// - Parameters:
-    ///     - sceneSize : Size of the `SKScene` the map is a child of and in which the camera move is made.
-    ///     - zoomMode : Used to determine the camera zoom scale within the given `sceneSize`.
-    ///     - viewMode : Used to determine how the camera position is aligned within the given `sceneSize`.
-    ///     - factor : Optional movement factor that limits the move. A value of 1.0 means full motion within the given `sceneSize`.
-    ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
-    ///     - timingMode: Optional SKActionTimingMode for the animation. Defaults to .linear.
-    ///     - completion : Optional completion block which is called when camera movement has finished.
-    public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, timingMode: SKActionTimingMode = .linear, completion:@escaping ()->Void = {}) {
-        guard cameraNode != nil else { return }
-        
-        
-        if zoomMode != .none && mapSizeInPoints.width > 0 && mapSizeInPoints.height > 0 {
-            let maxWidthScale = sceneSize.width / mapSizeInPoints.width
-            let maxHeightScale = sceneSize.height / mapSizeInPoints.height
-            var contentScale : CGFloat = 1.0
-            
-            switch zoomMode {
-            case .aspectFit:
-                contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
-            case .aspectFill:
-                contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
-            case .center:
-                break
-            case .none:
-                break
-            }
-            
-            let newScale = (1.0 / contentScale / factor * 100).rounded() / 100
-            
-            if duration > 0 {
-                let zoomAction = SKAction.scale(to: newScale, duration: duration)
-                zoomAction.timingMode = timingMode
-                cameraNode?.run(zoomAction)
-            } else {
-                cameraNode?.xScale = newScale
-                cameraNode?.yScale = newScale
-            }
-            
-            cameraZoomMode = zoomMode
-        }
-        
-        if viewMode == .none {
-            completion()
-            return
-        }
-        
-        if var newPosition = cameraNode?.position {
-            let cameraScale = cameraNode!.xScale
-
-            if viewMode == .center {
-                newPosition = .zero
-            } else {
-                if viewMode == .left || viewMode == .topLeft || viewMode == .bottomLeft {
-                    newPosition.x = sceneSize.width * 0.5 * factor * cameraScale + mapSizeInPoints.width * -0.5
-                } else if viewMode == .top || viewMode == .bottom {
-                    newPosition.x = 0
-                } else if viewMode == .right || viewMode == .topRight || viewMode == .bottomRight {
-                    newPosition.x = sceneSize.width * -0.5 * factor * cameraScale + mapSizeInPoints.width * 0.5
-                }
-                
-                if viewMode == .top || viewMode == .topLeft || viewMode == .topRight {
-                    newPosition.y = sceneSize.height * -0.5 * factor * cameraScale + mapSizeInPoints.height * 0.5
-                } else if viewMode == .left || viewMode == .right {
-                    newPosition.y = 0
-                } else if viewMode == .bottom || viewMode == .bottomLeft || viewMode == .bottomRight {
-                    newPosition.y = sceneSize.height * 0.5 * factor * cameraScale + mapSizeInPoints.height * -0.5
-                }
-            }
-                    
-            if duration > 0 {
-                let moveAction = SKAction.move(to: newPosition, duration: duration)
-                moveAction.timingMode = timingMode
-                cameraNode?.run(moveAction, completion: completion)
-            } else {
-                cameraNode?.position = newPosition
-                completion()
-            }
-            
-            cameraViewMode = viewMode
-        }
-    }
-    
     // MARK: - Private
     
     internal func tileSetContaining(gid: UInt32) -> PEMTileSet? {
@@ -479,10 +448,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             #endif
             return
         }
-            
-        highestZPosition = baseZPosition
-        mapSizeInPoints = mapSizeInPointsFromTileSize
         
+        highestZPosition = baseZPosition
         renderLayers()
     }
     
@@ -508,7 +475,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 if imageLayer.visible {
                     highestZPosition += zPositionLayerDelta
                     
-                    imageLayer.render(mapSizeInPoints: mapSizeInPointsFromTileSize, textureFilteringMode:textureFilteringMode)
+                    imageLayer.render(mapSizeInPoints: coordinateHelper!.mapSizeInPoints, textureFilteringMode:textureFilteringMode)
                     imageLayer.zPosition = highestZPosition
                     
                     addChild(imageLayer)
@@ -541,7 +508,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         childNode(withName: MapCanvasName)?.removeFromParent()
         
         if _showCanvas {
-            let canvas = mapCanvas(size: mapSizeInPoints, name: MapCanvasName)
+            let canvas = mapCanvas(size: mapSizeInPoints(), name: MapCanvasName)
             canvas.zPosition = CGFloat.leastNonzeroMagnitude
             addChild(canvas)
         }
@@ -552,7 +519,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         childNode(withName: MapGridName)?.removeFromParent()
         
         if _showGrid {
-            let grid = mapGrid(sizeInTiles: mapSizeInTiles, tileSizeInPoints: tileSizeInPoints, name: MapGridName)
+            let grid = mapGrid(sizeInTiles: mapSizeInTiles(), tileSizeInPoints: tileSizeInPoints(), name: MapGridName)
             grid.zPosition = highestZPosition + 1
             grid.alpha = 0.5
             addChild(grid)
