@@ -154,7 +154,7 @@ class DemoScene: SKScene {
             cameraNode.zPosition = newMap.highestZPosition + 20
             newMap.cameraNode = cameraNode
 
-            renderTimeLabel?.attributedText = attributedString(String("parse time: \(newMap.parseTime.stringValue())\nrender time: \(newMap.renderTime.stringValue())"), fontName: "Courier", textSize: textSize)
+            renderTimeLabel?.attributedText = attributedString(String("parse time: \(newMap.parseTime.minSecMsRepresentation())\nrender time: \(newMap.renderTime.minSecMsRepresentation())"), fontName: "Courier", textSize: textSize)
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints.width * -0.5, y: newMap.mapSizeInPoints.height * -0.5)
             addChild(newMap)
