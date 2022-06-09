@@ -49,6 +49,7 @@ internal enum MapStaggerIndex: String {
 }
 
 public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
+    /// Adds a background node on the map representing the map canvas when set to `true`. Removes the canvas when set to `false`.
     public var showCanvas: Bool {
         set {
             _showCanvas = newValue
@@ -58,6 +59,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             return _showCanvas
         }
     }
+    
+    /// Adds a grid node on the map representing the tile grid when set to `true`. Removes the grid when set to `false`.
     public var showGrid: Bool {
         set {
             _showGrid = newValue
@@ -67,17 +70,29 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             return _showGrid
         }
     }
+    
+    /// To use camera functions, this variable must be set to the `SKScene` camera.
     public weak var cameraNode: SKCameraNode?
 
     public private (set) var mapSizeInPoints = CGSize.zero
     public private (set) var tileSizeInPoints = CGSize.zero
     public private (set) var mapSizeInTiles = CGSize.zero
+    /// Background color of the map.
     public private (set) var backgroundColor: SKColor?
+    
+    /// Highest generated ZPosition after rendering the map.
     public private (set) var highestZPosition = CGFloat(0)
+
+    /// Number of seconds that the map took to parse files.
     public private (set) var parseTime = TimeInterval(0)
+
+    /// Number of seconds that the map took to render.
     public private (set) var renderTime = TimeInterval(0)
 
+    /// TMX Map properties.
     private (set) var properties: Dictionary<String, Any>?
+    
+    /// TMX Map orientation.
     private (set) var orientation: MapOrientation = .unknown
 
     private var version: String?
