@@ -23,7 +23,7 @@ public enum CameraViewMode {
     case bottomRight
 }
 
-internal enum Orientation: String {
+internal enum MapOrientation: String {
     case unknown
     case hexagonal = "hexagonal"
     case isometric = "isometric"
@@ -78,7 +78,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     public private (set) var renderTime = TimeInterval(0)
 
     private (set) var properties: Dictionary<String, Any>?
-    private (set) var orientation: Orientation = .unknown
+    private (set) var orientation: MapOrientation = .unknown
 
     private var version: String?
     private var mapSource: String?
@@ -198,7 +198,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         version = attributes[ElementAttributes.version.rawValue]
         tiledversion = attributes[ElementAttributes.tiledVersion.rawValue]
         
-        if let mapOrientation = Orientation(rawValue: orientationValue) {
+        if let mapOrientation = MapOrientation(rawValue: orientationValue) {
             orientation = mapOrientation
         } else {
             #if DEBUG
