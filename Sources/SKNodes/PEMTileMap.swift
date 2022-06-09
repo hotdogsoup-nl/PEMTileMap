@@ -3,6 +3,7 @@ import SpriteKit
 import zlib
 import CoreGraphics
 
+/// Camera zoom mode.
 public enum CameraZoomMode {
     case none
     case center
@@ -10,6 +11,7 @@ public enum CameraZoomMode {
     case aspectFill
 }
 
+/// Camera view mode.
 public enum CameraViewMode {
     case none
     case center
@@ -23,6 +25,7 @@ public enum CameraViewMode {
     case bottomRight
 }
 
+/// TMX Map orientation.
 public enum MapOrientation: String {
     case unknown
     case hexagonal = "hexagonal"
@@ -49,6 +52,7 @@ internal enum MapStaggerIndex: String {
 }
 
 public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
+    
     /// Adds a background node on the map representing the map canvas when set to `true`. Removes the canvas when set to `false`.
     public var showCanvas: Bool {
         set {
