@@ -189,6 +189,9 @@
 		20D58915285205E100A2317E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58914285205E100A2317E /* NSAttributedString+Extension.swift */; };
 		20D58916285205E100A2317E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58914285205E100A2317E /* NSAttributedString+Extension.swift */; };
 		20D58917285205E100A2317E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58914285205E100A2317E /* NSAttributedString+Extension.swift */; };
+		20D5891A2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D589192852130E00A2317E /* PEMCoordinateHelper.swift */; };
+		20D5891B2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D589192852130E00A2317E /* PEMCoordinateHelper.swift */; };
+		20D5891C2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D589192852130E00A2317E /* PEMCoordinateHelper.swift */; };
 		20DB79A32837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
 		20DB79A42837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
 		20DB79A52837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
@@ -594,6 +597,7 @@
 		20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTileMapOverlay.swift; sourceTree = "<group>"; };
 		20D58910285203F400A2317E /* SKTexture+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKTexture+Extension.swift"; sourceTree = "<group>"; };
 		20D58914285205E100A2317E /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		20D589192852130E00A2317E /* PEMCoordinateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMCoordinateHelper.swift; sourceTree = "<group>"; };
 		20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mylevel1_tiles.png; sourceTree = "<group>"; };
 		20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mylevel1.tmx; sourceTree = "<group>"; };
 		20DB7C5C2837B9ED00F17FC7 /* beach_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beach_tileset.png; sourceTree = "<group>"; };
@@ -873,6 +877,7 @@
 		20B329CF283953180082CE8B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				20D589192852130E00A2317E /* PEMCoordinateHelper.swift */,
 				20B329D4283953180082CE8B /* PEMTileMapHelper.swift */,
 				20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */,
 				20B329D5283953180082CE8B /* PEMTmxParser.swift */,
@@ -1672,6 +1677,7 @@
 				2037A5EE28258DA500E13452 /* DemoController.swift in Sources */,
 				20D5890F2851E41A00A2317E /* PEMTileMapOverlay.swift in Sources */,
 				20B329DD283953180082CE8B /* PEMObjectData.swift in Sources */,
+				20D5891C2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */,
 				20B32A07283953180082CE8B /* Image+Extension.swift in Sources */,
 				20B329F5283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0D283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
@@ -1713,6 +1719,7 @@
 				20B329DB283953180082CE8B /* PEMObjectData.swift in Sources */,
 				20D5890D2851E41A00A2317E /* PEMTileMapOverlay.swift in Sources */,
 				20B32A05283953180082CE8B /* Image+Extension.swift in Sources */,
+				20D5891A2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */,
 				20B329F3283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0B283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
 				20B329FF283953180082CE8B /* CG+Extensions.swift in Sources */,
@@ -1754,6 +1761,7 @@
 				20B329DC283953180082CE8B /* PEMObjectData.swift in Sources */,
 				20D5890E2851E41A00A2317E /* PEMTileMapOverlay.swift in Sources */,
 				20B32A06283953180082CE8B /* Image+Extension.swift in Sources */,
+				20D5891B2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */,
 				20B329F4283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0C283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
 				20B32A00283953180082CE8B /* CG+Extensions.swift in Sources */,
