@@ -7,7 +7,6 @@ func mapCanvas(size: CGSize, name: String? = nil) -> SKSpriteNode {
     return canvas
 }
 
-
 func mapGrid(sizeInTiles: CGSize, tileSizeInPoints: CGSize, name: String? = nil) -> SKShapeNode {
     let grid = SKShapeNode.init()
     grid.lineWidth = 1.0
