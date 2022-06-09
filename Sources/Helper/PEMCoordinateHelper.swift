@@ -1,4 +1,4 @@
-import Foundation
+import CoreGraphics
 
 internal class PEMCoordinateHelper: NSObject {
     private (set) var orientation: MapOrientation
