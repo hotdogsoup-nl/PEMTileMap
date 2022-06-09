@@ -51,7 +51,7 @@ class PEMObjectText: SKSpriteNode {
             var vAlign: TextVerticalAlignment!
             vAlign = (objectData.vAlign != nil) ? objectData.vAlign : .top
             
-            texture = highResolutionLabelTexture(text: text,
+            texture = SKTexture(text: text,
                                           fontName: fontFamily,
                                           fontSize: pixelSize,
                                           fontColor: textColor,

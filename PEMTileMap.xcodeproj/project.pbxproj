@@ -100,9 +100,9 @@
 		20B32A05283953180082CE8B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D2283953180082CE8B /* Image+Extension.swift */; };
 		20B32A06283953180082CE8B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D2283953180082CE8B /* Image+Extension.swift */; };
 		20B32A07283953180082CE8B /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D2283953180082CE8B /* Image+Extension.swift */; };
-		20B32A08283953180082CE8B /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* PEMFontHelper.swift */; };
-		20B32A09283953180082CE8B /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* PEMFontHelper.swift */; };
-		20B32A0A283953180082CE8B /* PEMFontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* PEMFontHelper.swift */; };
+		20B32A08283953180082CE8B /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* Font+Extension.swift */; };
+		20B32A09283953180082CE8B /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* Font+Extension.swift */; };
+		20B32A0A283953180082CE8B /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D3283953180082CE8B /* Font+Extension.swift */; };
 		20B32A0B283953180082CE8B /* PEMTileMapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D4283953180082CE8B /* PEMTileMapHelper.swift */; };
 		20B32A0C283953180082CE8B /* PEMTileMapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D4283953180082CE8B /* PEMTileMapHelper.swift */; };
 		20B32A0D283953180082CE8B /* PEMTileMapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329D4283953180082CE8B /* PEMTileMapHelper.swift */; };
@@ -183,6 +183,12 @@
 		20D5890D2851E41A00A2317E /* PEMTileMapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */; };
 		20D5890E2851E41A00A2317E /* PEMTileMapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */; };
 		20D5890F2851E41A00A2317E /* PEMTileMapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */; };
+		20D58911285203F400A2317E /* SKTexture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58910285203F400A2317E /* SKTexture+Extension.swift */; };
+		20D58912285203F400A2317E /* SKTexture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58910285203F400A2317E /* SKTexture+Extension.swift */; };
+		20D58913285203F400A2317E /* SKTexture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58910285203F400A2317E /* SKTexture+Extension.swift */; };
+		20D58915285205E100A2317E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58914285205E100A2317E /* NSAttributedString+Extension.swift */; };
+		20D58916285205E100A2317E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58914285205E100A2317E /* NSAttributedString+Extension.swift */; };
+		20D58917285205E100A2317E /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D58914285205E100A2317E /* NSAttributedString+Extension.swift */; };
 		20DB79A32837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
 		20DB79A42837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
 		20DB79A52837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */; };
@@ -557,7 +563,7 @@
 		20B329D0283953180082CE8B /* CG+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CG+Extensions.swift"; sourceTree = "<group>"; };
 		20B329D1283953180082CE8B /* Data+Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
 		20B329D2283953180082CE8B /* Image+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
-		20B329D3283953180082CE8B /* PEMFontHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMFontHelper.swift; sourceTree = "<group>"; };
+		20B329D3283953180082CE8B /* Font+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		20B329D4283953180082CE8B /* PEMTileMapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTileMapHelper.swift; sourceTree = "<group>"; };
 		20B329D5283953180082CE8B /* PEMTmxParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMTmxParser.swift; sourceTree = "<group>"; };
 		20B329D6283953180082CE8B /* SKColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKColor+Extension.swift"; sourceTree = "<group>"; };
@@ -586,6 +592,8 @@
 		20CA139D2818168600797A7C /* DemoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoController.swift; sourceTree = "<group>"; };
 		20CA158128181D8700797A7C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMTileMapOverlay.swift; sourceTree = "<group>"; };
+		20D58910285203F400A2317E /* SKTexture+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKTexture+Extension.swift"; sourceTree = "<group>"; };
+		20D58914285205E100A2317E /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		20DB79A12837B4AD00F17FC7 /* mylevel1_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mylevel1_tiles.png; sourceTree = "<group>"; };
 		20DB79A22837B4AD00F17FC7 /* mylevel1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mylevel1.tmx; sourceTree = "<group>"; };
 		20DB7C5C2837B9ED00F17FC7 /* beach_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beach_tileset.png; sourceTree = "<group>"; };
@@ -839,6 +847,7 @@
 		20B32969283952810082CE8B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				20D589182852065400A2317E /* Extension */,
 				20B329CF283953180082CE8B /* Helper */,
 				20B329C1283953180082CE8B /* Model */,
 				20DD97392848A2100076FCAC /* SKNodes */,
@@ -864,15 +873,9 @@
 		20B329CF283953180082CE8B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				20B329D0283953180082CE8B /* CG+Extensions.swift */,
-				20B329D1283953180082CE8B /* Data+Compression.swift */,
-				20B329D2283953180082CE8B /* Image+Extension.swift */,
-				20B329D3283953180082CE8B /* PEMFontHelper.swift */,
 				20B329D4283953180082CE8B /* PEMTileMapHelper.swift */,
 				20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */,
 				20B329D5283953180082CE8B /* PEMTmxParser.swift */,
-				20B329D6283953180082CE8B /* SKColor+Extension.swift */,
-				20B329D7283953180082CE8B /* TimeInterval+Extension.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -934,6 +937,21 @@
 				20FAF0042837A67500BEFA8E /* Maps */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		20D589182852065400A2317E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				20B329D0283953180082CE8B /* CG+Extensions.swift */,
+				20B329D1283953180082CE8B /* Data+Compression.swift */,
+				20B329D3283953180082CE8B /* Font+Extension.swift */,
+				20B329D2283953180082CE8B /* Image+Extension.swift */,
+				20D58914285205E100A2317E /* NSAttributedString+Extension.swift */,
+				20B329D6283953180082CE8B /* SKColor+Extension.swift */,
+				20D58910285203F400A2317E /* SKTexture+Extension.swift */,
+				20B329D7283953180082CE8B /* TimeInterval+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		20DB7C5B2837B9ED00F17FC7 /* rpg */ = {
@@ -1657,6 +1675,7 @@
 				20B32A07283953180082CE8B /* Image+Extension.swift in Sources */,
 				20B329F5283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0D283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
+				20D58917285205E100A2317E /* NSAttributedString+Extension.swift in Sources */,
 				20B32A01283953180082CE8B /* CG+Extensions.swift in Sources */,
 				20B329E0283953180082CE8B /* PEMProperty.swift in Sources */,
 				20DD97452848B5520076FCAC /* PEMObjectPoint.swift in Sources */,
@@ -1678,9 +1697,10 @@
 				20B32A10283953180082CE8B /* PEMTmxParser.swift in Sources */,
 				20B329E3283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329FB283953180082CE8B /* PEMImageLayer.swift in Sources */,
+				20D58913285203F400A2317E /* SKTexture+Extension.swift in Sources */,
 				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
-				20B32A0A283953180082CE8B /* PEMFontHelper.swift in Sources */,
+				20B32A0A283953180082CE8B /* Font+Extension.swift in Sources */,
 				20B32A16283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1696,6 +1716,7 @@
 				20B329F3283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0B283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
 				20B329FF283953180082CE8B /* CG+Extensions.swift in Sources */,
+				20D58915285205E100A2317E /* NSAttributedString+Extension.swift in Sources */,
 				20B329DE283953180082CE8B /* PEMProperty.swift in Sources */,
 				20B329EA283953180082CE8B /* PEMTileData.swift in Sources */,
 				20DD97432848B5520076FCAC /* PEMObjectPoint.swift in Sources */,
@@ -1717,9 +1738,10 @@
 				20B329E1283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329F9283953180082CE8B /* PEMImageLayer.swift in Sources */,
 				207D3DBB2812AD5700FC4C77 /* GameViewController.swift in Sources */,
+				20D58911285203F400A2317E /* SKTexture+Extension.swift in Sources */,
 				207D3DB92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139E2818168600797A7C /* DemoController.swift in Sources */,
-				20B32A08283953180082CE8B /* PEMFontHelper.swift in Sources */,
+				20B32A08283953180082CE8B /* Font+Extension.swift in Sources */,
 				20B32A14283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1735,6 +1757,7 @@
 				20B329F4283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0C283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
 				20B32A00283953180082CE8B /* CG+Extensions.swift in Sources */,
+				20D58916285205E100A2317E /* NSAttributedString+Extension.swift in Sources */,
 				20B329DF283953180082CE8B /* PEMProperty.swift in Sources */,
 				20B329EB283953180082CE8B /* PEMTileData.swift in Sources */,
 				20DD97442848B5520076FCAC /* PEMObjectPoint.swift in Sources */,
@@ -1756,9 +1779,10 @@
 				20B329E2283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329FA283953180082CE8B /* PEMImageLayer.swift in Sources */,
 				20CA139B281815DD00797A7C /* GameViewController.swift in Sources */,
+				20D58912285203F400A2317E /* SKTexture+Extension.swift in Sources */,
 				207D3DC92812AD5700FC4C77 /* AppDelegate.swift in Sources */,
 				20CA139F2818168600797A7C /* DemoController.swift in Sources */,
-				20B32A09283953180082CE8B /* PEMFontHelper.swift in Sources */,
+				20B32A09283953180082CE8B /* Font+Extension.swift in Sources */,
 				20B32A15283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

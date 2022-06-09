@@ -232,7 +232,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode? {
-        if let texture = highResolutionLabelTexture(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5) {
+        if let texture = SKTexture(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5) {
             
             let scale = fontSize / texture.size().height
             var size = texture.size().scaled(scale)

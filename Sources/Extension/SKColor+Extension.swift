@@ -1,17 +1,7 @@
 import SpriteKit
 
 extension SKColor {
-    func multiplyColor(_ color: SKColor) -> SKColor {
-        var (r, g, b, a) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
-        var (multR, multG, multB, multA) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
-        
-        self.getRed(&r, green: &g, blue: &b, alpha: &a)
-        color.getRed(&multR, green: &multG, blue: &multB, alpha: &multA)
-        
-        return SKColor(red: r * multR, green: g * multG, blue: b * multB, alpha: a * multA)
-    }
-    
-    public convenience init(hexString: String) {
+    convenience init(hexString: String) {
         func standardiseHexString(_ hexString: String) -> String {
             let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
             switch hex.count {
@@ -41,5 +31,15 @@ extension SKColor {
         }
         
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+    
+    func multiplyColor(_ color: SKColor) -> SKColor {
+        var (r, g, b, a) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
+        var (multR, multG, multB, multA) = (CGFloat(0), CGFloat(0), CGFloat(0), CGFloat(0))
+        
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        color.getRed(&multR, green: &multG, blue: &multB, alpha: &multA)
+        
+        return SKColor(red: r * multR, green: g * multG, blue: b * multB, alpha: a * multA)
     }
 }
