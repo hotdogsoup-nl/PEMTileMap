@@ -25,8 +25,6 @@ internal class PEMSpriteSheet: NSObject {
     // MARK: - Init
     
     init?(tileSizeInPoints : CGSize, marginInPoints : UInt, spacingInPoints : UInt, attributes: Dictionary<String, String>) {
-        guard let width = attributes[ElementAttributes.width.rawValue] else { return nil }
-        guard let height = attributes[ElementAttributes.height.rawValue] else { return nil }
         guard let source = attributes[ElementAttributes.source.rawValue] else { return nil }
 
         super.init()
@@ -64,10 +62,13 @@ internal class PEMSpriteSheet: NSObject {
             tilesPerRow = (UInt(textureImageSize!.width) - marginInPoints * 2 + spacingInPoints) / (UInt(tileSizeInPoints.width) + spacingInPoints)
             tilesPerColumn = (UInt(textureImageSize!.height) - marginInPoints * 2 + spacingInPoints) / (UInt(tileSizeInPoints.height) + spacingInPoints)
             
-            if textureImageSize!.width != CGFloat(Int(width)!) || textureImageSize!.height != CGFloat(Int(height)!) {
-                #if DEBUG
-                print("PEMSpriteSheet: tileset <image> size mismatch: \(source)")
-                #endif
+            if let width = attributes[ElementAttributes.width.rawValue],
+               let height = attributes[ElementAttributes.height.rawValue] {
+                if textureImageSize!.width != CGFloat(Int(width)!) || textureImageSize!.height != CGFloat(Int(height)!) {
+                    #if DEBUG
+                    print("PEMSpriteSheet: tileset <image> size mismatch: \(source)")
+                    #endif
+                }
             }
         }
     }
