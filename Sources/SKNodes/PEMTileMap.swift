@@ -519,7 +519,9 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         childNode(withName: MapCanvasName)?.removeFromParent()
         
         if _showCanvas {
-            let canvas = mapCanvas(size: mapSizeInPoints(), name: MapCanvasName)
+            guard coordinateHelper != nil else { return }
+            
+            let canvas = mapCanvas(coordinateHelper: coordinateHelper!, name: MapCanvasName)
             canvas.zPosition = CGFloat.leastNonzeroMagnitude
             addChild(canvas)
         }

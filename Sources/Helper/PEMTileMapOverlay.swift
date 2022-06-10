@@ -1,7 +1,21 @@
 import SpriteKit
 
-internal func mapCanvas(size: CGSize, name: String? = nil) -> SKSpriteNode {
-    let canvas = SKSpriteNode(color: .red, size: size)
+internal func mapCanvas(coordinateHelper: PEMCoordinateHelper, name: String? = nil) -> SKSpriteNode {
+    let canvas = SKSpriteNode(color: .red, size: coordinateHelper.mapSizeInPoints)
+    
+    switch coordinateHelper.orientation {
+    case .unknown:
+        canvas.position = .zero
+    case .hexagonal:
+        break
+    case .isometric:
+        canvas.position = CGPoint(x: 0, y: -coordinateHelper.tileSizeInPoints.height)
+    case .orthogonal:
+        canvas.position = .zero
+    case .staggered:
+        break
+    }
+    
     canvas.anchorPoint = CGPoint(x: 0, y: 0)
     canvas.name = name
     return canvas
