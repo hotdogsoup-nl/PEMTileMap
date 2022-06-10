@@ -211,6 +211,13 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         return coordinateHelper!.tileSizeInPoints
     }
     
+    /// Get half of the tile size (in points) based on the TMX map tile width and height.
+    /// - Returns: Halved tile size as a `CGSize`.
+    public func halfTileSizeInPoints() -> CGSize {
+        guard coordinateHelper != nil else { return .zero }
+        return coordinateHelper!.halfTileSizeInPoints
+    }
+    
     /// Converts the tile coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
     /// - Parameter coords: TMX tile coordinates.
     /// - Returns: Position as a `CGPoint`.
@@ -463,7 +470,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 if tileLayer.visible {
                     highestZPosition += zPositionLayerDelta
 
-                    tileLayer.render(textureFilteringMode)
+                    tileLayer.render(map: self, textureFilteringMode: textureFilteringMode)
                     tileLayer.zPosition = highestZPosition
                     
                     addChild(tileLayer)
@@ -494,7 +501,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 if objectLayer.visible {
                     highestZPosition += zPositionLayerDelta
                     
-                    objectLayer.render(textureFilteringMode:textureFilteringMode)
+                    objectLayer.render(map: self, textureFilteringMode:textureFilteringMode)
                     objectLayer.zPosition = highestZPosition
                     
                     addChild(objectLayer)
@@ -523,7 +530,9 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         childNode(withName: MapGridName)?.removeFromParent()
         
         if _showGrid {
-            let grid = mapGrid(sizeInTiles: mapSizeInTiles(), tileSizeInPoints: tileSizeInPoints(), name: MapGridName)
+            guard coordinateHelper != nil else { return }
+
+            let grid = mapGrid(coordinateHelper: coordinateHelper!, name: MapGridName)
             grid.zPosition = highestZPosition + 1
             grid.alpha = 0.5
             addChild(grid)

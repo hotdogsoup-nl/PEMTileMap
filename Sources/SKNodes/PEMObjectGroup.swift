@@ -19,12 +19,9 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     internal var objects: Array<PEMObjectData> = []
     private var parentGroup: PEMGroup?
     
-    private weak var map : PEMTileMap!
-
-    init?(attributes: Dictionary<String, String>, map: PEMTileMap, group: PEMGroup?) {
+    init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
         super.init()
 
-        self.map = map
         parentGroup = group
         name = attributes[ElementAttributes.name.rawValue]
         
@@ -129,11 +126,12 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         return (result.count > 0) ? result : nil
     }
 
-    internal func render(textureFilteringMode: SKTextureFilteringMode) {
+    internal func render(map: PEMTileMap, textureFilteringMode: SKTextureFilteringMode) {
         let tileSizeInPoints = map.tileSizeInPoints()
+        let halfTileSizeInPoints = map.halfTileSizeInPoints()
 
         alpha = opacity
-        position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
+        position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
                 
         for object in objects {
             object.parseAttributes(defaultSize: tileSizeInPoints)
@@ -198,7 +196,8 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             guard node != nil else { continue }
            
             node?.name = object.objectName
-            node?.position = objectPosition(coordsInPoints: object.coordsInPoints!)
+            node?.position = map.position(coordsInPoints: object.coordsInPoints!).add(CGPoint(x: halfTileSizeInPoints.width, y: halfTileSizeInPoints.height))
+                        
             addChild(node!)
             
             addObjectLabel(node!, fontSize: tileSizeInPoints.height * 0.25)
@@ -226,11 +225,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             addChild(label)
         }
     }
-    
-    private func objectPosition(coordsInPoints: CGPoint, sizeDeviation: CGSize = .zero) -> CGPoint {
-        return map.position(coordsInPoints: coordsInPoints).with(tileSizeDeviation: sizeDeviation)
-    }
-    
+        
     private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode? {
         if let texture = SKTexture(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5) {
             

@@ -213,7 +213,7 @@ internal class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
         case Elements.layer.rawValue:
             let currentGroup = elementPath.last as? PEMGroup
-            if let tileLayer = PEMTileLayer(attributes: attributeDict, map:currentMap!, group:currentGroup) {
+            if let tileLayer = PEMTileLayer(attributes: attributeDict, group:currentGroup) {
                 currentMap?.layers.append(tileLayer)
                 elementPath.append(tileLayer)
                 break
@@ -221,7 +221,7 @@ internal class PEMTmxParser: XMLParser, XMLParserDelegate {
             abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.objectGroup.rawValue:
             let currentGroup = elementPath.last as? PEMGroup
-            if let groupLayer = PEMObjectGroup(attributes: attributeDict, map:currentMap!, group:currentGroup) {
+            if let groupLayer = PEMObjectGroup(attributes: attributeDict, group:currentGroup) {
                 currentMap?.layers.append(groupLayer)
                 elementPath.append(groupLayer)
                 break

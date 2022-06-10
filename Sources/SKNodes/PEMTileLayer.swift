@@ -16,15 +16,12 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     internal var tileData: Array<UInt32> = []
     private var parentGroup: PEMGroup?
-    
-    private weak var map : PEMTileMap!
-    
+        
     // MARK: - Init
 
-    init?(attributes: Dictionary<String, String>, map: PEMTileMap, group: PEMGroup?) {
+    init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
         super.init()
         
-        self.map = map
         parentGroup = group
         name = attributes[ElementAttributes.name.rawValue]
 
@@ -89,12 +86,13 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Public
 
-    internal func render(_ textureFilteringMode: SKTextureFilteringMode) {
+    internal func render(map: PEMTileMap, textureFilteringMode: SKTextureFilteringMode) {
         let tileSizeInPoints = map.tileSizeInPoints()
         let mapSizeInTiles = map.mapSizeInTiles()
-        
+        let halfTileSizeInPoints = map.halfTileSizeInPoints()
+
         alpha = opacity
-        position = CGPoint(x: offSetInPoints.x + tileSizeInPoints.width * 0.5, y: -offSetInPoints.y + tileSizeInPoints.height * 0.5)
+        position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
         
         for index in tileData.indices {
             let tileGid = tileData[index]
@@ -117,8 +115,8 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
                     }
                     
                     let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
-                    tile.position = tilePosition(coords: tile.coords!, sizeDeviation: sizeDeviation, offset: tileSet.tileOffSetInPoints)
-                                        
+                    tile.position = map.position(tileCoords: tile.coords!).add(CGPoint(x: halfTileSizeInPoints.width, y: -halfTileSizeInPoints.height)).with(tileSizeDeviation: sizeDeviation, offset: tileSet.tileOffSetInPoints)
+
                     addChild(tile)
                     
                     if tile.animation != nil {
@@ -145,10 +143,6 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     // MARK: - Private
-    
-    private func tilePosition(coords: CGPoint, sizeDeviation: CGSize = .zero, offset: CGPoint = .zero) -> CGPoint {
-        return map.position(tileCoords: coords).with(tileSizeDeviation: sizeDeviation, offset: offset)
-    }
     
     private func applyParentGroupAttributes() {
         guard parentGroup != nil else { return }

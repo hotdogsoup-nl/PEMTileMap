@@ -3,6 +3,7 @@ import CoreGraphics
 internal class PEMCoordinateHelper: NSObject {
     private (set) var orientation: MapOrientation
     private (set) var tileSizeInPoints = CGSize.zero
+    private (set) var halfTileSizeInPoints = CGSize.zero
     private (set) var mapSizeInTiles = CGSize.zero
     private (set) var mapSizeInPoints = CGSize.zero
 
@@ -12,6 +13,7 @@ internal class PEMCoordinateHelper: NSObject {
         self.tileSizeInPoints = tileSizeInPoints
         
         super.init()
+        halfTileSizeInPoints = tileSizeInPoints.scaled(0.5)
         mapSizeInPoints = calculateMapSizeInPoints()
     }
     
@@ -46,7 +48,7 @@ internal class PEMCoordinateHelper: NSObject {
             y = mapSizeInPoints.height - (tileCoords.x + tileCoords.y) * tileSizeInPoints.height * 0.5 - tileSizeInPoints.height
         case .orthogonal:
             x = (tileCoords.x * tileSizeInPoints.width)
-            y = mapSizeInPoints.height - ((tileCoords.y + 1) * tileSizeInPoints.height)
+            y = mapSizeInPoints.height - (tileCoords.y * tileSizeInPoints.height)
         case .staggered:
             break
         }
