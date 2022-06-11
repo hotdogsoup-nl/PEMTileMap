@@ -461,6 +461,11 @@ class DemoScene: SKScene {
             return
         }
     }
+    
+#if os(macOS)
+    private func mouseMovedToPoint(_ pos: CGPoint) {
+    }
+#endif
 }
 
 #if os(iOS) || os(tvOS)
@@ -564,6 +569,10 @@ extension DemoScene {
     
     override func mouseDown(with event: NSEvent) {
         touchDownAtPoint(event.location(in: self))
+    }
+    
+    override func mouseMoved(with event: NSEvent) {
+        mouseMovedToPoint(event.location(in: self))
     }
     
     override func mouseDragged(with event: NSEvent) {
