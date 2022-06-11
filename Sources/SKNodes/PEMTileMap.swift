@@ -219,9 +219,10 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     /// Converts the tile coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
-    /// - Parameter coords: TMX tile coordinates.
+    /// - Parameter tileCoords: TMX tile coordinates.
     /// - Returns: Position as a `CGPoint`.
     public func position(tileCoords: CGPoint) -> CGPoint {
+        guard coordinateHelper != nil else { return .zero }
         return coordinateHelper!.position(tileCoords: tileCoords)
     }
     
@@ -229,7 +230,16 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// - Parameter coordsInPoints: TMX pixel coordinates.
     /// - Returns: Position as a `CGPoint`.
     public func position(coordsInPoints: CGPoint) -> CGPoint {
+        guard coordinateHelper != nil else { return .zero }
         return coordinateHelper!.position(coordsInPoints: coordsInPoints)
+    }
+    
+    /// Converts a `SpriteKit` position on the map to TMX Map tile coordinates (in tiles).
+    /// - Parameter positionInPoints: TMX pixel coordinates.
+    /// - Returns: Tile coordinates as a `CGPoint`.
+    public func tileCoords(positionInPoints: CGPoint) -> CGPoint {
+        guard coordinateHelper != nil else { return .zero }
+        return coordinateHelper!.tileCoords(positionInPoints: positionInPoints)
     }
         
     // MARK: - Camera
