@@ -17,6 +17,8 @@ internal class PEMCoordinateHelper: NSObject {
         mapSizeInPoints = calculateMapSizeInPoints()
     }
     
+    // MARK: - Private
+    
     private func calculateMapSizeInPoints() -> CGSize {
         var size = CGSize.zero
         
@@ -33,6 +35,8 @@ internal class PEMCoordinateHelper: NSObject {
         }
         return size
     }
+    
+    // MARK: - Internal
     
     func position(tileCoords: CGPoint) -> CGPoint {
         var x: CGFloat = 0
@@ -78,4 +82,24 @@ internal class PEMCoordinateHelper: NSObject {
         return CGPoint(x: x, y: y)
     }
     
+    public func tileCoords(positionInPoints: CGPoint) -> CGPoint {
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        
+        switch orientation {
+        case .unknown:
+            break
+        case .hexagonal:
+            break
+        case .isometric:
+            break
+        case .orthogonal:
+            x = (positionInPoints.x / tileSizeInPoints.width)
+            y = (mapSizeInPoints.height - positionInPoints.y) / tileSizeInPoints.height
+        case .staggered:
+            break
+        }
+
+        return CGPoint(x: Int(x), y: Int(y))
+    }
 }
