@@ -15,8 +15,12 @@ class DemoScene: SKScene {
     
     private var map: PEMTileMap?
     private var currentMapIndex = Int(20)
+    
+    private let textSizeRegular: CGFloat
+    private let textSizeSmall: CGFloat
     private var currentMapNameLabel: SKLabelNode?
     private var renderTimeLabel: SKLabelNode?
+    private var tileCoordsLabel: SKLabelNode?
 
     private var maps: Array<Dictionary<String, String>> = []
     
@@ -27,8 +31,8 @@ class DemoScene: SKScene {
     
     private var buttonTapped = false
     private var rendering = false
-    private var showCanvas = false
-    private var showGrid = false
+    private var showCanvas = true
+    private var showGrid = true
 
     #if os(iOS)
     private var pinch: UIPinchGestureRecognizer!
@@ -38,6 +42,9 @@ class DemoScene: SKScene {
     // MARK: - Init
     
     init(view: SKView, size: CGSize) {
+        textSizeRegular = size.width * 0.0175
+        textSizeSmall = size.width * 0.015
+        
         super.init(size: size)
         
         cameraNode = SKCameraNode()
@@ -137,8 +144,7 @@ class DemoScene: SKScene {
         let mapTitle = mapInfo["title"]
         let mapAuthor = mapInfo["author"]
         
-        let textSize = size.width * 0.015
-        currentMapNameLabel?.attributedText = attributedString(String(format: "%@ - \"%@\" - %@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSize)
+        currentMapNameLabel?.attributedText = attributedString(String(format: "%@ - \"%@\" - %@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSizeSmall)
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
 
         if let newMap = PEMTileMap(mapName: mapName!) {
@@ -158,7 +164,7 @@ class DemoScene: SKScene {
             cameraNode.zPosition = newMap.highestZPosition + 20
             newMap.cameraNode = cameraNode
 
-            renderTimeLabel?.attributedText = attributedString(String("parse time: \(newMap.parseTime.minSecMsRepresentation())\nrender time: \(newMap.renderTime.minSecMsRepresentation())"), fontName: "Courier", textSize: textSize)
+            renderTimeLabel?.attributedText = attributedString(String("parse time: \(newMap.parseTime.minSecMsRepresentation())\nrender time: \(newMap.renderTime.minSecMsRepresentation())"), fontName: "Courier", textSize: textSizeSmall)
 
             newMap.position = CGPoint(x: newMap.mapSizeInPoints().width * -0.5, y: newMap.mapSizeInPoints().height * -0.5)
             addChild(newMap)
@@ -166,22 +172,20 @@ class DemoScene: SKScene {
         }
     }
     
-    func removeMap() {
-        let textSize = size.width * 0.015
-
+    private func removeMap() {
         cameraNode.position = .zero
         cameraNode.xScale = 1
         cameraNode.yScale = 1
         
-        currentMapNameLabel?.attributedText = attributedString(" ... ", fontName: "Courier-Bold", textSize: textSize)
+        currentMapNameLabel?.attributedText = attributedString(" ... ", fontName: "Courier-Bold", textSize: textSizeSmall)
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
-        renderTimeLabel?.attributedText = attributedString(" Rendering... ", fontName: "Courier", textSize: textSize)
+        renderTimeLabel?.attributedText = attributedString(" Rendering... ", fontName: "Courier", textSize: textSizeSmall)
 
         map?.removeFromParent()
         map = nil
     }
     
-    func canvasButton(_ enabled: Bool) {
+    private func canvasButton(_ enabled: Bool) {
         showCanvas = enabled
         map?.showCanvas = showCanvas
         if let canvasButton = cameraNode.childNode(withName: "canvasButton"),
@@ -190,7 +194,7 @@ class DemoScene: SKScene {
         }
     }
     
-    func gridButton(_ enabled: Bool) {
+    private func gridButton(_ enabled: Bool) {
         showGrid = enabled
         map?.showGrid = showGrid
         if let canvasButton = cameraNode.childNode(withName: "gridButton"),
@@ -199,7 +203,17 @@ class DemoScene: SKScene {
         }
     }
     
-    func adjustCamera(buttonIndex: Int) {
+    private func updateTileCoords(_ position: CGPoint?) {
+        if let currentPosition = position {
+            let tileCoords = map!.tileCoords(positionInPoints: currentPosition)
+            tileCoordsLabel?.attributedText = attributedString(String(format:"tile coords\n(%ld, %ld)", Int(tileCoords.x), Int(tileCoords.y)), fontName: "Courier", textSize: textSizeSmall)
+            return
+        }
+        
+        tileCoordsLabel?.attributedText = attributedString("tile coords\n ", fontName: "Courier", textSize: textSizeSmall)
+    }
+    
+    private func adjustCamera(buttonIndex: Int) {
         var zoomMode = CameraZoomMode.none
         var viewMode = CameraViewMode.none
 
@@ -235,7 +249,9 @@ class DemoScene: SKScene {
         map?.moveCamera(sceneSize: size, zoomMode: zoomMode, viewMode: viewMode, factor: 1, duration: 0.5, timingMode: .easeInEaseOut)
     }
     
-    private func attributedString(_ string: String, fontName:String, textSize: CGFloat ) -> NSAttributedString {
+    private func attributedString(_ string: String, fontName:String, textSize: CGFloat ) -> NSAttributedString? {
+        guard string.count > 0 else { return nil }
+        
         let attrString = NSMutableAttributedString(string: string)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -252,7 +268,7 @@ class DemoScene: SKScene {
     }
     
     // MARK: - HUD
-    
+        
     private func addHud() {
         let logoNode = SKSpriteNode(imageNamed: "logo")
         let scale = size.width * 0.15 / logoNode.size.width
@@ -260,44 +276,48 @@ class DemoScene: SKScene {
         var horizontalMargin = size.width * 0.02
 
         var buttonSize = CGSize(width: size.width * 0.1, height: size.width * 0.03)
-        var textSize = size.width * 0.0175
 
         logoNode.size = logoNode.size.scaled(scale)
         logoNode.position = CGPoint(x: size.width * -0.5 + logoNode.size.width * 0.5 + horizontalMargin, y: size.height * 0.5 - buttonSize.height * 0.5 - verticalMargin)
         cameraNode.addChild(logoNode)
         
-        var newButton = button(name: "previousMapButton", buttonSize: buttonSize, text: "Previous", textSize: textSize, textColor: .white, fillColor: .red)
+        var newButton = button(name: "previousMapButton", buttonSize: buttonSize, text: "Previous", textSize: textSizeRegular, textColor: .white, fillColor: .red)
         newButton.position = CGPoint(x: buttonSize.width * -0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - verticalMargin)
         cameraNode.addChild(newButton)
 
-        newButton = button(name: "nextMapButton", buttonSize: buttonSize, text: "Next", textSize: textSize, textColor: .white, fillColor: .red)
+        newButton = button(name: "nextMapButton", buttonSize: buttonSize, text: "Next", textSize: textSizeRegular, textColor: .white, fillColor: .red)
         newButton.position = CGPoint(x: buttonSize.width * 0.6, y: size.height * 0.5 - buttonSize.height * 0.5 - verticalMargin)
         cameraNode.addChild(newButton)
         
-        renderTimeLabel = SKLabelNode(attributedText: attributedString(" ... ", fontName: "Courier", textSize: textSize))
+        renderTimeLabel = SKLabelNode(attributedText: attributedString(" ... ", fontName: "Courier", textSize: textSizeSmall))
         renderTimeLabel?.numberOfLines = 0
         renderTimeLabel?.position = CGPoint(x: 0, y: newButton.position.y - newButton.calculateAccumulatedFrame().size.height * 1.4 - verticalMargin)
         cameraNode.addChild(renderTimeLabel!)
         
-        newButton = button(name: "canvasButton", buttonSize: buttonSize, text: "Canvas", textSize: textSize, textColor: .white, fillColor: .blue)
+        newButton = button(name: "canvasButton", buttonSize: buttonSize, text: "Canvas", textSize: textSizeRegular, textColor: .white, fillColor: .blue)
         newButton.position = CGPoint(x: size.width * -0.5 + newButton.calculateAccumulatedFrame().size.width * 0.5 + horizontalMargin, y: logoNode.position.y - buttonSize.height * 1.25 - verticalMargin)
         cameraNode.addChild(newButton)
         
-        newButton = button(name: "gridButton", buttonSize: buttonSize, text: "Grid", textSize: textSize, textColor: .white, fillColor: .blue)
+        newButton = button(name: "gridButton", buttonSize: buttonSize, text: "Grid", textSize: textSizeRegular, textColor: .white, fillColor: .blue)
         newButton.position = CGPoint(x: size.width * -0.5 + newButton.calculateAccumulatedFrame().size.width * 0.5 + horizontalMargin, y: logoNode.position.y - buttonSize.height * 2 - verticalMargin * 2)
         cameraNode.addChild(newButton)
         
-        let roundedBox = roundedBox(size: CGSize(width: size.width * 0.8, height: textSize * 2.0), fillColor: SKColor(white: 0, alpha: 0.5))
+        tileCoordsLabel = SKLabelNode(attributedText: attributedString("tile coords\n ", fontName: "Courier", textSize: textSizeSmall))
+        tileCoordsLabel?.numberOfLines = 0
+        tileCoordsLabel?.position = CGPoint(x: newButton.position.x, y: newButton.position.y - newButton.calculateAccumulatedFrame().size.height * 0.5 - verticalMargin - tileCoordsLabel!.calculateAccumulatedFrame().size.height * 0.75)
+        cameraNode.addChild(tileCoordsLabel!)
+        
+        let roundedBox = roundedBox(size: CGSize(width: size.width * 0.8, height: textSizeRegular * 2.0), fillColor: SKColor(white: 0, alpha: 0.5))
         roundedBox.position = CGPoint(x: 0, y: size.height * -0.5 + roundedBox.calculateAccumulatedFrame().size.height + verticalMargin)
         cameraNode.addChild(roundedBox)
         
-        currentMapNameLabel = SKLabelNode(attributedText: attributedString(" ... ", fontName: "Courier-Bold", textSize: textSize))
+        currentMapNameLabel = SKLabelNode(attributedText: attributedString(" ... ", fontName: "Courier-Bold", textSize: textSizeSmall))
         currentMapNameLabel?.numberOfLines = 0
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
         roundedBox.addChild(currentMapNameLabel!)
         
         let externalLinkButton = SKSpriteNode(texture: SKTexture(imageNamed: "link-icon"))
-        externalLinkButton.size = CGSize(width: textSize * 1.25, height: textSize * 1.25)
+        externalLinkButton.size = CGSize(width: textSizeRegular * 1.25, height: textSizeRegular * 1.25)
         externalLinkButton.name = "externalLinkButton"
         externalLinkButton.position = CGPoint(x: roundedBox.calculateAccumulatedFrame().size.width * 0.5 - externalLinkButton.size.width, y:0)
         roundedBox.addChild(externalLinkButton)
@@ -316,12 +336,12 @@ class DemoScene: SKScene {
                 fillColor = .systemBlue
             }
 
-            newButton = button(name: "cameraButton-\(index)", buttonSize: buttonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
+            newButton = button(name: "cameraButton-\(index)", buttonSize: buttonSize, text: buttonTitle, textSize: textSizeRegular, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
             newButton.position = CGPoint(x: size.width * 0.5 - (buttonSize.width + horizontalMargin) * 3 + buttonSize.width * CGFloat(index % 3) + horizontalMargin * CGFloat(index % 3), y: size.height * 0.5 - verticalMargin - buttonSize.height * 0.5 - buttonSize.height * CGFloat(index / 3) - verticalMargin * CGFloat(index / 3))
             cameraNode.addChild(newButton)
             
             if index == 1 {
-                let cameraLabel = SKLabelNode(attributedText: attributedString("Camera Alignment", fontName: "Courier", textSize: textSize * 0.8))
+                let cameraLabel = SKLabelNode(attributedText: attributedString("Camera Alignment", fontName: "Courier", textSize: textSizeSmall))
                 cameraLabel.numberOfLines = 0
                 cameraLabel.position = CGPoint(x: newButton.position.x, y: newButton.position.y - buttonSize.height - cameraLabel.calculateAccumulatedFrame().size.height * 0.5)
                 cameraNode.addChild(cameraLabel)
@@ -335,11 +355,9 @@ class DemoScene: SKScene {
         for buttonTitle in buttonTitles {
             let fillColor = SKColor.clear
             let strokeColor = SKColor.clear
+            let smallButtonSize = CGSize(width: textSizeRegular, height: textSizeRegular)
 
-            textSize = size.width * 0.03
-            let smallButtonSize = CGSize(width: textSize, height: textSize)
-
-            newButton = button(name: "cameraButton-\(index)", buttonSize: smallButtonSize, text: buttonTitle, textSize: textSize, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
+            newButton = button(name: "cameraButton-\(index)", buttonSize: smallButtonSize, text: buttonTitle, textSize: textSizeRegular * 1.5, textColor: .white, fillColor: fillColor, strokeColor: strokeColor)
             newButton.position = CGPoint(x: size.width * 0.5 - (buttonSize.width + horizontalMargin) * 3 + buttonSize.width * CGFloat(index % 3) + horizontalMargin * CGFloat(index % 3), y: size.height * 0.5 - verticalMargin - buttonSize.height * 1.25 - buttonSize.height * CGFloat(index / 3) - verticalMargin * CGFloat(index / 3))
             cameraNode.addChild(newButton)
 
@@ -424,21 +442,30 @@ class DemoScene: SKScene {
                 gridButton(!showGrid)
                 return
             }
-            var touchedNodeName: String?
+            var touchedCameraButtonName: String?
 
             if nodeName.hasPrefix("cameraButton-") {
-                touchedNodeName = nodeName
+                touchedCameraButtonName = nodeName
             } else if nodeParentName.hasPrefix("cameraButton-") {
-                touchedNodeName = nodeParentName
+                touchedCameraButtonName = nodeParentName
             }
             
-            if touchedNodeName != nil {
+            if touchedCameraButtonName != nil {
                 let fromIndex = nodeName.index(nodeName.startIndex, offsetBy: 13)
                 let number = String(nodeName[fromIndex...])
                 
                 buttonTapped = true
                 adjustCamera(buttonIndex: Int(number)!)
+                return
             }
+            
+#if os(iOS) || os(tvOS)
+            if map != nil {
+                let location = convert(pos, to: map!)
+                updateTileCoords(location)
+            }
+#endif
+            
         }
         
         #if os(macOS)
@@ -460,10 +487,20 @@ class DemoScene: SKScene {
             buttonTapped = false
             return
         }
+        
+#if os(iOS) || os(tvOS)
+            if map != nil {
+                updateTileCoords(nil)
+            }
+#endif
+
     }
     
 #if os(macOS)
     private func mouseMovedToPoint(_ pos: CGPoint) {
+        guard map != nil else { return }
+        let location = convert(pos, to: map!)
+        updateTileCoords(location)
     }
 #endif
 }
