@@ -1,4 +1,4 @@
-import Foundation
+import CoreGraphics
 
 func polygonPath(_ points: [CGPoint], closed: Bool = true) -> CGPath {
     let path = CGMutablePath();
