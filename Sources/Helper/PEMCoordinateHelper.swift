@@ -92,9 +92,12 @@ internal class PEMCoordinateHelper: NSObject {
         case .hexagonal:
             break
         case .isometric:
-            break
+            let tileX = (positionInPoints.x - (mapSizeInTiles.height * tileSizeInPoints.width * 0.5)) / tileSizeInPoints.width
+            let tileY = (mapSizeInPoints.height - positionInPoints.y - tileSizeInPoints.height) / tileSizeInPoints.height
+            x = floor(tileY + tileX)
+            y = floor(tileY - tileX)
         case .orthogonal:
-            x = (positionInPoints.x / tileSizeInPoints.width)
+            x = positionInPoints.x / tileSizeInPoints.width
             y = (mapSizeInPoints.height - positionInPoints.y) / tileSizeInPoints.height
         case .staggered:
             break
