@@ -522,6 +522,9 @@
 		20FAF22D2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */; };
 		20FAF22E2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */; };
 		20FAF22F2837AC2700BEFA8E /* test_hexagonal_tile_60x60x30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */; };
+		20FCB633285F1F3D00C43B34 /* PEMPolygonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FCB632285F1F3D00C43B34 /* PEMPolygonHelper.swift */; };
+		20FCB634285F1F3D00C43B34 /* PEMPolygonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FCB632285F1F3D00C43B34 /* PEMPolygonHelper.swift */; };
+		20FCB635285F1F3D00C43B34 /* PEMPolygonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FCB632285F1F3D00C43B34 /* PEMPolygonHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -708,6 +711,7 @@
 		20FAF0562837AC2600BEFA8E /* perspective_walls.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = perspective_walls.tsx; sourceTree = "<group>"; };
 		20FAF0C22837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_hexagonal_tile_60x60x30.png; sourceTree = "<group>"; };
 		20FAF0C32837AC2600BEFA8E /* test_hexagonal_tile_60x60x30.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test_hexagonal_tile_60x60x30.tmx; sourceTree = "<group>"; };
+		20FCB632285F1F3D00C43B34 /* PEMPolygonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMPolygonHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -878,6 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				20D589192852130E00A2317E /* PEMCoordinateHelper.swift */,
+				20FCB632285F1F3D00C43B34 /* PEMPolygonHelper.swift */,
 				20B329D4283953180082CE8B /* PEMTileMapHelper.swift */,
 				20D5890C2851E41A00A2317E /* PEMTileMapOverlay.swift */,
 				20B329D5283953180082CE8B /* PEMTmxParser.swift */,
@@ -1680,6 +1685,7 @@
 				20D5891C2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */,
 				20B32A07283953180082CE8B /* Image+Extension.swift in Sources */,
 				20B329F5283953180082CE8B /* PEMTile.swift in Sources */,
+				20FCB635285F1F3D00C43B34 /* PEMPolygonHelper.swift in Sources */,
 				20B32A0D283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
 				20D58917285205E100A2317E /* NSAttributedString+Extension.swift in Sources */,
 				20B32A01283953180082CE8B /* CG+Extensions.swift in Sources */,
@@ -1722,6 +1728,7 @@
 				20D5891A2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */,
 				20B329F3283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0B283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
+				20FCB633285F1F3D00C43B34 /* PEMPolygonHelper.swift in Sources */,
 				20B329FF283953180082CE8B /* CG+Extensions.swift in Sources */,
 				20D58915285205E100A2317E /* NSAttributedString+Extension.swift in Sources */,
 				20B329DE283953180082CE8B /* PEMProperty.swift in Sources */,
@@ -1764,6 +1771,7 @@
 				20D5891B2852130E00A2317E /* PEMCoordinateHelper.swift in Sources */,
 				20B329F4283953180082CE8B /* PEMTile.swift in Sources */,
 				20B32A0C283953180082CE8B /* PEMTileMapHelper.swift in Sources */,
+				20FCB634285F1F3D00C43B34 /* PEMPolygonHelper.swift in Sources */,
 				20B32A00283953180082CE8B /* CG+Extensions.swift in Sources */,
 				20D58916285205E100A2317E /* NSAttributedString+Extension.swift in Sources */,
 				20B329DF283953180082CE8B /* PEMProperty.swift in Sources */,

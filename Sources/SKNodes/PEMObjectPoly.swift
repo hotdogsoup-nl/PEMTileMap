@@ -16,21 +16,7 @@ class PEMObjectPoly: SKShapeNode {
             super.init()
 
             if (points.count > 0) {
-                let path = CGMutablePath();
-
-                let startPoint = points[0]
-                path.move(to: startPoint)
-                
-                for index in 1...(points.count - 1) {
-                    let p = points[index]
-                    path.addLine(to: p)
-                }
-                
-                if (isPolygon) {
-                    path.closeSubpath()
-                }
-                
-                self.path = path
+                self.path = polygonPath(points, closed: isPolygon)
             }
 
             name = objectData.objectName
