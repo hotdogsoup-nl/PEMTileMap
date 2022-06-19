@@ -545,8 +545,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             guard coordinateHelper != nil else { return }
 
             let grid = mapGrid(coordinateHelper: coordinateHelper!, name: MapGridName)
-            grid.zPosition = highestZPosition + 1
-            grid.alpha = 0.5
+            grid.zPosition = CGFloat.leastNonzeroMagnitude + 1
+            grid.alpha = 1.0
             addChild(grid)
         }
     }
