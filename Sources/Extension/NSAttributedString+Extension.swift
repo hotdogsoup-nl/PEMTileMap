@@ -6,18 +6,18 @@ import UIKit
 
 internal extension NSAttributedString {
     convenience init(string: String,
-                              font: Font,
-                              fontColor: Color = .white,
-                              alignment: NSTextAlignment = .left,
-                              underline: Bool = false,
-                              strikeThrough: Bool = false,
-                              lineHeight: CGFloat = 0,
-                              kerning: Float = 0,
-                              strokeColor: Color = .clear,
-                              strokeWidth: CGFloat = 0,
-                              shadowColor: Color = .clear,
-                              shadowOffset: CGSize = .zero,
-                              shadowBlurRadius: CGFloat = 0) {
+                     font: Font,
+                     fontColor: Color = .white,
+                     alignment: NSTextAlignment = .left,
+                     underline: Bool = false,
+                     strikeThrough: Bool = false,
+                     lineHeight: CGFloat = 0,
+                     kerning: Float = 0,
+                     strokeColor: Color = .clear,
+                     strokeWidth: CGFloat = 0,
+                     shadowColor: Color = .clear,
+                     shadowOffset: CGSize = .zero,
+                     shadowBlurRadius: CGFloat = 0) {
         
         let style = NSMutableParagraphStyle()
         style.alignment = alignment
