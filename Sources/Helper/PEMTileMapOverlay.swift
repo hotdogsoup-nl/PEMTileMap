@@ -33,17 +33,51 @@ internal func mapGrid(coordinateHelper: PEMCoordinateHelper, name: String? = nil
     grid.name = name
 
     let path = CGMutablePath();
-    let startPoint = coordinateHelper.position(tileCoords: CGPoint(x: 0, y: 0))
-    let endPoint = coordinateHelper.position(tileCoords: CGPoint(x: sizeInTiles.width + 1, y: sizeInTiles.height + 1))
+    
+    let row = Int(sizeInTiles.height)
+    for col in 0 ..< Int(sizeInTiles.width + 1) {
+        var startPoint = coordinateHelper.position(tileCoords: CGPoint(x: col, y: 0))
+        var endPoint = coordinateHelper.position(tileCoords: CGPoint(x: col, y: row))
 
-    for x in stride(from: startPoint.x, to: endPoint.x, by: tileSizeInPoints.width) {
-        path.move(to: CGPoint(x: x, y: startPoint.y))
-        path.addLine(to: CGPoint(x: x, y: endPoint.y + tileSizeInPoints.height))
+        switch coordinateHelper.orientation {
+        case .unknown:
+            break
+        case .hexagonal:
+            break
+        case .isometric:
+            startPoint.x += tileSizeInPoints.width * 0.5
+            endPoint.x += tileSizeInPoints.width * 0.5
+        case .orthogonal:
+            break
+        case .staggered:
+            break
+        }
+
+        path.move(to: startPoint)
+        path.addLine(to: endPoint)
     }
+    
+    let col = Int(sizeInTiles.width)
+    for row in 0 ..< Int(sizeInTiles.height + 1) {
+        var startPoint = coordinateHelper.position(tileCoords: CGPoint(x: 0, y: row))
+        var endPoint = coordinateHelper.position(tileCoords: CGPoint(x: col, y: row))
+        
+        switch coordinateHelper.orientation {
+        case .unknown:
+            break
+        case .hexagonal:
+            break
+        case .isometric:
+            startPoint.x += tileSizeInPoints.width * 0.5
+            endPoint.x += tileSizeInPoints.width * 0.5
+        case .orthogonal:
+            break
+        case .staggered:
+            break
+        }
 
-    for y in stride(from: startPoint.y, to: endPoint.y, by: -tileSizeInPoints.height) {
-        path.move(to: CGPoint(x: startPoint.x, y: y))
-        path.addLine(to: CGPoint(x: endPoint.x - tileSizeInPoints.width, y: y))
+        path.move(to: startPoint)
+        path.addLine(to: endPoint)
     }
 
     grid.path = path
