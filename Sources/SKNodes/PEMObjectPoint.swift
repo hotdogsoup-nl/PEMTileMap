@@ -39,14 +39,4 @@ class PEMObjectPoint: SKShapeNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(Swift.type(of: self))")
-        #endif
-        #endif
-    }
 }

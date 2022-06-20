@@ -74,16 +74,6 @@ class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-    
     // MARK: - Internal
     
     internal func render(mapSizeInPoints: CGSize, textureFilteringMode: SKTextureFilteringMode) {

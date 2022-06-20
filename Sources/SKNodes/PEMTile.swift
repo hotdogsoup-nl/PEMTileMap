@@ -33,16 +33,6 @@ class PEMTile: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(Swift.type(of: self))")
-        #endif
-        #endif
-    }
-    
     // MARK: - Setup
     
     private func applyTileFlipping(horizontally: Bool, vertically: Bool, diagonally: Bool) {
