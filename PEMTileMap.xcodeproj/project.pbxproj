@@ -535,6 +535,8 @@
 		20584B49283A2A1C00B38F37 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		205E0F182846244500AA7BB6 /* Isometric1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Isometric1.tmx; sourceTree = "<group>"; };
 		205F766F283BC452003B775E /* macOS version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "macOS version.entitlements"; sourceTree = "<group>"; };
+		206587D828607BD200DED69C /* license.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = license.md; sourceTree = "<group>"; };
+		206587D928607BD300DED69C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		20794332283E173C0012BB88 /* point.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = point.tx; sourceTree = "<group>"; };
 		2079433A283E35480012BB88 /* polyline.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = polyline.tx; sourceTree = "<group>"; };
 		207D3DAF2812AD5600FC4C77 /* DemoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScene.swift; sourceTree = "<group>"; };
@@ -778,16 +780,13 @@
 			children = (
 				20584B49283A2A1C00B38F37 /* logo.png */,
 			);
-			name = Doc;
-			path = Demo/Doc;
+			path = Doc;
 			sourceTree = SOURCE_ROOT;
 		};
 		206E238C282667640039C4FE /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				205F766F283BC452003B775E /* macOS version.entitlements */,
-				20584B48283A2A1C00B38F37 /* Doc */,
-				20B32969283952810082CE8B /* Sources */,
 				20CA13A028181D5000797A7C /* Assets */,
 				20C9979428227A7D00EEBDE0 /* Scenes */,
 				20CA139C2818160800797A7C /* Controller */,
@@ -810,6 +809,10 @@
 		207D3DA72812AD5600FC4C77 = {
 			isa = PBXGroup;
 			children = (
+				206587D828607BD200DED69C /* license.md */,
+				206587D928607BD300DED69C /* README.md */,
+				20B32969283952810082CE8B /* Sources */,
+				20584B48283A2A1C00B38F37 /* Doc */,
 				206E238C282667640039C4FE /* Demo */,
 				207D3DB62812AD5700FC4C77 /* Products */,
 				2074E41F28181EDD002137A7 /* Frameworks */,
