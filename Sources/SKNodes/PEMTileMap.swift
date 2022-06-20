@@ -252,6 +252,23 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         guard coordinateHelper != nil else { return .zero }
         return coordinateHelper!.tileCoords(positionInPoints: positionInPoints)
     }
+    
+    // MARK: - Layers
+    
+    /// Find a TMX Map layer with a specific name.
+    /// - Parameter name: The name of the layer to search for.
+    /// - Returns: The first layer found on the map which has the specified name.
+    public func layerNamed(_ name: String) -> Any? {
+        guard name.count > 0 else { return nil }
+        
+        for layer in layers {
+            if layer.name == name {
+                return layer
+            }
+        }
+        
+        return nil
+    }
         
     // MARK: - Camera
     
