@@ -13,11 +13,11 @@ Based on the well-known [JSTileMap][jstilemap-url] project which was famously us
 I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url], which uses `PEMTileMap` to generate the map and also supports iOS, macOS and tvOS.
 
 ## TMX Features
-
 - [X] read and parse TMX map files
 - [X] CSV, Base64 layer formats with gzip, zlib or no compression
 - [X] fixed size maps
 - [X] orthogonal map types
+- [X] isometric map types
 - [X] map background color
 - [X] embedded tile sets
 - [X] tilesets based on a tileset image
@@ -33,30 +33,32 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [X] animated tiles
 - [X] properties
   
-## Not yet supported
+## Not (yet) supported
 - [ ] Zstandard compression 
 - [ ] world files
 - [ ] infinite maps
-- [ ] isometric map types
-- [ ] isometric staggerd map types
+- [ ] isometric staggered map types
 - [ ] hexagonal staggered map types
 - [ ] terraintypes, wangsets, transformations
 
-## PEMTileMap Features
+## Known issues
+Please refer to the [issue tracker][issues-url] on GitHub. All bugs reports, feature requests and comments are welcome.
 
+## PEMTileMap Features
 - [X] Swift 5
 - [ ] Objective-C compatibility
 - [X] iOS (>13.6), macOS (>10.15), tvOS (>13.4)
-- [X] generates the TMX map as an `SKNode` with child elements as `SKNode` subclasses (eg. a tile as a `SKSpriteNode` etc.)
-- [X] supports both nearest neighbor and linear texture antialiasing
-- [ ] access layers, tiles, objects
+- [X] generate TMX maps as `SKNode` objects with child elements as `SKNode` subclasses (eg. a tile as a `SKSpriteNode`, a polygon object as an `SKShapeNode`, etc.)
+- [X] both nearest neighbor and linear texture antialiasing
 - [X] camera tilt and zoom
+- [ ] access layers, tiles, objects
 - [ ] parallax scroll
 - [ ] anti-tearing (removing tear lines between tiles)
   
 ## License
 Licensed under the [MIT license](license.md).
 
+[issues-url]:https://github.com/hotdogsoup-nl/PEMTileMap/issues
 [tmx-map-url]:https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#
 [tiled-url]:http://www.mapeditor.org
 [jstilemap-url]:https://github.com/slycrel/JSTileMap
