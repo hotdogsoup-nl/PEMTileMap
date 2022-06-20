@@ -63,7 +63,7 @@ class DemoScene: SKScene {
         }
         
         #if os(iOS)
-        initGestures()
+        initGestures(view: view)
         #endif
 
         startControl()
@@ -84,7 +84,7 @@ class DemoScene: SKScene {
     }
     
     #if os(iOS)
-    private func initGestures() {
+    private func initGestures(view: SKView) {
         pinch = UIPinchGestureRecognizer(target: self, action: #selector(scenePinched(_:)))
         pinch.delegate = self
         pan = UIPanGestureRecognizer(target: self, action: #selector(scenePanned(_:)))
