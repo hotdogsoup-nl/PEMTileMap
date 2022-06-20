@@ -129,6 +129,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     internal func render(map: PEMTileMap, textureFilteringMode: SKTextureFilteringMode) {
         let tileSizeInPoints = map.tileSizeInPoints()
         let halfTileSizeInPoints = map.halfTileSizeInPoints()
+        let showObjectLabels = map.showObjectLabels
 
         alpha = opacity
         position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
@@ -200,10 +201,18 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                         
             addChild(node!)
             
-            addObjectLabel(node!, fontSize: tileSizeInPoints.height * 0.25)
+            addObjectLabel(node!, fontSize: tileSizeInPoints.height * 0.25, visible: visible)
         }
     }
-        
+    
+    internal func updateObjectLabels(visible: Bool) {
+        for child in children  {
+            if child.name == "PEMObjectLabel" {
+                child.isHidden = !visible
+            }
+        }
+    }
+            
     // MARK: - PEMTileMapPropertiesProtocol
     
     internal func addProperties(_ newProperties: [PEMProperty]) {
@@ -212,7 +221,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Private
     
-    private func addObjectLabel(_ node: SKNode, fontSize: CGFloat) {
+    private func addObjectLabel(_ node: SKNode, fontSize: CGFloat, visible: Bool) {
         guard node.name != nil else { return }
         
         let nodeRect = node.calculateAccumulatedFrame()
@@ -222,6 +231,8 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             let labelSize = label.calculateAccumulatedFrame().size
             label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + nodeRect.size.height * 0.5 + labelSize.height * 0.6)
             label.zPosition = node.zPosition + 1
+            label.name = "PEMObjectLabel"
+            label.isHidden = !visible
             addChild(label)
         }
     }

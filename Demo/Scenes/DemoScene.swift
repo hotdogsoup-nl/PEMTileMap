@@ -3,7 +3,8 @@ import SpriteKit
 class DemoScene: SKScene {
     private let DefaultsKeyShowCanvas = "ShowCanvas"
     private let DefaultsKeyShowGrid = "ShowGrid"
-
+    private let DefaultsKeyShowObjectLabels = "ShowObjectLabels"
+    
     private enum TileQueryPosition: Int {
         case atCenter
         case above
@@ -17,7 +18,7 @@ class DemoScene: SKScene {
     }
     
     private var map: PEMTileMap?
-    private var currentMapIndex = Int(19)
+    private var currentMapIndex = Int(20)
     
     private let textSizeRegular: CGFloat
     private let textSizeSmall: CGFloat
@@ -36,6 +37,7 @@ class DemoScene: SKScene {
     private var rendering = false
     private var showCanvas = false
     private var showGrid = false
+    private var showObjectLabels = false
 
     #if os(iOS)
     private var pinch: UIPinchGestureRecognizer!
@@ -52,6 +54,7 @@ class DemoScene: SKScene {
         
         showCanvas = UserDefaults.standard.bool(forKey: DefaultsKeyShowCanvas)
         showGrid = UserDefaults.standard.bool(forKey: DefaultsKeyShowGrid)
+        showObjectLabels = UserDefaults.standard.bool(forKey: DefaultsKeyShowObjectLabels)
 
         cameraNode = SKCameraNode()
         
@@ -169,9 +172,11 @@ class DemoScene: SKScene {
             map = newMap
             map?.showCanvas = showCanvas
             map?.showGrid = showGrid
+            map?.showObjectLabels = showObjectLabels
             
             canvasButton(showCanvas)
             gridButton(showGrid)
+            objectLabelsButton(showObjectLabels)
 
             if newMap.backgroundColor != nil {
                 backgroundColor = newMap.backgroundColor!
@@ -209,8 +214,8 @@ class DemoScene: SKScene {
         
         UserDefaults.standard.set(enabled, forKey: DefaultsKeyShowCanvas)
         
-        if let canvasButton = cameraNode.childNode(withName: "canvasButton"),
-           let label = canvasButton.childNode(withName: canvasButton.name!) as? SKLabelNode {
+        if let button = cameraNode.childNode(withName: "canvasButton"),
+           let label = button.childNode(withName: button.name!) as? SKLabelNode {
             label.text = (enabled ? "Canvas ✓" : "Canvas")
         }
     }
@@ -221,9 +226,21 @@ class DemoScene: SKScene {
 
         UserDefaults.standard.set(enabled, forKey: DefaultsKeyShowGrid)
 
-        if let canvasButton = cameraNode.childNode(withName: "gridButton"),
-           let label = canvasButton.childNode(withName: canvasButton.name!) as? SKLabelNode {
+        if let button = cameraNode.childNode(withName: "gridButton"),
+           let label = button.childNode(withName: button.name!) as? SKLabelNode {
             label.text = (enabled ? "Grid ✓" : "Grid")
+        }
+    }
+    
+    private func objectLabelsButton(_ enabled: Bool) {
+        showObjectLabels = enabled
+        map?.showObjectLabels = showObjectLabels
+
+        UserDefaults.standard.set(enabled, forKey: DefaultsKeyShowObjectLabels)
+
+        if let button = cameraNode.childNode(withName: "objectLabelsButton"),
+           let label = button.childNode(withName: button.name!) as? SKLabelNode {
+            label.text = (enabled ? "Labels ✓" : "Labels")
         }
     }
     
@@ -324,6 +341,10 @@ class DemoScene: SKScene {
         
         newButton = button(name: "gridButton", buttonSize: buttonSize, text: "Grid", textSize: textSizeRegular, textColor: .white, fillColor: .blue)
         newButton.position = CGPoint(x: size.width * -0.5 + newButton.calculateAccumulatedFrame().size.width * 0.5 + horizontalMargin, y: logoNode.position.y - buttonSize.height * 2 - verticalMargin * 2)
+        cameraNode.addChild(newButton)
+        
+        newButton = button(name: "objectLabelsButton", buttonSize: buttonSize, text: "Labels", textSize: textSizeRegular, textColor: .white, fillColor: .blue)
+        newButton.position = CGPoint(x: size.width * -0.5 + newButton.calculateAccumulatedFrame().size.width * 0.5 + horizontalMargin, y: logoNode.position.y - buttonSize.height * 3 - verticalMargin * 3)
         cameraNode.addChild(newButton)
         
         tileCoordsLabel = SKLabelNode(attributedText: attributedString("tile coords\n ", fontName: "Courier", textSize: textSizeSmall))
@@ -466,6 +487,13 @@ class DemoScene: SKScene {
                 gridButton(!showGrid)
                 return
             }
+
+            if nodeName == "objectLabelsButton" {
+                buttonTapped = true
+                objectLabelsButton(!showObjectLabels)
+                return
+            }
+            
             var touchedCameraButtonName: String?
 
             if nodeName.hasPrefix("cameraButton-") {

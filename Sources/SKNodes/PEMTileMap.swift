@@ -52,8 +52,7 @@ internal enum MapStaggerIndex: String {
 }
 
 public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
-    
-    /// Adds a background node on the map representing the map canvas when set to `true`. Removes the canvas when set to `false`.
+    /// Adds a background node to the map representing the map canvas when set to `true`. Removes the canvas when set to `false`.
     public var showCanvas: Bool {
         set {
             _showCanvas = newValue
@@ -64,7 +63,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         }
     }
     
-    /// Adds a grid node on the map representing the tile grid when set to `true`. Removes the grid when set to `false`.
+    /// Adds a grid node to the map representing the tile grid when set to `true`. Removes the grid when set to `false`.
     public var showGrid: Bool {
         set {
             _showGrid = newValue
@@ -72,6 +71,17 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         }
         get {
             return _showGrid
+        }
+    }
+    
+    /// Adds a node to the map containing object labels  when set to `true`. Removes the node when set to `false`.
+    public var showObjectLabels: Bool {
+        set {
+            _showObjectLabels = newValue
+            updateObjectLabels()
+        }
+        get {
+            return _showObjectLabels
         }
     }
     
@@ -102,7 +112,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
 
     private var _showCanvas: Bool = false
     private var _showGrid: Bool = false
-    
+    private var _showObjectLabels: Bool = false
+
     private var coordinateHelper: PEMCoordinateHelper?
     private var hexSideLengthInPoints = Int(0)
     private var parallaxOriginInPoints = CGPoint.zero
@@ -488,7 +499,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                     print(layer)
                     #endif
                 }
-                
                 continue
             }
 
@@ -548,6 +558,14 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             grid.zPosition = highestZPosition + 1
             grid.alpha = 0.5
             addChild(grid)
+        }
+    }
+    
+    private func updateObjectLabels() {
+        for layer in layers {
+            if let objectLayer = layer as? PEMObjectGroup {
+                objectLayer.updateObjectLabels(visible: _showObjectLabels)
+            }
         }
     }
     
