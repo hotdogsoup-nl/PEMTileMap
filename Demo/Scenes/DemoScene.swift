@@ -60,12 +60,7 @@ class DemoScene: SKScene {
         }
         
         #if os(iOS)
-        pinch = UIPinchGestureRecognizer(target: self, action: #selector(scenePinched(_:)))
-        pinch.delegate = self
-        pan = UIPanGestureRecognizer(target: self, action: #selector(scenePanned(_:)))
-        pan.delegate = self
-        view.addGestureRecognizer(pinch)
-        view.addGestureRecognizer(pan)
+        initGestures()
         #endif
 
         startControl()
@@ -76,9 +71,26 @@ class DemoScene: SKScene {
     }
     
     deinit {
-        print("deinit: \(self)")
+        #if DEBUG
+        #if os(macOS)
+        print("deinit: \(self.className.components(separatedBy: ".").last! )")
+        #else
+        print("deinit: \(Swift.type(of: self))")
+        #endif
+        #endif
     }
     
+    #if os(iOS)
+    private func initGestures() {
+        pinch = UIPinchGestureRecognizer(target: self, action: #selector(scenePinched(_:)))
+        pinch.delegate = self
+        pan = UIPanGestureRecognizer(target: self, action: #selector(scenePanned(_:)))
+        pan.delegate = self
+        view.addGestureRecognizer(pinch)
+        view.addGestureRecognizer(pan)
+    }
+    #endif
+
     // MARK: - Control
 
     private func startControl() {
