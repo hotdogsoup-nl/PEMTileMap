@@ -26,7 +26,7 @@
   <object id="24" name="Text" type="dsdd" x="20.5484" y="23.2619" width="42" height="18.8438" rotation="344.256">
    <text fontfamily="Arial" wrap="1" color="#00f900" halign="center">Text!</text>
   </object>
-  <object id="27" name="Point" x="63" y="84">
+  <object id="27" name="Point" x="0" y="0">
    <point/>
   </object>
   <object id="46" name="Circle / ellipse" type="Ellipseskslsk" x="105" y="0" width="84" height="42" rotation="346.503">

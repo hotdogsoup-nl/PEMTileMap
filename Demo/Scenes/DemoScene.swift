@@ -14,7 +14,7 @@ class DemoScene: SKScene {
     }
     
     private var map: PEMTileMap?
-    private var currentMapIndex = Int(20)
+    private var currentMapIndex = Int(19)
     
     private let textSizeRegular: CGFloat
     private let textSizeSmall: CGFloat
