@@ -1,6 +1,6 @@
 import SpriteKit
 
-// MARK: - Properties
+// MARK: - TMX Properties
 
 internal func convertProperties(_ newProperties: [PEMProperty]) -> Dictionary<String, Any>? {
     var properties: Dictionary<String, Any>? = [:]
@@ -33,7 +33,7 @@ internal func convertProperties(_ newProperties: [PEMProperty]) -> Dictionary<St
     return properties
 }
 
-// MARK: - Flipping attributes
+// MARK: - TMX attribute flipping
 
 internal func tileAttributes(fromId id: UInt32) -> (id: UInt32, flippedHorizontally: Bool, flippedVertically: Bool, flippedDiagonally: Bool) {
     let flippedDiagonalFlag: UInt32   = 0x20000000
