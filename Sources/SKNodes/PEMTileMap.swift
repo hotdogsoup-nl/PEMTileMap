@@ -296,7 +296,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             
             let newScale = (1.0 / contentScale / factor * 100).rounded() / 100
             
-            if duration > 0 {
+            if duration > 0 && viewMode == .none {
                 let zoomAction = SKAction.scale(to: newScale, duration: duration)
                 zoomAction.timingMode = timingMode
                 cameraNode?.run(zoomAction)
