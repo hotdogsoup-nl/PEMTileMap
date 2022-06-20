@@ -811,11 +811,11 @@
 			children = (
 				206587D828607BD200DED69C /* license.md */,
 				206587D928607BD300DED69C /* README.md */,
-				20B32969283952810082CE8B /* Sources */,
 				20584B48283A2A1C00B38F37 /* Doc */,
+				20B32969283952810082CE8B /* Sources */,
 				206E238C282667640039C4FE /* Demo */,
-				207D3DB62812AD5700FC4C77 /* Products */,
 				2074E41F28181EDD002137A7 /* Frameworks */,
+				207D3DB62812AD5700FC4C77 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
