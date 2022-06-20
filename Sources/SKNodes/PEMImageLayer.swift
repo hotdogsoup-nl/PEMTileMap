@@ -82,6 +82,7 @@ class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
         }
 
         alpha = opacity
+        isHidden = !visible
                         
         if tintColor != nil {
             color = tintColor!

@@ -92,6 +92,7 @@ class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
         let halfTileSizeInPoints = map.halfTileSizeInPoints()
 
         alpha = opacity
+        isHidden = !visible
         position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
         
         for index in tileData.indices {

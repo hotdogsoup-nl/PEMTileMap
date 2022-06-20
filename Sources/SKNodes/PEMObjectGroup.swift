@@ -132,12 +132,12 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         let showObjectLabels = map.showObjectLabels
 
         alpha = opacity
+        isHidden = !visible
         position = CGPoint(x: offSetInPoints.x, y: -offSetInPoints.y)
                 
         for object in objects {
             object.parseAttributes(defaultSize: tileSizeInPoints)
             
-            guard object.visible else { continue }
             guard object.coordsInPoints != nil else { continue }
 
             var node : SKNode?
@@ -198,6 +198,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
            
             node?.name = object.objectName
             node?.position = map.position(coordsInPoints: object.coordsInPoints!).add(CGPoint(x: halfTileSizeInPoints.width, y: halfTileSizeInPoints.height))
+            node?.isHidden = !object.visible
                         
             addChild(node!)
             

@@ -488,47 +488,41 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private func renderLayers() {
         for layer in layers {
             if let tileLayer = layer as? PEMTileLayer {
-                if tileLayer.visible {
-                    highestZPosition += zPositionLayerDelta
+                highestZPosition += zPositionLayerDelta
 
-                    tileLayer.render(map: self, textureFilteringMode: textureFilteringMode)
-                    tileLayer.zPosition = highestZPosition
-                    
-                    addChild(tileLayer)
-                    #if DEBUG
-                    print(layer)
-                    #endif
-                }
+                tileLayer.render(map: self, textureFilteringMode: textureFilteringMode)
+                tileLayer.zPosition = highestZPosition
+                
+                addChild(tileLayer)
+                #if DEBUG
+                print(layer)
+                #endif
                 continue
             }
 
             if let imageLayer = layer as? PEMImageLayer {
-                if imageLayer.visible {
-                    highestZPosition += zPositionLayerDelta
-                    
-                    imageLayer.render(mapSizeInPoints: coordinateHelper!.mapSizeInPoints, textureFilteringMode:textureFilteringMode)
-                    imageLayer.zPosition = highestZPosition
-                    
-                    addChild(imageLayer)
-                    #if DEBUG
-                    print(layer)
-                    #endif
-                }
+                highestZPosition += zPositionLayerDelta
+                
+                imageLayer.render(mapSizeInPoints: coordinateHelper!.mapSizeInPoints, textureFilteringMode:textureFilteringMode)
+                imageLayer.zPosition = highestZPosition
+                
+                addChild(imageLayer)
+                #if DEBUG
+                print(layer)
+                #endif
                 continue
             }
 
             if let objectLayer = layer as? PEMObjectGroup {
-                if objectLayer.visible {
-                    highestZPosition += zPositionLayerDelta
-                    
-                    objectLayer.render(map: self, textureFilteringMode:textureFilteringMode)
-                    objectLayer.zPosition = highestZPosition
-                    
-                    addChild(objectLayer)
-                    #if DEBUG
-                    print(layer)
-                    #endif
-                }
+                highestZPosition += zPositionLayerDelta
+                
+                objectLayer.render(map: self, textureFilteringMode:textureFilteringMode)
+                objectLayer.zPosition = highestZPosition
+                
+                addChild(objectLayer)
+                #if DEBUG
+                print(layer)
+                #endif
                 continue
             }
         }
