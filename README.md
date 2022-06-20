@@ -42,7 +42,7 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [ ] isometric staggered map types
 - [ ] hexagonal staggered map types
 - [ ] terraintypes, wangsets, transformations
-- [ ] image <trans> color
+- [ ] image `<trans>` color
 
 ## Known issues
 Please refer to the [issue tracker][issues-url] on GitHub. All bugs reports, feature requests and comments are welcome.
