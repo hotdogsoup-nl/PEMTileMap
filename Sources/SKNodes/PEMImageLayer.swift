@@ -1,7 +1,7 @@
 import Foundation
 import SpriteKit
 
-class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
+public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
     private (set) var visible = true
     private (set) var properties: Dictionary<String, Any>?
 
@@ -176,7 +176,7 @@ class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
     // MARK: - Debug
     
     #if DEBUG
-    override var description: String {
+    public override var description: String {
         return "PEMImageLayer: \(id), (name: \(name ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)))"
     }
     #endif
