@@ -1,6 +1,9 @@
 import SpriteKit
 
 class DemoScene: SKScene {
+    private let DefaultsKeyShowCanvas = "ShowCanvas"
+    private let DefaultsKeyShowGrid = "ShowGrid"
+
     private enum TileQueryPosition: Int {
         case atCenter
         case above
@@ -31,8 +34,8 @@ class DemoScene: SKScene {
     
     private var buttonTapped = false
     private var rendering = false
-    private var showCanvas = true
-    private var showGrid = true
+    private var showCanvas = false
+    private var showGrid = false
 
     #if os(iOS)
     private var pinch: UIPinchGestureRecognizer!
@@ -47,6 +50,9 @@ class DemoScene: SKScene {
         
         super.init(size: size)
         
+        showCanvas = UserDefaults.standard.bool(forKey: DefaultsKeyShowCanvas)
+        showGrid = UserDefaults.standard.bool(forKey: DefaultsKeyShowGrid)
+
         cameraNode = SKCameraNode()
         
         if let url = bundleURLForResource("maps.plist") {
@@ -188,6 +194,9 @@ class DemoScene: SKScene {
     private func canvasButton(_ enabled: Bool) {
         showCanvas = enabled
         map?.showCanvas = showCanvas
+        
+        UserDefaults.standard.set(enabled, forKey: DefaultsKeyShowCanvas)
+        
         if let canvasButton = cameraNode.childNode(withName: "canvasButton"),
            let label = canvasButton.childNode(withName: canvasButton.name!) as? SKLabelNode {
             label.text = (enabled ? "Canvas ✓" : "Canvas")
@@ -197,6 +206,9 @@ class DemoScene: SKScene {
     private func gridButton(_ enabled: Bool) {
         showGrid = enabled
         map?.showGrid = showGrid
+
+        UserDefaults.standard.set(enabled, forKey: DefaultsKeyShowGrid)
+
         if let canvasButton = cameraNode.childNode(withName: "gridButton"),
            let label = canvasButton.childNode(withName: canvasButton.name!) as? SKLabelNode {
             label.text = (enabled ? "Grid ✓" : "Grid")
