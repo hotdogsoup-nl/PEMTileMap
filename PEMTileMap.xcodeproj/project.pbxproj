@@ -15,15 +15,12 @@
 		2037A5EB28258D9D00E13452 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CA158128181D8700797A7C /* Colors.xcassets */; };
 		2037A5EC28258DA000E13452 /* DemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207D3DAF2812AD5600FC4C77 /* DemoScene.swift */; };
 		2037A5EE28258DA500E13452 /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA139D2818168600797A7C /* DemoController.swift */; };
-		2037A5F828258E0700E13452 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		20426D60283D20EC00514ABE /* Spaced with margin.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D5F283D20EC00514ABE /* Spaced with margin.tsx */; };
 		20426D61283D20EC00514ABE /* Spaced with margin.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D5F283D20EC00514ABE /* Spaced with margin.tsx */; };
 		20426D62283D20EC00514ABE /* Spaced with margin.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D5F283D20EC00514ABE /* Spaced with margin.tsx */; };
 		20426D64283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
 		20426D65283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
 		20426D66283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
-		204662E0281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
-		204662E1281BE8CF00F3635B /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204662DF281BE8CF00F3635B /* Define.swift */; };
 		20584B4A283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
 		20584B4B283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
 		20584B4C283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
@@ -535,7 +532,6 @@
 		2037A5E528258C4A00E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20426D5F283D20EC00514ABE /* Spaced with margin.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Spaced with margin.tsx"; sourceTree = "<group>"; };
 		20426D63283D212A00514ABE /* Snail.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Snail.tx; sourceTree = "<group>"; };
-		204662DF281BE8CF00F3635B /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		20584B49283A2A1C00B38F37 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		205E0F182846244500AA7BB6 /* Isometric1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Isometric1.tmx; sourceTree = "<group>"; };
 		205F766F283BC452003B775E /* macOS version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "macOS version.entitlements"; sourceTree = "<group>"; };
@@ -790,7 +786,6 @@
 			isa = PBXGroup;
 			children = (
 				205F766F283BC452003B775E /* macOS version.entitlements */,
-				204662DF281BE8CF00F3635B /* Define.swift */,
 				20584B48283A2A1C00B38F37 /* Doc */,
 				20B32969283952810082CE8B /* Sources */,
 				20CA13A028181D5000797A7C /* Assets */,
@@ -1710,7 +1705,6 @@
 				20B329E3283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329FB283953180082CE8B /* PEMImageLayer.swift in Sources */,
 				20D58913285203F400A2317E /* SKTexture+Extension.swift in Sources */,
-				2037A5F828258E0700E13452 /* Define.swift in Sources */,
 				2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */,
 				20B32A0A283953180082CE8B /* Font+Extension.swift in Sources */,
 				20B32A16283953180082CE8B /* TimeInterval+Extension.swift in Sources */,
@@ -1740,7 +1734,6 @@
 				20DD973B2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */,
 				20B329E7283953180082CE8B /* PEMTileAnimationFrame.swift in Sources */,
 				20B329F0283953180082CE8B /* PEMTileLayer.swift in Sources */,
-				204662E0281BE8CF00F3635B /* Define.swift in Sources */,
 				20DD97472848B75B0076FCAC /* PEMObjectPoly.swift in Sources */,
 				20DD973F2848B1580076FCAC /* PEMObjectRectangle.swift in Sources */,
 				20DD974F2848C9870076FCAC /* PEMObjectText.swift in Sources */,
@@ -1783,7 +1776,6 @@
 				20DD973C2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */,
 				20B329E8283953180082CE8B /* PEMTileAnimationFrame.swift in Sources */,
 				20B329F1283953180082CE8B /* PEMTileLayer.swift in Sources */,
-				204662E1281BE8CF00F3635B /* Define.swift in Sources */,
 				20DD97482848B75B0076FCAC /* PEMObjectPoly.swift in Sources */,
 				20DD97402848B1580076FCAC /* PEMObjectRectangle.swift in Sources */,
 				20DD97502848C9870076FCAC /* PEMObjectText.swift in Sources */,
