@@ -1,6 +1,6 @@
 import CoreGraphics
 
-func polygonPath(_ points: [CGPoint], closed: Bool = true) -> CGPath {
+internal func polygonPath(_ points: [CGPoint], closed: Bool = true) -> CGPath {
     let path = CGMutablePath();
 
     let startPoint = points[0]
