@@ -170,9 +170,6 @@ class DemoScene: SKScene {
 
         if let newMap = PEMTileMap(mapName: mapName!) {
             map = newMap
-            map?.showCanvas = showCanvas
-            map?.showGrid = showGrid
-            map?.showObjectLabels = showObjectLabels
             
             canvasButton(showCanvas)
             gridButton(showGrid)

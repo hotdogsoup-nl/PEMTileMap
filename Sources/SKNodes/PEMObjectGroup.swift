@@ -201,7 +201,7 @@ class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                         
             addChild(node!)
             
-            addObjectLabel(node!, fontSize: tileSizeInPoints.height * 0.25, visible: visible)
+            addObjectLabel(node!, fontSize: tileSizeInPoints.height * 0.25, visible: showObjectLabels)
         }
     }
     
