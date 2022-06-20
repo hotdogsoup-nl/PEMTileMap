@@ -5,12 +5,14 @@
 <a href="https://developer.apple.com/download/more/"><img src="https://img.shields.io/badge/Xcode-orange.svg"></a>
 <a href="https://www.apple.com"><img src="https://img.shields.io/badge/platforms-iOS%20%7C%20tvOS%20%7C%20macOS-red.svg"></a>
 </p>
-
+  
 **PEMTileMap** creates `SpriteKit` game maps from TMX Map files. [TMX Map files][tmx-map-url] can be created and edited with [Tiled][tiled-url].
 
 Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs SpriteKit [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
 
 I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url], which uses `PEMTileMap` to generate the map and also supports iOS, macOS and tvOS.
+  
+‼️ *This project is IN DEVELOPMENT. The master branch will be pushed when the code is alpha ready.* ‼️
 
 ## TMX Features
 - [X] read and parse TMX map files
@@ -40,6 +42,7 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [ ] isometric staggered map types
 - [ ] hexagonal staggered map types
 - [ ] terraintypes, wangsets, transformations
+- [ ] image <trans> color
 
 ## Known issues
 Please refer to the [issue tracker][issues-url] on GitHub. All bugs reports, feature requests and comments are welcome.
