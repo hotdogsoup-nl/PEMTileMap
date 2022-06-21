@@ -165,6 +165,18 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
         }
     }
     
+    internal func tileAt(tileCoords: CGPoint) -> PEMTile? {
+        for child in children {
+            if let tile = child as? PEMTile {
+                if tile.coords == tileCoords {
+                    return tile
+                }
+            }
+        }
+        
+        return nil
+    }
+    
     // MARK: - Debug
     
     #if DEBUG

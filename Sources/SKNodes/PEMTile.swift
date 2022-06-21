@@ -1,6 +1,6 @@
 import SpriteKit
 
-class PEMTile: SKSpriteNode {
+public class PEMTile: SKSpriteNode {
     var coords: CGPoint?
 
     private (set) var id = UInt32(0)
@@ -85,7 +85,7 @@ class PEMTile: SKSpriteNode {
     // MARK: - Debug
     
     #if DEBUG
-    override var description: String {
+    public override var description: String {
         return "PEMTile: \(id), type: \(type ?? "-"), (\(Int(coords?.x ?? 0)), \(Int(coords?.y ?? 0)))"
     }
     #endif
