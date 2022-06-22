@@ -116,7 +116,7 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
                     }
                     
                     let sizeDeviation = CGSize(width: tile.size.width - tileSizeInPoints.width, height: tile.size.height - tileSizeInPoints.height)
-                    tile.position = map.position(tileCoords: tile.coords!).add(CGPoint(x: halfTileSizeInPoints.width, y: -halfTileSizeInPoints.height)).with(tileSizeDeviation: sizeDeviation, offset: tileSet.tileOffSetInPoints)
+                    tile.position = map.position(tileCoords: tile.coords!, centered: true).with(tileSizeDeviation: sizeDeviation, offset: tileSet.tileOffSetInPoints)
 
                     addChild(tile)
                     

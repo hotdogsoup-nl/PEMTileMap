@@ -228,10 +228,15 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     /// Converts the tile coordinates of a  TMX Map tile to `SpriteKit` coordinates (in points).
     /// - Parameter tileCoords: TMX tile coordinates.
+    /// - Parameter centered: If `true`, adjusts the result to the center of the tile rather than the top left point.
     /// - Returns: Position as a `CGPoint`.
-    public func position(tileCoords: CGPoint) -> CGPoint {
+    public func position(tileCoords: CGPoint, centered: Bool = false) -> CGPoint {
         guard coordinateHelper != nil else { return .zero }
-        return coordinateHelper!.position(tileCoords: tileCoords)
+        var position = coordinateHelper!.position(tileCoords: tileCoords)
+        if centered {
+            position = position.add(CGPoint(x: tileSizeInPoints().width * 0.5, y:tileSizeInPoints().height * -0.5))
+        }
+        return position
     }
     
     /// Converts the pixel coordinates of a  TMX Map object to `SpriteKit` coordinates (in points).
