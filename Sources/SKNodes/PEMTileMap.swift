@@ -136,9 +136,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     internal var objectTemplates: Dictionary<String, PEMObjectData> = [:]
     internal var layers: Array<AnyObject> = []
     
-    private var cameraViewMode = CameraViewMode.none
-    private var cameraZoomMode = CameraZoomMode.none
-
     // MARK: - Init
         
     /// Load a **TMX** tilemap file and return a new `PEMTileMap` node. Returns nil if the file could not be read or parsed.
@@ -344,8 +341,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 cameraNode?.xScale = newScale
                 cameraNode?.yScale = newScale
             }
-            
-            cameraZoomMode = zoomMode
         }
         
         if viewMode == .none {
@@ -385,7 +380,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 completion()
             }
             
-            cameraViewMode = viewMode
         }
     }
     
