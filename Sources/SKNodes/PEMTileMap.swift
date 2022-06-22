@@ -6,7 +6,7 @@ import CoreGraphics
 /// Camera zoom mode.
 public enum CameraZoomMode {
     case none
-    case center
+    case actualSize
     case aspectFit
     case aspectFill
 }
@@ -323,8 +323,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 contentScale = (maxWidthScale < maxHeightScale) ? maxWidthScale : maxHeightScale
             case .aspectFill:
                 contentScale = (maxWidthScale > maxHeightScale) ? maxWidthScale : maxHeightScale
-            case .center:
-                break
+            case .actualSize:
+                contentScale = 1.0
             case .none:
                 break
             }

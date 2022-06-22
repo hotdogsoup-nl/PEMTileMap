@@ -261,7 +261,7 @@ class DemoScene: SKScene {
         case 1:
             zoomMode = .aspectFill
         case 2:
-            zoomMode = .center
+            zoomMode = .actualSize
         case 3:
             viewMode = .topLeft
         case 4:
