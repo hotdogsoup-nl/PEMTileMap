@@ -292,9 +292,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         
     // MARK: - Camera
     
-    /// Changes the map camera scale using the specified `CameraZoomMode` and its position using the specified `CameraViewMode` with optional animation.
-    ///
-    /// Makes it possible to zoom, pan and tilt the camera to positions on the map.
+    /// Zoom, pan and tilt the camera to predefined positions on the map. Changes the camera scale using the specified `CameraZoomMode` and its position using the specified `CameraViewMode` with optional animation.
     ///
     /// For example in a "Mario" style platform game, when starting a level, the camera will move to the bottom left of the map and zoom in so it fills the screen vertically, leaving the rest of the map outside of the screen to the right.
     ///
@@ -302,17 +300,17 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// * `zoomMode` = **.aspectFill**
     /// * `viewMode` =  **.bottomLeft**
     ///
-    /// Both `zoomMode` and `viewMode` can be disabled by using a value of **.none**. This way a camera move can be made without zooming, or vice versa.  (Setting both to **.none** will do nothing.)
+    /// It is required that an `SKCameraNode` has been added to the `SKScene` and the `cameraNode` var on the map was set to point to it. Both `zoomMode` and `viewMode` can be disabled by using a value of **.none**. This way a camera move can be made without zooming or panning.
     ///
     /// - Parameters:
-    ///     - sceneSize : Size of the `SKScene` the map is a child of and in which the camera move is made.
+    ///     - sceneSize : Size of the `SKScene` the map is a child of and in which the camera move will be made.
     ///     - zoomMode : Used to determine the camera zoom scale within the given `sceneSize`.
     ///     - viewMode : Used to determine how the camera position is aligned within the given `sceneSize`.
     ///     - factor : Optional movement factor that limits the move. A value of 1.0 means full motion within the given `sceneSize`.
     ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
-    ///     - timingMode: Optional SKActionTimingMode for the animation. Defaults to .linear.
+    ///     - timingMode: Optional `SKActionTimingMode` for the animation. Defaults to `.linear`.
     ///     - completion : Optional completion block which is called when camera movement has finished.
-    public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, timingMode: SKActionTimingMode = .linear, completion:@escaping ()->Void = {}) {
+    public func moveCamera(sceneSize: CGSize, zoomMode: CameraZoomMode, viewMode: CameraViewMode, factor: CGFloat = 1.0, duration: TimeInterval = 0, timingMode: SKActionTimingMode = .linear, completion:@escaping () -> Void = {}) {
         guard cameraNode != nil else { return }
         
         if zoomMode != .none && mapSizeInPoints().width > 0 && mapSizeInPoints().height > 0 {
