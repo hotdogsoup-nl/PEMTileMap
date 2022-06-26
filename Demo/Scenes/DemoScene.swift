@@ -17,6 +17,7 @@ class DemoScene: SKScene {
         case toTheRight
     }
     
+    private weak var skView: SKView?
     private var map: PEMTileMap?
     private var currentMapIndex = Int(20)
     
@@ -52,6 +53,7 @@ class DemoScene: SKScene {
         
         super.init(size: size)
         
+        skView = view
         showCanvas = UserDefaults.standard.bool(forKey: DefaultsKeyShowCanvas)
         showGrid = UserDefaults.standard.bool(forKey: DefaultsKeyShowGrid)
         showObjectLabels = UserDefaults.standard.bool(forKey: DefaultsKeyShowObjectLabels)
@@ -63,7 +65,7 @@ class DemoScene: SKScene {
         }
         
         #if os(iOS)
-        initGestures(view: view)
+        initGestures()
         #endif
 
         startControl()
@@ -84,13 +86,13 @@ class DemoScene: SKScene {
     }
     
     #if os(iOS)
-    private func initGestures(view: SKView) {
+    private func initGestures() {
         pinch = UIPinchGestureRecognizer(target: self, action: #selector(scenePinched(_:)))
         pinch.delegate = self
         pan = UIPanGestureRecognizer(target: self, action: #selector(scenePanned(_:)))
         pan.delegate = self
-        view.addGestureRecognizer(pinch)
-        view.addGestureRecognizer(pan)
+        skView?.addGestureRecognizer(pinch)
+        skView?.addGestureRecognizer(pan)
     }
     #endif
 
@@ -168,7 +170,7 @@ class DemoScene: SKScene {
         currentMapNameLabel?.attributedText = attributedString(String(format: "%@ - \"%@\" - %@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSizeSmall)
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)
 
-        if let newMap = PEMTileMap(mapName: mapName!) {
+        if let newMap = PEMTileMap(mapName: mapName!, view: skView!) {
             map = newMap
             
             canvasButton(showCanvas)

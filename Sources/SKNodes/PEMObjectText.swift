@@ -11,7 +11,7 @@ class PEMObjectText: SKSpriteNode {
 
     // MARK: - Init
     
-    init?(objectData: PEMObjectData) {
+    init?(map: PEMTileMap, objectData: PEMObjectData) {
         if let size = objectData.sizeInPoints {
             super.init(texture: nil, color: .green, size: size)
 
@@ -50,19 +50,22 @@ class PEMObjectText: SKSpriteNode {
             
             var vAlign: TextVerticalAlignment!
             vAlign = (objectData.vAlign != nil) ? objectData.vAlign : .top
-            
-            texture = SKTexture(text: text,
-                                          fontName: fontFamily,
-                                          fontSize: pixelSize,
-                                          fontColor: textColor,
-                                          bold: bold,
-                                          italic: italic,
-                                          underline: underline,
-                                          strikeOut: strikeOut,
-                                          kerning: kerning,
-                                          wordWrapWidth: (wrap) ? size.width : 0,
-                                          hAlign: hAlign,
-                                          vAlign: vAlign)
+
+            let scaleFactor = 15.0 // scale up to increase text render quality
+            let label = SKLabelNode(text: text,
+                                    fontName: fontFamily,
+                                    fontSize: pixelSize * scaleFactor,
+                                    fontColor: textColor,
+                                    bold: bold,
+                                    italic: italic,
+                                    underline: underline,
+                                    strikeOut: strikeOut,
+                                    kerning: kerning,
+                                    wordWrapWidth: (wrap) ? size.width * scaleFactor : 0,
+                                    hAlign: hAlign,
+                                    vAlign: vAlign)
+             
+            texture = map.skView!.texture(from: label)
             
             name = objectData.objectName
             anchorPoint = CGPoint(x: 0.0, y: 1.0)

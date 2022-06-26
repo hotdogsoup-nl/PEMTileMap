@@ -1,26 +1,24 @@
 import SpriteKit
 
-internal extension SKTexture {
-    convenience init?(text: String,
-                      fontName: String,
-                      fontSize: CGFloat,
-                      fontColor: SKColor,
-                      bold: Bool = false,
-                      italic: Bool = false,
-                      underline: Bool = false,
-                      strikeOut: Bool = false,
-                      kerning: Bool = false,
-                      wordWrapWidth: CGFloat = 0,
-                      hAlign: TextHorizontalAlignment = .left,
-                      vAlign: TextVerticalAlignment = .center,
-                      shadowColor: SKColor = .clear,
-                      shadowOffset: CGSize = .zero,
-                      shadowBlurRadius: CGFloat = 0) {
-        let scaleFactor = 15.0
-        
-        var font = Font(name: fontName, size: fontSize * scaleFactor)
+internal extension SKLabelNode {
+    convenience init(text: String,
+                     fontName: String,
+                     fontSize: CGFloat,
+                     fontColor: SKColor,
+                     bold: Bool = false,
+                     italic: Bool = false,
+                     underline: Bool = false,
+                     strikeOut: Bool = false,
+                     kerning: Bool = false,
+                     wordWrapWidth: CGFloat = 0,
+                     hAlign: TextHorizontalAlignment = .left,
+                     vAlign: TextVerticalAlignment = .center,
+                     shadowColor: SKColor = .clear,
+                     shadowOffset: CGSize = .zero,
+                     shadowBlurRadius: CGFloat = 0) {
+        var font = Font(name: fontName, size: fontSize)
         if font == nil {
-            font = Font.systemFont(ofSize: fontSize * scaleFactor)
+            font = Font.systemFont(ofSize: fontSize)
         }
         
         if bold {
@@ -72,20 +70,15 @@ internal extension SKTexture {
                                                   shadowOffset: shadowOffset,
                                                   shadowBlurRadius: shadowBlurRadius)
         
-        let label = SKLabelNode(attributedText: attributedString)
+        self.init(attributedText: attributedString)
+        
         if wordWrapWidth > 0 {
-            label.numberOfLines = 0
-            label.preferredMaxLayoutWidth = wordWrapWidth * scaleFactor
+            numberOfLines = 0
+            preferredMaxLayoutWidth = wordWrapWidth
         } else {
-            label.numberOfLines = 1
+            numberOfLines = 1
         }
         
-        label.verticalAlignmentMode = alignmentVertical
-
-        if let texture = SKView().texture(from: label) {
-            self.init(cgImage: texture.cgImage())
-        } else {
-            return nil
-        }
+        verticalAlignmentMode = alignmentVertical
     }
 }

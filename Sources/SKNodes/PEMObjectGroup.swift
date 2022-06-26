@@ -18,7 +18,7 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     
     internal var objects: Array<PEMObjectData> = []
     private var parentGroup: PEMGroup?
-    
+        
     init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
         super.init()
 
@@ -152,7 +152,7 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
             case .polygon, .polyline:
                 node = PEMObjectPoly(objectData: object, color: color, isPolygon: (object.objectType == .polygon))
             case .text:
-                node = PEMObjectText(objectData: object)
+                node = PEMObjectText(map: map, objectData: object)
             case .tile:
                 var tileGid: UInt32!
                 tileGid = (object.tileGid != nil) ? object.tileGid : 0
@@ -202,7 +202,7 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
                         
             addChild(node!)
             
-            addObjectLabel(node!, fontSize: tileSizeInPoints.height * 0.25, visible: showObjectLabels)
+            addObjectLabel(node!, map: map, fontSize: tileSizeInPoints.height * 0.25, visible: showObjectLabels)
         }
     }
     
@@ -222,13 +222,13 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Private
     
-    private func addObjectLabel(_ node: SKNode, fontSize: CGFloat, visible: Bool) {
+    private func addObjectLabel(_ node: SKNode, map: PEMTileMap, fontSize: CGFloat, visible: Bool) {
         guard node.name != nil else { return }
         
         let nodeRect = node.calculateAccumulatedFrame()
         let nodeCenter = CGPoint(x: nodeRect.midX, y: nodeRect.midY)
         
-        if let label = objectLabel(text: node.name!, fontSize: fontSize, color:color) {
+        if let label = objectLabel(map: map, text: node.name!, fontSize: fontSize, color:color) {
             let labelSize = label.calculateAccumulatedFrame().size
             label.position = CGPoint(x: nodeCenter.x, y: nodeCenter.y + nodeRect.size.height * 0.5 + labelSize.height * 0.6)
             label.zPosition = node.zPosition + 1
@@ -238,9 +238,12 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
         }
     }
         
-    private func objectLabel(text: String, fontSize: CGFloat, color: SKColor) -> SKNode? {
-        if let texture = SKTexture(text: text, fontName: "Arial", fontSize: fontSize, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5) {
-            
+    private func objectLabel(map: PEMTileMap, text: String, fontSize: CGFloat, color: SKColor) -> SKNode? {
+        let scaleFactor = 15.0 // scale up to increase text render quality
+        let label = SKLabelNode(text: text, fontName: "Arial", fontSize: fontSize * scaleFactor, fontColor: .white, shadowColor: .black, shadowOffset: CGSize(width: 2, height: 2), shadowBlurRadius: 5)
+        
+        if let skView = map.skView,
+            let texture = skView.texture(from: label) {
             let scale = fontSize / texture.size().height
             var size = texture.size().scaled(scale)
             let spriteLabel = SKSpriteNode(texture: texture, size: size)

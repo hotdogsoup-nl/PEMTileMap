@@ -119,6 +119,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     private var parallaxOriginInPoints = CGPoint.zero
     private var infinite = false
     
+    private (set) weak var skView: SKView?
+    
     private var staggerAxis: MapStaggerAxis?
     private var staggerIndex: MapStaggerIndex?
 
@@ -141,11 +143,12 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// Load a **TMX** tilemap file and return a new `PEMTileMap` node. Returns nil if the file could not be read or parsed.
     /// - Parameters:
     ///     - mapName : TMX file name.
-    ///     - baseZPosition : Base zPosition for the node. Default is 0.
-    ///     - zPositionLayerDelta : Delta for the zPosition of each layer node. Default is 20.
-    ///     - textureFilteringMode : Texture anti aliasing / filtering mode. Default is Nearest Neighbor
+    ///     - view : The `SKView` of the `SKScene`.
+    ///     - baseZPosition : Optional base zPosition for the node. Default is 0.
+    ///     - zPositionLayerDelta : Optional delta for the zPosition of each layer node. Default is 20.
+    ///     - textureFilteringMode : Optional texture anti aliasing / filtering mode. Default is Nearest Neighbor
     /// - returns: A `PEMTileMap` node if the TMX file could be parsed succesfully.
-    public init?(mapName: String, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest) {
+    public init?(mapName: String, view: SKView, baseZPosition: CGFloat = 0, zPositionLayerDelta: CGFloat = 20, textureFilteringMode: SKTextureFilteringMode = .nearest) {
         super.init()
         
         let parseStartTime = Date()
@@ -164,6 +167,8 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
             #endif
             return nil
         }
+        
+        skView = view
         
         parseExternalFiles()
         parseTime = -parseStartTime.timeIntervalSinceNow
