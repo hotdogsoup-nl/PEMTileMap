@@ -11,7 +11,7 @@
 Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs SpriteKit [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
   
 <p align="center">
-<img src="Doc/screenshot_macos.png" height="450"/>
+<img src="Doc/screenshot_macos_01.png" height="450"/>
 </p>
 
 I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url], which uses `PEMTileMap` to generate the map and also supports iOS, macOS and tvOS.
