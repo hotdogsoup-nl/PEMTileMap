@@ -105,7 +105,7 @@ To set the background color of your `SKScene` to match the map background color:
 ```
   
 ## Build the Demo app
-Download the repository and open the PEMTileMap Xcode project. Build any of the iOS, macOS or tvOS targets. Depending on the platform choice, you may get a build error stating that a provisioning profile is required. In "Signing and Capabilities", make sure each target has either automatic signing enabled or select the correct provisioning profile.
+Download the repository and open the `PEMTileMap` Xcode project. Build any of the iOS, macOS or tvOS targets. Depending on the platform choice, you may get a build error stating that a provisioning profile is required. In "Signing and Capabilities", make sure each target has either automatic signing enabled or select the correct provisioning profile.
   
 If a build error occurs stating `Resource fork, Finder information, or similar detritus not allowed` there is an issue with image files in the project. Run `sudo xattr -cr *` on all image file folders in the project and clean the build folder to fix.
 
