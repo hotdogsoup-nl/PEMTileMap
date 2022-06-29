@@ -16,8 +16,6 @@ Based on the well-known [JSTileMap][jstilemap-url] project which was famously us
 
 I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url], which uses `PEMTileMap` to generate the map and also supports iOS, macOS and tvOS.
   
-‼️ *This project is IN DEVELOPMENT. The master branch will be pushed when the code is alpha ready.* ‼️
-
 ## TMX Features
 - [X] read and parse TMX map files
 - [X] CSV, Base64 layer formats with gzip, zlib or no compression
