@@ -23,7 +23,6 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [X] CSV, Base64 layer formats with gzip, zlib or no compression
 - [X] fixed size maps
 - [X] orthogonal map types
-- [X] isometric map types
 - [X] map background color
 - [X] embedded tile sets
 - [X] tilesets based on a tileset image
@@ -43,6 +42,7 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [ ] Zstandard compression 
 - [ ] world files
 - [ ] infinite maps
+- [ ] isometric map types
 - [ ] isometric staggered map types
 - [ ] hexagonal staggered map types
 - [ ] terraintypes, wangsets, transformations
