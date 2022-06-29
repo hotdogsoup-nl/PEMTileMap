@@ -89,7 +89,6 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     internal func render(map: PEMTileMap, textureFilteringMode: SKTextureFilteringMode) {
         let tileSizeInPoints = map.tileSizeInPoints()
         let mapSizeInTiles = map.mapSizeInTiles()
-        let halfTileSizeInPoints = map.halfTileSizeInPoints()
 
         alpha = opacity
         isHidden = !visible
