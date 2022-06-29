@@ -131,6 +131,10 @@ public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
             
             texture = atexture
             position = CGPoint(x: size.width * 0.5 + offSetInPoints.x, y: mapSizeInPoints.height - size.height * 0.5 - offSetInPoints.y)
+        } else {
+            #if DEBUG
+            print("PEMImageLayer: Image file not found: \(String(describing: textureImageSource))")
+            #endif
         }
     }
     

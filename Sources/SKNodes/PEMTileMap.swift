@@ -189,16 +189,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-    
     // MARK: - Coordinates
     
     /// Get the map canvas size (in points) based on the TMX map width and height multiplied by the tile size.

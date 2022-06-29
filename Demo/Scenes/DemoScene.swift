@@ -19,7 +19,7 @@ class DemoScene: SKScene {
     
     private weak var skView: SKView?
     private var map: PEMTileMap?
-    private var currentMapIndex = Int(20)
+    private var currentMapIndex = Int(0)
     
     private let textSizeRegular: CGFloat
     private let textSizeSmall: CGFloat
@@ -27,7 +27,7 @@ class DemoScene: SKScene {
     private var renderTimeLabel: SKLabelNode?
     private var tileCoordsLabel: SKLabelNode?
 
-    private var maps: Array<Dictionary<String, String>> = []
+    private var maps: Array<Dictionary<String, Any>> = []
     
     private var previousUpdateTime = TimeInterval(0)
     private var cameraNode: SKCameraNode!
@@ -61,7 +61,14 @@ class DemoScene: SKScene {
         cameraNode = SKCameraNode()
         
         if let url = bundleURLForResource("maps.plist") {
-            maps = NSArray(contentsOf: url) as! [Dictionary<String, String>]
+            maps = NSArray(contentsOf: url) as! [Dictionary<String, Any>]
+            
+            maps = maps.filter { item in
+                if let itemEnabled = item["enabled"] as? Bool {
+                    return itemEnabled == true
+                }
+                return false
+            }
         }
         
         #if os(iOS)
@@ -73,16 +80,6 @@ class DemoScene: SKScene {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(Swift.type(of: self))")
-        #endif
-        #endif
     }
     
     #if os(iOS)
@@ -109,7 +106,7 @@ class DemoScene: SKScene {
     
     private func openExternalMapLink() {
         let mapInfo = maps[currentMapIndex]
-        let mapURL = mapInfo["url"]
+        let mapURL = mapInfo["url"] as? String
         if let URL = URL(string: mapURL!) {
             #if os(macOS)
             NSWorkspace.shared.open(URL)
@@ -163,9 +160,9 @@ class DemoScene: SKScene {
     
     private func renderMap() {
         let mapInfo = maps[currentMapIndex]
-        let mapName = mapInfo["filename"]
-        let mapTitle = mapInfo["title"]
-        let mapAuthor = mapInfo["author"]
+        let mapName = mapInfo["filename"] as? String
+        let mapTitle = mapInfo["title"] as? String
+        let mapAuthor = mapInfo["author"] as? String
         
         currentMapNameLabel?.attributedText = attributedString(String(format: "%@ - \"%@\" - %@", mapName!, mapTitle!, mapAuthor!), fontName: "Courier-Bold", textSize: textSizeSmall)
         currentMapNameLabel?.position = CGPoint(x: 0, y: currentMapNameLabel!.calculateAccumulatedFrame().size.height * -0.5)

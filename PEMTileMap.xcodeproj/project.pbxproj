@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201F5D2B286C3E5700C435AF /* PEMSuperKoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F5D2A286C3E5700C435AF /* PEMSuperKoalio.png */; };
+		201F5D2C286C3E5700C435AF /* PEMSuperKoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F5D2A286C3E5700C435AF /* PEMSuperKoalio.png */; };
+		201F5D2D286C3E5700C435AF /* PEMSuperKoalio.png in Resources */ = {isa = PBXBuildFile; fileRef = 201F5D2A286C3E5700C435AF /* PEMSuperKoalio.png */; };
 		2037A5D628258C4900E13452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5D528258C4900E13452 /* AppDelegate.swift */; };
 		2037A5DE28258C4900E13452 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037A5DD28258C4900E13452 /* GameViewController.swift */; };
 		2037A5E128258C4900E13452 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2037A5DF28258C4900E13452 /* Main.storyboard */; };
@@ -525,6 +528,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		201F5D2A286C3E5700C435AF /* PEMSuperKoalio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PEMSuperKoalio.png; sourceTree = "<group>"; };
 		2037A5D328258C4800E13452 /* PEMTileMap Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PEMTileMap Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2037A5D528258C4900E13452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2037A5DD28258C4900E13452 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -915,6 +919,7 @@
 		20C32421283B79E900316B48 /* Superkoalio */ = {
 			isa = PBXGroup;
 			children = (
+				201F5D2A286C3E5700C435AF /* PEMSuperKoalio.png */,
 				20AC1FFB283CFDE900BE83F0 /* superkoalio.png */,
 				20FAEFCC2837A66C00BEFA8E /* superkoalio.tmx */,
 				20C3242A283B7B7B00316B48 /* tileSet.tsx */,
@@ -1301,6 +1306,7 @@
 				20FAF0EE2837AC2600BEFA8E /* objecttypes.xml in Resources */,
 				20DB7DB62837BABE00F17FC7 /* wallDecor3.png in Resources */,
 				20DB7D622837BABE00F17FC7 /* platformBase2.png in Resources */,
+				201F5D2D286C3E5700C435AF /* PEMSuperKoalio.png in Resources */,
 				20DB7D112837BABE00F17FC7 /* castleWall.png in Resources */,
 				20DB7C652837B9ED00F17FC7 /* beach_tileset.tsx in Resources */,
 				20DB7DC22837BABE00F17FC7 /* preview.png in Resources */,
@@ -1445,6 +1451,7 @@
 				20FAF0EC2837AC2600BEFA8E /* objecttypes.xml in Resources */,
 				20DB7DB42837BABE00F17FC7 /* wallDecor3.png in Resources */,
 				20DB7D602837BABE00F17FC7 /* platformBase2.png in Resources */,
+				201F5D2B286C3E5700C435AF /* PEMSuperKoalio.png in Resources */,
 				20DB7D0F2837BABE00F17FC7 /* castleWall.png in Resources */,
 				20DB7C632837B9ED00F17FC7 /* beach_tileset.tsx in Resources */,
 				20DB7DC02837BABE00F17FC7 /* preview.png in Resources */,
@@ -1573,6 +1580,7 @@
 				20DB7D852837BABE00F17FC7 /* pushBlock2.png in Resources */,
 				20DB7DC72837BABE00F17FC7 /* sprites.png in Resources */,
 				20DB7DB52837BABE00F17FC7 /* wallDecor3.png in Resources */,
+				201F5D2C286C3E5700C435AF /* PEMSuperKoalio.png in Resources */,
 				20FAF0172837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
 				20C32226283B62C200316B48 /* dungeon-16x16.tmx in Resources */,
 				20DB79A42837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */,
