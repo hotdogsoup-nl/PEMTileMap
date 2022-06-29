@@ -14,7 +14,7 @@ Based on the well-known [JSTileMap][jstilemap-url] project which was famously us
 <img src="Doc/screenshot_macos_01.png" height="450"/>
 </p>
 
-I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url], which uses `PEMTileMap` to generate the map and also supports iOS, macOS and tvOS.
+I also made a [Swift version of the SuperKoalio game][superkoalio-project-url], which uses `PEMTileMap` to generate the map and also supports iOS, macOS and tvOS.
   
 ## TMX Features
 - [X] read and parse TMX map files
@@ -47,7 +47,7 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [ ] image `<trans>` color
 
 ## PEMTileMap Features
-- [X] Swift 5
+- [X] Swift code
 - [ ] Objective-C compatibility
 - [X] iOS (>13.6), macOS (>10.15), tvOS (>13.4)
 - [X] generate TMX maps as `SKNode` objects with child elements as `SKNode` subclasses (eg. a tile as a `SKSpriteNode`, a polygon object as an `SKShapeNode`, etc.)
@@ -69,11 +69,46 @@ In Xcode project settings, under "Package Dependencies" add the PEMTileMap repos
     Dependency rule: branch
     Branch: master
   
+### Cocoapods & Carthage
+These dependency managers are not supported and will not be supported in the future.
+  
 ## Build the Demo app
 Download the repository and open the PEMTileMap Xcode project. Build any of the iOS, macOS or tvOS targets. Depending on the platform choice, you may get a build error stating that a provisioning profile is required. In "Signing and Capabilities", make sure each target has either automatic signing enabled or select the correct provisioning profile.
   
 If a build error occurs stating `Resource fork, Finder information, or similar detritus not allowed` there is an issue with image files in the project. Run `sudo xattr -cr *` on all image file folders in the project and clean the build folder to fix.
   
+## Usage
+#### Loading the map
+The tilemap should be loaded in your `SKScene` referring the map file name and the associated `SKView`.
+
+```swift
+  if let newMap = PEMTileMap(mapName: "superkoalio.tmx", view: skView!) {
+    // center the map on the screen
+    newMap.position = CGPoint(x: newMap.mapSizeInPoints().width * -0.5, y: newMap.mapSizeInPoints().height * -0.5)
+    addChild(newMap)
+  }
+```
+  
+The map will now render and appear on the scene as an `SKNode`. It will contain child nodes for all TMX Map layers and groups which contain the tiles and other objects as children.
+  
+#### Accessing map functions
+`PEMTileMap` has several public properties and functions that can be use to access map properties such as its orientation, highest used zPosition, map size (in tiles or in points) and for converting scene coordinates to map coordinates and vice versa.
+  
+#### Accessing layers, tiles, objects
+`PEMTileMap` has several functions to access layers, tiles, and objects on the map.
+  
+#### Using a camera
+You are responsible for creating and controlling the camera in your scene. `PEMTileMap` does however feature a basic `moveCamera` function to move the camera around the map. Set the `cameraNode` property to point to your camera before calling `moveCamera`.
+  
+#### Use the background color
+To set the background color of your `SKScene` to match the map background color:
+  
+```swift
+    if newMap.backgroundColor != nil {
+        backgroundColor = newMap.backgroundColor!
+    }
+```
+
 ## License
 Licensed under the [MIT license](license.md).
 
