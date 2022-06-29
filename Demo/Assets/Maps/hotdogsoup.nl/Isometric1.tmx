@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.5" orientation="isometric" renderorder="right-down" width="20" height="10" tilewidth="128" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="19">
+ <tileset firstgid="1" name="Iso" tilewidth="128" tileheight="128" tilecount="56" columns="8">
+  <grid orientation="isometric" width="128" height="128"/>
+  <image source="Tiles/basic_ground_tiles.png" width="1024" height="896"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="20" height="10">
+  <data encoding="csv">
+0,0,0,0,0,1,0,0,0,0,0,0,0,0,8,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,1,2,2,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,1,2,2,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,5,0,0,0,0,0,0,0,0,2,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="2" name="Tile Layer 2" width="20" height="10">
+  <data encoding="csv">
+2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+</data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="6" name="right" x="960" y="0">
+   <point/>
+  </object>
+  <object id="10" name="top" x="320" y="0">
+   <point/>
+  </object>
+  <object id="11" name="left" x="320" y="640">
+   <point/>
+  </object>
+  <object id="12" name="bottom" x="960" y="640">
+   <point/>
+  </object>
+  <object id="13" name="square" x="128" y="320" width="128" height="64"/>
+  <object id="15" name="circle" x="256" y="256" width="150" height="75">
+   <ellipse/>
+  </object>
+  <object id="17" name="triangle" x="512" y="-192">
+   <polygon points="0,0 192,128 256,-128"/>
+  </object>
+  <object id="18" name="line" x="1216" y="192">
+   <polyline points="0,0 0,256"/>
+  </object>
+ </objectgroup>
+</map>
