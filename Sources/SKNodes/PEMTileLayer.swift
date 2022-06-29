@@ -74,16 +74,6 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        #if DEBUG
-        #if os(macOS)
-        print("deinit: \(self.className.components(separatedBy: ".").last! )")
-        #else
-        print("deinit: \(type(of: self))")
-        #endif
-        #endif
-    }
-    
     // MARK: - Public
 
     internal func render(map: PEMTileMap, textureFilteringMode: SKTextureFilteringMode) {
