@@ -46,9 +46,6 @@ I also made a [Swift 5 version of the SuperKoalio game][superkoalio-project-url]
 - [ ] terraintypes, wangsets, transformations
 - [ ] image `<trans>` color
 
-## Known issues
-Please refer to the [issue tracker][issues-url] on GitHub. All bugs reports, feature requests and comments are welcome.
-
 ## PEMTileMap Features
 - [X] Swift 5
 - [ ] Objective-C compatibility
@@ -59,6 +56,23 @@ Please refer to the [issue tracker][issues-url] on GitHub. All bugs reports, fea
 - [ ] access layers, tiles, objects
 - [ ] parallax scroll
 - [ ] anti-tearing (removing tear lines between tiles)
+  
+## Known issues
+Please refer to the [issue tracker][issues-url] on GitHub. All bugs reports, feature requests and comments are welcome.
+
+## Installation
+### Swift package
+
+In Xcode project settings, under "Package Dependencies" add the PEMTileMap repository.
+
+    URL: https://github.com/hotdogsoup-nl/PEMTileMap.git
+    Dependency rule: branch
+    Branch: master
+  
+## Build the Demo app
+Download the repository and open the PEMTileMap Xcode project. Build any of the iOS, macOS or tvOS targets. Depending on the platform choice, you may get a build error stating that a provisioning profile is required. In "Signing and Capabilities", make sure each target has either automatic signing enabled or select the correct provisioning profile.
+  
+If a build error occurs stating `Resource fork, Finder information, or similar detritus not allowed` there is an issue with image files in the project. Run `sudo xattr -cr *` on all image file folders in the project and clean the build folder to fix.
   
 ## License
 Licensed under the [MIT license](license.md).
