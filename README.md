@@ -72,11 +72,6 @@ In Xcode project settings, under "Package Dependencies" add the PEMTileMap repos
 ### Cocoapods & Carthage
 These dependency managers are not supported and will not be supported in the future.
   
-## Build the Demo app
-Download the repository and open the PEMTileMap Xcode project. Build any of the iOS, macOS or tvOS targets. Depending on the platform choice, you may get a build error stating that a provisioning profile is required. In "Signing and Capabilities", make sure each target has either automatic signing enabled or select the correct provisioning profile.
-  
-If a build error occurs stating `Resource fork, Finder information, or similar detritus not allowed` there is an issue with image files in the project. Run `sudo xattr -cr *` on all image file folders in the project and clean the build folder to fix.
-  
 ## Usage
 #### Loading the map
 The tilemap should be loaded in your `SKScene` referring the map file name and the associated `SKView`.
@@ -108,6 +103,11 @@ To set the background color of your `SKScene` to match the map background color:
         backgroundColor = newMap.backgroundColor!
     }
 ```
+  
+## Build the Demo app
+Download the repository and open the PEMTileMap Xcode project. Build any of the iOS, macOS or tvOS targets. Depending on the platform choice, you may get a build error stating that a provisioning profile is required. In "Signing and Capabilities", make sure each target has either automatic signing enabled or select the correct provisioning profile.
+  
+If a build error occurs stating `Resource fork, Finder information, or similar detritus not allowed` there is an issue with image files in the project. Run `sudo xattr -cr *` on all image file folders in the project and clean the build folder to fix.
 
 ## License
 Licensed under the [MIT license](license.md).
