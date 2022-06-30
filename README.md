@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://github.com/p-edge-media/PEMTileMap"><img src="Doc/logo.png" height="100"/>
+<a href="https://github.com/p-edge-media/PEMTileMap"><img src="logo.png" height="100"/>
 <p align="center">
 <a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-5-brightgreen.svg"></a>
 <a href="https://developer.apple.com/download/more/"><img src="https://img.shields.io/badge/Xcode-orange.svg"></a>
@@ -11,7 +11,7 @@
 Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs SpriteKit [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
   
 <p align="center">
-<img src="Doc/screenshot_macos_01.png" height="450"/>
+<img src="screenshot_macos_01.png" height="450"/>
 </p>
 
 I also made a [Swift version of the SuperKoalio game][superkoalio-project-url], which uses `PEMTileMap` to generate the map and also supports iOS, macOS and tvOS.
