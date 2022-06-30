@@ -24,9 +24,6 @@
 		20426D64283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
 		20426D65283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
 		20426D66283D212A00514ABE /* Snail.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20426D63283D212A00514ABE /* Snail.tx */; };
-		20584B4A283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
-		20584B4B283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
-		20584B4C283A2A1C00B38F37 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20584B49283A2A1C00B38F37 /* logo.png */; };
 		205E0F192846244500AA7BB6 /* Isometric1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205E0F182846244500AA7BB6 /* Isometric1.tmx */; };
 		205E0F1A2846244500AA7BB6 /* Isometric1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205E0F182846244500AA7BB6 /* Isometric1.tmx */; };
 		205E0F1B2846244500AA7BB6 /* Isometric1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 205E0F182846244500AA7BB6 /* Isometric1.tmx */; };
@@ -536,7 +533,6 @@
 		2037A5E528258C4A00E13452 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20426D5F283D20EC00514ABE /* Spaced with margin.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Spaced with margin.tsx"; sourceTree = "<group>"; };
 		20426D63283D212A00514ABE /* Snail.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Snail.tx; sourceTree = "<group>"; };
-		20584B49283A2A1C00B38F37 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		205E0F182846244500AA7BB6 /* Isometric1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Isometric1.tmx; sourceTree = "<group>"; };
 		205F766F283BC452003B775E /* macOS version.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "macOS version.entitlements"; sourceTree = "<group>"; };
 		206587D828607BD200DED69C /* license.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = license.md; sourceTree = "<group>"; };
@@ -779,14 +775,6 @@
 			path = MyLevel1;
 			sourceTree = "<group>";
 		};
-		20584B48283A2A1C00B38F37 /* Doc */ = {
-			isa = PBXGroup;
-			children = (
-				20584B49283A2A1C00B38F37 /* logo.png */,
-			);
-			path = Doc;
-			sourceTree = SOURCE_ROOT;
-		};
 		206E238C282667640039C4FE /* Demo */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,7 +803,6 @@
 			children = (
 				206587D828607BD200DED69C /* license.md */,
 				206587D928607BD300DED69C /* README.md */,
-				20584B48283A2A1C00B38F37 /* Doc */,
 				20B32969283952810082CE8B /* Sources */,
 				206E238C282667640039C4FE /* Demo */,
 				2074E41F28181EDD002137A7 /* Frameworks */,
@@ -1249,7 +1236,6 @@
 			files = (
 				20DB7D172837BABE00F17FC7 /* column1.png in Resources */,
 				20DB7D7A2837BABE00F17FC7 /* platformConnector2.png in Resources */,
-				20584B4C283A2A1C00B38F37 /* logo.png in Resources */,
 				20DB7D7D2837BABE00F17FC7 /* platformConnector3.png in Resources */,
 				20DB7DBF2837BABE00F17FC7 /* window3.png in Resources */,
 				20DB7CFF2837BABE00F17FC7 /* backgroundTower.png in Resources */,
@@ -1394,7 +1380,6 @@
 			files = (
 				20DB7D152837BABE00F17FC7 /* column1.png in Resources */,
 				20DB7D782837BABE00F17FC7 /* platformConnector2.png in Resources */,
-				20584B4A283A2A1C00B38F37 /* logo.png in Resources */,
 				20DB7D7B2837BABE00F17FC7 /* platformConnector3.png in Resources */,
 				20DB7DBD2837BABE00F17FC7 /* window3.png in Resources */,
 				20DB7CFD2837BABE00F17FC7 /* backgroundTower.png in Resources */,
@@ -1626,7 +1611,6 @@
 				20DB7D342837BABE00F17FC7 /* gemBlueStroked.png in Resources */,
 				20DB7DB22837BABE00F17FC7 /* wallDecor2.png in Resources */,
 				20DB7D402837BABE00F17FC7 /* grey.png in Resources */,
-				20584B4B283A2A1C00B38F37 /* logo.png in Resources */,
 				20DB7D2B2837BABE00F17FC7 /* earthWall2.png in Resources */,
 				20DB7C642837B9ED00F17FC7 /* beach_tileset.tsx in Resources */,
 				207D3DD72812AD5700FC4C77 /* Assets.xcassets in Resources */,
