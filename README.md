@@ -60,6 +60,9 @@ I also made a [Swift version of the SuperKoalio game][superkoalio-project-url], 
 ## Known issues
 Please refer to the [issue tracker][issues-url] on GitHub. All bugs reports, feature requests and comments are welcome.
 
+## Documentation
+Check out the documentation [on this page][documentation-url].
+
 ## Installation
 ### Swift package
 
@@ -87,10 +90,10 @@ The tilemap should be loaded in your `SKScene` referring the map file name and t
 The map will now render and appear on the scene as an `SKNode`. It will contain child nodes for all TMX Map layers and groups which contain the tiles and other objects as children.
   
 #### Accessing map functions
-`PEMTileMap` has several public properties and functions that can be use to access map properties such as its orientation, highest used zPosition, map size (in tiles or in points) and for converting scene coordinates to map coordinates and vice versa.
+`PEMTileMap` has several public properties and functions that can be use to access map properties such as its orientation, highest used zPosition, map size (in tiles or in points) and for converting scene coordinates to map coordinates and vice versa. Check out the [documentation][documentation-url].
   
 #### Accessing layers, tiles, objects
-`PEMTileMap` has several functions to access layers, tiles, and objects on the map.
+`PEMTileMap` has several functions to access layers, tiles, and objects on the map. Check out the [documentation][documentation-url].
   
 #### Using a camera
 You are responsible for creating and controlling the camera in your scene. `PEMTileMap` does however feature a basic `moveCamera` function to move the camera around the map. Set the `cameraNode` property to point to your camera before calling `moveCamera`.
@@ -112,6 +115,7 @@ If a build error occurs stating `Resource fork, Finder information, or similar d
 ## License
 Licensed under the [MIT license](license.md).
 
+[documentation-url]:https://hotdogsoup-nl.github.io/PEMTileMap/documentation/pemtilemap/
 [issues-url]:https://github.com/hotdogsoup-nl/PEMTileMap/issues
 [tmx-map-url]:https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#
 [tiled-url]:http://www.mapeditor.org
