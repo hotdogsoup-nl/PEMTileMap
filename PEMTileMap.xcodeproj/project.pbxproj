@@ -420,6 +420,9 @@
 		20DB7DF22837BBD600F17FC7 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7DF12837BBD600F17FC7 /* ui */; };
 		20DB7DF32837BBD600F17FC7 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7DF12837BBD600F17FC7 /* ui */; };
 		20DB7DF42837BBD600F17FC7 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 20DB7DF12837BBD600F17FC7 /* ui */; };
+		20DBA7F628757E6300A505F3 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DBA7F528757E6300A505F3 /* logo.png */; };
+		20DBA7F728757E6300A505F3 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DBA7F528757E6300A505F3 /* logo.png */; };
+		20DBA7F828757E6300A505F3 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DBA7F528757E6300A505F3 /* logo.png */; };
 		20DD973B2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */; };
 		20DD973C2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */; };
 		20DD973D2848A25D0076FCAC /* PEMObjectEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */; };
@@ -676,6 +679,7 @@
 		20DB7CE72837BABE00F17FC7 /* sticker-knight.world */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sticker-knight.world"; sourceTree = "<group>"; };
 		20DB7DED2837BB4400F17FC7 /* templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = templates; sourceTree = "<group>"; };
 		20DB7DF12837BBD600F17FC7 /* ui */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ui; sourceTree = "<group>"; };
+		20DBA7F528757E6300A505F3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMObjectEllipse.swift; sourceTree = "<group>"; };
 		20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectRectangle.swift; sourceTree = "<group>"; };
 		20DD97422848B5520076FCAC /* PEMObjectPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectPoint.swift; sourceTree = "<group>"; };
@@ -803,6 +807,7 @@
 			children = (
 				206587D828607BD200DED69C /* license.md */,
 				206587D928607BD300DED69C /* README.md */,
+				20DBA7F528757E6300A505F3 /* logo.png */,
 				20B32969283952810082CE8B /* Sources */,
 				206E238C282667640039C4FE /* Demo */,
 				2074E41F28181EDD002137A7 /* Frameworks */,
@@ -1350,6 +1355,7 @@
 				20DB7D712837BABE00F17FC7 /* platformBlock3.png in Resources */,
 				20DB7D142837BABE00F17FC7 /* cloud.png in Resources */,
 				20DB7D1D2837BABE00F17FC7 /* doorBlueStroked.png in Resources */,
+				20DBA7F828757E6300A505F3 /* logo.png in Resources */,
 				20DB7D862837BABE00F17FC7 /* pushBlock2.png in Resources */,
 				20DB7D082837BABE00F17FC7 /* blobGreen.png in Resources */,
 				20FAF02D2837A67500BEFA8E /* CREDITS.txt in Resources */,
@@ -1494,6 +1500,7 @@
 				20DB7D6F2837BABE00F17FC7 /* platformBlock3.png in Resources */,
 				20DB7D122837BABE00F17FC7 /* cloud.png in Resources */,
 				20DB7D1B2837BABE00F17FC7 /* doorBlueStroked.png in Resources */,
+				20DBA7F628757E6300A505F3 /* logo.png in Resources */,
 				20DB7D842837BABE00F17FC7 /* pushBlock2.png in Resources */,
 				20DB7D062837BABE00F17FC7 /* blobGreen.png in Resources */,
 				20FAF02B2837A67500BEFA8E /* CREDITS.txt in Resources */,
@@ -1568,6 +1575,7 @@
 				201F5D2C286C3E5700C435AF /* PEMSuperKoalio.png in Resources */,
 				20FAF0172837A67500BEFA8E /* gameart2d-desert.tmx in Resources */,
 				20C32226283B62C200316B48 /* dungeon-16x16.tmx in Resources */,
+				20DBA7F728757E6300A505F3 /* logo.png in Resources */,
 				20DB79A42837B4AD00F17FC7 /* mylevel1_tiles.png in Resources */,
 				20C3242C283B7B7B00316B48 /* tileSet.tsx in Resources */,
 				20C32430283B7F6A00316B48 /* link-icon.png in Resources */,
