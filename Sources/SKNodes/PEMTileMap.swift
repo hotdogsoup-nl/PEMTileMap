@@ -26,7 +26,7 @@ public enum CameraViewMode {
 }
 
 /// TMX Map orientation.
-public enum MapOrientation: String {
+internal enum MapOrientation: String {
     case unknown
     case hexagonal = "hexagonal"
     case isometric = "isometric"
@@ -51,6 +51,7 @@ internal enum MapStaggerIndex: String {
     case odd = "odd"
 }
 
+/// Generates an `SKNode` from a TMX Map file.
 public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// Adds a background node to the map representing the map canvas when set to `true`. Removes the canvas when set to `false`.
     public var showCanvas: Bool {
@@ -85,6 +86,9 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         }
     }
     
+    /// TMX Map properties.
+    public var properties: Dictionary<String, Any>?
+    
     /// To use camera functions, this variable must be set to the `SKScene` camera.
     public weak var cameraNode: SKCameraNode?
 
@@ -99,9 +103,6 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
 
     /// Number of seconds that the map took to render.
     public private (set) var renderTime = TimeInterval(0)
-
-    /// TMX Map properties.
-    private (set) var properties: Dictionary<String, Any>?
     
     /// TMX Map orientation.
     private (set) var orientation: MapOrientation = .unknown

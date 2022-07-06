@@ -5,19 +5,21 @@ internal enum DrawOrder: String {
     case topDown = "topdown"
 }
 
+/// A TMX object group as an `SKNode`.
 public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
-    private (set) var properties: Dictionary<String, Any>?
-    private (set) var opacity = CGFloat(1.0)
-    private (set) var visible = true
-    private (set) var offSetInPoints = CGPoint.zero
-    private (set) var tintColor: SKColor?
-    private (set) var color = SKColor.lightGray
-
-    private var id = UInt32(0)
-    private var drawOrder = DrawOrder.topDown
+    public var properties: Dictionary<String, Any>?
     
-    internal var objects: Array<PEMObjectData> = []
+    public private (set) var opacity = CGFloat(1.0)
+    public private (set) var visible = true
+    public private (set) var offSetInPoints = CGPoint.zero
+    public private (set) var tintColor: SKColor?
+    public private (set) var color = SKColor.lightGray
+
+    public private (set) var id = UInt32(0)
+    
+    private var drawOrder = DrawOrder.topDown
     private var parentGroup: PEMGroup?
+    internal var objects: Array<PEMObjectData> = []
         
     init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
         super.init()

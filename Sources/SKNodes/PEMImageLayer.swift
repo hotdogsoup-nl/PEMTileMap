@@ -1,22 +1,24 @@
 import Foundation
 import SpriteKit
 
+/// A TMX image layer as an `SKSpriteNode`.
 public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
-    private (set) var visible = true
-    private (set) var properties: Dictionary<String, Any>?
+    public var parallaxFactorX = CGFloat(1)
+    public var parallaxFactorY = CGFloat(1)
 
-    private var id = UInt32(0)
-    private var textureImageSource: String?
-    private var offSetInPoints = CGPoint.zero
-    private var imageSizeInPoints = CGSize.zero
-    private var opacity = CGFloat(1)
-    private var tintColor: SKColor?
-    private var parallaxFactorX = CGFloat(1)
-    private var parallaxFactorY = CGFloat(1)
-    private var repeatX = false
-    private var repeatY = false
+    public var properties: Dictionary<String, Any>?
+
+    public private (set) var id = UInt32(0)
+    public private (set) var offSetInPoints = CGPoint.zero
+    public private (set) var imageSizeInPoints = CGSize.zero
+    public private (set) var opacity = CGFloat(1)
+    public private (set) var tintColor: SKColor?
+    public private (set) var visible = true
+    public private (set) var repeatX = false
+    public private (set) var repeatY = false
     
     private var parentGroup: PEMGroup?
+    private var textureImageSource: String?
 
     // MARK: - Init
 

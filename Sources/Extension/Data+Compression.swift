@@ -43,7 +43,7 @@ extension Data {
     /// - Parameter level: Compression level.
     /// - Returns: Gzip-compressed `Data` object.
     /// - Throws: `GzipError`
-    public func gzipped(level: CompressionLevel = .defaultCompression) throws -> Data {
+    internal func gzipped(level: CompressionLevel = .defaultCompression) throws -> Data {
         guard !self.isEmpty else {
             return Data()
         }
@@ -163,7 +163,7 @@ extension Data {
 }
 
 /// Compression level whose rawValue is based on the zlib's constants.
-public struct CompressionLevel: RawRepresentable {
+internal struct CompressionLevel: RawRepresentable {
     /// Compression level in the range of `0` (no compression) to `9` (maximum compression).
     public let rawValue: Int32
 
@@ -182,7 +182,7 @@ public struct CompressionLevel: RawRepresentable {
 }
 
 /// Errors on gzipping/gunzipping based on the zlib error codes.
-public struct GzipError: Swift.Error {
+internal struct GzipError: Swift.Error {
     // cf. http://www.zlib.net/manual.html
 
     public enum Kind: Equatable {

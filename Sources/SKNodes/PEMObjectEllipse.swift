@@ -1,12 +1,14 @@
 import SpriteKit
 import CoreGraphics
 
+/// A TMX ellipse object as an `SKShapeNode`.
 class PEMObjectEllipse: SKShapeNode {
+    public var properties: Dictionary<String, Any>?
+
     private (set) var coordsInPoints: CGPoint?
     private (set) var sizeInPoints: CGSize?
 
     private (set) var id = UInt32(0)
-    private (set) var properties: Dictionary<String, Any>?
     private (set) var type: String?
 
     // MARK: - Init
