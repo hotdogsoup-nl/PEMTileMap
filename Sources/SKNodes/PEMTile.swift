@@ -1,14 +1,16 @@
 import SpriteKit
 
+/// A TMX Tile as an `SKSpriteNode`.
 public class PEMTile: SKSpriteNode {
-    var coords: CGPoint?
+    public var properties: Dictionary<String, Any>?
 
-    private (set) var id = UInt32(0)
-    private (set) var animation: PEMTileAnimation?
-    private (set) var properties: Dictionary<String, Any>?
-    private (set) var type: String?
+    public private (set) var id = UInt32(0)
+    public private (set) var type: String?
     
+    private (set) var animation: PEMTileAnimation?
     private var probability = CGFloat(0)
+    
+    internal var coords: CGPoint?
 
     // MARK: - Init
     

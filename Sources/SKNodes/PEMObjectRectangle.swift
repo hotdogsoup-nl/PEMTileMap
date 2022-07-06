@@ -1,13 +1,15 @@
 import SpriteKit
 import CoreGraphics
 
+/// A TMX rectangle object as an `SKShapeNode`.
 class PEMObjectRectangle: SKShapeNode {
-    private (set) var coordsInPoints: CGPoint?
-    private (set) var sizeInPoints: CGSize?
+    public var properties: Dictionary<String, Any>?
 
-    private (set) var id = UInt32(0)
-    private (set) var properties: Dictionary<String, Any>?
-    private (set) var type: String?
+    public private (set) var coordsInPoints: CGPoint?
+    public private (set) var sizeInPoints: CGSize?
+
+    public private (set) var id = UInt32(0)
+    public private (set) var type: String?
 
     // MARK: - Init
     

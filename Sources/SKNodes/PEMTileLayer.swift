@@ -1,21 +1,23 @@
 import Foundation
 import SpriteKit
 
+/// A TMX Tile layer as an `SKNode`.
 public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
-    private (set) var visible = true
-    private (set) var properties: Dictionary<String, Any>?
+    public var parallaxFactorX = CGFloat(1)
+    public var parallaxFactorY = CGFloat(1)
 
-    private var id = UInt32(0)
-    private var coordsInTiles = CGPoint.zero // not supported
-    private var sizeInTiles = CGSize.zero
-    private var opacity = CGFloat(1)
-    private var tintColor: SKColor?
-    private var offSetInPoints = CGPoint.zero
-    private var parallaxFactorX = CGFloat(1)
-    private var parallaxFactorY = CGFloat(1)
-    
-    internal var tileData: Array<UInt32> = []
+    public var properties: Dictionary<String, Any>?
+
+    public private (set) var id = UInt32(0)
+    public private (set) var offSetInPoints = CGPoint.zero
+    public private (set) var coordsInTiles = CGPoint.zero
+    public private (set) var sizeInTiles = CGSize.zero
+    public private (set) var opacity = CGFloat(1)
+    public private (set) var tintColor: SKColor?
+    public private (set) var visible = true
+
     private var parentGroup: PEMGroup?
+    internal var tileData: Array<UInt32> = []
         
     // MARK: - Init
 
