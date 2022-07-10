@@ -4,6 +4,7 @@ import CoreGraphics
 /// A TMX polygon object as an `SKShapeNode`.
 class PEMObjectPoly: SKShapeNode {
     public var properties: Dictionary<String, Any>?
+    public var class_: String?
 
     private (set) var coordsInPoints: CGPoint?
     private (set) var sizeInPoints: CGSize?
@@ -34,6 +35,7 @@ class PEMObjectPoly: SKShapeNode {
             id = objectData.id
             type = objectData.type
             properties = objectData.properties
+            class_ = objectData.class_
             coordsInPoints = objectData.coordsInPoints
             sizeInPoints = calculateAccumulatedFrame().size
             return

@@ -22,6 +22,8 @@ internal class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     
     private (set) var firstGid = UInt32(0)
     private (set) var properties: Dictionary<String, Any>?
+    private (set) var class_: String?
+
     private (set) var tileOffSetInPoints = CGPoint.zero
     private (set) var externalSource: String?
 
@@ -60,7 +62,8 @@ internal class PEMTileSet: NSObject, PEMTileMapPropertiesProtocol {
     
     func addAttributes(_ attributes: Dictionary<String, String>) {
         name = attributes[ElementAttributes.name.rawValue]
-
+        class_ = attributes[ElementAttributes.class_.rawValue]
+        
         if let tilewidth = attributes[ElementAttributes.tileWidth.rawValue],
            let tileheight = attributes[ElementAttributes.tileHeight.rawValue] {
             tileSizeInPoints = CGSize(width: Int(tilewidth)!, height: Int(tileheight)!)

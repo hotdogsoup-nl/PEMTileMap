@@ -3,6 +3,7 @@ import SpriteKit
 /// A TMX Tile as an `SKSpriteNode`.
 public class PEMTile: SKSpriteNode {
     public var properties: Dictionary<String, Any>?
+    public var class_: String?
 
     public private (set) var id = UInt32(0)
     public private (set) var type: String?
@@ -23,7 +24,8 @@ public class PEMTile: SKSpriteNode {
             probability = tileData.probability
             animation = tileData.animation
             properties = tileData.properties
-            
+            class_ = tileData.class_
+                        
             applyTileFlipping(horizontally: flippedHorizontally, vertically: flippedVertically, diagonally: flippedDiagonally)
             return
         }

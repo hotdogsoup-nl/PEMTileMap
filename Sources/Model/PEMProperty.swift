@@ -22,7 +22,7 @@ internal class PEMProperty: NSObject {
         
         value = attributes[ElementAttributes.value.rawValue]
         
-        if let propertyValue = attributes[ElementAttributes.typeAttribute.rawValue] {
+        if let propertyValue = attributes[ElementAttributes.type_.rawValue] {
             if let propertyType = PropertyType(rawValue: propertyValue) {
                 type = propertyType
             } else {

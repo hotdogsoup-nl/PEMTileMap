@@ -7,7 +7,8 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     public var parallaxFactorY = CGFloat(1)
 
     public var properties: Dictionary<String, Any>?
-
+    
+    public private (set) var class_: String?
     public private (set) var id = UInt32(0)
     public private (set) var offSetInPoints = CGPoint.zero
     public private (set) var coordsInTiles = CGPoint.zero
@@ -26,7 +27,8 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
         
         parentGroup = group
         name = attributes[ElementAttributes.name.rawValue]
-
+        class_ = attributes[ElementAttributes.class_.rawValue]
+        
         if let value = attributes[ElementAttributes.id.rawValue] {
             id = UInt32(value)!
         }
@@ -172,7 +174,7 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     
     #if DEBUG
     public override var description: String {
-        return "PEMTileLayer: \(id), (name: \(name ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles: \(children.count))"
+        return "PEMTileLayer: \(id), (name: \(name ?? "-"), class: \(class_ ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)), tiles: \(children.count))"
     }
     #endif
 }

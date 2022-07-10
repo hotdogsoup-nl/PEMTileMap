@@ -4,6 +4,7 @@ import CoreGraphics
 /// A TMX point object as an `SKShapeNode`.
 class PEMObjectPoint: SKShapeNode {
     public var properties: Dictionary<String, Any>?
+    public var class_: String?
 
     private (set) var coordsInPoints: CGPoint?
     private (set) var sizeInPoints: CGSize?
@@ -30,6 +31,7 @@ class PEMObjectPoint: SKShapeNode {
             id = objectData.id
             type = objectData.type
             properties = objectData.properties
+            class_ = objectData.class_
             coordsInPoints = objectData.coordsInPoints
             sizeInPoints = objectData.sizeInPoints
             return

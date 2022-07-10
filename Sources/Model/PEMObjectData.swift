@@ -49,6 +49,8 @@ internal class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var externalSource: String?
     
     private (set) var properties: Dictionary<String, Any>?
+    private (set) var class_: String?
+
     private (set) var polygonPoints: Array<CGPoint>?
     
     private (set) var attributes: Dictionary<String, String>?
@@ -77,11 +79,13 @@ internal class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
         attributesParsed = true
         
         if let currentAttributes = attributes {
+            class_ = currentAttributes[ElementAttributes.class_.rawValue]
+                        
             if let value = currentAttributes[ElementAttributes.name.rawValue] {
                 objectName = value
             }
             
-            if let value = currentAttributes[ElementAttributes.typeAttribute.rawValue] {
+            if let value = currentAttributes[ElementAttributes.type_.rawValue] {
                 type = value
             }
 
