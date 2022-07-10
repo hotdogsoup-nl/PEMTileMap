@@ -88,7 +88,10 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     /// TMX Map properties.
     public var properties: Dictionary<String, Any>?
-    
+
+    /// TMX Map class.
+    public var class_: String?
+
     /// To use camera functions, this variable must be set to the `SKScene` camera.
     public weak var cameraNode: SKCameraNode?
 
@@ -253,7 +256,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Layers, tiles, objects
     
-    /// Find a TMX Map layer with a specific name.
+    /// Find a TMX Map layer with a specific, case sensitive, name. 
     /// - Parameter name: The name of the layer to search for.
     /// - Returns: The first layer found on the map which has the specified name.
     public func layerNamed(_ name: String) -> Any? {
@@ -393,6 +396,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 
         version = attributes[ElementAttributes.version.rawValue]
         tiledversion = attributes[ElementAttributes.tiledVersion.rawValue]
+        class_ = attributes[ElementAttributes.class_.rawValue]
         
         if let mapOrientation = MapOrientation(rawValue: orientationValue) {
             orientation = mapOrientation

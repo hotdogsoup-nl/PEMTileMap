@@ -8,6 +8,7 @@ public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
 
     public var properties: Dictionary<String, Any>?
 
+    public private (set) var class_: String?
     public private (set) var id = UInt32(0)
     public private (set) var offSetInPoints = CGPoint.zero
     public private (set) var imageSizeInPoints = CGSize.zero
@@ -32,7 +33,8 @@ public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
         }
 
         name = attributes[ElementAttributes.name.rawValue]
-        
+        class_ = attributes[ElementAttributes.class_.rawValue]
+
         if let dx = attributes[ElementAttributes.offsetX.rawValue],
            let dy = attributes[ElementAttributes.offsetY.rawValue] {
             offSetInPoints = CGPoint(x: Int(dx)!, y: Int(dy)!)
@@ -183,7 +185,7 @@ public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
     
     #if DEBUG
     public override var description: String {
-        return "PEMImageLayer: \(id), (name: \(name ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)))"
+        return "PEMImageLayer: \(id), (name: \(name ?? "-"), class: \(class_ ?? "-"), zPosition: \(zPosition), parent: \(String(describing: parentGroup)))"
     }
     #endif
 }

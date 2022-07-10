@@ -4,6 +4,7 @@ import CoreGraphics
 /// A TMX text object as an `SKSpriteNode`.
 class PEMObjectText: SKSpriteNode {
     public var properties: Dictionary<String, Any>?
+    public var class_: String?
 
     public private (set) var coordsInPoints: CGPoint?
     public private (set) var sizeInPoints: CGSize?
@@ -79,6 +80,7 @@ class PEMObjectText: SKSpriteNode {
             id = objectData.id
             type = objectData.type
             properties = objectData.properties
+            class_ = objectData.class_
             coordsInPoints = objectData.coordsInPoints
             sizeInPoints = objectData.sizeInPoints
             return

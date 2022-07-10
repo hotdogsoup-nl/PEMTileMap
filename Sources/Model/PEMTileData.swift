@@ -7,6 +7,8 @@ internal class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var type: String?
     private (set) var probability = CGFloat(0)
     private (set) var properties: Dictionary<String, Any>?
+    private (set) var class_: String?
+
     private (set) var animation: PEMTileAnimation?
 
     private var textureImageSource : String?
@@ -34,7 +36,9 @@ internal class PEMTileData: NSObject, PEMTileMapPropertiesProtocol {
     // MARK: - Setup
     
     func addAttributes(_ attributes: Dictionary<String, String>) {
-        if let value = attributes[ElementAttributes.typeAttribute.rawValue] {
+        class_ = attributes[ElementAttributes.class_.rawValue]
+
+        if let value = attributes[ElementAttributes.type_.rawValue] {
             type = value
         }
 

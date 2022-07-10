@@ -2,6 +2,8 @@ import SpriteKit
 
 internal class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var properties: Dictionary<String, Any>?
+    private (set) var class_: String?
+
     private (set) var opacity = CGFloat(1.0)
     private (set) var visible = true
     private (set) var offSetInPoints = CGPoint.zero
@@ -20,7 +22,8 @@ internal class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
         parentGroup = group
 
         name = attributes[ElementAttributes.name.rawValue]
-        
+        class_ = attributes[ElementAttributes.class_.rawValue]
+
         if let value = attributes[ElementAttributes.opacity.rawValue] {
             let valueString : NSString = value as NSString
             opacity = CGFloat(valueString.doubleValue)
@@ -74,7 +77,7 @@ internal class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
 
     #if DEBUG
     override var description: String {
-        return "PEMGroup: \(id), (name: \(name ?? "-"), parent: \(String(describing: parentGroup)))"
+        return "PEMGroup: \(id), (name: \(name ?? "-"), class: \(class_ ?? "-"), parent: \(String(describing: parentGroup)))"
     }
     #endif
 }

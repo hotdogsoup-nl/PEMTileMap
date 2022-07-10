@@ -28,6 +28,7 @@ internal enum Elements: String {
 internal enum ElementAttributes: String {
     case backgroundColor = "backgroundcolor"
     case bold = "bold"
+    case class_ = "class" // "class" is a reserved MetaType name so we use "class_" instead
     case columns = "columns"
     case color = "color"
     case compression = "compression"
@@ -81,7 +82,7 @@ internal enum ElementAttributes: String {
     case tileWidth = "tilewidth"
     case tintColor = "tintcolor"
     case trans = "trans"
-    case typeAttribute = "type" // "Type" is a reserved MetaType name so we use "TypeAttribute" instead
+    case type_ = "type" // "Type" is a reserved MetaType name so we use "type_" instead
     case underline = "underline"
     case vAlign = "valign"
     case value = "value"

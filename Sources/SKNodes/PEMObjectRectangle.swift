@@ -4,6 +4,7 @@ import CoreGraphics
 /// A TMX rectangle object as an `SKShapeNode`.
 class PEMObjectRectangle: SKShapeNode {
     public var properties: Dictionary<String, Any>?
+    public var class_: String?
 
     public private (set) var coordsInPoints: CGPoint?
     public private (set) var sizeInPoints: CGSize?
@@ -33,6 +34,7 @@ class PEMObjectRectangle: SKShapeNode {
             id = objectData.id
             type = objectData.type
             properties = objectData.properties
+            class_ = objectData.class_
             coordsInPoints = objectData.coordsInPoints
             sizeInPoints = objectData.sizeInPoints
             return

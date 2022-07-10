@@ -9,6 +9,7 @@ internal enum DrawOrder: String {
 public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     public var properties: Dictionary<String, Any>?
     
+    public private (set) var class_: String?
     public private (set) var opacity = CGFloat(1.0)
     public private (set) var visible = true
     public private (set) var offSetInPoints = CGPoint.zero
@@ -26,7 +27,8 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
 
         parentGroup = group
         name = attributes[ElementAttributes.name.rawValue]
-        
+        class_ = attributes[ElementAttributes.class_.rawValue]
+
         if let value = attributes[ElementAttributes.id.rawValue] {
             id = UInt32(value)!
         }
@@ -280,7 +282,7 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
 
     #if DEBUG
     public override var description: String {
-        return "PEMObjectGroup: \(id), (name: \(name ?? "-"), parent: \(String(describing: parentGroup)), objects: \(objects.count))"
+        return "PEMObjectGroup: \(id), (name: \(name ?? "-"), class: \(class_ ?? "-"), parent: \(String(describing: parentGroup)), objects: \(objects.count))"
     }
     #endif
 }
