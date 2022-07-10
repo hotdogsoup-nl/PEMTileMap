@@ -253,7 +253,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     // MARK: - Layers, tiles, objects
     
-    /// Find a TMX Map layer with a specific name.
+    /// Find a TMX Map layer with a specific, case sensitive, name. 
     /// - Parameter name: The name of the layer to search for.
     /// - Returns: The first layer found on the map which has the specified name.
     public func layerNamed(_ name: String) -> Any? {
