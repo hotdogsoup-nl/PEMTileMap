@@ -6,11 +6,11 @@ class PEMObjectPoint: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?
 
-    private (set) var coordsInPoints: CGPoint?
-    private (set) var sizeInPoints: CGSize?
+    public private (set) var coordsInPoints: CGPoint?
+    public private (set) var sizeInPoints: CGSize?
 
-    private (set) var id = UInt32(0)
-    private (set) var type: String?
+    public private (set) var id = UInt32(0)
+    public private (set) var type: String?
 
     // MARK: - Init
     
