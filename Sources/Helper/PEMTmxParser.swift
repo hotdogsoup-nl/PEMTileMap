@@ -236,6 +236,7 @@ internal class PEMTmxParser: XMLParser, XMLParserDelegate {
         case Elements.group.rawValue:
             let currentGroup = elementPath.last as? PEMGroup
             if let group = PEMGroup(attributes: attributeDict, group:currentGroup) {
+                currentMap?.layers.append(group)
                 elementPath.append(group)
                 break
             }
