@@ -299,7 +299,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     
     /// Find a tile with specific coordinates.
     /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
-    /// - Returns: The first tile found on the map which at the specified coordinates. Note that multiple layers may be present on the map with tiles at the same coordinates.
+    /// - Returns: The first tile found on the map at the specified coordinates. Note that multiple layers may be present on the map with tiles at the same coordinates.
     public func tileAt(tileCoords: CGPoint) -> PEMTile? {
         for layer in layers {
             if let tileLayer = layer as? PEMTileLayer {
@@ -315,7 +315,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// Find a tile with specific coordinates on a specific layer.
     /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
     /// - Parameter inLayer: The `PEMTileLayer` to find the tile in.
-    /// - Returns: The tile found on the specified layer which at the specified coordinates.
+    /// - Returns: The tile found on the specified layer at the specified coordinates.
     public func tileAt(tileCoords: CGPoint, inLayer tileLayer: PEMTileLayer) -> PEMTile? {
         return tileLayer.tileAt(tileCoords: tileCoords)
     }
