@@ -18,12 +18,12 @@ public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
     public private (set) var repeatX = false
     public private (set) var repeatY = false
     
-    private var parentGroup: PEMGroup?
+    private var parentGroup: PEMGroupLayer?
     private var textureImageSource: String?
 
     // MARK: - Init
 
-    init(attributes: Dictionary<String, String>, group: PEMGroup?) {
+    init(attributes: Dictionary<String, String>, group: PEMGroupLayer?) {
         super.init(texture: nil, color: .clear, size: .zero)
         
         parentGroup = group

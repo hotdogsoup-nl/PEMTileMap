@@ -1,6 +1,6 @@
 import SpriteKit
 
-internal class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
+public class PEMGroupLayer: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var properties: Dictionary<String, Any>?
     private (set) var class_: String?
 
@@ -12,9 +12,9 @@ internal class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
     private var id = UInt32(0)
     private var name: String?
 
-    private var parentGroup: PEMGroup?
+    private var parentGroup: PEMGroupLayer?
 
-    init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
+    init?(attributes: Dictionary<String, String>, group: PEMGroupLayer?) {
         guard let groupId = attributes[ElementAttributes.id.rawValue] else { return nil }
         super.init()
 
@@ -76,8 +76,8 @@ internal class PEMGroup: NSObject, PEMTileMapPropertiesProtocol {
     // MARK: - Debug
 
     #if DEBUG
-    override var description: String {
-        return "PEMGroup: \(id), (name: \(name ?? "-"), class: \(class_ ?? "-"), parent: \(String(describing: parentGroup)))"
+    public override var description: String {
+        return "PEMGroupLayer: \(id), (name: \(name ?? "-"), class: \(class_ ?? "-"), parent: \(String(describing: parentGroup)))"
     }
     #endif
 }

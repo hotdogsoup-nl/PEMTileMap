@@ -49,9 +49,9 @@
 		20AC200C283D026900BE83F0 /* ellipse.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20AC200B283D026900BE83F0 /* ellipse.tx */; };
 		20AC200D283D026900BE83F0 /* ellipse.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20AC200B283D026900BE83F0 /* ellipse.tx */; };
 		20AC200E283D026900BE83F0 /* ellipse.tx in Resources */ = {isa = PBXBuildFile; fileRef = 20AC200B283D026900BE83F0 /* ellipse.tx */; };
-		20B329D8283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
-		20B329D9283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
-		20B329DA283953180082CE8B /* PEMGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroup.swift */; };
+		20B329D8283953180082CE8B /* PEMGroupLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroupLayer.swift */; };
+		20B329D9283953180082CE8B /* PEMGroupLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroupLayer.swift */; };
+		20B329DA283953180082CE8B /* PEMGroupLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C2283953180082CE8B /* PEMGroupLayer.swift */; };
 		20B329DB283953180082CE8B /* PEMObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C3283953180082CE8B /* PEMObjectData.swift */; };
 		20B329DC283953180082CE8B /* PEMObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C3283953180082CE8B /* PEMObjectData.swift */; };
 		20B329DD283953180082CE8B /* PEMObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B329C3283953180082CE8B /* PEMObjectData.swift */; };
@@ -554,7 +554,7 @@
 		207D3DCD2812AD5700FC4C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		20AC1FFB283CFDE900BE83F0 /* superkoalio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = superkoalio.png; sourceTree = "<group>"; };
 		20AC200B283D026900BE83F0 /* ellipse.tx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ellipse.tx; sourceTree = "<group>"; };
-		20B329C2283953180082CE8B /* PEMGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMGroup.swift; sourceTree = "<group>"; };
+		20B329C2283953180082CE8B /* PEMGroupLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMGroupLayer.swift; sourceTree = "<group>"; };
 		20B329C3283953180082CE8B /* PEMObjectData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMObjectData.swift; sourceTree = "<group>"; };
 		20B329C4283953180082CE8B /* PEMProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMProperty.swift; sourceTree = "<group>"; };
 		20B329C5283953180082CE8B /* PEMSpriteSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEMSpriteSheet.swift; sourceTree = "<group>"; };
@@ -860,7 +860,7 @@
 		20B329C1283953180082CE8B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				20B329C2283953180082CE8B /* PEMGroup.swift */,
+				20B329C2283953180082CE8B /* PEMGroupLayer.swift */,
 				20B329C3283953180082CE8B /* PEMObjectData.swift */,
 				20B329C4283953180082CE8B /* PEMProperty.swift */,
 				20B329C5283953180082CE8B /* PEMSpriteSheet.swift */,
@@ -1703,7 +1703,7 @@
 				20B329EF283953180082CE8B /* PEMTileSet.swift in Sources */,
 				20B329E6283953180082CE8B /* PEMTileAnimation.swift in Sources */,
 				2037A5EC28258DA000E13452 /* DemoScene.swift in Sources */,
-				20B329DA283953180082CE8B /* PEMGroup.swift in Sources */,
+				20B329DA283953180082CE8B /* PEMGroupLayer.swift in Sources */,
 				20B32A10283953180082CE8B /* PEMTmxParser.swift in Sources */,
 				20B329E3283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329FB283953180082CE8B /* PEMImageLayer.swift in Sources */,
@@ -1743,7 +1743,7 @@
 				20B329ED283953180082CE8B /* PEMTileSet.swift in Sources */,
 				20B329E4283953180082CE8B /* PEMTileAnimation.swift in Sources */,
 				207D3DD42812AD5700FC4C77 /* DemoScene.swift in Sources */,
-				20B329D8283953180082CE8B /* PEMGroup.swift in Sources */,
+				20B329D8283953180082CE8B /* PEMGroupLayer.swift in Sources */,
 				20B32A0E283953180082CE8B /* PEMTmxParser.swift in Sources */,
 				20B329E1283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329F9283953180082CE8B /* PEMImageLayer.swift in Sources */,
@@ -1785,7 +1785,7 @@
 				20B329EE283953180082CE8B /* PEMTileSet.swift in Sources */,
 				20B329E5283953180082CE8B /* PEMTileAnimation.swift in Sources */,
 				207D3DD52812AD5700FC4C77 /* DemoScene.swift in Sources */,
-				20B329D9283953180082CE8B /* PEMGroup.swift in Sources */,
+				20B329D9283953180082CE8B /* PEMGroupLayer.swift in Sources */,
 				20B32A0F283953180082CE8B /* PEMTmxParser.swift in Sources */,
 				20B329E2283953180082CE8B /* PEMSpriteSheet.swift in Sources */,
 				20B329FA283953180082CE8B /* PEMImageLayer.swift in Sources */,

@@ -17,12 +17,12 @@ public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     public private (set) var tintColor: SKColor?
     public private (set) var visible = true
 
-    private var parentGroup: PEMGroup?
+    private var parentGroup: PEMGroupLayer?
     internal var tileData: Array<UInt32> = []
         
     // MARK: - Init
 
-    init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
+    init?(attributes: Dictionary<String, String>, group: PEMGroupLayer?) {
         super.init()
         
         parentGroup = group
