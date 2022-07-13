@@ -319,6 +319,26 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     public func tileAt(tileCoords: CGPoint, inLayer tileLayer: PEMTileLayer) -> PEMTile? {
         return tileLayer.tileAt(tileCoords: tileCoords)
     }
+    
+    /// Find all tiles at the specified coordinates across all TMX Tile layers.
+    /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
+    /// - Returns: An array of tiles found on the map at the specified coordinates.
+    public func tilesAt(tileCoords: CGPoint) -> [PEMTile]? {
+        var result: [PEMTile] = []
+        
+        for layer in layers {
+            if let tileLayer = layer as? PEMTileLayer {
+                if let tile = tileLayer.tileAt(tileCoords: tileCoords) {
+                    result.append(tile)
+                }
+            }
+        }
+        
+        return (result.count > 0) ? result : nil
+    }
+    
+    // MARK: - Objects
+
         
     // MARK: - Camera
     
