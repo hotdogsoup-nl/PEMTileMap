@@ -7,11 +7,10 @@ public class PEMTile: SKSpriteNode {
 
     public private (set) var id = UInt32(0)
     public private (set) var type: String?
-    
+    public internal (set) var coords: CGPoint?
+
     private (set) var animation: PEMTileAnimation?
-    private var probability = CGFloat(0)
-    
-    internal var coords: CGPoint?
+    private var probability = CGFloat(0)    
 
     // MARK: - Init
     

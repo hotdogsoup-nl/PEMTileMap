@@ -213,7 +213,7 @@ internal class PEMTmxParser: XMLParser, XMLParserDelegate {
                 break
             }
         case Elements.layer.rawValue:
-            let currentGroup = elementPath.last as? PEMGroup
+            let currentGroup = elementPath.last as? PEMGroupLayer
             if let tileLayer = PEMTileLayer(attributes: attributeDict, group:currentGroup) {
                 currentMap?.layers.append(tileLayer)
                 elementPath.append(tileLayer)
@@ -221,7 +221,7 @@ internal class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.objectGroup.rawValue:
-            let currentGroup = elementPath.last as? PEMGroup
+            let currentGroup = elementPath.last as? PEMGroupLayer
             if let groupLayer = PEMObjectGroup(attributes: attributeDict, group:currentGroup) {
                 currentMap?.layers.append(groupLayer)
                 elementPath.append(groupLayer)
@@ -229,13 +229,14 @@ internal class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithFailedCreation(elementName: elementName, attributes:attributeDict, inside: elementPath.last)
         case Elements.imageLayer.rawValue:
-            let currentGroup = elementPath.last as? PEMGroup
+            let currentGroup = elementPath.last as? PEMGroupLayer
             let layer = PEMImageLayer(attributes: attributeDict, group:currentGroup)
             currentMap?.layers.append(layer)
             elementPath.append(layer)
         case Elements.group.rawValue:
-            let currentGroup = elementPath.last as? PEMGroup
-            if let group = PEMGroup(attributes: attributeDict, group:currentGroup) {
+            let currentGroup = elementPath.last as? PEMGroupLayer
+            if let group = PEMGroupLayer(attributes: attributeDict, group:currentGroup) {
+                currentMap?.layers.append(group)
                 elementPath.append(group)
                 break
             }
@@ -416,7 +417,7 @@ internal class PEMTmxParser: XMLParser, XMLParserDelegate {
             }
             abortWithUnexpected(closingElementName: elementName, inside: elementPath.last)
         case Elements.group.rawValue:
-            if elementPath.last is PEMGroup {
+            if elementPath.last is PEMGroupLayer {
                 elementPath.removeLast()
                 break
             }

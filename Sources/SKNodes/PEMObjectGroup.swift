@@ -19,10 +19,10 @@ public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     public private (set) var id = UInt32(0)
     
     private var drawOrder = DrawOrder.topDown
-    private var parentGroup: PEMGroup?
+    private var parentGroup: PEMGroupLayer?
     internal var objects: Array<PEMObjectData> = []
         
-    init?(attributes: Dictionary<String, String>, group: PEMGroup?) {
+    init?(attributes: Dictionary<String, String>, group: PEMGroupLayer?) {
         super.init()
 
         parentGroup = group

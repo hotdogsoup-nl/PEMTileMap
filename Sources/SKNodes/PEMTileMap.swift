@@ -254,7 +254,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         return coordinateHelper!.tileCoords(positionInPoints: positionInPoints)
     }
     
-    // MARK: - Layers, tiles, objects
+    // MARK: - Layers
     
     /// Find a TMX Map layer with a specific, case sensitive, name. 
     /// - Parameter name: The name of the layer to search for.
@@ -271,9 +271,35 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         return nil
     }
     
+    /// List all TMX Map Tile layers.
+    /// - Returns: An array of `PEMTileLayer`s.
+    public func tileLayers() -> [PEMTileLayer] {
+        return layers.compactMap { $0 as? PEMTileLayer }
+    }
+
+    /// List all TMX Map Image layers.
+    /// - Returns: An array of `PEMTileLayer`s.
+    public func imageLayers() -> [PEMImageLayer] {
+        return layers.compactMap { $0 as? PEMImageLayer }
+    }
+
+    /// List all TMX Map Object Groups.
+    /// - Returns: An array of `PEMTileLayer`s.
+    public func objectGroups() -> [PEMObjectGroup] {
+        return layers.compactMap { $0 as? PEMObjectGroup }
+    }
+
+    /// List all TMX Map Group layers.
+    /// - Returns: An array of `PEMGroup`s.
+    public func groupLayers() -> [PEMGroupLayer] {
+        return layers.compactMap { $0 as? PEMGroupLayer }
+    }
+
+    // MARK: - Tiles
+    
     /// Find a tile with specific coordinates.
     /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
-    /// - Returns: The first tile found on the map which at the specified coordinates. Note that multiple layers may be present on the map with tiles at the same coordinates.
+    /// - Returns: The first tile found on the map at the specified coordinates. Note that multiple layers may be present on the map with tiles at the same coordinates.
     public func tileAt(tileCoords: CGPoint) -> PEMTile? {
         for layer in layers {
             if let tileLayer = layer as? PEMTileLayer {
@@ -289,10 +315,30 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// Find a tile with specific coordinates on a specific layer.
     /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
     /// - Parameter inLayer: The `PEMTileLayer` to find the tile in.
-    /// - Returns: The tile found on the specified layer which at the specified coordinates.
+    /// - Returns: The tile found on the specified layer at the specified coordinates.
     public func tileAt(tileCoords: CGPoint, inLayer tileLayer: PEMTileLayer) -> PEMTile? {
         return tileLayer.tileAt(tileCoords: tileCoords)
     }
+    
+    /// Find all tiles at the specified coordinates across all TMX Tile layers.
+    /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
+    /// - Returns: An array of tiles found on the map at the specified coordinates.
+    public func tilesAt(tileCoords: CGPoint) -> [PEMTile]? {
+        var result: [PEMTile] = []
+        
+        for layer in layers {
+            if let tileLayer = layer as? PEMTileLayer {
+                if let tile = tileLayer.tileAt(tileCoords: tileCoords) {
+                    result.append(tile)
+                }
+            }
+        }
+        
+        return (result.count > 0) ? result : nil
+    }
+    
+    // MARK: - Objects
+
         
     // MARK: - Camera
     
