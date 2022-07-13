@@ -254,7 +254,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         return coordinateHelper!.tileCoords(positionInPoints: positionInPoints)
     }
     
-    // MARK: - Layers, tiles, objects
+    // MARK: - Layers
     
     /// Find a TMX Map layer with a specific, case sensitive, name. 
     /// - Parameter name: The name of the layer to search for.
@@ -270,6 +270,32 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
         
         return nil
     }
+    
+    /// List all TMX Map Tile layers.
+    /// - Returns: An array of `PEMTileLayer`s.
+    public func tileLayers() -> [PEMTileLayer] {
+        return layers.compactMap { $0 as? PEMTileLayer }
+    }
+
+    /// List all TMX Map Image layers.
+    /// - Returns: An array of `PEMTileLayer`s.
+    public func imageLayers() -> [PEMImageLayer] {
+        return layers.compactMap { $0 as? PEMImageLayer }
+    }
+
+    /// List all TMX Map Object Groups.
+    /// - Returns: An array of `PEMTileLayer`s.
+    public func objectGroups() -> [PEMObjectGroup] {
+        return layers.compactMap { $0 as? PEMObjectGroup }
+    }
+
+    /// List all TMX Map Group layers.
+    /// - Returns: An array of `PEMGroup`s.
+    public func groupLayers() -> [PEMGroupLayer] {
+        return layers.compactMap { $0 as? PEMGroupLayer }
+    }
+
+    // MARK: - Tiles
     
     /// Find a tile with specific coordinates.
     /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
