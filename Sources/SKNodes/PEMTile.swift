@@ -6,7 +6,6 @@ public class PEMTile: SKSpriteNode {
     public var class_: String?
 
     public private (set) var id = UInt32(0)
-    public private (set) var type: String?
     public internal (set) var coords: CGPoint?
 
     private (set) var animation: PEMTileAnimation?
@@ -19,7 +18,6 @@ public class PEMTile: SKSpriteNode {
             super.init(texture: texture, color: .clear, size: texture.size())
             
             id = tileData.id
-            type = tileData.type
             probability = tileData.probability
             animation = tileData.animation
             properties = tileData.properties
@@ -89,7 +87,7 @@ public class PEMTile: SKSpriteNode {
     
     #if DEBUG
     public override var description: String {
-        return "PEMTile: \(id), type: \(type ?? "-"), (\(Int(coords?.x ?? 0)), \(Int(coords?.y ?? 0)))"
+        return "PEMTile: \(id), class: \(class_ ?? "-"), (\(Int(coords?.x ?? 0)), \(Int(coords?.y ?? 0)))"
     }
     #endif
 }

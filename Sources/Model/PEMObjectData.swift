@@ -45,7 +45,6 @@ internal class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var hAlign: TextHorizontalAlignment?
     private (set) var vAlign: TextVerticalAlignment?
     private (set) var wrap: Bool?
-    private (set) var type: String?
     private (set) var externalSource: String?
     
     private (set) var properties: Dictionary<String, Any>?
@@ -80,15 +79,11 @@ internal class PEMObjectData: NSObject, PEMTileMapPropertiesProtocol {
         
         if let currentAttributes = attributes {
             class_ = currentAttributes[ElementAttributes.class_.rawValue]
-                        
+            
             if let value = currentAttributes[ElementAttributes.name.rawValue] {
                 objectName = value
             }
             
-            if let value = currentAttributes[ElementAttributes.type_.rawValue] {
-                type = value
-            }
-
             if let x = currentAttributes[ElementAttributes.x.rawValue],
                let y = currentAttributes[ElementAttributes.y.rawValue] {
                 
