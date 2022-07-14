@@ -10,7 +10,6 @@ class PEMObjectEllipse: SKShapeNode {
     public private (set) var sizeInPoints: CGSize?
 
     public private (set) var id = UInt32(0)
-    public private (set) var type: String?
 
     // MARK: - Init
     
@@ -32,7 +31,6 @@ class PEMObjectEllipse: SKShapeNode {
             zRotation = rotation.radians()
             
             id = objectData.id
-            type = objectData.type
             properties = objectData.properties
             class_ = objectData.class_
             coordsInPoints = objectData.coordsInPoints
