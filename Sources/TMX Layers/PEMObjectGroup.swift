@@ -5,7 +5,10 @@ internal enum DrawOrder: String {
     case topDown = "topdown"
 }
 
-/// A TMX object group as an `SKNode`.
+/// A TMX Object group.
+/// A layer that contains objects.
+///
+/// Documentation: [TMX Object group](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#objectgroup)
 public class PEMObjectGroup: SKNode, PEMTileMapPropertiesProtocol {
     public var properties: Dictionary<String, Any>?
     
