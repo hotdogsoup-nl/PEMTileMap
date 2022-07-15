@@ -4,7 +4,7 @@ import CoreGraphics
 /// A TMX Ellipse object.
 ///
 /// Documentation: [TMX Ellipse](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#ellipse)
-class PEMObjectEllipse: SKShapeNode {
+public class PEMObjectEllipse: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?
 

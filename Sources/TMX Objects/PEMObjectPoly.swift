@@ -7,7 +7,7 @@ import CoreGraphics
 /// Documentation: [TMX Polyline](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#polyline)
 ///
 /// Documentation: [TMX Polygon](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#polygon)
-class PEMObjectPoly: SKShapeNode {
+public class PEMObjectPoly: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?
 

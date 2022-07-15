@@ -4,7 +4,7 @@ import CoreGraphics
 /// A TMX Rectangle object.
 ///
 /// Documentation: [TMX Object](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#object)
-class PEMObjectRectangle: SKShapeNode {
+public class PEMObjectRectangle: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?
 
