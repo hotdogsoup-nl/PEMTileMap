@@ -1,7 +1,10 @@
 import Foundation
 import SpriteKit
 
-/// A TMX Tile layer as an `SKNode`.
+/// A TMX Tile layer.
+/// A layer that contains tiles.
+///
+/// Documentation: [TMX Tile layer](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#layer)
 public class PEMTileLayer: SKNode, PEMTileMapPropertiesProtocol {
     public var parallaxFactorX = CGFloat(1)
     public var parallaxFactorY = CGFloat(1)

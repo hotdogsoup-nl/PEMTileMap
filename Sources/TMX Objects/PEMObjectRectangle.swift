@@ -1,8 +1,10 @@
 import SpriteKit
 import CoreGraphics
 
-/// A TMX polygon object as an `SKShapeNode`.
-class PEMObjectPoly: SKShapeNode {
+/// A TMX Rectangle object.
+///
+/// Documentation: [TMX Object](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#object)
+class PEMObjectRectangle: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?
 
@@ -13,18 +15,17 @@ class PEMObjectPoly: SKShapeNode {
 
     // MARK: - Init
     
-    init?(objectData: PEMObjectData, color: SKColor, isPolygon: Bool) {
-        if let points = objectData.polygonPoints {
+    init?(objectData: PEMObjectData, color: SKColor) {
+        if let size = objectData.sizeInPoints {
             super.init()
-
-            if (points.count > 0) {
-                self.path = polygonPath(points, closed: isPolygon)
-            }
+            
+            let rect = CGRect(x: 0, y: -size.height, width: size.width, height: size.height)
+            path = CGPath(rect: rect, transform: .none)
 
             name = objectData.objectName
             lineWidth = 0.25
             strokeColor = color
-            fillColor = (isPolygon ? color.withAlphaComponent(0.5) : .clear)
+            fillColor = color.withAlphaComponent(0.5)
             isAntialiased = true
             
             var rotation: CGFloat!
@@ -35,7 +36,7 @@ class PEMObjectPoly: SKShapeNode {
             properties = objectData.properties
             class_ = objectData.class_
             coordsInPoints = objectData.coordsInPoints
-            sizeInPoints = calculateAccumulatedFrame().size
+            sizeInPoints = objectData.sizeInPoints
             return
         }
         

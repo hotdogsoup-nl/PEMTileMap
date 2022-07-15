@@ -1,7 +1,9 @@
 import SpriteKit
 import CoreGraphics
 
-/// A TMX point object as an `SKShapeNode`.
+/// A TMX Point object.
+///
+/// Documentation: [TMX Point](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#point)
 class PEMObjectPoint: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?

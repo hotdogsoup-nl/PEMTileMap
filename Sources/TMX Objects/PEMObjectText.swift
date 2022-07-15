@@ -1,7 +1,9 @@
 import SpriteKit
 import CoreGraphics
 
-/// A TMX text object as an `SKSpriteNode`.
+/// A TMX Text object.
+///
+/// Documentation: [TMX Text](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#text)
 class PEMObjectText: SKSpriteNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?

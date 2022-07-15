@@ -1,8 +1,10 @@
 import SpriteKit
 import CoreGraphics
 
-/// A TMX rectangle object as an `SKShapeNode`.
-class PEMObjectRectangle: SKShapeNode {
+/// A TMX Ellipse object.
+///
+/// Documentation: [TMX Ellipse](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#ellipse)
+class PEMObjectEllipse: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?
 
@@ -18,7 +20,7 @@ class PEMObjectRectangle: SKShapeNode {
             super.init()
             
             let rect = CGRect(x: 0, y: -size.height, width: size.width, height: size.height)
-            path = CGPath(rect: rect, transform: .none)
+            path = CGPath(ellipseIn: rect, transform: .none)
 
             name = objectData.objectName
             lineWidth = 0.25

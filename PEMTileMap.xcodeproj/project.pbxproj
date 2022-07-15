@@ -741,6 +741,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2025A0F728815C8200A255B1 /* TMX Objects */ = {
+			isa = PBXGroup;
+			children = (
+				20B329CB283953180082CE8B /* PEMTile.swift */,
+				20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */,
+				20DD97422848B5520076FCAC /* PEMObjectPoint.swift */,
+				20DD97462848B75B0076FCAC /* PEMObjectPoly.swift */,
+				20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */,
+				20DD974E2848C9870076FCAC /* PEMObjectText.swift */,
+			);
+			path = "TMX Objects";
+			sourceTree = "<group>";
+		};
+		2025A0F828815E0F00A255B1 /* TMX Map */ = {
+			isa = PBXGroup;
+			children = (
+				20B329CE283953180082CE8B /* PEMTileMap.swift */,
+			);
+			path = "TMX Map";
+			sourceTree = "<group>";
+		};
 		2037A5D428258C4900E13452 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -849,10 +870,12 @@
 		20B32969283952810082CE8B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2025A0F828815E0F00A255B1 /* TMX Map */,
+				20DD97392848A2100076FCAC /* TMX Layers */,
+				2025A0F728815C8200A255B1 /* TMX Objects */,
 				20D589182852065400A2317E /* Extension */,
 				20B329CF283953180082CE8B /* Helper */,
 				20B329C1283953180082CE8B /* Model */,
-				20DD97392848A2100076FCAC /* SKNodes */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -860,7 +883,6 @@
 		20B329C1283953180082CE8B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				20B329C2283953180082CE8B /* PEMGroupLayer.swift */,
 				20B329C3283953180082CE8B /* PEMObjectData.swift */,
 				20B329C4283953180082CE8B /* PEMProperty.swift */,
 				20B329C5283953180082CE8B /* PEMSpriteSheet.swift */,
@@ -1056,21 +1078,15 @@
 			path = map;
 			sourceTree = "<group>";
 		};
-		20DD97392848A2100076FCAC /* SKNodes */ = {
+		20DD97392848A2100076FCAC /* TMX Layers */ = {
 			isa = PBXGroup;
 			children = (
-				20B329CD283953180082CE8B /* PEMImageLayer.swift */,
-				20DD973A2848A25D0076FCAC /* PEMObjectEllipse.swift */,
-				20B329CC283953180082CE8B /* PEMObjectGroup.swift */,
-				20DD97422848B5520076FCAC /* PEMObjectPoint.swift */,
-				20DD97462848B75B0076FCAC /* PEMObjectPoly.swift */,
-				20DD973E2848B1580076FCAC /* PEMObjectRectangle.swift */,
-				20DD974E2848C9870076FCAC /* PEMObjectText.swift */,
-				20B329CB283953180082CE8B /* PEMTile.swift */,
 				20B329CA283953180082CE8B /* PEMTileLayer.swift */,
-				20B329CE283953180082CE8B /* PEMTileMap.swift */,
+				20B329CD283953180082CE8B /* PEMImageLayer.swift */,
+				20B329CC283953180082CE8B /* PEMObjectGroup.swift */,
+				20B329C2283953180082CE8B /* PEMGroupLayer.swift */,
 			);
-			path = SKNodes;
+			path = "TMX Layers";
 			sourceTree = "<group>";
 		};
 		20FAEFC62837A66C00BEFA8E /* hotdogsoup.nl */ = {

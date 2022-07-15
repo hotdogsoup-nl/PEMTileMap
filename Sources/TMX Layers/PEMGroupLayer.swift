@@ -1,5 +1,9 @@
 import SpriteKit
 
+/// A TMX Group layer.
+/// Used to organize the layers of the map in a hierarchy.
+///
+/// Documentation: [TMX Group layer](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#group)
 public class PEMGroupLayer: NSObject, PEMTileMapPropertiesProtocol {
     private (set) var properties: Dictionary<String, Any>?
     private (set) var class_: String?

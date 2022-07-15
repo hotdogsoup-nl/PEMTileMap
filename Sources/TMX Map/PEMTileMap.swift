@@ -51,7 +51,10 @@ internal enum MapStaggerIndex: String {
     case odd = "odd"
 }
 
-/// Generates an `SKNode` from a TMX Map file.
+/// A TMX Map.
+/// Top level object that contains TMX Layers.
+///
+/// Documentation: [TMX Map](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#map)
 public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// Adds a background node to the map representing the map canvas when set to `true`. Removes the canvas when set to `false`.
     public var showCanvas: Bool {

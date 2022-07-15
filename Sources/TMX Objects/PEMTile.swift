@@ -1,6 +1,8 @@
 import SpriteKit
 
-/// A TMX Tile as an `SKSpriteNode`.
+/// A TMX Tile object.
+///
+/// Documentation: [TMX Tile](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#tile)
 public class PEMTile: SKSpriteNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?

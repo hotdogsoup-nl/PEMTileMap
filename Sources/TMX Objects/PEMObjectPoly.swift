@@ -1,8 +1,13 @@
 import SpriteKit
 import CoreGraphics
 
-/// A TMX ellipse object as an `SKShapeNode`.
-class PEMObjectEllipse: SKShapeNode {
+/// A TMX Polygon or Polyline object.
+/// When the first point of a polyline is equal to the last point, it is considered a polygon.
+///
+/// Documentation: [TMX Polyline](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#polyline)
+///
+/// Documentation: [TMX Polygon](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#polygon)
+class PEMObjectPoly: SKShapeNode {
     public var properties: Dictionary<String, Any>?
     public var class_: String?
 
@@ -13,17 +18,18 @@ class PEMObjectEllipse: SKShapeNode {
 
     // MARK: - Init
     
-    init?(objectData: PEMObjectData, color: SKColor) {
-        if let size = objectData.sizeInPoints {
+    init?(objectData: PEMObjectData, color: SKColor, isPolygon: Bool) {
+        if let points = objectData.polygonPoints {
             super.init()
-            
-            let rect = CGRect(x: 0, y: -size.height, width: size.width, height: size.height)
-            path = CGPath(ellipseIn: rect, transform: .none)
+
+            if (points.count > 0) {
+                self.path = polygonPath(points, closed: isPolygon)
+            }
 
             name = objectData.objectName
             lineWidth = 0.25
             strokeColor = color
-            fillColor = color.withAlphaComponent(0.5)
+            fillColor = (isPolygon ? color.withAlphaComponent(0.5) : .clear)
             isAntialiased = true
             
             var rotation: CGFloat!
@@ -34,7 +40,7 @@ class PEMObjectEllipse: SKShapeNode {
             properties = objectData.properties
             class_ = objectData.class_
             coordsInPoints = objectData.coordsInPoints
-            sizeInPoints = objectData.sizeInPoints
+            sizeInPoints = calculateAccumulatedFrame().size
             return
         }
         

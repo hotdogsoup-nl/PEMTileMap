@@ -1,7 +1,10 @@
 import Foundation
 import SpriteKit
 
-/// A TMX image layer as an `SKSpriteNode`.
+/// A TMX Image layer.
+/// A layer consisting of a single image.
+///
+/// Documentation: [TMX Image layer](https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#imagelayer)
 public class PEMImageLayer: SKSpriteNode, PEMTileMapPropertiesProtocol {
     public var parallaxFactorX = CGFloat(1)
     public var parallaxFactorY = CGFloat(1)
