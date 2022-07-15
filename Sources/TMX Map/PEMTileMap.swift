@@ -300,7 +300,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
 
     // MARK: - Tiles
     
-    /// Find a tile with specific coordinates.
+    /// Find the first tile at specific coordinates.
     /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
     /// - Returns: The first tile found on the map at the specified coordinates. Note that multiple layers may be present on the map with tiles at the same coordinates.
     public func tileAt(tileCoords: CGPoint) -> PEMTile? {
@@ -341,7 +341,47 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     }
     
     // MARK: - Objects
+    
+    /// Find the first visible object on the map at the the specified tile coordinates.
+    ///
+    /// Note that objects are detected by their bounding boxes (frames) and not by pixel.
+    /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
+    /// - Returns: The first visible object found on the map at the specified coordinates. Note that multiple objects may be present on the map at the same coordinates.
+    public func objectAt(tileCoords: CGPoint) -> Any? {
+        return objectsAt(tileCoords: tileCoords)?.first
+    }
+    
+    /// Find all visible objects on the specified layer at the the specified tile coordinates.
+    /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
+    /// - Parameter inObjectGroup: The `PEMObjectGroup` to find the object in.
+    /// - Returns: An array of visible objects found on the specified object group at the specified tile coordinates.
+    public func objectsAt(tileCoords: CGPoint, inObjectGroup objectGroup: PEMObjectGroup) -> [Any]? {
+        let positionInPoints = position(tileCoords: tileCoords, centered: true)
+        return nodes(at: positionInPoints).filter { node in
+            (node.parent == objectGroup) &&
+            (node as? PEMObjectEllipse != nil
+            || node as? PEMObjectPoint != nil
+            || node as? PEMObjectPoly != nil
+            || node as? PEMObjectRectangle != nil
+            || node as? PEMObjectText != nil)
+        }
+    }
 
+    /// Find all visible objects on the map at the the specified tile coordinates.
+    ///
+    /// Note that objects are detected by their bounding boxes (frames) and not by pixel.
+    /// - Parameter tileCoords: TMX Map tile coordinates (in tiles).
+    /// - Returns: An array of visible objects found on the map at the specified tile coordinates.
+    public func objectsAt(tileCoords: CGPoint) -> [Any]? {
+        let positionInPoints = position(tileCoords: tileCoords, centered: true)
+        return nodes(at: positionInPoints).filter { node in
+            node as? PEMObjectEllipse != nil
+            || node as? PEMObjectPoint != nil
+            || node as? PEMObjectPoly != nil
+            || node as? PEMObjectRectangle != nil
+            || node as? PEMObjectText != nil
+        }
+    }
         
     // MARK: - Camera
     
