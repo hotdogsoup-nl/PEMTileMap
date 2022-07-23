@@ -470,7 +470,46 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
                 cameraNode?.position = newPosition
                 completion()
             }
-            
+        }
+    }
+    
+    /// Pan and tilt the camera to the specified position on the map with optional animation, clamping map edges to scene edges.
+    ///
+    /// It is required that an `SKCameraNode` has been added as a child of the `SKScene` and the `cameraNode` var on the map was set to point to it.
+    ///
+    /// - Parameters:
+    ///     - point: Target point (in points).
+    ///     - sceneSize : Size of the `SKScene` the map is a child of and in which the camera move will be made.
+    ///     - duration : Optional duration (in seconds) to animate the movement. A value of 0 will result in no animation.
+    ///     - timingMode: Optional `SKActionTimingMode` for the animation. Defaults to `.linear`.
+    ///     - completion : Optional completion block which is called when camera movement has finished.
+    public func moveCamera(toPoint point: CGPoint, sceneSize: CGSize, duration: TimeInterval = 0, timingMode: SKActionTimingMode = .linear, completion:@escaping () -> Void = {}) {
+        guard cameraNode != nil else { return }
+
+        var x = 0.0
+        var y = 0.0
+        
+        if (mapSizeInPoints().width > sceneSize.width * cameraNode!.xScale) {
+            x = max(point.x, sceneSize.width * 0.5 * cameraNode!.xScale)
+            x = min(x, mapSizeInPoints().width - sceneSize.width * 0.5 * cameraNode!.xScale)
+            x += mapSizeInPoints().width * -0.5
+        }
+        
+        if (mapSizeInPoints().height > sceneSize.height * cameraNode!.xScale) {
+            y = max(point.y, sceneSize.height * 0.5 * cameraNode!.yScale)
+            y = min(y, mapSizeInPoints().height - sceneSize.height * 0.5 * cameraNode!.yScale)
+            y += mapSizeInPoints().height * -0.5
+        }
+        
+        let newPosition = CGPoint(x: x, y: y)
+        
+        if duration > 0 {
+            let moveAction = SKAction.move(to: newPosition, duration: duration)
+            moveAction.timingMode = timingMode
+            cameraNode?.run(moveAction, completion: completion)
+        } else {
+            cameraNode?.position = newPosition
+            completion()
         }
     }
     
