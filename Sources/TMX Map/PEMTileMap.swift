@@ -393,7 +393,7 @@ public class PEMTileMap: SKNode, PEMTileMapPropertiesProtocol {
     /// * `zoomMode` = **.aspectFill**
     /// * `viewMode` =  **.bottomLeft**
     ///
-    /// It is required that an `SKCameraNode` has been added to the `SKScene` and the `cameraNode` var on the map was set to point to it. Both `zoomMode` and `viewMode` can be disabled by using a value of **.none**. This way a camera move can be made without zooming or panning.
+    /// It is required that an `SKCameraNode` has been added as a child of the `SKScene` and the `cameraNode` var on the map was set to point to it. Both `zoomMode` and `viewMode` can be disabled by using a value of **.none**. This way a camera move can be made without zooming or panning.
     ///
     /// - Parameters:
     ///     - sceneSize : Size of the `SKScene` the map is a child of and in which the camera move will be made.
