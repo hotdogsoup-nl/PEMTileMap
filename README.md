@@ -6,9 +6,9 @@
 <a href="https://www.apple.com"><img src="https://img.shields.io/badge/platforms-iOS%20%7C%20tvOS%20%7C%20macOS-red.svg"></a>
 </p>
   
-**PEMTileMap** creates `SpriteKit` game maps from TMX Map files. [TMX Map files][tmx-map-url] can be created and edited with [Tiled][tiled-url].
+**PEMTileMap** is a Swift package that generates `SpriteKit` game maps from TMX Map files. Maps, layers, tiles and objects are automatically rendered as `SKNode`s on the `SKScene`. [TMX Map files][tmx-map-url] can be created and edited with [Tiled][tiled-url].
 
-Based on the well-known [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs SpriteKit [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
+Based on the [JSTileMap][jstilemap-url] project which was famously used in Ray Wenderlichs SpriteKit [SuperKoalio][superkoalio-url] tutorial but no longer seems to be maintained. I hope to make a light-weight framework that supports iOS, macOS and tvOS.
   
 <p align="center">
 <img src="screenshot_macos_01.png" height="450"/>
@@ -96,7 +96,7 @@ The map will now render and appear on the scene as an `SKNode`. It will contain 
 `PEMTileMap` has several functions to access layers, tiles, and objects on the map. Check out the [documentation][documentation-url].
   
 #### Using a camera
-You are responsible for creating and controlling the camera in your scene. `PEMTileMap` does however feature a basic `moveCamera` function to move the camera around the map. Set the `cameraNode` property to point to your camera before calling `moveCamera`.
+You are responsible for creating and controlling the camera in your scene. `PEMTileMap` does however have basic `moveCamera` functions to move the camera around the map. Set the `cameraNode` property to point to your camera before calling `moveCamera`.
   
 #### Use the background color
 To set the background color of your `SKScene` to match the map background color:
