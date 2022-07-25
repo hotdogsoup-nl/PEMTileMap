@@ -53,7 +53,7 @@ I also made a [Swift version of the SuperKoalio game][superkoalio-project-url], 
 - [X] generate TMX maps as `SKNode` objects with child elements as `SKNode` subclasses (eg. a tile as a `SKSpriteNode`, a polygon object as an `SKShapeNode`, etc.)
 - [X] both nearest neighbor and linear texture antialiasing
 - [X] camera tilt and zoom
-- [ ] access layers, tiles, objects
+- [X] access layers, tiles, objects
 - [ ] parallax scroll
 - [ ] anti-tearing (removing tear lines between tiles)
   
